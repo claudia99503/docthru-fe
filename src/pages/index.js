@@ -3,13 +3,6 @@ import Head from "next/head";
 import Container from "../components/Container";
 
 export default function Home() {
-  const [showContainer, setShowContainer] = useState(false);
-  const [isOngoing, setIsOngoing] = useState(false);
-
-  const handleButtonClick = () => {
-    setShowContainer(true);
-    setIsOngoing(false);
-  };
 
   return (
     <>

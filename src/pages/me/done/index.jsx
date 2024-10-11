@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import TabNavigation from '../../../components/TabNavigation';
 
 export default function MyFinishedChallengePage() {
   return (
@@ -8,7 +9,8 @@ export default function MyFinishedChallengePage() {
         <meta name="description" content="사용자가 완료한 챌린지 목록을 확인하는 페이지입니다." />
       </Head>
       <div>
-      <h1>완료한 챌린지 내용</h1>
+        <h1>완료한 챌린지 내용</h1>
+        <TabNavigation activeTab="completed" />
       </div>
     </>
   );
