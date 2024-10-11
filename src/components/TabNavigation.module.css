@@ -1,12 +1,49 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  width: inherit;
+}
+
+.title {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 23.87px;
+  color: #262626;
+}
+
+.newChallengeButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 154px;
+  height: 39px;
+  border-radius: 19.5px;
+  background-color: #262626;
+  color: #FFFFFF;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19.09px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.icon {
+  margin-left: auto;
+}
+
 .TabNavigation {
   display: flex;
   justify-content: flex-start;
-  border-bottom: 1px solid #d4d4d4;
+  border-bottom: 1px solid #D4D4D4;
   height: 53px;
 }
 
 .tabButton {
-  font-family: "Pretendard", sans-serif;
+  font-family: 'Pretendard', sans-serif;
   font-weight: 600;
   font-size: 18px;
   line-height: 21.48px;
@@ -20,30 +57,30 @@
   border-bottom: 1px solid transparent;
 }
 
-.inactive {
-  color: #737373;
-  border-bottom: 1px solid transparent;
-}
-
 .active {
   color: #262626;
   border-bottom: 3px solid #262626;
 }
 
+.inactive {
+  color: #737373;
+  border-bottom: 1px solid transparent;
+}
+
 @media (min-width: 1200px) {
-  .TabNavigation {
+  .TabNavigation, .header {
     width: 996px;
   }
 }
 
 @media (min-width: 744px) and (max-width: 1199px) {
-  .TabNavigation {
+  .TabNavigation, .header {
     width: 697px;
   }
 }
 
 @media (max-width: 743px) {
-  .TabNavigation {
+  .TabNavigation, .header {
     width: 343px;
     height: 48px;
     justify-content: space-between;
@@ -55,3 +92,4 @@
     font-size: 16px;
   }
 }
+
