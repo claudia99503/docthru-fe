@@ -15,7 +15,7 @@ const TabNavigation = () => {
         className={`${styles.tabButton} ${router.pathname === '/me' ? styles.active : ''}`}
         onClick={() => handleTabClick('/me')}
       >
-        참여 중인 챌린지
+        참여중인 챌린지
       </button>
       <button
         className={`${styles.tabButton} ${router.pathname === '/me/done' ? styles.active : ''}`}
