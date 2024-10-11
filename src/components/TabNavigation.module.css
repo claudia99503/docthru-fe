@@ -69,19 +69,19 @@
 
 @media (min-width: 1200px) {
   .TabNavigation, .header {
-    width: 996px;
+    max-width: 996px;
   }
 }
 
 @media (min-width: 744px) and (max-width: 1199px) {
   .TabNavigation, .header {
-    width: 697px;
+    max-width: 697px;
   }
 }
 
 @media (max-width: 743px) {
   .TabNavigation, .header {
-    width: 343px;
+    min-width: 343px;
     height: 48px;
     justify-content: space-between;
   }
