@@ -1,0 +1,33 @@
+.Nav .lists {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 34px;
+}
+
+.link {
+  font-weight: 600;
+  font: size 15px;
+  color: var(--grey-500);
+}
+
+.link.active {
+  font-weight: 700;
+  color: var(--grey-800);
+}
+
+@media only screen and (max-width: 1199px) {
+  .MemberHeader {
+    padding: 24px;
+  }
+}
+
+@media only screen and (max-width: 743px) {
+  .Nav .lists {
+    gap: 16px;
+  }
+  .link {
+    font: size 13px;
+    font-weight: 700;
+  }
+}
