@@ -1,4 +1,5 @@
 import '@/styles/globals.css';
+import Layout from '@/components/layouts/Layout';
 import Head from 'next/head';
 
 export default function App({ Component, pageProps }) {
@@ -7,7 +8,9 @@ export default function App({ Component, pageProps }) {
       <Head>
         <link rel="icon" href="/favicon.svg" />
       </Head>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   );
 }

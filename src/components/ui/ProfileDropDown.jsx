@@ -9,11 +9,11 @@ const mockup = {
 };
 
 export default function ProfileDropDown() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const dropDownRef = useRef(null);
 
   const toggleDropdown = () => {
-    setIsOpen(!setIsOpen);
+    setIsOpen((prev) => !prev);
   };
 
   useEffect(() => {

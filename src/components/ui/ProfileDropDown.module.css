@@ -1,8 +1,6 @@
 .ProfileDropDown {
   display: flex;
   flex-direction: row-reverse;
-  max-width: 130px;
-  width: 100%;
   position: relative;
 }
 
@@ -11,11 +9,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
   border-radius: 8px;
   padding: 16px 16px 8px;
+  width: 152px;
+  height: 137px;
   margin-top: 40px;
-  z-index: 99;
+  z-index: 999;
   overflow: hidden;
   font-size: 16px;
   font-weight: 500;
@@ -30,7 +29,6 @@
 .lists {
   display: flex;
   flex-direction: column;
-  gap: 4px;
   width: 100%;
   text-align: left;
 }
@@ -46,8 +44,10 @@
 
 .lists .link {
   color: var(--grey-600);
+  padding: 7px 0;
 }
 
 .lists .logout {
   color: var(--grey-100);
+  padding: 7px 0;
 }
