@@ -1,0 +1,53 @@
+.ProfileDropDown {
+  display: flex;
+  flex-direction: row-reverse;
+  max-width: 130px;
+  width: 100%;
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  border-radius: 8px;
+  padding: 16px 16px 8px;
+  margin-top: 40px;
+  z-index: 99;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 500;
+  border: 2px solid var(--grey-100);
+  background-color: #ffff;
+}
+
+.dropdown-menu:hover {
+  color: var(--grey-600);
+}
+
+.lists {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  text-align: left;
+}
+
+.lists::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--grey-100);
+  margin: 8px 0;
+}
+
+.lists .link {
+  color: var(--grey-600);
+}
+
+.lists .logout {
+  color: var(--grey-100);
+}

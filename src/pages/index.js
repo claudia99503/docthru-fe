@@ -1,5 +1,4 @@
-import DocTypeChip from '@/components/ui/DocTypeChip';
-import Profile from '@/components/ui/Profile';
+import ProfileDropDown from '@/components/ui/ProfileDropDown';
 
 import Head from 'next/head';
 const user = {
@@ -15,8 +14,7 @@ export default function Home() {
       <div>
         <h1>챌린지 목록 페이지 내용</h1>
       </div>
-      <Profile user={user} />
-      <DocTypeChip field="NEXTJS" docType="OFFICIAL" />
+      <ProfileDropDown user={user} />
     </>
   );
 }
