@@ -16,7 +16,7 @@ export function MemberHeader() {
       <div className={styles.container}>
         <Link href="/">
           <Image
-            className={styles.image}
+            className={styles.logo}
             src={assets.images.navLogoLarge}
             width={120}
             height={27}
@@ -32,14 +32,6 @@ export function AdminHeader() {
   return (
     <header className={styles.AdminHeader}>
       <div className={styles.container}>
-        <Link href="/">
-          <Image
-            className={styles.image}
-            src={assets.images.navLogoLarge}
-            width={120}
-            height={27}
-          />
-        </Link>
         <Nav links={pages} />
         <ProfileDropDown user={user} />
       </div>

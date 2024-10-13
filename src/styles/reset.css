@@ -36,6 +36,9 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
+a:visited {
+  color: inherit;
+}
 
 a:not([class]) {
   text-decoration-skip-ink: auto;
