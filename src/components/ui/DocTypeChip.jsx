@@ -1,7 +1,7 @@
 import styles from './DocTypeChip.module.css';
 import { quantico } from '@/variables/fonts';
 
-export const STATUS = {
+export const FIELD = {
   color: {
     NEXTJS: '#79E16A',
     API: '#FF905E',
@@ -18,15 +18,33 @@ export const STATUS = {
   },
 };
 
-export default function DocTypeChip({ status }) {
-  const color = STATUS.color[status];
+export function ChipField({ field }) {
+  const color = FIELD.color[field];
 
   return (
     <div
-      className={`${styles.DocTypeChip} ${quantico.className}`}
+      className={`${styles.ChipField} ${quantico.className}`}
       style={{ '--bg-color': color }}
     >
-      <span className={styles.text}>{STATUS.name[status]}</span>
+      <span className={styles.text}>{FIELD.name[field]}</span>
+    </div>
+  );
+}
+
+export function ChipType({ type }) {
+  const docType = type === 'OFFICIAL' ? '공식 문서' : '블로그';
+  return (
+    <div className={`${styles.ChipType}`}>
+      <span className={styles.text}>{docType}</span>
+    </div>
+  );
+}
+
+export default function DocTypeChip({ field, docType }) {
+  return (
+    <div className={`${styles.DocTypeChip}`}>
+      <ChipField field={field} />
+      <ChipType type={docType} />
     </div>
   );
 }

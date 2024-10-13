@@ -1,8 +1,11 @@
-import { useState } from 'react';
-import Head from 'next/head';
-import Container from '../components/Container';
 import DocTypeChip from '@/components/ui/DocTypeChip';
+import Profile from '@/components/ui/Profile';
 
+import Head from 'next/head';
+const user = {
+  nickName: '닉네임',
+  grade: 'EXPERT',
+};
 export default function Home() {
   return (
     <>
@@ -12,7 +15,8 @@ export default function Home() {
       <div>
         <h1>챌린지 목록 페이지 내용</h1>
       </div>
-      <DocTypeChip status="NEXTJS" />
+      <Profile user={user} />
+      <DocTypeChip field="NEXTJS" docType="OFFICIAL" />
     </>
   );
 }

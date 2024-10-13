@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import styles from './NavDropDown.module.css';
+import styles from './ProfileDropDown.module.css';
 
-export default function NavDropDown() {
+export default function ProfileDropDown() {
   const pathName = usePathname();
 
   return (
