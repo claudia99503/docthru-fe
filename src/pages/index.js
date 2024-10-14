@@ -1,8 +1,7 @@
 import { useState } from "react";
-import Head from "next/head";
+import Head from 'next/head';
 
 export default function Home() {
-
   return (
     <>
       <Head>
@@ -10,9 +9,7 @@ export default function Home() {
       </Head>
       <div>
         <h1>챌린지 목록 페이지 내용</h1>
-
       </div>
     </>
   );
 }
-

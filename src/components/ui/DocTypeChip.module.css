@@ -1,0 +1,34 @@
+.DocTypeChip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: var(--grey-600);
+  text-align: center;
+}
+
+.ChipField,
+.ChipType {
+  border-radius: 8px;
+}
+
+.ChipField {
+  padding: 3px 12px;
+  background-color: var(--bg-color);
+}
+
+.ChipType {
+  padding: 2px 7px;
+  border: 1px solid var(--grey-300);
+  background-color: #fff;
+}
+
+.ChipField .text {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ChipType .text {
+  font-size: 13px;
+  font-weight: 500;
+}

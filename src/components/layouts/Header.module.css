@@ -1,0 +1,45 @@
+.MemberHeader,
+.AdminHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  position: sticky;
+  height: 60px;
+  background-color: #ffffff;
+  z-index: 999;
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.logo {
+  width: 120px;
+  height: 27px;
+}
+@media only screen and (max-width: 1199px) {
+  .MemberHeader {
+    padding: 24px;
+  }
+}
+
+@media only screen and (max-width: 743px) {
+  .MemberHeader {
+    padding: 16px;
+  }
+  .logo {
+    width: 80px;
+    height: 18px;
+  }
+}

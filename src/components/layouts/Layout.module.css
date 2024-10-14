@@ -1,0 +1,18 @@
+.main {
+  max-width: 1200px;
+  width: 100%;
+  padding-top: 24px;
+  padding-bottom: 150px;
+  margin: 0 auto;
+}
+@media only screen and (max-width: 1199px) {
+  .main {
+    padding: 24px 24px 40px;
+  }
+}
+
+@media only screen and (max-width: 743px) {
+  .main {
+    padding: 16px 16px 32px;
+  }
+}
