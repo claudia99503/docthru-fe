@@ -1,0 +1,29 @@
+.SearchbarWithDropdown {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 996px;
+  margin: 0 auto;
+}
+
+.SearchbarWithDropdown > * {
+  flex-shrink: 0;
+  margin-right: 10px;
+}
+
+.SearchbarWithDropdown > *:last-child {
+  margin-right: 0;
+}
+
+@media (max-width: 743px) {
+  .SearchbarWithDropdown {
+    max-width: 343px;
+  }
+
+  .SearchbarWithDropdown > * {
+    flex-shrink: 0;
+    width: auto;
+  }
+}
+

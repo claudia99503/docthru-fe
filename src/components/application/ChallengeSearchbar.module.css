@@ -29,7 +29,7 @@
 /* 데스크탑 버전 */
 @media (min-width: 1200px) {
   .ChallengeSearchbar {
-    max-width: 844px;
+    max-width: 744px;
     width: 100%;
   }
 
