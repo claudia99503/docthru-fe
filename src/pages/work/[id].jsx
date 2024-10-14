@@ -1,8 +1,10 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import DocTypeChip from '@/components/ui/DocTypeChip';
+import DocTypeChip from '@/components/common/DocTypeChip';
 import { work, feedbacks } from '../../../mockup/work';
-import { Profile } from '@/components/ui/Profile';
+import { Profile } from '@/components/common/Profile';
+import assets from '@/variables/images';
+import LikeButton from '@/components/common/LikeButton';
 
 const workData = work;
 const feedbackData = feedbacks;
@@ -22,8 +24,10 @@ export default function WorkDetailPage() {
       </Head>
       <section>
         <h1>{workData.challenge.title}</h1>
+        <KebabMenu />
         <DocTypeChip field={challenge.field} docType={challenge.docType} />
         <Profile user={user} type="simple" />
+        <LikeButton data={workData} />
       </section>
     </>
   );

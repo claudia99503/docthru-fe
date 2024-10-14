@@ -5,6 +5,7 @@ export const work = {
   lastModifiedAt: '2024-10-12T12:30:00Z',
   isSubmitted: true,
   submittedAt: '2024-10-10T12:45:00Z',
+  isLiked: true,
   likeCount: 5,
   challenge: {
     id: 1,
