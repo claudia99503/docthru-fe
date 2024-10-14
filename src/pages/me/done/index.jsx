@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import TabNavigation from '../../../components/TabNavigation';
+import TabNavigation from '../../../components/layouts/TabNavigation';
 
 export default function MyFinishedChallengePage() {
   return (
