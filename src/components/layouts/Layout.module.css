@@ -4,6 +4,8 @@
   padding-top: 24px;
   padding-bottom: 150px;
   margin: 0 auto;
+  display: flex;
+  align-self: center;
 }
 @media only screen and (max-width: 1199px) {
   .main {
