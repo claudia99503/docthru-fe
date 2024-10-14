@@ -1,0 +1,41 @@
+.Nav .lists {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 34px;
+}
+.logo {
+  width: 120px;
+  height: 27px;
+}
+
+.link {
+  font-weight: 600;
+  font: size 15px;
+  color: var(--grey-500);
+}
+
+.active {
+  font-weight: 700;
+  color: var(--grey-800);
+}
+
+@media only screen and (max-width: 1199px) {
+  .MemberHeader {
+    padding: 24px;
+  }
+}
+
+@media only screen and (max-width: 743px) {
+  .Nav .lists {
+    gap: 16px;
+  }
+  .link {
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .logo {
+    width: 80px;
+    height: 18px;
+  }
+}

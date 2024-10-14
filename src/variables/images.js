@@ -46,11 +46,15 @@ const assets = {
     toggleUp: "/assets/icons/ic_toggle_up.svg",
   },
   images: {
-    LoginLogoSmall: "/assets/images/img__login_logo_small.svg",
+    black: "/assets/images/img_black.svg",
+    check: "/assets/images/img_check.svg",
     loginLogoLarge: "/assets/images/img_login_logo_large.svg",
     loginLogoMedium: "/assets/images/img_login_logo_medium.svg",
+    loginLogoSmall: "/assets/images/img_login_logo_small.svg",
     navLogoLarge: "/assets/images/img_nav_logo_large.svg",
     navLogoSmall: "/assets/images/img_nav_logo_small.svg",
+    profileAdmin: "/assets/images/img_profile_admin.svg",
+    profileMember: "/assets/images/img_profile_member.svg",
   },
 };
 
