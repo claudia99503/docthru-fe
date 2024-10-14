@@ -3,12 +3,9 @@ import styles from './ProfileDropDown.module.css';
 import { ProfileImage, Profile } from './Profile';
 import { useEffect, useRef, useState } from 'react';
 
-const mockup = {
-  nickName: '사용자이름',
-  grade: 'EXPERT',
-};
+export default function ProfileDropDown({ user }) {
+  const isUser = user.role === 'USER';
 
-export default function ProfileDropDown() {
   const [isOpen, setIsOpen] = useState(false);
   const dropDownRef = useRef(null);
 
@@ -31,18 +28,20 @@ export default function ProfileDropDown() {
   return (
     <div className={styles.ProfileDropDown} ref={dropDownRef}>
       <button onClick={toggleDropdown}>
-        <ProfileImage user={mockup} />
+        <ProfileImage user={user} />
       </button>
 
       {isOpen && (
         <div className={styles['dropdown-menu']}>
-          <Profile user={mockup} />
+          <Profile user={user} />
           <ul className={styles.lists}>
-            <li>
-              <Link className={styles.link} href="/me">
-                나의 챌린지
-              </Link>
-            </li>
+            {isUser && (
+              <li>
+                <Link className={styles.link} href="/me">
+                  나의 챌린지
+                </Link>
+              </li>
+            )}
             <li className={styles.logout}>로그아웃</li>
           </ul>
         </div>

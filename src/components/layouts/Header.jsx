@@ -6,11 +6,7 @@ import ProfileDropDown from '../ui/ProfileDropDown';
 import { pages } from '@/variables/variables';
 import Nav from './Nav';
 
-const user = {
-  nickName: '닉네임',
-  grade: 'EXPERT',
-};
-export function MemberHeader() {
+export function MemberHeader({ user }) {
   return (
     <header className={styles.MemberHeader}>
       <div className={styles.container}>
@@ -28,7 +24,7 @@ export function MemberHeader() {
   );
 }
 
-export function AdminHeader() {
+export function AdminHeader({ user }) {
   return (
     <header className={styles.AdminHeader}>
       <div className={styles.container}>
