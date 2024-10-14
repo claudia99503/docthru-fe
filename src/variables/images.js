@@ -30,6 +30,7 @@ const assets = {
     keyboard: "/assets/icons/ic_keyboard.svg",
     list: "/assets/icons/ic_list.svg",
     medal: "/assets/icons/ic_medal.svg",
+    meatballsMenu: '/assets/icons/ic_meatballs_menu.svg',
     monitor: "/assets/icons/ic_monitor.svg",
     out: "/assets/icons/ic_out.svg",
     outLarge: "/assets/icons/ic_out_large.svg",
