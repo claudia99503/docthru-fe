@@ -24,8 +24,8 @@
 .ProfileImage {
   position: relative;
   aspect-ratio: 1/1;
-  width: 32px;
-  height: 32px;
+  width: var(--width);
+  height: var(--width);
   border-radius: 50%;
   overflow: hidden;
 }
@@ -33,4 +33,14 @@
   width: 100%;
   height: auto;
   object-fit: contain;
+}
+
+.simple {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.simple .name {
+  font-size: 12px;
 }

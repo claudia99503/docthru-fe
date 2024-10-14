@@ -11,15 +11,11 @@ export const work = {
     title: 'API Challenge',
     field: 'API',
     docType: 'OFFICIAL',
-    description:
-      'Build a REST API using Express.js that handles CRUD operations for a user entity. Ensure to include proper error handling and validation.',
-    deadline: '2024-10-15T23:59:59Z',
   },
   user: {
     id: 1,
     nickName: 'Alice',
     role: 'USER',
-    grade: 'NORMAL',
   },
 };
 
