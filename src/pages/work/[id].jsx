@@ -9,7 +9,6 @@ const feedbackData = feedbacks;
 export default function WorkDetailPage() {
   const router = useRouter();
   const { id } = router.query;
-  const { user, challenge } = workData;
 
   return (
     <>
@@ -20,7 +19,7 @@ export default function WorkDetailPage() {
           content="작업물에 대한 상세 정보를 보여주는 페이지입니다."
         />
       </Head>
-      <WorkDetail />
+      <WorkDetail data={workData} />
     </>
   );
 }
