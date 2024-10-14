@@ -1,0 +1,172 @@
+.tableContainer {
+  margin-top: 5px;
+}
+
+.header,
+.row {
+  display: flex;
+  width: 100%;
+  max-width: 996px;
+}
+
+/* 데스크탑 버전 */
+@media (min-width: 1200px) {
+  .header,
+  .row {
+    max-width: 996px;
+    height: 36px;
+    border-radius: 8px;
+  }
+
+  .header {
+    background-color: #262626;
+    color: #ffffff;
+    font-family: Pretendard;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15.51px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .no,
+  .field,
+  .category,
+  .title,
+  .participants,
+  .applicationDate,
+  .deadline,
+  .status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 0 10px;
+    text-align: center;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .title {
+    flex: 2;
+  }
+
+  .row {
+    background-color: #ffffff;
+    color: #737373;
+    border-bottom: 1px solid #d4d4d4;
+    font-family: Pretendard;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15.51px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .row:last-child {
+    border-bottom: 1px solid #d4d4d4;
+  }
+}
+
+/* 태블릿 및 모바일 버전 */
+@media (max-width: 1199px) {
+  .header,
+  .row {
+    max-width: 696px;
+    height: 36px;
+  }
+
+  .header {
+    background-color: #262626;
+    color: #ffffff;
+    font-family: Pretendard;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15.51px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+  }
+
+  .no,
+  .field,
+  .category,
+  .title,
+  .participants,
+  .applicationDate,
+  .deadline,
+  .status {
+    padding: 15px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .title {
+    flex: 2;
+  }
+
+  .row {
+    background-color: #ffffff;
+    color: #737373;
+    border-bottom: 1px solid #d4d4d4;
+    font-family: Pretendard;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15.51px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .row .title {
+    font-weight: 500;
+    color: #404040;
+  }
+
+  .row:last-child {
+    border-bottom: 1px solid #d4d4d4;
+  }
+}
+
+/* 모바일 버전 */
+@media (max-width: 743px) {
+  .tableContainer {
+    overflow-x: auto;
+  }
+
+  .header,
+  .row {
+    min-width: 696px;
+    height: auto;
+    flex-direction: row;
+  }
+
+  .header {
+    background-color: #262626;
+    color: #ffffff;
+    font-family: Pretendard;
+    font-weight: 500;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  .row {
+    background-color: #ffffff;
+    color: #737373;
+    font-family: Pretendard;
+    font-weight: 400;
+    font-size: 12px;
+  }
+}
+

@@ -3,7 +3,7 @@ import styles from "./DeleteModal.module.css";
 
 const DeleteModal = ({ onConfirm, onCancel }) => {
   return (
-    <div className={styles.Component}>
+    <div className={styles.DeleteModal}>
       <div className={styles.modal}>
         <div className={styles["top-box"]}>
           <div className={styles["icon-wrapper"]}>

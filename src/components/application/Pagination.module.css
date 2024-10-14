@@ -1,0 +1,58 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 328px;
+  height: 40px;
+}
+
+.page-button {
+  font-family: Pretendard;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16.71px;
+  color: #A3A3A3;
+  margin: 0 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.active {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #262626 !important;
+  color: #FFC117 !important;
+}
+
+.page-button:hover {
+  color: #262626;
+}
+
+.arrow-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.disabled-arrow {
+  stroke: #A3A3A3 !important;
+}
+
+.enabled-arrow {
+  stroke: #262626 !important;
+}
+
+/* 모바일 */
+@media (max-width: 743px) {
+  .pagination {
+    max-width: 288px;
+  }
+
+  .page-button {
+    font-size: 12px;
+    line-height: 14.71px;
+  }
+}
+
