@@ -1,7 +1,28 @@
 import Head from 'next/head';
 import TabNavigation from '../../components/layouts/TabNavigation';
+import AllCardSection from '../../components/challenge/AllCardSection';
 
-export default function MyChallengePage() {
+// export const getStaticProps = async () => {
+//   const response = await axios(
+//     `${process.env.NEXT_PUBLIC_API_BASE_URL}/  `
+//   );
+//   const data = await response.json();
+
+//   return {
+//     props: {
+//       initialArticles: data.data || [], // 데이터가 없을 경우 빈 배열
+//       hasNext: data.hasNext || false, // 다음 페이지가 있는지 여부
+//       nextCursor: data.nextCursor || null, // 다음 페이지를 위한 커서
+//     },
+//     revalidate: 60, // 60초마다 정적 페이지를 재생성
+//   };
+// };
+
+export default function MyChallengePage({
+  initialArticles,
+  hasNext,
+  nextCursor,
+}) {
   return (
     <>
       <Head>
@@ -15,6 +36,14 @@ export default function MyChallengePage() {
         <h1>참여중인 챌린지 내용</h1>
         <TabNavigation activeTab="ongoing" />
       </div>
+      <>
+        <AllCardSection
+          initialArticles={initialArticles}
+          // hasNext={hasNext}
+          // nextCursor={nextCursor}
+          deadline="2024-12-14"
+        />
+      </>
     </>
   );
 }
