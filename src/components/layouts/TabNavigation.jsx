@@ -14,27 +14,40 @@ const TabNavigation = ({ activeTab }) => {
     <div>
       <div className={styles.header}>
         <h1 className={styles.title}>나의 챌린지</h1>
-        <button className={styles['new-challenge-button']} onClick={() => router.push('/application')}>
+        <button
+          className={styles['new-challenge-button']}
+          onClick={() => router.push('/application')}
+        >
           <span>신규 챌린지 신청</span>
-          <img src={assets.icons.plusLarge} alt="plus Icon" className={styles.icon} />
+          <img
+            src={assets.icons.plus}
+            alt="plus Icon"
+            className={styles.icon}
+          />
         </button>
       </div>
 
       <div className={styles['tab-navigation']}>
         <button
-          className={`${styles['tab-button']} ${activeTab === 'ongoing' ? styles.active : ''}`}
+          className={`${styles['tab-button']} ${
+            activeTab === 'ongoing' ? styles.active : ''
+          }`}
           onClick={() => handleTabClick('/me')}
         >
           참여 중인 챌린지
         </button>
         <button
-          className={`${styles['tab-button']} ${activeTab === 'completed' ? styles.active : ''}`}
+          className={`${styles['tab-button']} ${
+            activeTab === 'completed' ? styles.active : ''
+          }`}
           onClick={() => handleTabClick('/me/done')}
         >
           완료한 챌린지
         </button>
         <button
-          className={`${styles['tab-button']} ${activeTab === 'applications' ? styles.active : ''}`}
+          className={`${styles['tab-button']} ${
+            activeTab === 'applications' ? styles.active : ''
+          }`}
           onClick={() => handleTabClick('/me/application')}
         >
           신청한 챌린지
@@ -45,4 +58,3 @@ const TabNavigation = ({ activeTab }) => {
 };
 
 export default TabNavigation;
-

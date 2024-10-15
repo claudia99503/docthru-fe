@@ -1,16 +1,22 @@
 import React from 'react';
-import ChallengeSearchbar from './ChallengeSearchbar';
+import ChallengeSearchBar from './ChallengeSearchBar';
 import ApplicationDropdown from './ApplicationDropdown';
-import styles from './SearchbarWithDropdown.module.css';
+import styles from './SearchBarWithDropdown.module.css';
 
-const SearchbarWithDropdown = ({ searchTerm, setSearchTerm, onOptionChange }) => {
+const SearchBarWithDropdown = ({
+  searchTerm,
+  setSearchTerm,
+  onOptionChange,
+}) => {
   return (
-    <div className={styles.SearchbarWithDropdown}>
-      <ChallengeSearchbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+    <div className={styles.SearchBarWithDropdown}>
+      <ChallengeSearchBar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
       <ApplicationDropdown onOptionChange={onOptionChange} />
     </div>
   );
 };
 
-export default SearchbarWithDropdown;
-
+export default SearchBarWithDropdown;

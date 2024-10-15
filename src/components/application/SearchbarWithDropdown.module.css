@@ -1,10 +1,9 @@
-.SearchbarWithDropdown,
-.SearchbarWithDropdown > * {
+.SearchBarWithDropdown,
+.SearchBarWithDropdown > * {
   box-sizing: border-box;
 }
 
-
-.SearchbarWithDropdown {
+.SearchBarWithDropdown {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,18 +13,18 @@
   width: 100%;
 }
 
-.SearchbarWithDropdown > * {
+.SearchBarWithDropdown > * {
   flex-shrink: 0;
   margin-right: 5px;
   box-sizing: border-box;
 }
 
-.SearchbarWithDropdown > *:last-child {
+.SearchBarWithDropdown > *:last-child {
   margin-right: 0;
 }
 
 @media (max-width: 1199px) {
-  .SearchbarWithDropdown {
+  .SearchBarWithDropdown {
     max-width: 697px;
     width: 100%;
     margin: 0;
@@ -34,15 +33,14 @@
 }
 
 @media (max-width: 743px) {
-  .SearchbarWithDropdown {
+  .SearchBarWithDropdown {
     min-width: 343px;
     width: 100%;
     margin: 0;
   }
 
-  .SearchbarWithDropdown > * {
+  .SearchBarWithDropdown > * {
     flex-shrink: 0;
     width: auto;
   }
 }
-

@@ -1,4 +1,4 @@
-.ChallengeSearchbar {
+.ChallengeSearchBar {
   display: flex;
   align-items: center;
   background-color: #ffffff;
@@ -19,7 +19,6 @@
   flex-grow: 1;
   border: none;
   background-color: transparent;
-  font-family: Pretendard;
   font-weight: 400;
   color: #a3a3a3;
   padding-left: 8px;
@@ -31,7 +30,7 @@
 }
 
 @media (min-width: 1200px) {
-  .ChallengeSearchbar {
+  .ChallengeSearchBar {
     max-width: 744px;
   }
 
@@ -42,7 +41,7 @@
 }
 
 @media (min-width: 744px) and (max-width: 1199px) {
-  .ChallengeSearchbar {
+  .ChallengeSearchBar {
     max-width: 545px;
   }
 
@@ -53,7 +52,7 @@
 }
 
 @media (max-width: 743px) {
-  .ChallengeSearchbar {
+  .ChallengeSearchBar {
     max-width: 100%;
   }
 

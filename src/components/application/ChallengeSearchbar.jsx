@@ -1,15 +1,19 @@
 import React from 'react';
-import styles from './ChallengeSearchbar.module.css';
+import styles from './ChallengeSearchBar.module.css';
 import images from '../../variables/images';
 
-const ChallengeSearchbar = ({ searchTerm, setSearchTerm }) => {
+const ChallengeSearchBar = ({ searchTerm, setSearchTerm }) => {
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value); // 검색어 업데이트
   };
 
   return (
-    <div className={styles.ChallengeSearchbar}>
-      <img src={images.icons.search} alt="Search Icon" className={styles.icon} />
+    <div className={styles.ChallengeSearchBar}>
+      <img
+        src={images.icons.search}
+        alt="Search Icon"
+        className={styles.icon}
+      />
       <input
         type="text"
         className={styles.input}
@@ -21,5 +25,4 @@ const ChallengeSearchbar = ({ searchTerm, setSearchTerm }) => {
   );
 };
 
-export default ChallengeSearchbar;
-
+export default ChallengeSearchBar;
