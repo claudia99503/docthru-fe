@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import TabNavigation from '../../../components/layouts/TabNavigation';
-import SearchBarWithDropdown from '../../../components/application/SearchBarWithDropdown';
+import SearchBarWithDropdown from '../../../components/challenge/SearchBarWithDropdown';
 import ChallengeTable from '../../../components/application/ChallengeTable';
 import Pagination from '../../../components/application/Pagination';
 import styles from '../../../styles/pages/application/MyApplicationPage.module.css';
