@@ -1,0 +1,31 @@
+.Input,
+.PasswordInput {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.error {
+  outline: 1px solid var(--error);
+}
+
+.PasswordInput .input {
+  position: relative;
+}
+
+.toggleBtn {
+  background-color: transparent;
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  z-index: 999;
+}

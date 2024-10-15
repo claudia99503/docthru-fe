@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './ApplicationDropdown.module.css';
 import images from '../../variables/images';
 
-const AplicationDropdown = ({ onOptionChange }) => {
+const ApplicationDropdown = ({ onOptionChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('승인 대기');
 
@@ -28,8 +28,20 @@ const AplicationDropdown = ({ onOptionChange }) => {
       </button>
       {isOpen && (
         <ul className={styles['dropdown-list']}>
-          {['승인 대기', '신청 승인', '신청 거절', '신청 시간 빠른순', '신청 시간 느린순', '마감 기한 빠른순', '마감 기한 느린순'].map((option, index) => (
-            <li key={index} className={styles['dropdown-item']} onClick={() => handleOptionClick(option)}>
+          {[
+            '승인 대기',
+            '신청 승인',
+            '신청 거절',
+            '신청 시간 빠른순',
+            '신청 시간 느린순',
+            '마감 기한 빠른순',
+            '마감 기한 느린순',
+          ].map((option, index) => (
+            <li
+              key={index}
+              className={styles['dropdown-item']}
+              onClick={() => handleOptionClick(option)}
+            >
               {option}
             </li>
           ))}
@@ -39,5 +51,4 @@ const AplicationDropdown = ({ onOptionChange }) => {
   );
 };
 
-export default AplicationDropdown;
-
+export default ApplicationDropdown;
