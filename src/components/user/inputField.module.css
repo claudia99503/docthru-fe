@@ -17,6 +17,11 @@
   outline: 1px solid var(--error);
 }
 
+.error-text {
+  color: var(--error);
+  padding-left: 8px;
+}
+
 .PasswordInput .input {
   position: relative;
 }

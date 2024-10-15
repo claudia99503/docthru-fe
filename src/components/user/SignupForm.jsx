@@ -1,16 +1,17 @@
 import styles from './form.module.css';
 import { FormProvider, useForm } from 'react-hook-form';
 import Input from './Input';
-import { PasswordInput } from '.PasswordInput';
+import PasswordInput from './PasswordInput';
 import { AUTH } from '@/variables/formValidation';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 export default function SignUpForm() {
-  const [newUser, setNewUser] = useState(false);
-  const { signUp, user } = useAuth();
+  // const [newUser, setNewUser] = useState(false);
+  // const { signUp, user } = useAuth();
+
   const formMethods = useForm();
-  const { onModalOpen, GlobalModal } = useGlobalModal();
+
   const {
     handleSubmit,
     formState: { isValid },
@@ -38,12 +39,12 @@ export default function SignUpForm() {
     });
   };
 
-  useEffect(() => {
-    if (user && !newUser) {
-      router.push('/');
-      setNewUser(false);
-    }
-  }, [user, newUser, router]);
+  // useEffect(() => {
+  //   if (user && !newUser) {
+  //     router.push('/');
+  //     setNewUser(false);
+  //   }
+  // }, [user, newUser, router]);
 
   return (
     <>
@@ -74,9 +75,13 @@ export default function SignUpForm() {
             label="비밀번호 확인"
             validations={AUTH.CONFIRM_PW}
           />
-          <Button variant="auth" type="submit" disabled={!isValid}>
+          <button
+            type="submit"
+            className={styles['submit-btn']}
+            disabled={!isValid}
+          >
             로그인
-          </Button>
+          </button>
         </form>
       </FormProvider>
     </>

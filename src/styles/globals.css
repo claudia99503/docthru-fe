@@ -47,6 +47,7 @@ h1 {
 button:disabled {
   cursor: not-allowed;
   pointer-events: none;
+  background-color: var(--grey-300);
 }
 
 input {
@@ -54,4 +55,9 @@ input {
   border: 1px solid var(--grey-200);
   border-radius: 12px;
   width: 100%;
+}
+
+section {
+  width: 100%;
+  flex: display;
 }
