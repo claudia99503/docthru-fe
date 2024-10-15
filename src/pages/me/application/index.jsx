@@ -1,19 +1,10 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import TabNavigation from '../../../components/layouts/TabNavigation';
-import SearchbarWithDropdown from '../../../components/application/SearchBarWithDropdown';
+import SearchBarWithDropdown from '../../../components/application/SearchBarWithDropdown';
 import ChallengeTable from '../../../components/application/ChallengeTable';
 import Pagination from '../../../components/application/Pagination';
 import styles from '../../../styles/pages/application/MyApplicationPage.module.css';
-
-// 날짜를 'YY/MM/DD' 형식으로 변환하는 함수
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  const year = date.getFullYear().toString().slice(2); // 연도 마지막 두 자리
-  const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 월 (1부터 시작)
-  const day = date.getDate().toString().padStart(2, '0'); // 일
-  return `${year}/${month}/${day}`;
-};
 
 export default function MyApplicationPage() {
   const [selectedOption, setSelectedOption] = useState('');
@@ -202,7 +193,7 @@ export default function MyApplicationPage() {
           <TabNavigation activeTab="applications" />
         </div>
         <div className={styles.applicationSearchDropdownContainer}>
-          <SearchbarWithDropdown
+          <SearchBarWithDropdown
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
             onOptionChange={handleOptionChange}
