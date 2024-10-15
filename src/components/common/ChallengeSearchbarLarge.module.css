@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   background-color: #ffffff;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--grey-200);
   border-radius: 20px;
   height: 40px;
 }
@@ -17,13 +17,13 @@
   background-color: transparent;
   font-family: Pretendard;
   font-weight: 400;
-  color: #a3a3a3;
+  color: var(--grey-400);;
   padding-left: 8px;
   outline: none;
 }
 
 .input::placeholder {
-  color: #a3a3a3;
+  color: var(--grey-400);
 }
 
 /* 데스크탑 버전 */

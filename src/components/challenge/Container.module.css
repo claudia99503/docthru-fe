@@ -28,7 +28,7 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 20px;
-  color: #525252;
+  color: var(--grey-600);
   margin-right: 10px;
 }
 
@@ -42,15 +42,15 @@
   width: 100%;
   max-width: 253px;
   height: 40px;
-  background-color: #ffc117;
+  background-color: var( --brand-yellow);
   border-radius: 12px;
   font-family: "Pretendard", sans-serif;
   font-weight: 700;
   font-size: 14px;
   line-height: 26px;
-  color: #262626;
+  color: var(--grey-800);
   text-align: center;
-  border: 2px solid #262626;
+  border: 2px solid var(--grey-800);
 }
 
 .challenge-button-row {
@@ -64,13 +64,13 @@
   max-width: 253px;
   height: 40px;
   border-radius: 12px;
-  background-color: #e5e5e5;
+  background-color: var(--grey-200);
   font-family: "Pretendard", sans-serif;
   font-weight: 700;
   font-size: 14px;
   line-height: 26px;
   text-align: center;
-  color: #737373;
+  color: var(--grey-500);
   border: none;
 }
 
@@ -89,12 +89,12 @@
 }
 
 .mobile-buttons-row .primary-button {
-  background-color: #ffc117;
-  border: 2px solid #262626;
+  background-color: var( --brand-yellow);
+  border: 2px solid var(--grey-800);
 }
 
 .mobile-buttons-row .gray-button {
-  background-color: #e5e5e5;
+  background-color: var(--grey-200);
   border: none;
 }
 

@@ -7,7 +7,6 @@ import images from '../../variables/images';
 import styles from './Card.module.css';
 
 const Card = ({ data, site }) => {
-
   const formatDeadline = (dateTime) => {
     const date = new Date(dateTime);
 
@@ -35,7 +34,7 @@ const Card = ({ data, site }) => {
             router.pathname === `/work/${data.id}` ? styles.active : ''
           }`}
           onClick={() => handleTabClick(`/work/${data.id}`)}
-          style={{border:'none'}}
+          style={{ border: 'none' }}
         >
           <span>내 작업물 보기</span>
           <img src={images.icons.document} alt="document icon" />
@@ -81,16 +80,18 @@ const Card = ({ data, site }) => {
   function onDelete() {}
 
   return (
-    <div
-      className={styles.card}
-      onClick={() => handleTabClick(`/challenge/${data.id}`)}
-    >
+    <div className={styles.card}>
       <div className={styles['card-top']}>
         {getCondition()}
         <div className={`${styles.menuButton}`}>
           <KebabMenu onEdit={onEdit} onDelete={onDelete} />
         </div>
-        <div className={styles['challenge-title']}>{data.title} </div>
+        <div
+          className={styles['challenge-title']}
+          onClick={() => handleTabClick(`/${data.id}`)}
+        >
+          {data.title}{' '}
+        </div>
         <DocTypeChip field={data.field} docType={data.docType} />
       </div>
       <div className={styles['card-bottom']}>
