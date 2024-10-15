@@ -1,6 +1,6 @@
 import React from 'react';
 import ChallengeSearchBar from './ChallengeSearchBar';
-import ApplicationDropdown from './ApplicationDropdown';
+import ApplicationDropdown from '../application/ApplicationDropdown';
 import styles from './SearchBarWithDropdown.module.css';
 
 const SearchBarWithDropdown = ({
