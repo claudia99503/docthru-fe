@@ -2,7 +2,7 @@ import assets from '@/variables/images';
 import Image from 'next/image';
 import styles from './Header.module.css';
 import Link from 'next/link';
-import ProfileDropDown from '../ui/ProfileDropDown';
+import ProfileDropDown from './ProfileDropDown';
 import { pages } from '@/variables/variables';
 import Nav from './Nav';
 
@@ -13,7 +13,7 @@ export function MemberHeader({ user }) {
         <Link href="/">
           <Image
             className={styles.logo}
-            src={assets.images.navLogoLarge}
+            src={assets.images.logo}
             width={120}
             height={27}
           />
