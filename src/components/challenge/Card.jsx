@@ -1,18 +1,10 @@
 import { useRouter } from 'next/router';
 import styles from './Card.module.css';
 import DocTypeChip from '../common/DocTypeChip';
+import KebabMenu from '../common/KebabMenu';
 import images from '../../variables/images';
 
-const Card = ({
-  data,
-  title,
-  field,
-  docType,
-  deadline,
-  participants,
-  maxParticipants,
-}) => {
-  console.log(data)
+const Card = ({ data }) => {
   const formatDeadline = (dateTime) => {
     const date = new Date(dateTime);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -20,8 +12,8 @@ const Card = ({
   };
 
   const getCondition = () => {
-    const today = new Date().toLocaleDateString();
-    const time = new Date(deadline).toLocaleDateString();
+    const today = new Date();
+    const time = new Date(data.deadline);
 
     if (today >= time) {
       return (
@@ -33,7 +25,7 @@ const Card = ({
           <span>챌린지가 마감되었어요</span>
         </div>
       );
-    } else if (participants == maxParticipants) {
+    } else if (data.participates === data.maxParticipates) {
       return (
         <div
           className={styles['condition-chip']}
@@ -52,13 +44,16 @@ const Card = ({
     router.push(path);
   };
 
+  function onEdit() {}
+  function onDelete() {}
+
   return (
     <div className={styles.card}>
       <div className={styles['card-top']}>
         {getCondition()}
-        <button className={`${styles.menuButton}`}>
-          <img src={images.icons.meatballsMenu} alt="menu icon" />
-        </button>
+        <div className={`${styles.menuButton}`}>
+          <KebabMenu onEdit={onEdit} onDelete={onDelete} />
+        </div>
         <div className={styles['challenge-title']}>{data.title} </div>
         <DocTypeChip field={data.field} docType={data.docType} />
       </div>

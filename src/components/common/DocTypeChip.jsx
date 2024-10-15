@@ -5,7 +5,7 @@ export const FIELD = {
   color: {
     NEXTJS: '#79E16A',
     API: '#FF905E',
-    CAREER: '#Career',
+    CAREER: '#7EB2EE',
     MODERNJS: '#F66E6B',
     WEB: '#F7EA5D',
   },

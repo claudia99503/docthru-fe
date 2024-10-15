@@ -37,7 +37,7 @@ export default function MyChallengePage({
     {
       "id": 1023,
       "docType": "OFFICIAL",
-      "field": "Next.js",
+      "field": "NEXTJS",
       "title": "Next.js - App Router: Routing Fundamentals",
       "participates": 3,
       "maxParticipates": 5,
@@ -67,7 +67,7 @@ export default function MyChallengePage({
     {
       "id": 1020,
       "docType": "BLOG",
-      "field": "Career",
+      "field": "CAREER",
       "title": "개발자로서 자신만의 브랜드를 구축하는 방법(dailydev)",
       "participates": 5,
       "maxParticipates": 5,
@@ -77,7 +77,7 @@ export default function MyChallengePage({
     {
       "id": 1019,
       "docType": "OFFICIAL",
-      "field": "Next.js",
+      "field": "NEXTJS",
       "title": "Next.js - App Router: Routing Fundamentals",
       "participates": 2,
       "maxParticipates": 5,
@@ -101,13 +101,13 @@ export default function MyChallengePage({
       "title": "Fetch API, 너는 에러를 제대로 핸들링 하고 있는가?(dailydev)",
       "participates": 10,
       "maxParticipates": 10,
-      "deadline": "2024-02-22T23:59:59",
+      "deadline": "2024-11-22T23:59:59",
       "progress": false
     },
     {
       "id": 1016,
       "docType": "BLOG",
-      "field": "Career",
+      "field": "CAREER",
       "title": "개발자로서 자신만의 브랜드를 구축하는 방법(dailydev)",
       "participates": 5,
       "maxParticipates": 5,
@@ -117,17 +117,17 @@ export default function MyChallengePage({
     {
       "id": 1015,
       "docType": "BLOG",
-      "field": "Next.js",
+      "field": "NEXTJS",
       "title": "Next.js - App Router: Routing Fundamentals",
       "participates": 1,
       "maxParticipates": 10,
-      "deadline": "2024-02-22T23:59:59",
+      "deadline": "2025-02-22T23:59:59",
       "progress": false
     },
     {
       "id": 1014,
       "docType": "BLOG",
-      "field": "Next.js",
+      "field": "NEXTJS",
       "title": "Next.js - App Router: Routing Fundamentals",
       "participates": 10,
       "maxParticipates": 10,
@@ -137,11 +137,11 @@ export default function MyChallengePage({
     {
       "id": 2022,
       "docType": "OFFICIAL",
-      "field": "Next.js",
+      "field": "NEXTJS",
       "title": "Next.js - App Router: Routing Fundamentals",
       "participates": 10,
       "maxParticipates": 20,
-      "deadline": "2024-02-24T23:59:59",
+      "deadline": "2024-11-10T23:59:59",
       "progress": false
     }
   ];
