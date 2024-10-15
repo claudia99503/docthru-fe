@@ -2,6 +2,7 @@ import styles from './LikeButton.module.css';
 import assets from '@/variables/images';
 import Image from 'next/image';
 import { formatLikes } from '@/utils/utilFunction';
+
 export default function LikeButton({ data, isButton = true }) {
   const imgSrc = data.isLiked
     ? assets.icons.heartActive
