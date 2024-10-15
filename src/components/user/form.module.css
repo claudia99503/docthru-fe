@@ -23,3 +23,7 @@
   background-color: var(--brand-yellow);
   color: var(--brand-black);
 }
+
+.submit-btn:disabled {
+  background-color: var(--grey-200);
+}

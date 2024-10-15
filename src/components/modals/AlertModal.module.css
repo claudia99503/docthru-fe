@@ -1,0 +1,35 @@
+.AlertModal {
+  width: clamp(540px, 100%, 220px);
+  height: 250px;
+  background-color: #fff;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.msg {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--grey-800);
+}
+
+.btn {
+  max-width: 165px;
+  background-color: var(brand-black);
+  width: 100%;
+  min-width: 48px;
+}
+
+.btn:hover {
+  background-color: var(brand-yellow);
+}
+
+@media only screen and (max-width: 744px) {
+  .msg {
+    font-size: 16px;
+  }
+}

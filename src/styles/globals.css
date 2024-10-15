@@ -48,7 +48,6 @@ h1 {
 button:disabled {
   cursor: not-allowed;
   pointer-events: none;
-  /* background-color: var(--grey-300); */
 }
 
 input {
