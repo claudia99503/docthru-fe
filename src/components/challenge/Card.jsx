@@ -6,11 +6,42 @@ import images from '../../variables/images';
 
 import styles from './Card.module.css';
 
-const Card = ({ data }) => {
+const Card = ({ data, site }) => {
+
   const formatDeadline = (dateTime) => {
     const date = new Date(dateTime);
+
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return `${date.toLocaleString('ko-KR', options)} 마감`;
+  };
+
+  const getBtn = () => {
+    if (site == 'ongoing') {
+      return (
+        <button
+          className={`${styles.challengeButton} ${
+            router.pathname === `/work/${data.id}` ? styles.active : ''
+          }`}
+          onClick={() => handleTabClick(`/work/${data.id}`)}
+        >
+          <span>도전 계속하기</span>
+          <img src={images.icons.arrowMainRight} alt="arrow icon" />
+        </button>
+      );
+    } else {
+      return (
+        <button
+          className={`${styles.challengeButton} ${
+            router.pathname === `/work/${data.id}` ? styles.active : ''
+          }`}
+          onClick={() => handleTabClick(`/work/${data.id}`)}
+          style={{border:'none'}}
+        >
+          <span>내 작업물 보기</span>
+          <img src={images.icons.document} alt="document icon" />
+        </button>
+      );
+    }
   };
 
   const getCondition = () => {
@@ -50,7 +81,10 @@ const Card = ({ data }) => {
   function onDelete() {}
 
   return (
-    <div className={styles.card}>
+    <div
+      className={styles.card}
+      onClick={() => handleTabClick(`/challenge/${data.id}`)}
+    >
       <div className={styles['card-top']}>
         {getCondition()}
         <div className={`${styles.menuButton}`}>
@@ -80,15 +114,7 @@ const Card = ({ data }) => {
             </span>
           </div>
         </div>
-        <button
-          className={`${styles.challengeButton} ${
-            router.pathname === `/work/${data.id}` ? styles.active : ''
-          }`}
-          onClick={() => handleTabClick(`/work/${data.id}`)}
-        >
-          <span>도전 계속하기</span>
-          <img src={images.icons.arrowMainRight} alt="arrow icon" />
-        </button>
+        {getBtn()}
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 import Head from 'next/head';
 import TabNavigation from '../../../components/layouts/TabNavigation';
@@ -8,13 +9,23 @@ import Card from '../../../components/challenge/Card';
 import { seed } from '../../../../mockup/challenge';
 
 import frameStyles from '../../../styles/pages/application/MyApplicationPage.module.css';
-import styles from '../../../components/challenge/Card.module.css';
+import styles from '../../../styles/pages/me/MyChallengePage.module.css';
 
 export default function MyFinishedChallengePage() {
+  const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
+  
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
   const seedData = seed;
+
+  const getMobilePage = () => {
+    isMobile? setItemsPerPage(4) : setItemsPerPage(5)
+  }
+  
+  useEffect(() => {
+    getMobilePage()
+  },[isMobile])
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -55,7 +66,7 @@ export default function MyFinishedChallengePage() {
             {paginatedData.length > 0 ? (
               <div className={styles.AllCardSection}>
                 {paginatedData.map((paginatedData) => (
-                  <Card key={`${paginatedData.id}`} data={paginatedData} />
+                  <Card key={`${paginatedData.id}`} data={paginatedData} site={'done'}/>
                 ))}
               </div>
             ) : (
