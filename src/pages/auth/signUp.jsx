@@ -14,7 +14,7 @@ export default function SignUpPage() {
       <SignUpForm />
       <p className={styles.text}>
         회원이신가요?
-        <Link href="/auth/signUp" className={styles.link}>
+        <Link href="/auth/login" className={styles.link}>
           로그인하기
         </Link>
       </p>

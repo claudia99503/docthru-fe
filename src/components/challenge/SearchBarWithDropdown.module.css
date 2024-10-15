@@ -1,8 +1,3 @@
-.SearchBarWithDropdown,
-.SearchBarWithDropdown > * {
-  box-sizing: border-box;
-}
-
 .SearchBarWithDropdown {
   display: flex;
   justify-content: space-between;
@@ -16,31 +11,8 @@
 .SearchBarWithDropdown > * {
   flex-shrink: 0;
   margin-right: 5px;
-  box-sizing: border-box;
 }
 
 .SearchBarWithDropdown > *:last-child {
   margin-right: 0;
-}
-
-@media (max-width: 1199px) {
-  .SearchBarWithDropdown {
-    max-width: 697px;
-    width: 100%;
-    margin: 0;
-    box-sizing: border-box;
-  }
-}
-
-@media (max-width: 743px) {
-  .SearchBarWithDropdown {
-    min-width: 343px;
-    width: 100%;
-    margin: 0;
-  }
-
-  .SearchBarWithDropdown > * {
-    flex-shrink: 0;
-    width: auto;
-  }
 }

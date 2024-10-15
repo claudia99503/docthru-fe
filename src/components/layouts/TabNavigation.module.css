@@ -3,11 +3,10 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-  width: inherit;
+  width: 100%;
 }
 
 .title {
-  font-family: 'Pretendard', sans-serif;
   font-weight: 600;
   font-size: 20px;
   line-height: 23.87px;
@@ -22,8 +21,7 @@
   height: 39px;
   border-radius: 19.5px;
   background-color: #262626;
-  color: #FFFFFF;
-  font-family: 'Pretendard', sans-serif;
+  color: #ffffff;
   font-weight: 600;
   font-size: 16px;
   line-height: 19.09px;
@@ -38,12 +36,12 @@
 .tab-navigation {
   display: flex;
   justify-content: flex-start;
-  border-bottom: 1px solid #D4D4D4;
+  border-bottom: 1px solid var(--grey-200);
   height: 53px;
+  width: 100%;
 }
 
 .tab-button {
-  font-family: 'Pretendard', sans-serif;
   font-weight: 600;
   font-size: 18px;
   line-height: 21.48px;
@@ -62,21 +60,9 @@
   border-bottom: 3px solid #262626;
 }
 
-@media (min-width: 1200px) {
-  .tab-navigation, .header {
-    max-width: 996px;
-  }
-}
-
-@media (min-width: 744px) and (max-width: 1199px) {
-  .tab-navigation, .header {
-    max-width: 697px;
-  }
-}
-
 @media (max-width: 743px) {
-  .tab-navigation, .header {
-    min-width: 343px;
+  .tab-navigation,
+  .header {
     height: 48px;
     justify-content: space-between;
   }
@@ -87,4 +73,3 @@
     font-size: 16px;
   }
 }
-

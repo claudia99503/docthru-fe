@@ -11,7 +11,7 @@ const TabNavigation = ({ activeTab }) => {
   };
 
   return (
-    <div>
+    <>
       <div className={styles.header}>
         <h1 className={styles.title}>나의 챌린지</h1>
         <button
@@ -53,7 +53,7 @@ const TabNavigation = ({ activeTab }) => {
           신청한 챌린지
         </button>
       </div>
-    </div>
+    </>
   );
 };
 

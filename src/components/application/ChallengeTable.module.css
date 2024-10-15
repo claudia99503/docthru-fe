@@ -6,23 +6,19 @@
 .row {
   display: flex;
   width: 100%;
-  max-width: 996px;
-  box-sizing: border-box;
+  min-width: 696px;
 }
 
 /* 데스크탑 버전 */
 @media (min-width: 1200px) {
   .header,
   .row {
-    max-width: 996px;
     height: 36px;
-    box-sizing: border-box;
   }
 
   .header {
     background-color: #262626;
     color: #ffffff;
-    font-family: Pretendard;
     font-weight: 500;
     font-size: 13px;
     line-height: 15.51px;
@@ -57,7 +53,8 @@
     justify-content: start;
   }
 
-  .field, .category {
+  .field,
+  .category {
     justify-content: start;
   }
 
@@ -83,9 +80,9 @@
 @media (max-width: 1199px) {
   .header,
   .row {
-    max-width: 696px;
     height: 36px;
     box-sizing: border-box;
+    width: 100%;
   }
 
   .header {
@@ -125,7 +122,8 @@
     justify-content: start;
   }
 
-  .field, .category {
+  .field,
+  .category {
     justify-content: start;
   }
 
@@ -160,7 +158,6 @@
 
   .header,
   .row {
-    min-width: 696px;
     width: 100%;
     height: auto;
     flex-direction: row;
@@ -198,26 +195,25 @@
 }
 
 .waiting {
-  background-color: #FFFDE7;
-  color: #F2BC00;
+  background-color: #fffde7;
+  color: #f2bc00;
 }
 
 .accepted {
-  background-color: #DFF0FF;
-  color: #4095DE;
+  background-color: #dff0ff;
+  color: #4095de;
 }
 
 .rejected {
-  background-color: #FFF0F0;
-  color: #E54946;
+  background-color: #fff0f0;
+  color: #e54946;
 }
 
 .deleted {
-  background-color: #E5E5E5;
+  background-color: #e5e5e5;
   color: #737373;
 }
 
 .deletedRow {
-  background-color: #F5F5F5 !important;
+  background-color: #f5f5f5 !important;
 }
-

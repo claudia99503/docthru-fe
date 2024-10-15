@@ -11,6 +11,7 @@ const mockUp = {
 export default function Layout({ children }) {
   const router = useRouter();
   const isAdminRoute = router.pathname.startsWith('/admin');
+  const isAuthRoute = router.pathname.startsWith * '/auth';
 
   return (
     <>
