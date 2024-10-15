@@ -35,7 +35,7 @@ instance.interceptors.response.use(
     ) {
       originalRequest._retry = true;
       try {
-        const response = await instance.post('/auth/refresh-token', null, {
+        const response = await instance.post('/users/token/refresh', null, {
           withCredentials: true,
         });
         const { accessToken } = response.data;
