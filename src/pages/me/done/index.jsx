@@ -9,8 +9,7 @@ import ChallengeSearchBarLarge from '../../../components/common/ChallengeSearchB
 import Card from '../../../components/challenge/Card';
 import { seed } from '../../../../mockup/challenge';
 
-import frameStyles from '../../../styles/pages/application/MyApplicationPage.module.css';
-import styles from '../../../styles/pages/me/MyChallengePage.module.css';
+import styles from '../../../styles/pages/Home.module.css';
 
 export default function MyFinishedChallengePage() {
   const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
@@ -89,7 +88,7 @@ export default function MyFinishedChallengePage() {
                   />
                 ))}
               </div>
-              <div className={frameStyles.paginationWrapper}>
+              <div className={styles.paginationWrapper}>
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages} // 계산된 totalPages 사용

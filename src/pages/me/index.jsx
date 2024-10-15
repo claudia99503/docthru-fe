@@ -9,8 +9,7 @@ import ChallengeSearchBarLarge from '../../components/common/ChallengeSearchBarL
 import Card from '../../components/challenge/Card';
 import { seed } from '../../../mockup/challenge';
 
-import frameStyles from '../../styles/pages/application/MyApplicationPage.module.css';
-import styles from '../../styles/pages/me/MyChallengePage.module.css';
+import styles from '../../styles/pages/Home.module.css';
 
 // export const getStaticProps = async () => {
 //   const response = await axios(
@@ -96,7 +95,7 @@ export default function MyChallengePage() {
                   />
                 ))}
               </div>
-              <div className={frameStyles.paginationWrapper}>
+              <div className={styles.paginationWrapper}>
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages} // 계산된 totalPages 사용
