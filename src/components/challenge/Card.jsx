@@ -4,6 +4,7 @@ import DocTypeChip from '../common/DocTypeChip';
 import images from '../../variables/images';
 
 const Card = ({
+  data,
   title,
   field,
   docType,
@@ -11,6 +12,7 @@ const Card = ({
   participants,
   maxParticipants,
 }) => {
+  console.log(data)
   const formatDeadline = (dateTime) => {
     const date = new Date(dateTime);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -27,7 +29,7 @@ const Card = ({
           className={styles['condition-chip']}
           style={{ backgroundColor: '#262626', color: '#FFFFFF' }}
         >
-          <img src={images.icons.deadlineSmall} alt="deadline icon" />
+          <img src={images.icons.deadline} alt="deadline icon" />
           <span>챌린지가 마감되었어요</span>
         </div>
       );
@@ -37,7 +39,7 @@ const Card = ({
           className={styles['condition-chip']}
           style={{ backgroundColor: '#E5E5E5' }}
         >
-          <img src={images.icons.personMediumWhite} alt="deadline icon" />
+          <img src={images.icons.personWhite} alt="deadline icon" />
           <span>모집이 완료된 상태에요</span>
         </div>
       );
@@ -57,27 +59,27 @@ const Card = ({
         <button className={`${styles.menuButton}`}>
           <img src={images.icons.meatballsMenu} alt="menu icon" />
         </button>
-        <div className={styles['challenge-title']}>{title} </div>
-        <DocTypeChip field={field} docType={docType} />
+        <div className={styles['challenge-title']}>{data.title} </div>
+        <DocTypeChip field={data.field} docType={data.docType} />
       </div>
       <div className={styles['card-bottom']}>
         <div className={styles['info-row']}>
           <div style={{ display: 'flex' }}>
             <img
-              src={images.icons.deadlineLarge}
+              src={images.icons.deadline}
               alt="deadline icon"
               className={styles.icon}
             />
-            <span className={styles.text}>{formatDeadline(deadline)}</span>
+            <span className={styles.text}>{formatDeadline(data.deadline)}</span>
           </div>
           <div style={{ display: 'flex' }}>
             <img
-              src={images.icons.personLarge}
+              src={images.icons.person}
               alt="person icon"
               className={styles.icon}
             />
             <span className={styles.text}>
-              {participants}/{maxParticipants} 참여중
+              {data.participates}/{data.maxParticipates} 참여중
             </span>
           </div>
         </div>

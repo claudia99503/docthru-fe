@@ -1,3 +1,11 @@
+.AllCardSection {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  gap: 40px;
+}
+
 .card {
   position: relative;
   width: 996px;
