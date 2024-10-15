@@ -1,7 +1,8 @@
-.AplicationDropdown {
+.ApplicationDropdown {
   position: relative;
   max-width: 150px;
   color: #737373;
+  width: 100%;
 }
 
 .dropdown-button {
@@ -58,6 +59,7 @@
   cursor: pointer;
   border-bottom: 1px solid #d4d4d4;
   padding: 10px 0;
+  width: 100%;
 }
 
 .dropdown-item:last-child {
@@ -75,8 +77,9 @@
   }
 
   .dropdown-list {
-    min-width: 139px;
+    max-width: 139px;
     min-height: 270px;
+    width: 100%;
   }
 
   .dropdown-item {

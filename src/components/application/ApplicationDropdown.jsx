@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './AplicationDropdown.module.css';
+import styles from './ApplicationDropdown.module.css';
 import images from '../../variables/images';
 
 const AplicationDropdown = ({ onOptionChange }) => {
@@ -17,7 +17,7 @@ const AplicationDropdown = ({ onOptionChange }) => {
   };
 
   return (
-    <div className={styles.AplicationDropdown}>
+    <div className={styles.ApplicationDropdown}>
       <button className={styles['dropdown-button']} onClick={toggleDropdown}>
         <span className={styles['selected-text']}>{selectedOption}</span>
         <img
