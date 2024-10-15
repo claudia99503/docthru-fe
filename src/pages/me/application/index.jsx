@@ -20,9 +20,7 @@ export default function MyApplicationPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-  const totalPages = 5;
 
-  // 시드 데이터
   const seedData = [
     {
       id: 1023,
@@ -181,6 +179,9 @@ export default function MyApplicationPage() {
       return 0;
     });
 
+  // 페이지 수 계산
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+
   // 현재 페이지의 데이터만 추출
   const paginatedData = filteredData.slice(
     (currentPage - 1) * itemsPerPage,
@@ -197,7 +198,6 @@ export default function MyApplicationPage() {
         />
       </Head>
       <div className={styles.pageContainer}>
-        <h1>신청한 챌린지 내용</h1>
         <div className={styles.tabNavigationWrapper}>
           <TabNavigation activeTab="applications" />
         </div>
@@ -220,7 +220,7 @@ export default function MyApplicationPage() {
         <div className={styles.paginationWrapper}>
           <Pagination
             currentPage={currentPage}
-            totalPages={totalPages}
+            totalPages={totalPages} // 계산된 totalPages 사용
             onPageChange={handlePageChange}
           />
         </div>
@@ -228,3 +228,4 @@ export default function MyApplicationPage() {
     </>
   );
 }
+
