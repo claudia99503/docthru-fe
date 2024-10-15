@@ -82,9 +82,9 @@ const Card = ({ data }) => {
         </div>
         <button
           className={`${styles.challengeButton} ${
-            router.pathname === '/work/' ? styles.active : ''
+            router.pathname === `/work/${data.id}` ? styles.active : ''
           }`}
-          onClick={() => handleTabClick('/work/')}
+          onClick={() => handleTabClick(`/work/${data.id}`)}
         >
           <span>도전 계속하기</span>
           <img src={images.icons.arrowMainRight} alt="arrow icon" />
