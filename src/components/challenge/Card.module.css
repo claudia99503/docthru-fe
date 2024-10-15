@@ -85,8 +85,9 @@
   font-size: 14px;
   font-weight: 700;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  gap: 6px;
 }
 
 @media (min-width: 744px) and (max-width: 1199px) {
