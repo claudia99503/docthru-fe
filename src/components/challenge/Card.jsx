@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import styles from './Card.module.css';
-import DocTypeChip from '../ui/DocTypeChip';
+import DocTypeChip from '../common/DocTypeChip';
 import images from '../../variables/images';
 
 const Card = ({
@@ -11,7 +11,6 @@ const Card = ({
   participants,
   maxParticipants,
 }) => {
-
   const formatDeadline = (dateTime) => {
     const date = new Date(dateTime);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -38,10 +37,7 @@ const Card = ({
           className={styles['condition-chip']}
           style={{ backgroundColor: '#E5E5E5' }}
         >
-          <img
-            src={images.icons.personMediumWhite}
-            alt="deadline icon"
-          />
+          <img src={images.icons.personMediumWhite} alt="deadline icon" />
           <span>모집이 완료된 상태에요</span>
         </div>
       );
@@ -66,7 +62,7 @@ const Card = ({
       </div>
       <div className={styles['card-bottom']}>
         <div className={styles['info-row']}>
-          <div style={{display:'flex'}}>
+          <div style={{ display: 'flex' }}>
             <img
               src={images.icons.deadlineLarge}
               alt="deadline icon"
@@ -74,7 +70,7 @@ const Card = ({
             />
             <span className={styles.text}>{formatDeadline(deadline)}</span>
           </div>
-          <div style={{display:'flex'}}>
+          <div style={{ display: 'flex' }}>
             <img
               src={images.icons.personLarge}
               alt="person icon"

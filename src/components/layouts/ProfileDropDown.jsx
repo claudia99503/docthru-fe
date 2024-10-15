@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styles from './ProfileDropDown.module.css';
-import { ProfileImage, Profile } from './Profile';
+import { ProfileImage, Profile } from '../common/Profile';
 import { useEffect, useRef, useState } from 'react';
 
 export default function ProfileDropDown({ user }) {
