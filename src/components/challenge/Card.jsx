@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router';
-import styles from './Card.module.css';
+
 import DocTypeChip from '../common/DocTypeChip';
 import KebabMenu from '../common/KebabMenu';
 import images from '../../variables/images';
+
+import styles from './Card.module.css';
 
 const Card = ({ data }) => {
   const formatDeadline = (dateTime) => {
@@ -13,9 +15,9 @@ const Card = ({ data }) => {
 
   const getCondition = () => {
     const today = new Date();
-    const time = new Date(data.deadline);
+    const deadline = new Date(data.deadline);
 
-    if (today >= time) {
+    if (today >= deadline) {
       return (
         <div
           className={styles['condition-chip']}
