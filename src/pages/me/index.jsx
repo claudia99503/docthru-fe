@@ -84,7 +84,7 @@ export default function MyChallengePage() {
             setSearchTerm={setSearchTerm}
           />
         </div>
-        <div className={frameStyles.challengeTableWrapper}>
+        <div className={styles.challengeTableWrapper}>
           {paginatedData.length > 0 ? (
             <>
               <div className={styles.AllCardSection}>
