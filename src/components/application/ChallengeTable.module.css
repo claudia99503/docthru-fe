@@ -7,6 +7,7 @@
   display: flex;
   width: 100%;
   max-width: 996px;
+  box-sizing: border-box;
 }
 
 /* 데스크탑 버전 */
@@ -15,7 +16,7 @@
   .row {
     max-width: 996px;
     height: 36px;
-    border-radius: 8px;
+    box-sizing: border-box;
   }
 
   .header {
@@ -28,6 +29,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-radius: 8px;
   }
 
   .no,
@@ -51,7 +53,12 @@
   }
 
   .title {
-    flex: 2;
+    flex: 3;
+    justify-content: start;
+  }
+
+  .field, .category {
+    justify-content: start;
   }
 
   .row {
@@ -78,6 +85,7 @@
   .row {
     max-width: 696px;
     height: 36px;
+    box-sizing: border-box;
   }
 
   .header {
@@ -113,7 +121,12 @@
   }
 
   .title {
-    flex: 2;
+    flex: 3;
+    justify-content: start;
+  }
+
+  .field, .category {
+    justify-content: start;
   }
 
   .row {
@@ -140,7 +153,7 @@
 }
 
 /* 모바일 버전 */
-@media (max-width: 743px) {
+@media (max-width: 743px) and (min-width: 375px) {
   .tableContainer {
     overflow-x: auto;
   }
@@ -148,8 +161,10 @@
   .header,
   .row {
     min-width: 696px;
+    width: 100%;
     height: auto;
     flex-direction: row;
+    box-sizing: border-box;
   }
 
   .header {
@@ -168,5 +183,41 @@
     font-weight: 400;
     font-size: 12px;
   }
+}
+
+.status {
+  max-width: 70px;
+  max-height: 24px;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.waiting {
+  background-color: #FFFDE7;
+  color: #F2BC00;
+}
+
+.accepted {
+  background-color: #DFF0FF;
+  color: #4095DE;
+}
+
+.rejected {
+  background-color: #FFF0F0;
+  color: #E54946;
+}
+
+.deleted {
+  background-color: #E5E5E5;
+  color: #737373;
+}
+
+.deletedRow {
+  background-color: #F5F5F5 !important;
 }
 

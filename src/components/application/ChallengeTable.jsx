@@ -20,10 +20,25 @@ const getStatusLabel = (status) => {
 // 날짜를 'YY/MM/DD' 형식으로 변환하는 함수
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  const year = date.getFullYear().toString().slice(2); // 연도 마지막 두 자리
-  const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 월 (1부터 시작)
-  const day = date.getDate().toString().padStart(2, '0'); // 일
+  const year = date.getFullYear().toString().slice(2);
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
   return `${year}/${month}/${day}`;
+};
+
+const getStatusClass = (status) => {
+  switch (status) {
+    case 'WAITING':
+      return styles.waiting;
+    case 'ACCEPTED':
+      return styles.accepted;
+    case 'REJECTED':
+      return styles.rejected;
+    case 'DELETED':
+      return styles.deleted;
+    default:
+      return '';
+  }
 };
 
 const ChallengeTable = ({ data }) => {
@@ -41,7 +56,10 @@ const ChallengeTable = ({ data }) => {
       </div>
 
       {data.map((item) => (
-        <div key={item.id} className={styles.row}>
+        <div
+          key={item.id}
+          className={`${styles.row} ${item.status === 'DELETED' ? styles.deletedRow : ''}`}
+        >
           <div className={styles.no}>{item.id}</div>
           <div className={styles.field}>{item.docType === 'OFFICIAL' ? '공식문서' : '블로그'}</div>
           <div className={styles.category}>{item.field}</div>
@@ -49,7 +67,9 @@ const ChallengeTable = ({ data }) => {
           <div className={styles.participants}>{item.participates}</div>
           <div className={styles.applicationDate}>{formatDate(item.applicationDate)}</div>
           <div className={styles.deadline}>{formatDate(item.deadline)}</div>
-          <div className={styles.status}>{getStatusLabel(item.status)}</div>
+          <div className={`${styles.status} ${getStatusClass(item.status)}`}>
+            {getStatusLabel(item.status)}
+          </div>
         </div>
       ))}
     </div>
