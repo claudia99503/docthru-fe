@@ -4,7 +4,7 @@ import {
   createLogout,
   createUser,
   getUserMe,
-} from '@/service/api/user';
+} from '@/service/api/auth';
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { createContext, useContext, useEffect, useState } from 'react';
