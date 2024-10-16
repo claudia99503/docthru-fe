@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { createLogout } from './auth';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -47,6 +48,9 @@ instance.interceptors.response.use(
         return instance(originalRequest);
       } catch (refreshError) {
         console.error('token refresh error:', refreshError);
+
+        await createLogout();
+        localStorage.removeItem('accessToken');
 
         return Promise.reject({ status: refreshError.response?.status });
       }
