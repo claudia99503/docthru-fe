@@ -4,8 +4,8 @@ import Input from './Input';
 import PasswordInput from './PasswordInput';
 import { AUTH } from '@/variables/formValidation';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import { useAuth } from '@/context/AuthProvider';
+import Loader from '../common/Loader';
 
 export default function SignUpForm() {
   const [newUser, setNewUser] = useState(false);
@@ -19,8 +19,6 @@ export default function SignUpForm() {
     formState: { isValid },
     reset,
   } = formMethods;
-
-  const router = useRouter();
 
   const handleSignUpSubmit = (data) => {
     const filterData = {
@@ -40,6 +38,10 @@ export default function SignUpForm() {
   //     setNewUser(false);
   //   }
   // }, [user, newUser, router]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
