@@ -1,10 +1,10 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import styles from './form.module.css';
 import Input from './Input';
-import { PasswordInput } from './PasswordInput';
 import { AUTH } from '@/variables/formValidation';
+import PasswordInput from './PasswordInput';
 
-export default function LoginForm({ logIn }) {
+export default function LoginForm({ login }) {
   const formMethods = useForm();
 
   const {
@@ -14,7 +14,9 @@ export default function LoginForm({ logIn }) {
   } = formMethods;
 
   const handleLoginSubmit = (data) => {
-    logIn.mutate(data, {
+    console.log(data);
+
+    login.mutate(data, {
       onSuccess: () => {
         console.log('로그인 됨');
         reset();
@@ -40,7 +42,11 @@ export default function LoginForm({ logIn }) {
             label="비밀번호"
             validations={AUTH.PASSWORD}
           />
-          <button variant="auth" type="submit" disabled={!isValid}>
+          <button
+            className={styles['submit-btn']}
+            type="submit"
+            disabled={!isValid}
+          >
             로그인
           </button>
         </form>

@@ -1,6 +1,6 @@
 import axios from './axios';
 
-const PATH = '/work';
+const PATH = '/works';
 
 export async function getWork(id) {
   const res = await axios.get(`${PATH}/${id}`);

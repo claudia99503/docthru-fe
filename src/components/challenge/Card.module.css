@@ -34,7 +34,7 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .challenge-title {
@@ -107,7 +107,7 @@
     width: 343px;
     gap: 10px;
   }
-  
+
   .challenge-title {
     font-size: 20px;
     line-height: 23.87px;
@@ -126,7 +126,7 @@
     align-items: flex-start;
     width: 151px;
   }
-  .info-row:nth-child(1){
+  .info-row:nth-child(1) {
     flex-grow: 1;
   }
 

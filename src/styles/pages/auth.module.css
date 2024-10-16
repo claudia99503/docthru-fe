@@ -1,0 +1,19 @@
+.text {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-self: center;
+  color: var(--grey-600);
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.link {
+  color: var(--brand-black);
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

@@ -7,7 +7,7 @@ import { useFormContext } from 'react-hook-form';
 const showPassWord = assets.icons.eyeOn;
 const hidePassWord = assets.icons.eyeOff;
 
-export function PasswordInput({
+export default function PasswordInput({
   name,
   label = '비밀번호',
   placeholder = '비밀번호를 입력해 주세요',

@@ -1,6 +1,6 @@
 import assets from '@/variables/images';
 import Image from 'next/image';
-import styles from './Header.module.css';
+import styles from './Headers.module.css';
 import Link from 'next/link';
 import ProfileDropDown from './ProfileDropDown';
 import { pages } from '@/variables/variables';
@@ -14,6 +14,7 @@ export function MemberHeader({ user }) {
           <Image
             className={styles.logo}
             src={assets.images.logo}
+            alt="logo"
             width={120}
             height={27}
           />
@@ -31,6 +32,22 @@ export function AdminHeader({ user }) {
         <Nav links={pages} />
         <ProfileDropDown user={user} />
       </div>
+    </header>
+  );
+}
+
+export function AuthHeader() {
+  return (
+    <header className={styles.AuthHeader}>
+      <Link href="/">
+        <Image
+          className={styles.logo}
+          src={assets.images.logo}
+          alt="logo"
+          width={320}
+          height={72}
+        />
+      </Link>
     </header>
   );
 }

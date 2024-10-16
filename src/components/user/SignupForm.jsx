@@ -1,23 +1,24 @@
 import styles from './form.module.css';
 import { FormProvider, useForm } from 'react-hook-form';
 import Input from './Input';
-import { PasswordInput } from '.PasswordInput';
+import PasswordInput from './PasswordInput';
 import { AUTH } from '@/variables/formValidation';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useAuth } from '@/context/AuthProvider';
+import Loader from '../common/Loader';
 
 export default function SignUpForm() {
   const [newUser, setNewUser] = useState(false);
-  const { signUp, user } = useAuth();
+
   const formMethods = useForm();
-  const { onModalOpen, GlobalModal } = useGlobalModal();
+
+  const { signUp, isLoading } = useAuth();
+
   const {
     handleSubmit,
     formState: { isValid },
     reset,
   } = formMethods;
-
-  const router = useRouter();
 
   const handleSignUpSubmit = (data) => {
     const filterData = {
@@ -26,24 +27,21 @@ export default function SignUpForm() {
       password: String(data.password),
     };
 
-    signUp.mutate(filterData, {
-      onSuccess: () => {
-        setNewUser(true);
-        onModalOpen({
-          msg: '가입이 완료되었습니다.',
-          path: '/',
-        });
-        reset();
-      },
-    });
+    console.log('just before submit', filterData);
+
+    signUp.mutate(filterData);
   };
 
-  useEffect(() => {
-    if (user && !newUser) {
-      router.push('/');
-      setNewUser(false);
-    }
-  }, [user, newUser, router]);
+  // useEffect(() => {
+  //   if (user && !newUser) {
+  //     router.push('/');
+  //     setNewUser(false);
+  //   }
+  // }, [user, newUser, router]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -74,9 +72,13 @@ export default function SignUpForm() {
             label="비밀번호 확인"
             validations={AUTH.CONFIRM_PW}
           />
-          <Button variant="auth" type="submit" disabled={!isValid}>
-            로그인
-          </Button>
+          <button
+            type="submit"
+            className={styles['submit-btn']}
+            disabled={!isValid}
+          >
+            가입하기
+          </button>
         </form>
       </FormProvider>
     </>

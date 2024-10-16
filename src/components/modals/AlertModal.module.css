@@ -1,0 +1,41 @@
+.AlertModal {
+  width: clamp(540px, 100%, 220px);
+  height: 250px;
+  background-color: #fff;
+  padding: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  text-align: center;
+}
+
+.msg {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--grey-800);
+}
+
+.btn {
+  max-width: 165px;
+  background-color: var(--brand-black);
+  border-radius: 12px;
+  color: #fff;
+  padding: 12px;
+  width: 100%;
+  min-width: 48px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.btn:hover {
+  background-color: var(--brand-yellow);
+}
+
+@media only screen and (max-width: 744px) {
+  .msg {
+    font-size: 16px;
+  }
+}
