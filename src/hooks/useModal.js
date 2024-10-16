@@ -21,18 +21,19 @@ export function useModalAction() {
     setModalMsg(msg);
 
     if (path) {
-      setRedirectTo(() => router.push(path));
+      setRedirectTo(path);
     }
   };
 
   const onModalClose = () => {
     if (modalRef.current) {
-      if (redirectTo) {
-        router.push(redirectTo);
-      }
       modalRef.current.close();
       setIsModalOpen(false);
-      setRedirectTo(null);
+
+      if (redirectTo) {
+        router.push(redirectTo);
+        setRedirectTo(null);
+      }
     }
   };
 

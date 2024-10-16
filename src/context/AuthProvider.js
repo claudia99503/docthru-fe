@@ -58,6 +58,7 @@ export function AuthProvider({ children }) {
         const { accessToken } = data;
         localStorage.setItem('accessToken', accessToken);
         queryClient.invalidateQueries('user');
+
         onModalOpen({ msg: data.message, path: '/' });
         console.log('Access Token:', data.accessToken);
       }

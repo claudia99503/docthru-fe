@@ -8,12 +8,11 @@ import { useRouter } from 'next/router';
 import { useAuth } from '@/context/AuthProvider';
 
 export default function SignUpForm() {
-  // const [newUser, setNewUser] = useState(false);
-  // const { signUp, user } = useAuth();
+  const [newUser, setNewUser] = useState(false);
 
   const formMethods = useForm();
 
-  const { signUp } = useAuth();
+  const { signUp, isLoading } = useAuth();
 
   const {
     handleSubmit,
@@ -32,16 +31,7 @@ export default function SignUpForm() {
 
     console.log('just before submit', filterData);
 
-    signUp.mutate(filterData, {
-      onSuccess: (data) => {
-        // setNewUser(true);
-        // onModalOpen({
-        //   msg: '가입이 완료되었습니다.',
-        //   path: '/',
-        // });
-        console.log(data);
-      },
-    });
+    signUp.mutate(filterData);
   };
 
   // useEffect(() => {
@@ -85,7 +75,7 @@ export default function SignUpForm() {
             className={styles['submit-btn']}
             disabled={!isValid}
           >
-            로그인
+            가입하기
           </button>
         </form>
       </FormProvider>
