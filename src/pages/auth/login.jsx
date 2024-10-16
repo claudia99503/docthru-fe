@@ -17,7 +17,7 @@ export default function LoginPage() {
 
       <p className={styles.text}>
         회원이 아니신가요?
-        <Link href="/auth/signup" className={styles.link}>
+        <Link href="/auth/sign-up" className={styles.link}>
           회원가입하기
         </Link>
       </p>
