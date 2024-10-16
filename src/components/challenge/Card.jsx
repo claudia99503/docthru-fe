@@ -27,7 +27,7 @@ const Card = ({ data, site }) => {
           <img src={images.icons.arrowMainRight} alt="arrow icon" />
         </button>
       );
-    } else {
+    } else if(site == 'done'){
       return (
         <button
           className={`${styles.challengeButton} ${
@@ -40,7 +40,7 @@ const Card = ({ data, site }) => {
           <img src={images.icons.document} alt="document icon" />
         </button>
       );
-    }
+    } 
   };
 
   const getCondition = () => {
@@ -57,7 +57,7 @@ const Card = ({ data, site }) => {
           <span>챌린지가 마감되었어요</span>
         </div>
       );
-    } else if (data.participates === data.maxParticipates) {
+    } else if (data.participants === data.maxParticipants) {
       return (
         <div
           className={styles['condition-chip']}
@@ -111,7 +111,7 @@ const Card = ({ data, site }) => {
               className={styles.icon}
             />
             <span className={styles.text}>
-              {data.participates}/{data.maxParticipates} 참여중
+              {data.participants}/{data.maxParticipants} 참여중
             </span>
           </div>
         </div>
