@@ -36,7 +36,7 @@
   .field,
   .category,
   .title,
-  .participants,
+  .maxParticipants,
   .applicationDate,
   .deadline,
   .status {
@@ -105,7 +105,7 @@
   .field,
   .category,
   .title,
-  .participants,
+  .maxParticipants,
   .applicationDate,
   .deadline,
   .status {

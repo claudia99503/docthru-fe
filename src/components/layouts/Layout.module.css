@@ -10,17 +10,16 @@
 
 @media only screen and (max-width: 1199px) {
   .main {
-    max-width: 696px;
+    max-width: 697px;
     width: 100%;
-    padding: auto;
+
   }
 }
 
 @media only screen and (max-width: 743px) and (min-width: 375px) {
   .main {
-    min-width: 343px;
+    max-width: 343px;
     width: 100%;
-    padding: 20px;
   }
 }
 
