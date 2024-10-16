@@ -177,7 +177,7 @@ export default function MyApplicationDetailPage() {
         <InfoContainer
           applicationDate={challenge.applicationDate}
           deadline={challenge.deadline}
-          participants={challenge.participates}
+          maxParticipants={challenge.maxParticipants}
         />
 
         <div className={styles.bottomBorder} />
