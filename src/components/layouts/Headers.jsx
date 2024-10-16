@@ -14,6 +14,7 @@ export function MemberHeader({ user }) {
           <Image
             className={styles.logo}
             src={assets.images.logo}
+            alt="logo"
             width={120}
             height={27}
           />
@@ -42,6 +43,7 @@ export function AuthHeader() {
         <Image
           className={styles.logo}
           src={assets.images.logo}
+          alt="logo"
           width={320}
           height={72}
         />

@@ -4,7 +4,7 @@ import Input from './Input';
 import { AUTH } from '@/variables/formValidation';
 import PasswordInput from './PasswordInput';
 
-export default function LoginForm({ logIn }) {
+export default function LoginForm({ login }) {
   const formMethods = useForm();
 
   const {
@@ -14,7 +14,9 @@ export default function LoginForm({ logIn }) {
   } = formMethods;
 
   const handleLoginSubmit = (data) => {
-    logIn.mutate(data, {
+    console.log(data);
+
+    login.mutate(data, {
       onSuccess: () => {
         console.log('로그인 됨');
         reset();

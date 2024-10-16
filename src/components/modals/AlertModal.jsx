@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import styles from './Modal.module.scss';
+import styles from './AlertModal.module.css';
 import { createPortal } from 'react-dom';
 
 function AlertModal({ msg, onClose }, ref) {

@@ -5,7 +5,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-// import { AuthProvider } from '@/context/AuthProvider';
+import { AuthProvider } from '@/context/AuthProvider';
 import '@/styles/globals.css';
 import React from 'react';
 import Layout from '@/components/layouts/Layout';
@@ -39,11 +39,11 @@ export default function App({ Component, pageProps }) {
       </Head>
       <QueryClientProvider client={queryClient}>
         <HydrationBoundary state={pageProps.dehydratedState}>
-          {/* <AuthProvider> */}
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-          {/* </AuthProvider> */}
+          <AuthProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </AuthProvider>
         </HydrationBoundary>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

@@ -13,7 +13,7 @@ export async function createUser(data) {
 }
 
 export async function createLogin(data) {
-  const res = axios.post(`${PATH}/login`, data);
+  const res = axios.post(`${PATH}/login`, data, { withCredentials: false });
   return res.data;
 }
 

@@ -1,3 +1,4 @@
+import { useModal } from '@/hooks/useModal';
 import {
   createLogin,
   createLogout,
@@ -11,13 +12,14 @@ import { createContext, useContext, useEffect, useState } from 'react';
 const AuthContext = createContext({
   user: null,
   isLoading: false,
-  logIn: () => {},
-  logOut: () => {},
+  login: () => {},
+  logout: () => {},
 });
 
 export function AuthProvider({ children }) {
   const queryClient = useQueryClient();
   const [accessToken, setAccessToken] = useState(null);
+  const { onModalOpen, Modal: AuthModal } = useModal();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -35,28 +37,30 @@ export function AuthProvider({ children }) {
     enabled: !!accessToken,
   });
 
-  const logInMutation = useMutation({
+  const loginMutation = useMutation({
     mutationFn: (data) => createLogin(data),
-    onSuccess: (data) => {
-      const { accessToken } = data;
-      localStorage.setItem('accessToken', accessToken);
+    onSuccess: () => {
+      // const { accessToken } = data;
+      // localStorage.setItem('accessToken', accessToken);
+      onModalOpen({ msg: data.message, path: '/' });
       queryClient.invalidateQueries('user');
     },
   });
 
   const signUpMutation = useMutation({
     mutationFn: (data) => createUser(data),
-    onSuccess: (data) => {
-      const { accessToken } = data;
+    onSuccess: () => {
+      // const { accessToken } = data;
 
-      localStorage.setItem('accessToken', accessToken);
+      // localStorage.setItem('accessToken', accessToken);
       queryClient.invalidateQueries('user');
     },
   });
 
-  const logOut = useMutation({
+  const logoutMutation = useMutation({
     mutationFn: createLogout,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      onModalOpen({ msg: data.message });
       localStorage.removeItem('accessToken');
       queryClient.setQueriesData(['user'], null);
       router.push('/');
@@ -68,9 +72,9 @@ export function AuthProvider({ children }) {
       value={{
         user: data,
         isLoading,
-        logIn: logInMutation,
+        login: loginMutation,
         signUp: signUpMutation,
-        logOut,
+        logout: logoutMutation,
       }}
     >
       {children}
@@ -89,7 +93,10 @@ export function useAuth(required) {
 
   useEffect(() => {
     if (required && !context.user && !context.isLoading) {
-      router.push('/auth/login'), console.log('로그인 필요함');
+      context.onModalOpen({
+        msg: '로그인 된 유저만 접근할수 있습니다.',
+        action: () => router.push('/auth/login'),
+      });
     }
   }, [context.user, context.isLoading, router, required]);
   return context;

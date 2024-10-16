@@ -5,12 +5,15 @@ import PasswordInput from './PasswordInput';
 import { AUTH } from '@/variables/formValidation';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useAuth } from '@/context/AuthProvider';
 
 export default function SignUpForm() {
   // const [newUser, setNewUser] = useState(false);
   // const { signUp, user } = useAuth();
 
   const formMethods = useForm();
+
+  const { signUp } = useAuth();
 
   const {
     handleSubmit,
@@ -29,11 +32,11 @@ export default function SignUpForm() {
 
     signUp.mutate(filterData, {
       onSuccess: () => {
-        setNewUser(true);
-        onModalOpen({
-          msg: '가입이 완료되었습니다.',
-          path: '/',
-        });
+        // setNewUser(true);
+        // onModalOpen({
+        //   msg: '가입이 완료되었습니다.',
+        //   path: '/',
+        // });
         reset();
       },
     });
