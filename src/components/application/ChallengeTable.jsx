@@ -38,7 +38,7 @@ const ChallengeTable = ({ data }) => {
         <div className={styles.field}>분야</div>
         <div className={styles.category}>카테고리</div>
         <div className={styles.title}>챌린지 제목</div>
-        <div className={styles.participants}>모집 인원</div>
+        <div className={styles. maxParticipants}>모집 인원</div>
         <div className={styles.applicationDate}>신청일</div>
         <div className={styles.deadline}>마감 기한</div>
         <div className={styles.status}>상태</div>
@@ -59,7 +59,7 @@ const ChallengeTable = ({ data }) => {
             <div className={styles.field}>{getDocTypeLabel(item.docType)}</div>
             <div className={styles.category}>{getFieldLabel(item.field)}</div>
             <div className={styles.title}>{item.title}</div>
-            <div className={styles.participants}>{item.participates}</div>
+            <div className={styles. maxParticipants}>{item. maxParticipants}</div>
             <div className={styles.applicationDate}>{applicationDate}</div>
             <div className={styles.deadline}>{deadline}</div>
             <div className={`${styles.status} ${statusClass}`}>{statusLabel}</div>

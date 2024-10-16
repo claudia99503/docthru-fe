@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './InfoContainer.module.css';
 import assets from '@/variables/images';
 
-const InfoContainer = ({ deadline, participants, maxParticipants }) => {
+const InfoContainer = ({ deadline, maxParticipants }) => {
   const formatDeadline = (dateTime) => {
     const date = new Date(dateTime);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -23,7 +23,7 @@ const InfoContainer = ({ deadline, participants, maxParticipants }) => {
         className={styles.icon}
       />
       <span className={styles.text}>
-        {participants}
+        {maxParticipants}
       </span>
     </div>
   );
