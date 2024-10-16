@@ -1,0 +1,39 @@
+.badgeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 35px;
+  border-radius: 17.5px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+/* 데스크탑 */
+@media (min-width: 1200px) and (max-width: 1920px) {
+  .badgeContainer {
+    font-size: 16px;
+    line-height: 19.9px;
+    width:100%;
+  }
+}
+
+/* 태블릿 */
+@media (min-width: 744px) and (max-width: 1199px) {
+  .badgeContainer {
+    font-size: 16px;
+    line-height: 19.9px;
+    width: 100%;
+  }
+}
+
+/* 모바일 */
+@media (min-width: 375px) and (max-width: 743px) {
+  .badgeContainer {
+    font-size: 14px;
+    line-height: 16.71px;
+    width: 100%;
+  }
+}
+
