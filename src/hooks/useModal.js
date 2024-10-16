@@ -8,7 +8,6 @@ export function useModalAction() {
   const [redirectTo, setRedirectTo] = useState(null);
 
   const router = useRouter();
-
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -51,8 +50,10 @@ export const useModal = () => {
     useModalAction();
 
   const Modal = () => {
-    isModalOpen && (
-      <AlertModal msg={modalMsg} ref={modalRef} onClose={onModalClose} />
+    return (
+      isModalOpen && (
+        <AlertModal msg={modalMsg} ref={modalRef} onClose={onModalClose} />
+      )
     );
   };
 

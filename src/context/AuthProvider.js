@@ -39,21 +39,28 @@ export function AuthProvider({ children }) {
 
   const loginMutation = useMutation({
     mutationFn: (data) => createLogin(data),
-    onSuccess: () => {
-      // const { accessToken } = data;
-      // localStorage.setItem('accessToken', accessToken);
-      onModalOpen({ msg: data.message, path: '/' });
-      queryClient.invalidateQueries('user');
+    onSuccess: (data) => {
+      if (data && data.accessToken) {
+        const { accessToken } = data;
+        localStorage.setItem('accessToken', accessToken);
+        onModalOpen({ msg: data.message, path: '/' });
+        queryClient.invalidateQueries('user');
+      }
     },
   });
 
   const signUpMutation = useMutation({
     mutationFn: (data) => createUser(data),
-    onSuccess: () => {
-      // const { accessToken } = data;
+    onSuccess: (data) => {
+      console.log('Success:', data);
 
-      // localStorage.setItem('accessToken', accessToken);
-      queryClient.invalidateQueries('user');
+      if (data && data.accessToken) {
+        const { accessToken } = data;
+        localStorage.setItem('accessToken', accessToken);
+        queryClient.invalidateQueries('user');
+        onModalOpen({ msg: data.message, path: '/' });
+        console.log('Access Token:', data.accessToken);
+      }
     },
   });
 

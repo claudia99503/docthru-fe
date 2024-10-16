@@ -30,14 +30,16 @@ export default function SignUpForm() {
       password: String(data.password),
     };
 
+    console.log('just before submit', filterData);
+
     signUp.mutate(filterData, {
-      onSuccess: () => {
+      onSuccess: (data) => {
         // setNewUser(true);
         // onModalOpen({
         //   msg: '가입이 완료되었습니다.',
         //   path: '/',
         // });
-        reset();
+        console.log(data);
       },
     });
   };

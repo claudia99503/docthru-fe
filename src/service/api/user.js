@@ -3,21 +3,25 @@ import axios from './axios';
 const PATH = '/users';
 
 export async function getUserMe() {
-  const res = axios.post(`${PATH}/me`);
+  const res = await axios.post(`${PATH}/me`);
   return res.data;
 }
 
 export async function createUser(data) {
-  const res = axios.post(`${PATH}/register`, data);
+  const res = await axios.post(`${PATH}/register`, data, {
+    withCredentials: false,
+  });
   return res.data;
 }
 
 export async function createLogin(data) {
-  const res = axios.post(`${PATH}/login`, data, { withCredentials: false });
+  const res = await axios.post(`${PATH}/login`, data, {
+    withCredentials: false,
+  });
   return res.data;
 }
 
 export async function createLogout() {
-  const res = axios.post(`${PATH}/logout`);
+  const res = await axios.post(`${PATH}/logout`);
   return res.data;
 }
