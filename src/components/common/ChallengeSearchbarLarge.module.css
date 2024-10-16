@@ -2,9 +2,10 @@
   display: flex;
   align-items: center;
   background-color: #ffffff;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--grey-200);
   border-radius: 20px;
   height: 40px;
+  width: 100%;
 }
 
 .icon {
@@ -17,13 +18,13 @@
   background-color: transparent;
   font-family: Pretendard;
   font-weight: 400;
-  color: #a3a3a3;
+  color: var(--grey-400);;
   padding-left: 8px;
   outline: none;
 }
 
 .input::placeholder {
-  color: #a3a3a3;
+  color: var(--grey-400);
 }
 
 /* 데스크탑 버전 */
@@ -41,7 +42,7 @@
 
 /* 태블릿 버전 */
 @media (min-width: 744px) and (max-width: 1199px) {
-  .ChallengeSearchBar {
+  .ChallengeSearchBarLarge {
     max-width: 696px;
   }
 
@@ -53,7 +54,7 @@
 
 /* 모바일 버전 */
 @media (max-width: 743px) {
-  .ChallengeSearchBar {
+  .ChallengeSearchBarLarge {
     max-width: 343px;
   }
 

@@ -1,7 +1,7 @@
 .card {
   position: relative;
   width: 996px;
-  border: 2px solid #262626;
+  border: 2px solid var(--grey-800);
   border-radius: 12px;
   padding: 24px;
   display: flex;
@@ -41,8 +41,13 @@
   font-weight: 600;
   font-size: 22px;
   line-height: 26.25px;
-  color: #404040;
+  color: var(--grey-700);
   margin-right: 10px;
+}
+
+.challenge-title:hover {
+  color: var(--grey-600);
+  cursor: pointer;
 }
 
 .chip {
@@ -52,7 +57,7 @@
 .card-bottom {
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid var(--grey-200);
   padding-top: 17px;
 }
 
@@ -73,14 +78,14 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 20px;
-  color: #525252;
+  color: var(--grey-600);
 }
 
 .challengeButton {
   width: 132px;
   height: 33px;
   background-color: #ffffff;
-  border: 1px solid #262626;
+  border: 1px solid var(--grey-800);
   border-radius: 30.5px;
   font-size: 14px;
   font-weight: 700;
@@ -111,7 +116,7 @@
   .card-bottom {
     display: flex;
     justify-content: space-between;
-    border-top: 1px solid #e5e5e5;
+    border-top: 1px solid var(--grey-200);
     padding-top: 17px;
   }
 

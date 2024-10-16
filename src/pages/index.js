@@ -1,14 +1,27 @@
-import { useState } from "react";
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+
 import Head from 'next/head';
-import Container from '../components/challenge/Container';
+import ChallengeSearchBarLarge from '../components/common/ChallengeSearchBarLarge';
+import images from '../variables/images';
+
+import seed from '../../mockup/challenge';
+
+import AllCardSection from '@/components/challenge/AllCardSection';
+import ChallengeDropdown from '../components/challenge/ChallengeDropdown';
+import styles from '../styles/pages/Home.module.css';
 
 export default function Home() {
-  const [showContainer, setShowContainer] = useState(false);
-  const [isOngoing, setIsOngoing] = useState(false);
+  const router = useRouter();
 
-  const handleButtonClick = () => {
-    setShowContainer(true);
-    setIsOngoing(false);
+  const [selectedOption, setSelectedOption] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const seedData = seed;
+
+  const handleOptionChange = (option) => {
+    setSelectedOption(option);
+    // setCurrentPage(1);
   };
 
   return (
@@ -17,17 +30,33 @@ export default function Home() {
         <title>챌린지 목록 페이지</title>
       </Head>
       <div>
-        <h1>챌린지 목록 페이지 내용</h1>
-      
-        <button onClick={handleButtonClick}>Container 컴포넌트 보기</button>
-        {showContainer && (
-          <Container
-            deadline="2024-12-31"
-            participants={10} // 참가자 수
-            maxParticipants={20} // 최대 참가자 수
-            progress={isOngoing} // 진행 중 여부
+        <div className={styles.title}>
+          <span>챌린지 목록</span>
+          <button
+            className={styles['new-challenge-button']}
+            onClick={() => router.push('/application')}
+          >
+            <span>신규 챌린지 신청</span>
+            <img
+              src={images.icons.plus}
+              alt="plus Icon"
+              className={styles.icon}
+            />
+          </button>
+        </div>
+        <div className={styles.SearchContainer}>
+          <ChallengeDropdown onOptionChange={handleOptionChange} />
+          <ChallengeSearchBarLarge
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
           />
-        )}
+        </div>
+        <AllCardSection
+          seedData={seedData}
+          searchTerm={searchTerm}
+          selectedOption={selectedOption}
+          site={'home'}
+        />
       </div>
     </>
   );

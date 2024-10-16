@@ -1,0 +1,45 @@
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--grey-600);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.new-challenge-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 154px;
+  height: 39px;
+  border-radius: 19.5px;
+  background-color: #262626;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19.09px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.SearchContainer {
+  width: 996px;
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+}
+
+/* 태블릿 버전 */
+@media (max-width: 1199px) {
+  .SearchContainer {
+    width: 697px;
+  }
+}
+
+/* 모바일 버전 */
+@media (max-width: 743px) {
+  .SearchContainer {
+    width: 343px;
+  }
+}

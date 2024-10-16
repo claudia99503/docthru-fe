@@ -7,7 +7,6 @@ import images from '../../variables/images';
 import styles from './Card.module.css';
 
 const Card = ({ data, site }) => {
-
   const formatDeadline = (dateTime) => {
     const date = new Date(dateTime);
 
@@ -28,20 +27,20 @@ const Card = ({ data, site }) => {
           <img src={images.icons.arrowMainRight} alt="arrow icon" />
         </button>
       );
-    } else {
+    } else if(site == 'done'){
       return (
         <button
           className={`${styles.challengeButton} ${
             router.pathname === `/work/${data.id}` ? styles.active : ''
           }`}
           onClick={() => handleTabClick(`/work/${data.id}`)}
-          style={{border:'none'}}
+          style={{ border: 'none' }}
         >
           <span>내 작업물 보기</span>
           <img src={images.icons.document} alt="document icon" />
         </button>
       );
-    }
+    } 
   };
 
   const getCondition = () => {
@@ -58,7 +57,7 @@ const Card = ({ data, site }) => {
           <span>챌린지가 마감되었어요</span>
         </div>
       );
-    } else if (data.participates === data.maxParticipates) {
+    } else if (data.participants === data.maxParticipants) {
       return (
         <div
           className={styles['condition-chip']}
@@ -81,16 +80,18 @@ const Card = ({ data, site }) => {
   function onDelete() {}
 
   return (
-    <div
-      className={styles.card}
-      onClick={() => handleTabClick(`/challenge/${data.id}`)}
-    >
+    <div className={styles.card}>
       <div className={styles['card-top']}>
         {getCondition()}
         <div className={`${styles.menuButton}`}>
           <KebabMenu onEdit={onEdit} onDelete={onDelete} />
         </div>
-        <div className={styles['challenge-title']}>{data.title} </div>
+        <div
+          className={styles['challenge-title']}
+          onClick={() => handleTabClick(`/${data.id}`)}
+        >
+          {data.title}{' '}
+        </div>
         <DocTypeChip field={data.field} docType={data.docType} />
       </div>
       <div className={styles['card-bottom']}>
@@ -110,7 +111,7 @@ const Card = ({ data, site }) => {
               className={styles.icon}
             />
             <span className={styles.text}>
-              {data.participates}/{data.maxParticipates} 참여중
+              {data.participants}/{data.maxParticipants} 참여중
             </span>
           </div>
         </div>
