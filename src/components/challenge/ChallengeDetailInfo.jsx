@@ -29,7 +29,7 @@ const ChallengeDetailInfo = ({ data }) => {
         </div>
 
       ) : (
-        <> no challenge </>
+        <>  </>
       )}
       </> 
     );
