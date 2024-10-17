@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { createLogout } from './auth';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -48,6 +49,15 @@ instance.interceptors.response.use(
       } catch (refreshError) {
         console.error('token refresh error:', refreshError);
 
+        if (
+          refreshError.response?.status === 500 ||
+          refreshError.response?.status === 401
+        ) {
+          console.error('Refresh token is invalid or server error');
+
+          await createLogout();
+          localStorage.removeItem('accessToken', accessToken);
+        }
         return Promise.reject({ status: refreshError.response?.status });
       }
     }

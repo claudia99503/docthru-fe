@@ -4,14 +4,11 @@ import Input from './Input';
 import PasswordInput from './PasswordInput';
 import { AUTH } from '@/variables/formValidation';
 import { useEffect, useState } from 'react';
-import { useAuth } from '@/context/AuthProvider';
 import Loader from '../common/Loader';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function SignUpForm() {
-  const [newUser, setNewUser] = useState(false);
-
   const formMethods = useForm();
-
   const { signUp, isLoading } = useAuth();
 
   const {
@@ -31,13 +28,6 @@ export default function SignUpForm() {
 
     signUp.mutate(filterData);
   };
-
-  // useEffect(() => {
-  //   if (user && !newUser) {
-  //     router.push('/');
-  //     setNewUser(false);
-  //   }
-  // }, [user, newUser, router]);
 
   if (isLoading) {
     return <Loader />;
