@@ -8,7 +8,6 @@ export const AuthContext = createContext({
   isLoading: false,
   login: () => {},
   signUp: () => {},
-  onModalOpen: () => {},
 });
 
 export function AuthProvider({ children }) {
@@ -76,7 +75,6 @@ export function AuthProvider({ children }) {
         isLoading,
         login: loginMutation,
         signUp: signUpMutation,
-        onModalOpen,
       }}
     >
       {children}

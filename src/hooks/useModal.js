@@ -8,7 +8,7 @@ export function useModalAction() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMsg, setModalMsg] = useState('');
   const [redirectTo, setRedirectTo] = useState(null);
-  const [nextAction, setNextAction] = useState(null);
+  const [nextAction, setNextAction] = useState();
 
   const router = useRouter();
   const modalRef = useRef(null);
@@ -41,7 +41,7 @@ export function useModalAction() {
         setRedirectTo(null);
       }
 
-      if (typeof nextAction === 'function') {
+      if (nextAction) {
         nextAction();
         setNextAction(null);
       }
