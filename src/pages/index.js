@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
+import { useGetChallenges } from '@/service/queries/challenge';
+
 import Head from 'next/head';
 import ChallengeSearchBarLarge from '../components/common/ChallengeSearchBarLarge';
 import images from '../variables/images';
+import Loader from '@/components/common/Loader';
+import Pagination from '@/components/application/Pagination';
 
 import AllCardSection from '@/components/challenge/AllCardSection';
 import ChallengeDropdown from '../components/challenge/ChallengeDropdown';
+
 import styles from '../styles/pages/Home.module.css';
-import { useGetChallenges } from '@/service/queries/challenge';
-import Loader from '@/components/common/Loader';
-import Pagination from '@/components/application/Pagination';
 
 export default function Home() {
   const router = useRouter();
