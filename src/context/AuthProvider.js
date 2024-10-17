@@ -16,9 +16,19 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setAccessToken(localStorage.getItem('accessToken'));
+      const token = localStorage.getItem('accessToken');
+
+      if (token) {
+        setAccessToken(localStorage.getItem('accessToken'));
+      }
     }
   }, []);
+
+  useEffect(() => {
+    if (accessToken) {
+
+    }
+  }, [accessToken, queryClient]);
 
   const { data, isLoading } = useQuery({
     queryKey: ['user'],
@@ -37,7 +47,7 @@ export function AuthProvider({ children }) {
         const { accessToken } = data;
         localStorage.setItem('accessToken', accessToken);
         onModalOpen({ msg: data.message, path: '/' });
-        queryClient.invalidateQueries('user');
+        queryClient.invalidateQueries({ queryKey: ['user'] });
       }
     },
   });
@@ -50,7 +60,7 @@ export function AuthProvider({ children }) {
       if (data && data.accessToken) {
         const { accessToken } = data;
         localStorage.setItem('accessToken', accessToken);
-        queryClient.invalidateQueries('user');
+        queryClient.invalidateQueries({ queryKey: ['user'] });
 
         onModalOpen({ msg: data.message, path: '/' });
         console.log('Access Token:', data.accessToken);

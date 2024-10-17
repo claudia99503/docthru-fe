@@ -1,7 +1,9 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '@/context/AuthProvider';
+import { useModal } from './useModal';
+import { createLogout } from '@/service/api/auth';
 
 export function useAuth(required) {
   const context = useContext(AuthContext);
@@ -24,7 +26,7 @@ export function useAuth(required) {
 
 export function useLogout() {
   const queryClient = useQueryClient();
-  const router = useRouter();
+
   const { onModalOpen } = useModal();
 
   const { mutate } = useMutation({

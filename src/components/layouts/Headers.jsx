@@ -6,6 +6,16 @@ import ProfileDropDown from './ProfileDropDown';
 import { pages } from '@/variables/variables';
 import Nav from './Nav';
 
+const LoginButton = () => {
+  return (
+    <Link href="/auth/login">
+      <button type="button" className={styles['login-btn']}>
+        로그인
+      </button>
+    </Link>
+  );
+};
+
 export function MemberHeader({ user }) {
   return (
     <header className={styles.MemberHeader}>
@@ -19,7 +29,7 @@ export function MemberHeader({ user }) {
             height={27}
           />
         </Link>
-        <ProfileDropDown user={user} />
+        {user ? <ProfileDropDown user={user} /> : <LoginButton />}
       </div>
     </header>
   );

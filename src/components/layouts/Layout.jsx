@@ -3,6 +3,7 @@ import { AdminHeader, MemberHeader, AuthHeader } from './Headers';
 import styles from './Layout.module.css';
 import { useEffect } from 'react';
 import Loader from '../common/Loader';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function Layout({ children }) {
   const { user, isLoading } = useAuth(false);
