@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 // import { challengeList, work } from '../../../../mockup/challenge';
-import { useGetCompletedChallenge } from '@/service/queries/user'; 
+import { useGetCompletedChallenge } from '@/service/queries/user';
 import { useGetChallenges } from '@/service/queries/challenge';
 
 import Head from 'next/head';
@@ -23,20 +23,19 @@ export default function MyFinishedChallengePage() {
   // const accessToken = 'your_access_token_here';
   const [params, setParams] = useState({
     page: 1,
-    limit: 5
+    limit: 5,
   });
 
   // const { data, isPending } = useGetCompletedChallenge(accessToken, params);
 
   const { data, isPending } = useGetChallenges(params);
-  
+
   if (isPending) {
     return <Loader />;
   }
   console.log('data', data);
   console.log('list', data?.list);
   console.log('meta', data?.meta);
-  
 
   const filteredData = data.list.filter((item) => {
     const today = new Date();
@@ -64,11 +63,15 @@ export default function MyFinishedChallengePage() {
   });
 
   // 현재 페이지의 데이터만 추출
-  const list = filteredData.slice(
-    (currentPage - 1) * limit,
-    currentPage * limit
-  );
+  const list = {
+    list : filteredData.slice(
+      (currentPage - 1) * limit,
+      currentPage * limit
+    )
+  }
 
+
+  console.log(list);
   return (
     <>
       <Head>
@@ -88,14 +91,10 @@ export default function MyFinishedChallengePage() {
             setSearchTerm={setSearchTerm}
           />
         </div>
-        <AllCardSection
-          data={data}
-          searchTerm={searchTerm}
-          site={'done'}
-        />
+        <AllCardSection data={list} searchTerm={searchTerm} site={'done'} />
         <Pagination
           currentPage={data.meta.currentPage}
-          totalPages={data.meta.totalPages} // 계산된 totalPages 사용
+          totalPages={3} // 계산된 totalPages 사용
           onPageChange={setCurrentPage}
         />
       </div>
