@@ -40,6 +40,21 @@
   width: 120px;
   height: 27px;
 }
+
+.login-btn {
+  padding: 8px 16px;
+  background-color: var(--brand-yellow);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+
+  color: var(--brand-black);
+}
+
+.login-btn:hover {
+  background-color: var(--brand-black);
+  color: var(--brand-yellow);
+}
 @media only screen and (max-width: 1199px) {
   .MemberHeader {
     padding: 24px;

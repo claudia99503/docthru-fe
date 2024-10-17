@@ -2,9 +2,12 @@ import Link from 'next/link';
 import styles from './ProfileDropDown.module.css';
 import { ProfileImage, Profile } from '../common/Profile';
 import { useEffect, useRef, useState } from 'react';
+import { useLogout } from '@/hooks/useAuth';
 
 export default function ProfileDropDown({ user }) {
-  const isUser = user.role === 'USER';
+  const logout = useLogout();
+
+  const isUser = user?.role === 'USER';
 
   const [isOpen, setIsOpen] = useState(false);
   const dropDownRef = useRef(null);
@@ -42,7 +45,9 @@ export default function ProfileDropDown({ user }) {
                 </Link>
               </li>
             )}
-            <li className={styles.logout}>로그아웃</li>
+            <li className={styles.logout} onClick={logout}>
+              로그아웃
+            </li>
           </ul>
         </div>
       )}

@@ -1,19 +1,12 @@
 import { useModal } from '@/hooks/useModal';
-import {
-  createLogin,
-  createLogout,
-  createUser,
-  getUserMe,
-} from '@/service/api/auth';
+import { createLogin, createUser, getUserMe } from '@/service/api/auth';
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
-const AuthContext = createContext({
+export const AuthContext = createContext({
   user: null,
   isLoading: false,
   login: () => {},
-  logout: () => {},
 });
 
 export function AuthProvider({ children }) {
@@ -23,11 +16,19 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setAccessToken(localStorage.getItem('accessToken'));
+      const token = localStorage.getItem('accessToken');
+
+      if (token) {
+        setAccessToken(localStorage.getItem('accessToken'));
+      }
     }
   }, []);
 
-  const { data, isLoading } = useQuery({
+  const {
+    data,
+    isLoading,
+    refetch: getMe,
+  } = useQuery({
     queryKey: ['user'],
     queryFn: getUserMe,
     staleTime: Infinity,
@@ -44,7 +45,8 @@ export function AuthProvider({ children }) {
         const { accessToken } = data;
         localStorage.setItem('accessToken', accessToken);
         onModalOpen({ msg: data.message, path: '/' });
-        queryClient.invalidateQueries('user');
+        queryClient.invalidateQueries({ queryKey: ['user'] });
+        getMe();
       }
     },
   });
@@ -57,21 +59,11 @@ export function AuthProvider({ children }) {
       if (data && data.accessToken) {
         const { accessToken } = data;
         localStorage.setItem('accessToken', accessToken);
-        queryClient.invalidateQueries('user');
-
+        queryClient.invalidateQueries({ queryKey: ['user'] });
+        getMe();
         onModalOpen({ msg: data.message, path: '/' });
         console.log('Access Token:', data.accessToken);
       }
-    },
-  });
-
-  const logoutMutation = useMutation({
-    mutationFn: createLogout,
-    onSuccess: (data) => {
-      onModalOpen({ msg: data.message });
-      localStorage.removeItem('accessToken');
-      queryClient.setQueriesData(['user'], null);
-      router.push('/');
     },
   });
 
@@ -82,30 +74,10 @@ export function AuthProvider({ children }) {
         isLoading,
         login: loginMutation,
         signUp: signUpMutation,
-        logout: logoutMutation,
       }}
     >
       {children}
       <AuthModal />
     </AuthContext.Provider>
   );
-}
-
-export function useAuth(required) {
-  const context = useContext(AuthContext);
-  const router = useRouter();
-
-  if (!context) {
-    throw new Error('Error: not used within AuthProvider');
-  }
-
-  useEffect(() => {
-    if (required && !context.user && !context.isLoading) {
-      context.onModalOpen({
-        msg: '로그인 된 유저만 접근할수 있습니다.',
-        action: () => router.push('/auth/login'),
-      });
-    }
-  }, [context.user, context.isLoading, router, required]);
-  return context;
 }

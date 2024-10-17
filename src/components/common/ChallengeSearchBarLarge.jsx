@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './ChallengeSearchBarLarge.module.css';
 import images from '../../variables/images';
 
-const ChallengeSearchBar = ({ searchTerm, setSearchTerm }) => {
+const ChallengeSearchBarLarge = ({ searchTerm, setSearchTerm }) => {
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value); // 검색어 업데이트
   };
@@ -25,4 +25,4 @@ const ChallengeSearchBar = ({ searchTerm, setSearchTerm }) => {
   );
 };
 
-export default ChallengeSearchBar;
+export default ChallengeSearchBarLarge;
