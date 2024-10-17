@@ -53,7 +53,7 @@ export function AuthProvider({ children }) {
         const { accessToken } = data;
         localStorage.setItem('accessToken', accessToken);
         queryClient.invalidateQueries({ queryKey: ['user'] });
-        onModalOpen({ msg: data.message, path: '/', action: getMe });
+        getMe();
         console.log('Access Token:', data.accessToken);
       }
     },
@@ -65,13 +65,12 @@ export function AuthProvider({ children }) {
     mutationFn: (data) => createUser(data),
     onSuccess: (data) => {
       console.log('Success:', data);
-
       if (data && data.accessToken) {
         const { accessToken } = data;
         localStorage.setItem('accessToken', accessToken);
         queryClient.invalidateQueries({ queryKey: ['user'] });
 
-        onModalOpen({ msg: data.message, path: '/', action: getMe });
+        getMe();
         console.log('Access Token:', data.accessToken);
       }
     },

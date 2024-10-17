@@ -3,8 +3,8 @@
 import { useContext } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '@/context/AuthProvider';
-import { useModal } from './useModal';
 import { createLogout } from '@/service/api/auth';
+import { useRouter } from 'next/router';
 
 export function useAuth() {
   const context = useContext(AuthContext);
@@ -17,15 +17,14 @@ export function useAuth() {
 
 export function useLogout() {
   const queryClient = useQueryClient();
-
-  const { onModalOpen } = useModal();
+  const router = useRouter();
 
   const { mutateAsync } = useMutation({
     mutationFn: createLogout,
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.setQueriesData(['user'], null);
-      onModalOpen({ msg: data.message, path: '/' });
       localStorage.removeItem('accessToken');
+      router.reload();
     },
   });
 

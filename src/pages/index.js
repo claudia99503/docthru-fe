@@ -11,6 +11,7 @@ import styles from '../styles/pages/Home.module.css';
 import { useGetChallenges } from '@/service/queries/challenge';
 import Loader from '@/components/common/Loader';
 import Pagination from '@/components/application/Pagination';
+import { keepPreviousData } from '@tanstack/react-query';
 
 export default function Home() {
   const router = useRouter();
@@ -20,7 +21,9 @@ export default function Home() {
     docType: '',
     status: '',
   });
-  const { data, isLoading, isPending } = useGetChallenges(selectedOption);
+  const { data, isPending } = useGetChallenges(selectedOption, {
+    enabled: true,
+  });
 
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -32,7 +35,7 @@ export default function Home() {
     setSelectedOption((pev) => ({ ...pev, option }));
   };
 
-  if (isLoading || isPending) {
+  if (isPending) {
     return <Loader />;
   }
 

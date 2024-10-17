@@ -9,7 +9,6 @@ import { useModal } from '@/hooks/useModal';
 
 export default function Layout({ children }) {
   const router = useRouter();
-  const { Modal, onModalOpen } = useModal();
 
   const isPublicRoute = PUBLIC_ROUTES.includes(router.pathname);
   const isAuthPage = AUTH_ROUTES.includes(router.pathname);
@@ -21,19 +20,20 @@ export default function Layout({ children }) {
   const handleRedirects = useCallback(() => {
     if (!isLoading) {
       if (!user && !isPublicRoute) {
-        onModalOpen({ msg: '로그인이 필요합니다', path: '/auth/login' });
+        router.push('/auth/login');
+
         return;
       }
       if (user && isAuthPage) {
         router.push('/');
+
         return;
       }
       if (user && isAdminRoute && user.role !== 'ADMIN') {
         router.push('/');
-        return;
       }
     }
-  });
+  }, [isLoading, user, isPublicRoute, isAuthPage, isAdminRoute, router]);
 
   useEffect(() => {
     handleRedirects();
@@ -53,7 +53,6 @@ export default function Layout({ children }) {
         <MemberHeader user={user} />
       )}
       <main className={styles.main}>{children}</main>
-      <Modal />
     </>
   );
 }
