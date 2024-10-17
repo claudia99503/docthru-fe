@@ -22,9 +22,9 @@ export default function ProfileDropDown({ user }) {
         setIsOpen(false);
       }
     };
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside, true);
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside, true);
     };
   }, []);
 
@@ -40,13 +40,15 @@ export default function ProfileDropDown({ user }) {
           <ul className={styles.lists}>
             {isUser && (
               <li>
-                <Link className={styles.link} href="/me">
+                <Link href="/me" className={styles.link}>
                   나의 챌린지
                 </Link>
               </li>
             )}
-            <li className={styles.logout} onClick={logout}>
-              로그아웃
+            <li>
+              <button className={styles.logout} type="button" onClick={logout}>
+                로그아웃
+              </button>
             </li>
           </ul>
         </div>

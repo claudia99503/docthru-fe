@@ -45,8 +45,15 @@
   color: var(--grey-600);
   padding: 7px 0;
 }
+.link:hover {
+  color: var(--brand-yellow);
+}
 
 .lists .logout {
   color: var(--grey-100);
   padding: 7px 0;
+}
+
+.logout:hover {
+  color: var(--brand-yellow);
 }

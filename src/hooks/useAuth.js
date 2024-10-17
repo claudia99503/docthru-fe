@@ -17,7 +17,7 @@ export function useAuth(required) {
     if (required && !context.user && !context.isLoading) {
       context.onModalOpen({
         msg: '로그인 된 유저만 접근할수 있습니다.',
-        action: () => router.push('/auth/login'),
+        path: '/auth/login',
       });
     }
   }, [context.user, context.isLoading, router, required]);
@@ -32,10 +32,9 @@ export function useLogout() {
   const { mutate } = useMutation({
     mutationFn: createLogout,
     onSuccess: (data) => {
-      onModalOpen({ msg: data.message });
-      localStorage.removeItem('accessToken');
       queryClient.setQueriesData(['user'], null);
-      router.push('/');
+      onModalOpen({ msg: data.message, path: '/' });
+      localStorage.removeItem('accessToken');
     },
   });
 

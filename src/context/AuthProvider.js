@@ -7,6 +7,7 @@ export const AuthContext = createContext({
   user: null,
   isLoading: false,
   login: () => {},
+  signUp: () => {},
 });
 
 export function AuthProvider({ children }) {
@@ -44,9 +45,9 @@ export function AuthProvider({ children }) {
       if (data && data.accessToken) {
         const { accessToken } = data;
         localStorage.setItem('accessToken', accessToken);
-        onModalOpen({ msg: data.message, path: '/' });
         queryClient.invalidateQueries({ queryKey: ['user'] });
-        getMe();
+        onModalOpen({ msg: data.message, path: '/', action: getMe });
+        console.log('Access Token:', data.accessToken);
       }
     },
   });
@@ -60,8 +61,8 @@ export function AuthProvider({ children }) {
         const { accessToken } = data;
         localStorage.setItem('accessToken', accessToken);
         queryClient.invalidateQueries({ queryKey: ['user'] });
-        getMe();
-        onModalOpen({ msg: data.message, path: '/' });
+
+        onModalOpen({ msg: data.message, path: '/', action: getMe });
         console.log('Access Token:', data.accessToken);
       }
     },
