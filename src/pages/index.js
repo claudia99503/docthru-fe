@@ -25,7 +25,7 @@ export default function Home() {
 
   const handleOptionChange = (option) => {
     setSelectedOption((pev) => ({ ...pev, option }));
-    // setCurrentPage(1);
+    setCurrentPage(1);
   };
 
   const { data, isPending } = useGetChallenges(selectedOption);
@@ -35,6 +35,7 @@ export default function Home() {
   }
   console.log('data', data);
   console.log('list', data?.list);
+  console.log('meta', data?.meta);
   return (
     <>
       <Head>
@@ -64,16 +65,11 @@ export default function Home() {
       </div>
       <AllCardSection
         data={data}
-        searchTerm={searchTerm}
-        selectedOption={selectedOption}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
         site={'home'}
       />
-
       <Pagination
-        currentPage={currentPage}
-        totalPages={5} // 계산된 totalPages 사용
+        currentPage={data.meta.currentPage}
+        totalPages={data.meta.totalPages} // 계산된 totalPages 사용
         onPageChange={setCurrentPage}
       />
     </>

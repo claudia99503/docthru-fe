@@ -1,0 +1,5 @@
+.ParticipationStatus {
+  width: 890px;
+  gap: 24px;
+  border: 2px solid var(--grey-800);
+}
