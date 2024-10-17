@@ -41,7 +41,7 @@ export function useModalAction() {
         setRedirectTo(null);
       }
 
-      if (nextAction) {
+      if (typeof nextAction === 'function') {
         nextAction();
         setNextAction(null);
       }
