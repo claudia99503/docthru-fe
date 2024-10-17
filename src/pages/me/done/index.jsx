@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-// import { challengeList, work } from '../../../../mockup/challenge';
 import { useGetCompletedChallenge } from '@/service/queries/user';
 import { useGetChallenges } from '@/service/queries/challenge';
 
@@ -51,27 +50,14 @@ export default function MyFinishedChallengePage() {
     if (deadline <= today) {
       return item;
     }
-    // if (site === 'ongoing') {
-    //   if (deadline > today) {
-    //     return item;
-    //   }
-    // } else if (site === 'done') {
-    //   if (deadline <= today) {
-    //     return item;
-    //   }
-    // } else return item;
   });
 
   // 현재 페이지의 데이터만 추출
   const list = {
-    list : filteredData.slice(
-      (currentPage - 1) * limit,
-      currentPage * limit
-    )
-  }
+    list: filteredData.slice((currentPage - 1) * limit, currentPage * limit),
+  };
 
-
-  console.log(list);
+  // console.log(list);
   return (
     <>
       <Head>
@@ -92,11 +78,13 @@ export default function MyFinishedChallengePage() {
           />
         </div>
         <AllCardSection data={list} searchTerm={searchTerm} site={'done'} />
-        <Pagination
-          currentPage={data.meta.currentPage}
-          totalPages={3} // 계산된 totalPages 사용
-          onPageChange={setCurrentPage}
-        />
+        {data?.meta && (
+          <Pagination
+            currentPage={data.meta.currentPage}
+            totalPages={data.meta.totalPages} // 계산된 totalPages 사용
+            onPageChange={setCurrentPage}
+          />
+        )}
       </div>
     </>
   );

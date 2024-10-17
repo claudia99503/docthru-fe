@@ -35,9 +35,9 @@ export default function Home() {
   if (isPending) {
     return <Loader />;
   }
-  console.log('data', data);
-  console.log('list', data?.list);
-  console.log('meta', data?.meta);
+  // console.log('data', data);
+  // console.log('list', data?.list);
+  // console.log('meta', data?.meta);
   return (
     <>
       <Head>

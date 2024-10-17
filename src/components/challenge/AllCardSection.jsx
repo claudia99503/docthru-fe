@@ -6,12 +6,12 @@ const AllCardSection = ({
   data,
   site,
 }) => {
-  const { meta, list } = data;
+  const { list } = data;
 
   return (
     <>
       <div className={styles.challengeTableWrapper}>
-        {list.length > 0 ? (
+        { list ? (
           <>
             <div className={styles.AllCardSection}>
               {list.map((challenge) => (
