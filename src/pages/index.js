@@ -28,13 +28,15 @@ export default function Home() {
     // setCurrentPage(1);
   };
 
-  const { data, isPending } = useGetChallenges(selectedOption);
+  const { data, isLoading, isPending } = useGetChallenges(selectedOption);
 
-  if (isPending) {
+  if (isLoading || isPending) {
     return <Loader />;
   }
-  console.log('data', data);
-  console.log('list', data?.list);
+
+  const { meta = {}, list = [] } = data || {};
+  const { totalPages = 1, currentPage: page = 1 } = meta;
+
   return (
     <>
       <Head>
@@ -63,17 +65,15 @@ export default function Home() {
         />
       </div>
       <AllCardSection
-        data={data}
+        list={list}
         searchTerm={searchTerm}
         selectedOption={selectedOption}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
         site={'home'}
       />
 
       <Pagination
-        currentPage={currentPage}
-        totalPages={5} // 계산된 totalPages 사용
+        currentPage={page}
+        totalPages={totalPages} // 계산된 totalPages 사용
         onPageChange={setCurrentPage}
       />
     </>
