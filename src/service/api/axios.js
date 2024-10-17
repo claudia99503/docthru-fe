@@ -55,7 +55,6 @@ instance.interceptors.response.use(
         ) {
           console.error('Refresh token is invalid or server error');
 
-          await createLogout();
           localStorage.removeItem('accessToken', accessToken);
         }
         return Promise.reject({ status: refreshError.response?.status });
