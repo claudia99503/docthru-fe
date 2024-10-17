@@ -33,7 +33,7 @@ export function Profile({ user, size, type }) {
     <div className={styles.Profile}>
       <ProfileImage user={user} width={isSmall ? '24px' : '32px'} />
       <div className={styles.texts}>
-        <span className={styles.name}>{user.nickName || '기본사용자'}</span>
+        <span className={styles.name}>{user.nickname || '기본사용자'}</span>
         <span className={styles.grade}>{userGrade}</span>
       </div>
     </div>

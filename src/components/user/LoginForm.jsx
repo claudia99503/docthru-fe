@@ -3,9 +3,12 @@ import styles from './form.module.css';
 import Input from './Input';
 import { AUTH } from '@/variables/formValidation';
 import PasswordInput from './PasswordInput';
+import { useAuth } from '@/hooks/useAuth';
+import Loader from '../common/Loader';
 
-export default function LoginForm({ login }) {
+export default function LoginForm() {
   const formMethods = useForm();
+  const { login, isLoading } = useAuth();
 
   const {
     handleSubmit,
@@ -23,6 +26,10 @@ export default function LoginForm({ login }) {
       },
     });
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>

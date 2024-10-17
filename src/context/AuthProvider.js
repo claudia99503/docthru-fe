@@ -24,13 +24,11 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  useEffect(() => {
-    if (accessToken) {
-
-    }
-  }, [accessToken, queryClient]);
-
-  const { data, isLoading } = useQuery({
+  const {
+    data,
+    isLoading,
+    refetch: getMe,
+  } = useQuery({
     queryKey: ['user'],
     queryFn: getUserMe,
     staleTime: Infinity,
@@ -48,6 +46,7 @@ export function AuthProvider({ children }) {
         localStorage.setItem('accessToken', accessToken);
         onModalOpen({ msg: data.message, path: '/' });
         queryClient.invalidateQueries({ queryKey: ['user'] });
+        getMe();
       }
     },
   });
@@ -61,7 +60,7 @@ export function AuthProvider({ children }) {
         const { accessToken } = data;
         localStorage.setItem('accessToken', accessToken);
         queryClient.invalidateQueries({ queryKey: ['user'] });
-
+        getMe();
         onModalOpen({ msg: data.message, path: '/' });
         console.log('Access Token:', data.accessToken);
       }
