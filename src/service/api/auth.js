@@ -22,6 +22,8 @@ export async function createLogin(data) {
 }
 
 export async function createLogout() {
-  const res = await axios.post(`${PATH}/logout`);
+  const res = await axios.post(`${PATH}/logout`, null, {
+    withCredentials: true,
+  });
   return res.data;
 }

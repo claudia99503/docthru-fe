@@ -1,3 +1,5 @@
+'user client';
+
 import AlertModal from '@/components/modals/AlertModal';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
@@ -6,6 +8,7 @@ export function useModalAction() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMsg, setModalMsg] = useState('');
   const [redirectTo, setRedirectTo] = useState(null);
+  const [nextAction, setNextAction] = useState(null);
 
   const router = useRouter();
   const modalRef = useRef(null);
@@ -16,12 +19,15 @@ export function useModalAction() {
     }
   }, [isModalOpen]);
 
-  const onModalOpen = ({ msg, path }) => {
+  const onModalOpen = ({ msg = '', path = null, action = null }) => {
     setIsModalOpen(true);
     setModalMsg(msg);
 
     if (path) {
       setRedirectTo(path);
+    }
+    if (action) {
+      setNextAction(action);
     }
   };
 
@@ -33,6 +39,11 @@ export function useModalAction() {
       if (redirectTo) {
         router.push(redirectTo);
         setRedirectTo(null);
+      }
+
+      if (typeof nextAction === 'function') {
+        nextAction();
+        setNextAction(null);
       }
     }
   };
