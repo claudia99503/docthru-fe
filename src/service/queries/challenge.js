@@ -3,7 +3,7 @@ import { getChallengeList } from '@/service/api/challenge';
 
 export function useGetChallenges(queryParams) {
   return useQuery({
-    queryKey: ['challenges'],
+    queryKey: ['challenges', { queryParams }],
     queryFn: () => getChallengeList(queryParams),
   });
 }

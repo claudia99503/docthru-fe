@@ -20,22 +20,21 @@ export default function Home() {
     docType: '',
     status: '',
   });
+  const { data, isLoading, isPending } = useGetChallenges(selectedOption);
+
   const [searchTerm, setSearchTerm] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
+
+  const { meta = {}, list = [] } = data || {};
+  const { totalPages = 1, currentPage: page = 1 } = meta;
+  const [currentPage, setCurrentPage] = useState(page);
 
   const handleOptionChange = (option) => {
     setSelectedOption((pev) => ({ ...pev, option }));
-    // setCurrentPage(1);
   };
-
-  const { data, isLoading, isPending } = useGetChallenges(selectedOption);
 
   if (isLoading || isPending) {
     return <Loader />;
   }
-
-  const { meta = {}, list = [] } = data || {};
-  const { totalPages = 1, currentPage: page = 1 } = meta;
 
   return (
     <>
@@ -72,7 +71,7 @@ export default function Home() {
       />
 
       <Pagination
-        currentPage={page}
+        currentPage={currentPage}
         totalPages={totalPages} // 계산된 totalPages 사용
         onPageChange={setCurrentPage}
       />

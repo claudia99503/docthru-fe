@@ -7,21 +7,14 @@ import Card from '../../components/challenge/Card';
 
 import styles from './AllCardSection.module.css';
 
-const AllCardSection = ({
-  list,
-  currentPage,
-  setCurrentPage,
-  searchTerm,
-  selectedOption,
-  site,
-}) => {
+const AllCardSection = ({ list, searchTerm, selectedOption, site }) => {
   return (
     <>
       <div className={styles.challengeTableWrapper}>
         {list?.length > 0 ? (
           <div className={styles.AllCardSection}>
             {list.map((challenge) => (
-              <Card key={list.id} data={challenge} site={site} />
+              <Card key={challenge.id} data={challenge} site={site} />
             ))}
           </div>
         ) : (
