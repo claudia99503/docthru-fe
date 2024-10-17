@@ -1,25 +1,50 @@
-import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import Head from 'next/head';
+import Loader from '@/components/common/Loader';
 
 import ChallengeDetailInfo from '../components/challenge/ChallengeDetailInfo';
 import ParticipationStatus from '../components/challenge/ParticipationStatus';
 
-import styles from '../styles/pages/Home.module.css'
-import { challengeList } from '../../mockup/challenge';
+import styles from '../styles/pages/Home.module.css';
+
+import { useGetChallengeDetail } from '@/service/queries/challenge';
+import { useGetWorkList } from '@/service/queries/work';
 
 export default function ChallengeDetailPage() {
-  const seedData = challengeList[0].list;
-  const challenges = useParams('');
-  console.log(seedData);
+  const router = useRouter(); 
+  const { id: challengeId } = router.query; 
+  const [validId, setValidId] = useState(null);
 
-  const detailData = seedData.filter((item) => {
-    try {
-      if (challenges.id == item.id) {
-        return true;
-      } else return item
-    } catch (err) {}
-  })[0];
+  useEffect(() => {
+    if (challengeId) {
+      setValidId(challengeId);
+    }
+  }, [challengeId]);
+
+  const { data: challengeData, isPending, refetch: refetchChallenge, isFetching } = useGetChallengeDetail(validId, {
+    enabled: !!validId, 
+    queryKey: ['detailedChallenge', validId], 
+  });
+
+  const { data: worksData, isWorkPending, refetch: refetchWork } = useGetWorkList(validId, {
+    enabled: !!validId, 
+    queryKey: ['workList', validId], 
+  });
+
+  useEffect(() => {
+    if (validId) {
+      refetchChallenge();
+      refetchWork();
+    }
+  }, [validId, refetchChallenge, refetchWork]);
+
+  if ((isPending) || isWorkPending) {
+    return <Loader />;
+  }
+  // console.log('cdata', challengeData);
+  // console.log('wdata', worksData);
 
   return (
     <>
@@ -30,10 +55,11 @@ export default function ChallengeDetailPage() {
           content="챌린지에 대한 상세 정보를 제공합니다."
         />
       </Head>
-      <div className={styles.mainContainer}>
-        <ChallengeDetailInfo detailData={detailData} />
-        <ParticipationStatus />
-      </div>
+        <div className={styles.mainContainer}>
+          <ChallengeDetailInfo data={challengeData} />
+          <ParticipationStatus data={worksData} />
+        </div>
     </>
   );
 }
+

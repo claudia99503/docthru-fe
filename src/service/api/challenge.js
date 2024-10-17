@@ -23,7 +23,7 @@ export async function getChallenge(id) {
 
 /** /:id PATCH - 상세 챌린지 수정 - 어드민 */
 export async function updateChallenge(id, data) {
-  const res = await axios.patch(`${PATH}/${id}`, data);
+  const res = await axios.patch(`${PATH}/${id}/`, data);
   return res.data;
 }
 

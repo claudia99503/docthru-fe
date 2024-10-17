@@ -1,11 +1,19 @@
-import styles from './ParticipationStatus.module.css'
+import styles from './ParticipationStatus.module.css';
 
-const ParticipationStatus = ( {detailData} ) => {
+const ParticipationStatus = ({ data }) => {
+  const pageList = data?.meta;
+
   return (
-    <div className={styles.ParticipationStatus}>
-      {/* {detailData.title}aa */}
-    </div>
-  )
-}
+    <>
+    {data ? (
+      <div className={styles.ParticipationStatus}>
+        {data.list[0].userId}aa
+      </div>
+    ) : (
+      <> no challenge </>
+    )}
+    </>
+  );
+};
 
-export default ParticipationStatus
+export default ParticipationStatus;
