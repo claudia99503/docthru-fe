@@ -6,14 +6,14 @@ import ChallengeSearchBarLarge from '../../components/common/ChallengeSearchBarL
 
 import AllCardSection from '@/components/challenge/AllCardSection';
 
-import seed from '../../../mockup/challenge';
+import { challengeList, work } from '../../../mockup/challenge';
 
 import styles from '../../styles/pages/Home.module.css';
 
 export default function MyChallengePage() {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const seedData = seed;
+  const seedData = challengeList[0].list;
 
   return (
     <>

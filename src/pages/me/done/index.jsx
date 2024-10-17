@@ -4,7 +4,7 @@ import Head from 'next/head';
 import TabNavigation from '../../../components/layouts/TabNavigation';
 import ChallengeSearchBarLarge from '../../../components/common/ChallengeSearchBarLarge';
 
-import seed from '../../../../mockup/challenge';
+import { challengeList, work } from '../../../../mockup/challenge';
 
 import styles from '../../../styles/pages/Home.module.css';
 import AllCardSection from '@/components/challenge/AllCardSection';
@@ -12,7 +12,7 @@ import AllCardSection from '@/components/challenge/AllCardSection';
 export default function MyFinishedChallengePage() {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const seedData = seed;
+  const seedData = challengeList[0].list;
 
   return (
     <>
