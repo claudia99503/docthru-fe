@@ -69,11 +69,12 @@ export default function Home() {
         data={data}
         site={'home'}
       />
-      <Pagination
+      {data?.meta && (<Pagination
         currentPage={data.meta.currentPage}
         totalPages={data.meta.totalPages} // 계산된 totalPages 사용
         onPageChange={setCurrentPage}
       />
+      )}
     </>
   );
 }

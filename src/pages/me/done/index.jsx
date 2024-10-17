@@ -33,9 +33,9 @@ export default function MyFinishedChallengePage() {
   if (isPending) {
     return <Loader />;
   }
-  console.log('data', data);
-  console.log('list', data?.list);
-  console.log('meta', data?.meta);
+  // console.log('data', data);
+  // console.log('list', data?.list);
+  // console.log('meta', data?.meta);
 
   const filteredData = data.list.filter((item) => {
     const today = new Date();
