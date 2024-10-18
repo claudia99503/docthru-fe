@@ -24,7 +24,7 @@ export function Profile({ user, size, type }) {
     return (
       <div className={styles.simple}>
         <ProfileImage width="24px" user={user} />
-        <span className={styles.name}>{user.nickName}</span>
+        <span className={styles.name}>{user.nickname}</span>
       </div>
     );
   }

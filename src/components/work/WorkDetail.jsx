@@ -9,19 +9,20 @@ export default function WorkDetail({ data }) {
     return <div>데이터 없음</div>;
   }
 
+  const { challenge, ...rest } = data;
+
   return (
     <section className={styles.WorkDetail}>
       <div className={styles.heading}>
         <h1 className={styles.title}>{data.challenge.title}</h1>
         <KebabMenu />
       </div>
-
       <DocTypeChip field={challenge.field} docType={challenge.docType} />
       <div className={styles['user-info']}>
-        <Profile user={user} type="simple" />
+        <Profile user={rest} type="simple" />
         <LikeButton data={data} />
       </div>
-      <p className={styles.content}>{data.description}</p>
+      <p className={styles.content}>{data.content}</p>
     </section>
   );
 }
