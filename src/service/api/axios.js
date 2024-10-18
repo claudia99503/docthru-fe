@@ -32,7 +32,7 @@ instance.interceptors.response.use(
     //refreshToken handle
     if (
       typeof window !== 'undefined' &&
-      error.response?.status === 401 &&
+      error.response?.data.message === '토큰이 만료되었습니다.' &&
       !originalRequest._retry
     ) {
       originalRequest._retry = true;

@@ -2,13 +2,13 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { work, feedbacks } from '../../../mockup/work';
 import WorkDetail from '@/components/work/WorkDetail';
-
-const workData = work;
-const feedbackData = feedbacks;
+import { useGetWorkDetail } from '@/service/queries/work';
 
 export default function WorkDetailPage() {
   const router = useRouter();
   const { id } = router.query;
+
+  const { workData, feedbackData } = useGetWorkDetail(id);
 
   return (
     <>

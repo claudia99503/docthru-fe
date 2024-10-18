@@ -5,7 +5,10 @@ import LikeButton from '@/components/common/LikeButton';
 import KebabMenu from '@/components/common/KebabMenu';
 
 export default function WorkDetail({ data }) {
-  const { user, challenge } = data;
+  if (!data) {
+    return <div>데이터 없음</div>;
+  }
+
   return (
     <section className={styles.WorkDetail}>
       <div className={styles.heading}>
