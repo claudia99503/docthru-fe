@@ -3,15 +3,16 @@ import Card from '../../components/challenge/Card';
 import styles from './AllCardSection.module.css';
 
 const AllCardSection = ({
-  data,
+  list,
+  searchTerm, 
+  selectedOption,
   site,
 }) => {
-  const { list } = data;
 
   return (
     <>
       <div className={styles.challengeTableWrapper}>
-        { list ? (
+        { list.length ? (
           <>
             <div className={styles.AllCardSection}>
               {list.map((challenge) => (

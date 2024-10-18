@@ -14,6 +14,8 @@ import ChallengeDropdown from '../components/challenge/ChallengeDropdown';
 
 import styles from '../styles/pages/Home.module.css';
 
+import { keepPreviousData } from '@tanstack/react-query';
+
 export default function Home() {
   const router = useRouter();
 
@@ -22,21 +24,25 @@ export default function Home() {
     docType: '',
     status: '',
   });
+  const { data, isPending } = useGetChallenges(selectedOption, {
+    enabled: true,
+  });
+
   const [searchTerm, setSearchTerm] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
+
+  const { meta = {}, list = [] } = data || {};
+  const { totalPages = 1, currentPage: page = 1 } = meta;
+  const [currentPage, setCurrentPage] = useState(page);
 
   const handleOptionChange = (option) => {
     setSelectedOption((pev) => ({ ...pev, option }));
-    setCurrentPage(1);
   };
-
-  const { data, isPending } = useGetChallenges(selectedOption);
 
   if (isPending) {
     return <Loader />;
   }
-  // console.log('data', data);
-  // console.log('list', data?.list);
+  // console.log('list', list);
+  // console.log('meta', meta);
   // console.log('meta', data?.meta);
   return (
     <>
@@ -66,15 +72,17 @@ export default function Home() {
         />
       </div>
       <AllCardSection
-        data={data}
+        list={list}
+        searchTerm={searchTerm}
+        selectedOption={selectedOption}
         site={'home'}
       />
-      {data?.meta && (<Pagination
-        currentPage={data.meta.currentPage}
-        totalPages={data.meta.totalPages} // 계산된 totalPages 사용
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages} // 계산된 totalPages 사용
         onPageChange={setCurrentPage}
       />
-      )}
     </>
   );
 }
