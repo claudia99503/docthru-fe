@@ -12,11 +12,11 @@ const AllCardSection = ({
   return (
     <>
       <div className={styles.challengeTableWrapper}>
-        { list.length ? (
+        { list.length > 0? (
           <>
             <div className={styles.AllCardSection}>
               {list.map((challenge) => (
-                <Card key={`${challenge.id}`} data={challenge} site={site} />
+                <Card key={challenge.id} data={challenge} site={site} />
               ))}
             </div>
           </>
