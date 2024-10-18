@@ -12,7 +12,7 @@ export const challengeList = {
       "docType": "OFFICIAL",
       "description": "NEXTJS 관련 튜토리얼 번역 작업.",
       "docUrl": "https://www.example.com/NEXTJS-WEB",
-      "deadline": "2024-12-31T23:59:59.000Z",
+      "deadline": "2024-02-31T23:59:59.000Z",
       "progress": true,
       "participants": 3,
       "maxParticipants": 5
@@ -26,8 +26,8 @@ export const challengeList = {
       "docUrl": "https://www.example.com/js-doc",
       "deadline": "2024-11-30T23:59:59.000Z",
       "progress": false,
-      "participants": 0,
-      "maxParticipants": 10
+      "participants": 5,
+      "maxParticipants": 5
     },
     {
       "id": 3,

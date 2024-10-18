@@ -27,14 +27,9 @@ export default function Home() {
     status: '',
     limit: 5,
   });
-  const { data, isPending } = useGetChallenges(selectedOption, {
-    enabled: true,
-  });
 
   const [searchTerm, setSearchTerm] = useState('');
-
   const { meta = {}, list = [] } = challengeList || {};
-  // const { meta = {}, list = [] } = data || {};
   const { totalPages, page = 1 } = meta;
   const [currentPage, setCurrentPage] = useState(page);
 
@@ -42,14 +37,17 @@ export default function Home() {
     setSelectedOption((pev) => ({ ...pev, option }));
   };
 
-  if (isPending) {
-    return <Loader />;
-  }
+  // const { data, isPending } = useGetChallenges(selectedOption, {
+  //   enabled: true,
+  // });
+
+  // if (isPending) {
+  //   return <Loader />;
+  // }
 
   // 현재 페이지의 데이터만 추출
-  const currentList = 
-    list?.slice((currentPage - 1) * limit, currentPage * limit)
-  ;
+  const currentList =
+    list?.slice((currentPage - 1) * limit, currentPage * limit);
 
   return (
     <>
@@ -78,13 +76,14 @@ export default function Home() {
           setSearchTerm={setSearchTerm}
         />
       </div>
-      <AllCardSection
-        list={currentList}
-        searchTerm={searchTerm}
-        selectedOption={selectedOption}
-        site={'home'}
-      />
-
+      <div>
+        <AllCardSection
+          list={currentList}
+          searchTerm={searchTerm}
+          selectedOption={selectedOption}
+          site={'home'}
+        />
+      </div>
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages} // 계산된 totalPages 사용

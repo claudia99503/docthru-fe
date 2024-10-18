@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { useGetCompletedChallenge } from '@/service/queries/user';
 import { useGetChallenges } from '@/service/queries/challenge';
+import { challengeList } from '../../../../mockup/challenge';
 
 import Head from 'next/head';
 import TabNavigation from '../../../components/layouts/TabNavigation';
@@ -14,29 +14,23 @@ import AllCardSection from '@/components/challenge/AllCardSection';
 import styles from '../../../styles/pages/Home.module.css';
 
 export default function MyFinishedChallengePage() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(5);
-
-  // const accessToken = 'your_access_token_here';
   const [params, setParams] = useState({
-    page: 1,
     limit: 5,
   });
 
-  // const { data, isPending } = useGetCompletedChallenge(accessToken, params);
+  const { list = [], meta = {} } = challengeList || {};
+  const { totalPages, page = 1 } = meta;
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(page);
+  const [limit, setLimit] = useState(5);
 
-  const { data, isPending } = useGetChallenges(params);
+  // const { data, isPending } = useGetChallenges(params);
 
-  if (isPending) {
-    return <Loader />;
-  }
-  // console.log('data', data);
-  // console.log('list', data?.list);
-  // console.log('meta', data?.meta);
+  // if (isPending) {
+  //   return <Loader />;
+  // }
 
-  const filteredData = data.list.filter((item) => {
+  const filteredData = list.filter((item) => {
     const today = new Date();
     const deadline = new Date(item.deadline);
 
@@ -53,11 +47,11 @@ export default function MyFinishedChallengePage() {
   });
 
   // 현재 페이지의 데이터만 추출
-  const list = {
-    list: filteredData.slice((currentPage - 1) * limit, currentPage * limit),
-  };
-
-  // console.log(list);
+  const currentList = filteredData?.slice(
+    (currentPage - 1) * limit,
+    currentPage * limit
+  );
+  console.log(currentList);
   return (
     <>
       <Head>
@@ -77,15 +71,19 @@ export default function MyFinishedChallengePage() {
             setSearchTerm={setSearchTerm}
           />
         </div>
-        <AllCardSection data={list} searchTerm={searchTerm} site={'done'} />
-        {data?.meta && (
-          <Pagination
-            currentPage={data.meta.currentPage}
-            totalPages={data.meta.totalPages} // 계산된 totalPages 사용
-            onPageChange={setCurrentPage}
-          />
-        )}
+        <AllCardSection
+          list={currentList}
+          searchTerm={searchTerm}
+          site={'done'}
+        />
       </div>
+      {meta && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={1} // 계산된 totalPages 사용
+          onPageChange={setCurrentPage}
+        />
+      )}
     </>
   );
 }
