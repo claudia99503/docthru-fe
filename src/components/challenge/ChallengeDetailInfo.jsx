@@ -6,16 +6,16 @@ import styles from './ChallengeDetailInfo.module.css';
 import Container from './Container';
 
 const ChallengeDetailInfo = ({ list }) => {
-  const router = useRouter(); 
-  const { id: challengeId } = router.query; 
+  const router = useRouter();
+  const { id: challengeId } = router.query;
 
-  const data = list[challengeId-1]  
+  const data = list[challengeId - 1];
   const user = data?.applications[0].user;
 
   // const user = list?.applications[0].user;
 
-    return (
-      <>
+  return (
+    <>
       {data ? (
         <div className={styles.ChallengeDetailInfo}>
           <div className={styles['challenge-info']}>
@@ -24,22 +24,20 @@ const ChallengeDetailInfo = ({ list }) => {
             <div className={styles.description}>{data.description}</div>
             <div className={styles['user-profile']}>
               <Profile user={user} width="24px" type="simple" />
-              <span>{user.nickname}</span>
             </div>
           </div>
           <Container
             deadline={data.deadline}
             participants={data.participants}
             maxParticipants={data.maxParticipants}
-            progress = {true}
-            />
+            progress={true}
+          />
         </div>
-
       ) : (
-        <>  </>
+        <> </>
       )}
-      </> 
-    );
+    </>
+  );
 };
 
 export default ChallengeDetailInfo;
