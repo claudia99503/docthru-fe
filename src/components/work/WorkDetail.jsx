@@ -20,7 +20,7 @@ export default function WorkDetail({ data }) {
       <DocTypeChip field={challenge.field} docType={challenge.docType} />
       <div className={styles['user-info']}>
         <Profile user={rest} type="simple" />
-        <LikeButton data={data} />
+        <LikeButton data={data} isButton={true} />
       </div>
       <p className={styles.content}>{data.content}</p>
     </section>
