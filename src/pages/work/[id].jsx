@@ -2,13 +2,20 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { work, feedbacks } from '../../../mockup/work';
 import WorkDetail from '@/components/work/WorkDetail';
-
-const workData = work;
-const feedbackData = feedbacks;
+import { useGetWork, useGeWorkFeedbacks } from '@/service/queries/work';
+import Loader from '@/components/common/Loader';
 
 export default function WorkDetailPage() {
   const router = useRouter();
   const { id } = router.query;
+
+  const { data, isPending } = useGetWork(id);
+
+  // const {data} = useGeWorkFeedbacks();
+
+  if (isPending) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -19,7 +26,7 @@ export default function WorkDetailPage() {
           content="작업물에 대한 상세 정보를 보여주는 페이지입니다."
         />
       </Head>
-      <WorkDetail data={workData} />
+      <WorkDetail data={data} />
     </>
   );
 }

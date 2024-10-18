@@ -27,6 +27,7 @@ export function MemberHeader({ user }) {
             alt="logo"
             width={120}
             height={27}
+            priority
           />
         </Link>
         {user ? <ProfileDropDown user={user} /> : <LoginButton />}

@@ -18,7 +18,7 @@ export default function Layout({ children }) {
   const { user, isLoading } = useAuth(!isPublicRoute);
 
   const handleRedirects = useCallback(() => {
-    if (!isLoading) {
+    if (!isLoading && user !== undefined) {
       if (!user && !isPublicRoute) {
         router.push('/auth/login');
 
@@ -36,8 +36,10 @@ export default function Layout({ children }) {
   }, [isLoading, user, isPublicRoute, isAuthPage, isAdminRoute, router]);
 
   useEffect(() => {
-    handleRedirects();
-  }, [handleRedirects]);
+    if (!isLoading) {
+      handleRedirects();
+    }
+  }, [handleRedirects, isLoading]);
 
   if (isLoading) {
     return <Loader />;

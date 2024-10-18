@@ -3,7 +3,6 @@ import { FormProvider, useForm } from 'react-hook-form';
 import Input from './Input';
 import PasswordInput from './PasswordInput';
 import { AUTH } from '@/variables/formValidation';
-import { useEffect, useState } from 'react';
 import Loader from '../common/Loader';
 import { useAuth } from '@/hooks/useAuth';
 
