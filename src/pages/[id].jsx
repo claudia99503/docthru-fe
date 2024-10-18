@@ -11,6 +11,7 @@ import styles from '../styles/pages/Home.module.css';
 
 import { useGetChallengeDetail } from '@/service/queries/challenge';
 import { useGetWorkList } from '@/service/queries/work';
+import { challengeDetail, participantsList } from '../../mockup/challenge'
 
 export default function ChallengeDetailPage() {
   const router = useRouter(); 
@@ -23,26 +24,29 @@ export default function ChallengeDetailPage() {
     }
   }, [challengeId]);
 
-  const { data: challengeData, isPending, refetch: refetchChallenge, isFetching } = useGetChallengeDetail(validId, {
-    enabled: !!validId, 
-    queryKey: ['detailedChallenge', validId], 
-  });
+  const challengeData = challengeDetail
+  const worksData = participantsList
+  console.log(worksData)
+  // const { data: challengeData, isPending, refetch: refetchChallenge, isFetching } = useGetChallengeDetail(validId, {
+  //   enabled: !!validId, 
+  //   queryKey: ['detailedChallenge', validId], 
+  // });
 
-  const { data: worksData, isWorkPending, refetch: refetchWork } = useGetWorkList(validId, {
-    enabled: !!validId, 
-    queryKey: ['workList', validId], 
-  });
+  // const { data: worksData, isWorkPending, refetch: refetchWork } = useGetWorkList(validId, {
+  //   enabled: !!validId, 
+  //   queryKey: ['workList', validId], 
+  // });
 
-  useEffect(() => {
-    if (validId) {
-      refetchChallenge();
-      refetchWork();
-    }
-  }, [validId, refetchChallenge, refetchWork]);
+  // useEffect(() => {
+  //   if (validId) {
+  //     refetchChallenge();
+  //     refetchWork();
+  //   }
+  // }, [validId, refetchChallenge, refetchWork]);
 
-  if ((isPending) || isWorkPending) {
-    return <Loader />;
-  }
+  // if ((isPending) || isWorkPending) {
+  //   return <Loader />;
+  // }
   // console.log('cdata', challengeData);
   // console.log('wdata', worksData);
 
@@ -56,8 +60,8 @@ export default function ChallengeDetailPage() {
         />
       </Head>
         <div className={styles.mainContainer}>
-          <ChallengeDetailInfo data={challengeData} />
-          <ParticipationStatus data={worksData} />
+          <ChallengeDetailInfo list={challengeData} />
+          <ParticipationStatus list={worksData} />
         </div>
     </>
   );

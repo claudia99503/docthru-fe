@@ -1,12 +1,19 @@
+import { useRouter } from 'next/router';
 import DocTypeChip from '../common/DocTypeChip';
 import { Profile } from '../common/Profile';
 
 import styles from './ChallengeDetailInfo.module.css';
 import Container from './Container';
 
-const ChallengeDetailInfo = ({ data }) => {
+const ChallengeDetailInfo = ({ list }) => {
+  const router = useRouter(); 
+  const { id: challengeId } = router.query; 
 
-    const user = data?.applications[0].user;
+  const data = list[challengeId-1]  
+  const user = data?.applications[0].user;
+
+  // const user = list?.applications[0].user;
+
     return (
       <>
       {data ? (

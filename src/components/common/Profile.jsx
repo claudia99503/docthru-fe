@@ -3,7 +3,7 @@ import Image from 'next/image';
 import assets from '@/variables/images';
 
 export function ProfileImage({ user, width = '32px' }) {
-  const isUser = user?.role === 'USER';
+  const isUser = user.role === 'USER';
   const imgSrc = isUser
     ? assets.images.profileMember
     : assets.images.profileAdmin;
@@ -33,7 +33,7 @@ export function Profile({ user, size, type }) {
     <div className={styles.Profile}>
       <ProfileImage user={user} width={isSmall ? '24px' : '32px'} />
       <div className={styles.texts}>
-        <span className={styles.name}>{user.nickname || '기본사용자'}</span>
+        <span className={styles.name}>{user.nickName || user.nickname || '기본사용자'}</span>
         <span className={styles.grade}>{userGrade}</span>
       </div>
     </div>
