@@ -12,132 +12,121 @@ const seedData = [
     docType: "OFFICIAL",
     field: "NEXTJS",
     title: "Next.js - App Router: Routing Fundamentals",
-    description:
-      "Next.js의 App Router 사용법과 라우팅 기초를 설명하는 공식 문서입니다.",
     maxParticipants: 10,
     applicationDate: "2024-01-16T09:00:00",
     deadline: "2024-02-24T23:59:59",
     status: "WAITING",
+    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
   },
   {
     id: 1022,
     docType: "BLOG",
     field: "API",
     title: "Fetch API, 너는 에러를 제대로 핸들링 하고 있는가?(dailydev)",
-    description:
-      "Fetch API의 에러 핸들링 방법에 대한 블로그 포스트. 실전에서 올바르게 에러를 처리하는 방법을 다룹니다.",
     maxParticipants: 5,
     applicationDate: "2024-01-16T10:00:00",
     deadline: "2024-02-23T23:59:59",
     status: "WAITING",
+    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
   },
   {
     id: 1021,
     docType: "OFFICIAL",
     field: "API",
     title: "Fetch API, 너는 에러를 제대로 핸들링 하고 있는가?(dailydev)",
-    description:
-      "Fetch API 에러 처리를 주제로 한 공식 문서로, 다양한 사례와 해결책을 제시합니다.",
     maxParticipants: 10,
     applicationDate: "2024-01-15T12:00:00",
     deadline: "2024-02-22T23:59:59",
     status: "WAITING",
+    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
   },
   {
     id: 1020,
     docType: "BLOG",
-    field: "CAREER",
+    field: "Career",
     title: "개발자로서 자신만의 브랜드를 구축하는 방법(dailydev)",
-    description:
-      "개발자로서 개인 브랜드를 어떻게 구축할 수 있는지에 대한 전략과 팁을 제공하는 블로그 포스트입니다.",
     maxParticipants: 5,
     applicationDate: "2024-01-14T08:00:00",
     deadline: "2024-02-22T23:59:59",
     status: "REJECTED",
+    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
   },
   {
     id: 1019,
     docType: "OFFICIAL",
     field: "NEXTJS",
     title: "Next.js - App Router: Routing Fundamentals",
-    description:
-      "Next.js의 App Router 사용법과 라우팅 기초를 설명하는 공식 문서입니다.",
     maxParticipants: 10,
     applicationDate: "2024-01-13T14:00:00",
     deadline: "2024-02-22T23:59:59",
     status: "ACCEPTED",
+    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
   },
   {
     id: 1018,
     docType: "OFFICIAL",
     field: "API",
     title: "Fetch API, 너는 에러를 제대로 핸들링 하고 있는가?(dailydev)",
-    description:
-      "Fetch API의 에러 핸들링 방법에 대한 심도 있는 내용의 공식 문서입니다.",
     maxParticipants: 5,
     applicationDate: "2024-01-12T10:00:00",
     deadline: "2024-02-22T23:59:59",
     status: "REJECTED",
+    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
   },
   {
     id: 1017,
     docType: "OFFICIAL",
     field: "API",
     title: "Fetch API, 너는 에러를 제대로 핸들링 하고 있는가?(dailydev)",
-    description:
-      "Fetch API 에러 처리와 관련된 최신 동향과 베스트 프랙티스를 다룬 공식 문서입니다.",
     maxParticipants: 10,
     applicationDate: "2024-01-11T15:00:00",
     deadline: "2024-02-22T23:59:59",
     status: "ACCEPTED",
+    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
   },
   {
     id: 1016,
     docType: "BLOG",
-    field: "CAREER",
+    field: "Career",
     title: "개발자로서 자신만의 브랜드를 구축하는 방법(dailydev)",
-    description:
-      "개발자 커리어에서 개인 브랜드를 강화할 수 있는 다양한 전략과 팁을 제공하는 블로그 포스트입니다.",
     maxParticipants: 5,
     applicationDate: "2024-01-10T09:00:00",
     deadline: "2024-02-22T23:59:59",
     status: "ACCEPTED",
+    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
   },
   {
     id: 1015,
     docType: "BLOG",
     field: "NEXTJS",
     title: "Next.js - App Router: Routing Fundamentals",
-    description:
-      "Next.js의 App Router와 라우팅에 대한 실전 가이드를 다룬 블로그 포스트입니다.",
     maxParticipants: 10,
     applicationDate: "2024-01-09T08:00:00",
     deadline: "2024-02-22T23:59:59",
     status: "ACCEPTED",
+    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
   },
   {
     id: 1014,
     docType: "BLOG",
     field: "NEXTJS",
     title: "Next.js - App Router: Routing Fundamentals",
-    description:
-      "Next.js의 App Router 사용법을 다룬 블로그 포스트로, 최신 라우팅 기능을 설명합니다.",
     maxParticipants: 10,
     applicationDate: "2024-01-08T09:00:00",
     deadline: "2024-02-22T23:59:59",
     status: "DELETED",
+    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
   },
   {
     id: 2022,
     docType: "OFFICIAL",
     field: "NEXTJS",
     title: "Next.js - App Router: Routing Fundamentals",
-    description:
-      "Next.js의 App Router 사용법과 라우팅 기초를 설명하는 공식 문서입니다.",
     maxParticipants: 10,
     applicationDate: "2024-01-16T09:00:00",
     deadline: "2024-02-24T23:59:59",
     status: "WAITING",
+    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
   },
 ];
 
@@ -182,9 +171,24 @@ export default function MyApplicationDetailPage() {
 
         <div className={styles.bottomBorder} />
 
-        <a href="#" className={styles.originalLink}>
+        <a href={challenge.docUrl} className={styles.originalLink}>
           원문 링크
         </a>
+
+        <div className={styles.previewContainer}>
+          <iframe
+            src={challenge.docUrl}
+            className={styles.iframePreview}
+            title="Document Preview"
+          ></iframe>
+          <button
+            className={styles.previewButton}
+            onClick={() => (window.location.href = challenge.docUrl)}
+          >
+            링크 열기
+            <img src="/assets/icons/ic_diagonal.svg" alt="링크 열기" />
+          </button>
+        </div>
       </div>
     </>
   );
