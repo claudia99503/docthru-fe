@@ -1,0 +1,32 @@
+.ChallengeDetailInfo {
+  display: flex;
+  gap: 24px;
+  max-width: 890px;
+}
+
+.challenge-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  min-width: 581px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--grey-800);
+}
+
+.description {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--grey-700);
+}
+
+.user-profile {
+  display: flex;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--grey-800);
+}

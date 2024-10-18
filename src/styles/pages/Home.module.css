@@ -31,6 +31,12 @@
   gap: 12px;
 }
 
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 /* 태블릿 버전 */
 @media (max-width: 1199px) {
   .SearchContainer {

@@ -46,7 +46,7 @@
 }
 
 .challenge-title:hover {
-  color: var(--grey-600);
+  color: var(--grey-400);
   cursor: pointer;
 }
 

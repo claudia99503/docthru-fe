@@ -1,25 +1,31 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
+import { useGetChallenges } from '@/service/queries/challenge';
+import { challengeList } from '../../mockup/challenge'
+
 import Head from 'next/head';
 import ChallengeSearchBarLarge from '../components/common/ChallengeSearchBarLarge';
 import images from '../variables/images';
+import Loader from '@/components/common/Loader';
+import Pagination from '@/components/application/Pagination';
 
 import AllCardSection from '@/components/challenge/AllCardSection';
 import ChallengeDropdown from '../components/challenge/ChallengeDropdown';
+
 import styles from '../styles/pages/Home.module.css';
-import { useGetChallenges } from '@/service/queries/challenge';
-import Loader from '@/components/common/Loader';
-import Pagination from '@/components/application/Pagination';
+
 import { keepPreviousData } from '@tanstack/react-query';
 
 export default function Home() {
   const router = useRouter();
+  const [limit, setLimit] = useState(5);
 
   const [selectedOption, setSelectedOption] = useState({
     field: '',
     docType: '',
     status: '',
+    limit: 5,
   });
   const { data, isPending } = useGetChallenges(selectedOption, {
     enabled: true,
@@ -27,8 +33,9 @@ export default function Home() {
 
   const [searchTerm, setSearchTerm] = useState('');
 
-  const { meta = {}, list = [] } = data || {};
-  const { totalPages = 1, currentPage: page = 1 } = meta;
+  const { meta = {}, list = [] } = challengeList || {};
+  // const { meta = {}, list = [] } = data || {};
+  const { totalPages, page = 1 } = meta;
   const [currentPage, setCurrentPage] = useState(page);
 
   const handleOptionChange = (option) => {
@@ -38,6 +45,11 @@ export default function Home() {
   if (isPending) {
     return <Loader />;
   }
+
+  // 현재 페이지의 데이터만 추출
+  const currentList = 
+    list?.slice((currentPage - 1) * limit, currentPage * limit)
+  ;
 
   return (
     <>
@@ -67,7 +79,7 @@ export default function Home() {
         />
       </div>
       <AllCardSection
-        list={list}
+        list={currentList}
         searchTerm={searchTerm}
         selectedOption={selectedOption}
         site={'home'}
