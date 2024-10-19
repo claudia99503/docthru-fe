@@ -8,6 +8,7 @@ const Container = ({
   participants,
   maxParticipants,
   progress = false,
+  type,
 }) => {
   const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
 
@@ -21,6 +22,10 @@ const Container = ({
     const date = new Date(dateTime);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return `${date.toLocaleString('ko-KR', options)} 마감`;
+  };
+
+  const getButtonType = (type) => {
+    return type == 'beginning' ? '작업 도전하기' : '도전 계속하기';
   };
 
   return (
@@ -49,7 +54,7 @@ const Container = ({
           </div>
           <div className={styles['challenge-button-row']}>
             <button className={styles['gray-button']} style={getButtonStyles()}>
-              작업 도전하기
+              {getButtonType(type)}
             </button>
           </div>
         </>
@@ -57,7 +62,7 @@ const Container = ({
         <div className={styles['mobile-buttons-row']}>
           <button className={styles['primary-button']}>원문 보기</button>
           <button className={styles['gray-button']} style={getButtonStyles()}>
-            작업 도전하기
+            {getButtonType(type)}
           </button>
         </div>
       )}
