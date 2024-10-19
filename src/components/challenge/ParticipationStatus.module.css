@@ -97,22 +97,14 @@
 .participant-right {
   display: flex;
   justify-content: space-between;
-  width: 184px;
   font-size: 12px;
   font-weight: 500;
   color: var(--grey-500);
+  width: 174px;
 }
 
 .participant-right button {
-  position: relative;
   display: flex;
   align-items: center;
-  width: 73px;
   justify-content: flex-start;
-}
-
-.participant-right img {
-  position: absolute;
-  left: 48px;
-  height: 35px;
 }
