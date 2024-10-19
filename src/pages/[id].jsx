@@ -26,7 +26,7 @@ export default function ChallengeDetailPage() {
 
   const challengeData = challengeDetail
   const worksData = participantsList
-  console.log(worksData)
+  
   // const { data: challengeData, isPending, refetch: refetchChallenge, isFetching } = useGetChallengeDetail(validId, {
   //   enabled: !!validId, 
   //   queryKey: ['detailedChallenge', validId], 
