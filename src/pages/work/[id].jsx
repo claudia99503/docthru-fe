@@ -4,6 +4,7 @@ import { work, feedbacks } from '../../../mockup/work';
 import WorkDetail from '@/components/work/WorkDetail';
 import { useGetWork, useGeWorkFeedbacks } from '@/service/queries/work';
 import Loader from '@/components/common/Loader';
+import Svg, { IconSvg } from '@/components/common/Svg';
 
 export default function WorkDetailPage() {
   const router = useRouter();
@@ -27,6 +28,7 @@ export default function WorkDetailPage() {
         />
       </Head>
       <WorkDetail data={data} />
+      <Svg name="arrowDownCircle" width="40" />
     </>
   );
 }

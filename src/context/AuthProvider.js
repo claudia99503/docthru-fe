@@ -54,7 +54,6 @@ export function AuthProvider({ children }) {
         localStorage.setItem('accessToken', accessToken);
         queryClient.invalidateQueries({ queryKey: ['user'] });
         getMe();
-        console.log('Access Token:', data.accessToken);
       }
     },
     onSettled: () => setIsLoading(false),
@@ -71,7 +70,6 @@ export function AuthProvider({ children }) {
         queryClient.invalidateQueries({ queryKey: ['user'] });
 
         getMe();
-        console.log('Access Token:', data.accessToken);
       }
     },
     onSettled: () => setIsLoading(false),

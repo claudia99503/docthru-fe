@@ -1,7 +1,7 @@
-import styles from './form.module.css';
+import styles from './userForms.module.css';
 import { FormProvider, useForm } from 'react-hook-form';
-import Input from './Input';
-import PasswordInput from './PasswordInput';
+import Input from '../common/form/Input';
+import PasswordInput from '../common/form/PasswordInput';
 import { AUTH } from '@/variables/formValidation';
 import Loader from '../common/Loader';
 import { useAuth } from '@/hooks/useAuth';
