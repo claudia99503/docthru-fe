@@ -10,8 +10,8 @@ const ParticipationStatus = ({ list }) => {
   const userList = list?.list;
   const pageList = list?.meta;
 
-  console.log(pageList);
-  console.log(userList);
+  // console.log(pageList);
+  // console.log(userList);
 
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
@@ -73,7 +73,7 @@ const ParticipationStatus = ({ list }) => {
             {currentUsers.map((participant, index) => (
               <div key={participant.id} className={styles['participant-row']}>
                 <div className={styles['participant-left']}>
-                  {index == 0 ? (
+                  {currentPage == 1 && index == 0 ? (
                     <div className={styles['first-rank']}>
                       <img
                         src={images.icons.crown}
