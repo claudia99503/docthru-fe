@@ -15,6 +15,7 @@ export default function Nav({ links }) {
             src={assets.images.navLogoLarge}
             width={120}
             height={27}
+            alt="Docthru logo"
           />
         </Link>
         {links.map((link) => {
