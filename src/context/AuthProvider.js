@@ -1,4 +1,4 @@
-import { useModal } from '@/hooks/useModal';
+import { useAlertModal } from '@/hooks/useModal';
 import { createLogin, createUser, getUserMe } from '@/service/api/auth';
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { createContext, useEffect, useState } from 'react';
@@ -14,7 +14,7 @@ export const AuthContext = createContext({
 export function AuthProvider({ children }) {
   const queryClient = useQueryClient();
   const [accessToken, setAccessToken] = useState(null);
-  const { onModalOpen, Modal: AuthModal, isModalOpen } = useModal();
+  const { onModalOpen, Modal: AuthModal, isModalOpen } = useAlertModal();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {

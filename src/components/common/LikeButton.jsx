@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { formatLikes } from '@/utils/utilFunction';
 
 export default function LikeButton({ data, isButton = false }) {
+  console.log('data', data);
+
   const imgSrc = data.isLiked
     ? assets.icons.heartActive
     : assets.icons.heartInactive;

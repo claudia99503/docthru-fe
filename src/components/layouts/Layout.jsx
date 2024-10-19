@@ -5,7 +5,7 @@ import { useCallback, useEffect } from 'react';
 import Loader from '../common/Loader';
 import { useAuth } from '@/hooks/useAuth';
 import { PUBLIC_ROUTES, AUTH_ROUTES } from '@/variables/variables';
-import { useModal } from '@/hooks/useModal';
+import { useAlertModal } from '@/hooks/useModal';
 
 export default function Layout({ children }) {
   const router = useRouter();

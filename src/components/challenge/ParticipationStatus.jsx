@@ -4,6 +4,7 @@ import styles from './ParticipationStatus.module.css';
 import images from '@/variables/images';
 import { Profile } from '../common/Profile';
 import LikeButton from '../common/LikeButton';
+import Image from 'next/image';
 
 const ParticipationStatus = ({ list }) => {
   const bestList = list?.bestList;
@@ -18,11 +19,9 @@ const ParticipationStatus = ({ list }) => {
 
   const totalPages = pageList?.totalPages;
 
-  const filteredData = userList
-  .sort((a, b) => {
-      return b.likeCount - a.likeCount;
-    }
-  );
+  const filteredData = userList.sort((a, b) => {
+    return b.likeCount - a.likeCount;
+  });
 
   // 현재 페이지에 맞는 유저 리스트만 가져오기
   const currentUsers = filteredData?.slice(
@@ -91,9 +90,14 @@ const ParticipationStatus = ({ list }) => {
                 </div>
                 <div className={styles['participant-right']}>
                   <LikeButton data={participant} />
-                  <button>
-                    <span>작업물 보기</span>{' '}
-                    <img src={images.icons.arrowRight} />
+                  <button type="button">
+                    <span>작업물 보기</span>
+                    <Image
+                      src={images.icons.arrowRight}
+                      alt="arrow icon"
+                      width={30}
+                      height={30}
+                    />
                   </button>
                 </div>
               </div>

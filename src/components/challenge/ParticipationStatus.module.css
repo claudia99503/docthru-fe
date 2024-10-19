@@ -31,10 +31,10 @@
   line-height: 32px;
 }
 
-.pagination button { 
+.pagination button {
   width: 32px;
   cursor: pointer;
-  flex-grow: 1; 
+  flex-grow: 1;
   text-align: center;
 }
 
@@ -42,19 +42,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #e0e0e0; 
+  border-bottom: 1px solid #e0e0e0;
   margin-top: 10px;
   padding-bottom: 10px;
 }
 
 .participant-row:last-child {
-  border-bottom: none; 
+  border-bottom: none;
   margin-top: 0;
   padding-bottom: 0;
 }
 
 .participant-info {
-
 }
 
 .participant-left {
@@ -71,7 +70,8 @@
   display: flex;
   justify-content: center;
   width: 51px;
-  height: 21px;border-radius: 16px;
+  height: 21px;
+  border-radius: 16px;
   background-color: var(--grey-800);
   color: var(--brand-yellow);
   gap: 2px;
@@ -97,22 +97,14 @@
 .participant-right {
   display: flex;
   justify-content: space-between;
-  width: 184px;
   font-size: 12px;
   font-weight: 500;
   color: var(--grey-500);
+  width: 174px;
 }
 
 .participant-right button {
-  position: relative;
   display: flex;
   align-items: center;
-  width: 73px;
   justify-content: flex-start;
-}
-
-.participant-right img {
-  position: absolute;
-  left: 48px;
-  height: 35px;
 }
