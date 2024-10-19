@@ -3,6 +3,8 @@ export default function Svg({
   width = '24',
   height,
   type = 'icon',
+  className = 'Svg',
+  isActive = false,
   ...props
 }) {
   const calculatedHeight = height ? height : width;
@@ -12,9 +14,9 @@ export default function Svg({
   return (
     <svg
       {...props}
-      width={width}
       height={calculatedHeight}
       viewBox={`0 0 ${width} ${calculatedHeight}`}
+      className={`${className} ${isActive ? styles.active : ''}`}
     >
       <use href={`/assets/sprite.svg/#${prefix}_${name}`} />
     </svg>

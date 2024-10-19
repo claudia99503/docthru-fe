@@ -1,16 +1,42 @@
-import { useForm, useFormContext } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import TextArea from '../common/form/TextArea';
 import styles from './FeedbackForm.module.css';
-import assets from '@/variables/images';
+import Svg from '../common/Svg';
+
 export default function FeedbackForm() {
-  const {} = useForm();
+  const formMethods = useForm();
+
+  const {
+    handleSubmit,
+    reset,
+    formState: { isValid },
+  } = formMethods;
+
+  const handleNewCommentSubmit = (data) => {
+    const newComment = { content: data['create-comment-content'] };
+    mutate(newComment);
+  };
+
+  const handleResetAfterSubmit = (data) => {
+    handleNewCommentSubmit(data);
+    reset();
+  };
+
   return (
-    <form className={styles.FeedbackForm}>
-      <TextArea placeholder="피드백을 남겨주세요" />
-      <button>
-        <Image src={assets.icons.arrowDown} />
-      </button>
-    </form>
+    <FormProvider {...formMethods}>
+      <form
+        className={styles.FeedbackForm}
+        onSubmit={handleSubmit(handleResetAfterSubmit)}
+      >
+        <TextArea name="content" placeholder="피드백을 남겨주세요" />
+        <button
+          className={styles.submitButton}
+          type="submit"
+          disabled={!isValid}
+        >
+          <Svg name="arrowDown" className={styles.arrowDownIcon} />
+        </button>
+      </form>
+    </FormProvider>
   );
 }
-c;

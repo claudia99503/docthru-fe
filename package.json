@@ -26,7 +26,6 @@
   "devDependencies": {
     "@babel/core": "^7.25.7",
     "@babel/preset-env": "^7.25.7",
-    "@svgr/webpack": "^8.1.0",
     "eslint": "^8",
     "eslint-config-next": "^14.2.14"
   }
