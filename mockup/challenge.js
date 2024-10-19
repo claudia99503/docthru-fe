@@ -14,8 +14,8 @@ export const challengeList = {
       "docUrl": "https://www.example.com/NEXTJS-WEB",
       "deadline": "2024-02-31T23:59:59.000Z",
       "progress": true,
-      "participants": 3,
-      "maxParticipants": 5
+      "participants": 6,
+      "maxParticipants": 10
     },
     {
       "id": 2,
@@ -38,8 +38,8 @@ export const challengeList = {
       "docUrl": "https://www.example.com/python-library",
       "deadline": "2024-10-15T23:59:59.000Z",
       "progress": false,
-      "participants": 2,
-      "maxParticipants": 7
+      "participants": 10,
+      "maxParticipants": 10
     },
     {
       "id": 4,
@@ -50,8 +50,8 @@ export const challengeList = {
       "docUrl": "https://www.example.com/vue-guide",
       "deadline": "2024-10-20T23:59:59.000Z",
       "progress": true,
-      "participants": 5,
-      "maxParticipants": 6
+      "participants": 2,
+      "maxParticipants": 5
     },
     {
       "id": 5,
@@ -62,8 +62,8 @@ export const challengeList = {
       "docUrl": "https://www.example.com/django-doc",
       "deadline": "2024-11-15T23:59:59.000Z",
       "progress": false,
-      "participants": 1,
-      "maxParticipants": 8
+      "participants": 0,
+      "maxParticipants": 5
     },
     {
       "id": 6,
@@ -74,7 +74,7 @@ export const challengeList = {
       "docUrl": "https://www.example.com/kotlin-blog",
       "deadline": "2024-10-25T23:59:59.000Z",
       "progress": false,
-      "participants": 3,
+      "participants": 1,
       "maxParticipants": 10
     },
     {
@@ -86,8 +86,8 @@ export const challengeList = {
       "docUrl": "https://www.example.com/nodejs-api",
       "deadline": "2024-11-01T23:59:59.000Z",
       "progress": true,
-      "participants": 4,
-      "maxParticipants": 6
+      "participants": 1,
+      "maxParticipants": 5
     },
     {
       "id": 8,
@@ -111,7 +111,7 @@ export const challengeList = {
       "deadline": "2024-12-15T23:59:59.000Z",
       "progress": false,
       "participants": 2,
-      "maxParticipants": 7
+      "maxParticipants": 10
     },
     {
       "id": 10,
@@ -122,8 +122,8 @@ export const challengeList = {
       "docUrl": "https://www.example.com/css-doc",
       "deadline": "2024-10-30T23:59:59.000Z",
       "progress": true,
-      "participants": 6,
-      "maxParticipants": 10
+      "participants": 1,
+      "maxParticipants": 5
     }
   ]
 }
@@ -138,8 +138,8 @@ export const challengeDetail = [
     "docUrl": "https://www.example.com/NEXTJS-WEB",
     "deadline": "2024-02-31T23:59:59.000Z",
     "progress": true,
-    "participants": 3,
-    "maxParticipants": 5,
+    "participants": 6,
+    "maxParticipants": 10,
     "applications": [
       {
         "user": {
@@ -184,8 +184,8 @@ export const challengeDetail = [
     "docUrl": "https://www.example.com/python-library",
     "deadline": "2024-10-15T23:59:59.000Z",
     "progress": false,
-    "participants": 2,
-    "maxParticipants": 7,
+    "participants": 10,
+    "maxParticipants": 10,
     "applications": [
       {
         "user": {
@@ -207,8 +207,8 @@ export const challengeDetail = [
     "docUrl": "https://www.example.com/vue-guide",
     "deadline": "2024-10-20T23:59:59.000Z",
     "progress": true,
-    "participants": 5,
-    "maxParticipants": 6,
+    "participants": 2,
+    "maxParticipants": 5,
     "applications": [
       {
         "user": {
@@ -230,8 +230,8 @@ export const challengeDetail = [
     "docUrl": "https://www.example.com/django-doc",
     "deadline": "2024-11-15T23:59:59.000Z",
     "progress": false,
-    "participants": 1,
-    "maxParticipants": 8,
+    "participants": 0,
+    "maxParticipants": 5,
     "applications": [
       {
         "user": {
@@ -253,7 +253,7 @@ export const challengeDetail = [
     "docUrl": "https://www.example.com/kotlin-blog",
     "deadline": "2024-10-25T23:59:59.000Z",
     "progress": false,
-    "participants": 3,
+    "participants": 1,
     "maxParticipants": 10,
     "applications": [
       {
@@ -276,8 +276,8 @@ export const challengeDetail = [
     "docUrl": "https://www.example.com/nodejs-api",
     "deadline": "2024-11-01T23:59:59.000Z",
     "progress": true,
-    "participants": 4,
-    "maxParticipants": 6,
+    "participants": 1,
+    "maxParticipants": 5,
     "applications": [
       {
         "user": {
@@ -323,7 +323,7 @@ export const challengeDetail = [
     "deadline": "2024-12-15T23:59:59.000Z",
     "progress": false,
     "participants": 2,
-    "maxParticipants": 7,
+    "maxParticipants": 10,
     "applications": [
       {
         "user": {
@@ -345,8 +345,8 @@ export const challengeDetail = [
     "docUrl": "https://www.example.com/css-doc",
     "deadline": "2024-10-30T23:59:59.000Z",
     "progress": true,
-    "participants": 6,
-    "maxParticipants": 10,
+    "participants": 1,
+    "maxParticipants": 5,
     "applications": [
       {
         "user": {
@@ -474,9 +474,20 @@ export const participantsList = {
       "nickname": "테스트1",
       "grade": "EXPERT",
       "challengeId": 1,
-      "content": "챌린지 참여에 대해 매우 만족합니다.",
-      "lastModifiedAt": "2024-10-17T02:42:44.580Z",
+      "content": "NEXTJS 공식 문서에서 기본적인 개념과 페이지 구조에 대한 내용을 번역했습니다.",
+      "lastModifiedAt": "2024-02-17T02:42:44.580Z",
       "likeCount": 15,
+      "isLiked": false
+    },
+    {
+      "id": 3,
+      "userId": 27,
+      "nickname": "테스트27",
+      "grade": "EXPERT",
+      "challengeId": 3,
+      "content": "MODERNJS와 관련된 최신 기술 문서를 번역했습니다.",
+      "lastModifiedAt": "2024-10-15T04:35:44.678Z",
+      "likeCount": 31,
       "isLiked": true
     },
     {
@@ -485,9 +496,9 @@ export const participantsList = {
       "nickname": "테스트31",
       "grade": "NORMAL",
       "challengeId": 3,
-      "content": "챌린지 참여에 대해 매우 만족합니다.",
-      "lastModifiedAt": "2024-10-19T04:35:44.678Z",
-      "likeCount": 20,
+      "content": "MODERNJS와 관련된 최신 기술 문서를 번역했습니다.",
+      "lastModifiedAt": "2024-09-19T04:35:44.678Z",
+      "likeCount": 31,
       "isLiked": false
     }
   ],
@@ -499,9 +510,9 @@ export const participantsList = {
       "grade": "EXPERT",
       "challengeId": 1,
       "content": "NEXTJS 공식 문서에서 기본적인 개념과 페이지 구조에 대한 내용을 번역했습니다.",
-      "lastModifiedAt": "2024-10-17T02:42:44.580Z",
+      "lastModifiedAt": "2024-02-17T02:42:44.580Z",
       "likeCount": 15,
-      "isLiked": true
+      "isLiked": false
     },
     {
       "id": 2,
@@ -521,8 +532,8 @@ export const participantsList = {
       "grade": "NORMAL",
       "challengeId": 3,
       "content": "MODERNJS 기술 문서에서 최신 자바스크립트 기능에 대해 번역했습니다.",
-      "lastModifiedAt": "2024-10-19T04:35:44.678Z",
-      "likeCount": 20,
+      "lastModifiedAt": "2024-09-19T04:35:44.678Z",
+      "likeCount": 31,
       "isLiked": false
     },
     {
@@ -629,7 +640,7 @@ export const participantsList = {
       "userId": 13,
       "nickname": "테스트13",
       "grade": "NORMAL",
-      "challengeId": 5,
+      "challengeId": 2,
       "content": "CAREER 관련 문서를 번역했습니다.",
       "lastModifiedAt": "2024-11-14T06:20:44.456Z",
       "likeCount": 4,
@@ -744,6 +755,61 @@ export const participantsList = {
       "lastModifiedAt": "2024-11-27T13:44:12.789Z",
       "likeCount": 7,
       "isLiked": true
+    },
+    {
+      "id": 24,
+      "userId": 24,
+      "nickname": "테스트24",
+      "grade": "EXPERT",
+      "challengeId": 2,
+      "content": "MODERNJS와 관련된 최신 기술 문서를 번역했습니다.",
+      "lastModifiedAt": "2024-11-27T13:44:12.789Z",
+      "likeCount": 1,
+      "isLiked": true
+    },
+    {
+      "id": 25,
+      "userId": 25,
+      "nickname": "테스트25",
+      "grade": "EXPERT",
+      "challengeId": 3,
+      "content": "MODERNJS와 관련된 최신 기술 문서를 번역했습니다.",
+      "lastModifiedAt": "2024-11-27T13:44:12.789Z",
+      "likeCount": 1,
+      "isLiked": true
+    },
+    {
+      "id": 26,
+      "userId": 26,
+      "nickname": "테스트26",
+      "grade": "NORMAL",
+      "challengeId": 3,
+      "content": "MODERNJS와 관련된 최신 기술 문서를 번역했습니다.",
+      "lastModifiedAt": "2024-11-27T13:44:12.789Z",
+      "likeCount": 11,
+      "isLiked": true
+    },
+    {
+      "id": 27,
+      "userId": 27,
+      "nickname": "테스트27",
+      "grade": "EXPERT",
+      "challengeId": 3,
+      "content": "MODERNJS와 관련된 최신 기술 문서를 번역했습니다.",
+      "lastModifiedAt": "2024-10-15T04:35:44.678Z",
+      "likeCount": 31,
+      "isLiked": true
+    },
+    {
+      "id": 28,
+      "userId": 28,
+      "nickname": "테스트28",
+      "grade": "NORMAL",
+      "challengeId": 3,
+      "content": "MODERNJS와 관련된 최신 기술 문서를 번역했습니다.",
+      "lastModifiedAt": "2024-11-27T13:44:12.789Z",
+      "likeCount": 0,
+      "isLiked": false
     }
   ]
 }

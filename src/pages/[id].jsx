@@ -12,6 +12,7 @@ import styles from '../styles/pages/Home.module.css';
 import { useGetChallengeDetail } from '@/service/queries/challenge';
 import { useGetWorkList } from '@/service/queries/work';
 import { challengeDetail, participantsList } from '../../mockup/challenge';
+import BestRecWork from '@/components/challenge/BestRecWork';
 
 export default function ChallengeDetailPage() {
   const router = useRouter();
@@ -27,7 +28,9 @@ export default function ChallengeDetailPage() {
   const challengeData = challengeDetail;
   const worksData = participantsList;
 
-  //추후 삭제 예정 - 챌린지에 참여한 사람만 나타냄
+  //추후 삭제 예정 - 해당 챌린지와 챌린지에 참여한 사람만 나타냄
+  const data = challengeData[challengeId - 1];
+
   const bestList = worksData?.bestList.filter((item) => {
     if (item.challengeId == challengeId) return item;
   });
@@ -37,8 +40,8 @@ export default function ChallengeDetailPage() {
   const meta = {
     current: 1,
     totalCount: list.length,
-    totalPages: Math.ceil(list.length / 5)
-  }
+    totalPages: Math.ceil(list.length / 5),
+  };
 
   const workList = {
     bestList: bestList,
@@ -70,6 +73,20 @@ export default function ChallengeDetailPage() {
   // console.log('cdata', challengeData);
   // console.log('wdata', worksData);
 
+  // 추후 util로 분리 예정
+  const getPassedDeadline = (date) => {
+    const today = new Date();
+    const deadline = new Date(date);
+
+    // console.log('deadline', deadline);
+    // console.log('today', today);
+    
+    if (deadline <= today) {
+      return false;
+    } else return true;
+  };
+  // -----------------------------------------------
+  
   return (
     <>
       <Head>
@@ -80,7 +97,8 @@ export default function ChallengeDetailPage() {
         />
       </Head>
       <div className={styles.mainContainer}>
-        <ChallengeDetailInfo list={challengeData} />
+        <ChallengeDetailInfo list={data} />
+        {getPassedDeadline(data?.deadline) ? <></> : <BestRecWork />}
         <ParticipationStatus list={workList} />
       </div>
     </>
