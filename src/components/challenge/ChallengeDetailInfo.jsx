@@ -9,25 +9,35 @@ import { useEffect, useState } from 'react';
 const ChallengeDetailInfo = ({ list }) => {
   const router = useRouter();
   const [type, setType] = useState('beginning');
+  const [progress, setProgress] = useState(true);
+
   const { id: challengeId } = router.query;
 
   const data = list[challengeId - 1];
   const user = data?.applications[0].user;
   // const user = list?.applications[0].user;
 
-  // 추후 작업 기록 여부 확인으로 변경 필요 
-  const loginUser = 1;
+  console.log(list)
 
-  const getLoginUser = () => {
-    if (user?.userId == loginUser) {
+  const getTypes = () => {
+    const today = new Date();
+    const deadline = new Date(data?.deadline);
+    
+    if(deadline <= today) {
+      setProgress(false);
+    }
+    
+  // 추후 작업 기록 여부 확인으로 변경 필요 
+    if (user?.userId == 4) {
       setType('continuation');
     }
-  };
-  
-  useEffect(() => {
-    getLoginUser()
-  }, []);
   // -----------------------------------------------
+
+  };
+
+  useEffect(() => {
+    getTypes()
+  }, []);
 
   return (
     <>
@@ -46,7 +56,7 @@ const ChallengeDetailInfo = ({ list }) => {
             deadline={data.deadline}
             participants={data.participants}
             maxParticipants={data.maxParticipants}
-            progress={true}
+            progress={progress}
             type={type}
           />
         </div>
