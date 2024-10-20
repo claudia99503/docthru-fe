@@ -1,11 +1,14 @@
+import cn from '@/utils/clsx';
+
 export default function Svg({
   name,
   width = '24',
   height,
   type = 'icon',
   isActive = false,
+  className,
 }) {
-  const calculatedHeight = height ? height : width;
+  const calculatedHeight = height || width;
 
   const prefix = type === 'icon' ? 'ic' : 'img';
 
@@ -13,13 +16,9 @@ export default function Svg({
     <svg
       width={width}
       height={calculatedHeight}
-      viewBox={`0 0 ${width} ${calculatedHeight}`}
-      className={`Svg ${name} ${type} ${isActive ? styles.active : ''}`}
+      className={cn(name, type, className, { active: isActive })}
     >
-      <use
-        href={`/assets/${type}s_sprite.svg/#${prefix}_${name}`}
-        className="icon-use"
-      />
+      <use href={`/assets/${type}s_sprite.svg/#${prefix}_${name}`} />
     </svg>
   );
 }

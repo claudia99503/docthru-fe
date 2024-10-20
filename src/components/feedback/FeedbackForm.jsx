@@ -3,6 +3,7 @@ import TextArea from '../common/form/TextArea';
 import styles from './FeedbackForm.module.css';
 import { useCreateFeedback } from '@/service/mutations/work';
 import { useRouter } from 'next/router';
+import Svg from '../common/Svg';
 
 export default function FeedbackForm() {
   const formMethods = useForm();
@@ -36,9 +37,10 @@ export default function FeedbackForm() {
           className={s.textArea}
         />
         <button className={s.submitButton} type="submit" disabled={!isValid}>
-          등록
+          <Svg name="arrowDown" className={styles.Svg} />
         </button>
       </form>
     </FormProvider>
   );
+  ß;
 }
