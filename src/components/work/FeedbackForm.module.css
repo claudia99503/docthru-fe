@@ -1,3 +1,8 @@
-.arrowDownIcon {
-  fill: var(--grey-50);
+/* 기본 상태 */
+.Svg .icon-use circle {
+  fill: var(--grey-300); /* circle의 기본 색상 */
+}
+
+.Svg .icon-use path {
+  fill: var(--grey-50); /* path의 기본 색상 */
 }

@@ -34,7 +34,7 @@ export default function FeedbackForm() {
           type="submit"
           disabled={!isValid}
         >
-          <Svg name="arrowDown" className={styles.arrowDownIcon} />
+          <Svg name="arrowDownSubmit" width="40" className={styles.icon} />
         </button>
       </form>
     </FormProvider>
