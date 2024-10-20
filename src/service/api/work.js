@@ -22,8 +22,13 @@ export async function deleteWork(id) {
   return res.data;
 }
 
-export async function getWorkFeedbacks(id) {
-  const res = await axios.get(`${PATH}/${id}/feedbacks`);
+export async function getWorkFeedbacks(
+  id,
+  { cursorId = null, limit = 3 } = {}
+) {
+  const res = await axios.get(`${PATH}/${id}/feedbacks`, {
+    params: { cursorId, limit },
+  });
   return res.data;
 }
 

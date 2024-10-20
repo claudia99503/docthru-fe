@@ -10,6 +10,7 @@ export default function EmptyFeedbacks() {
         height={140}
         src={assets.images.replyEmpty}
         priority={true}
+        alt="empty bubble chat image"
       />
       <p className={styles.text}>아직 피드백이 없어요. 피드백을 달아주세요!</p>
     </div>

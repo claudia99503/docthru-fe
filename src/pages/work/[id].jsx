@@ -27,7 +27,7 @@ export default function WorkDetailPage() {
       </Head>
       <WorkDetail data={data} />
       <FeedbackForm />
-      <FeedbackList id={data.id} />
+      <FeedbackList id={id} />
     </>
   );
 }
