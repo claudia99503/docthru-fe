@@ -11,10 +11,6 @@ export default function FeedbackContent({ feedback }) {
 
   const { user, workId } = feedback;
 
-  const classNames = isEditMode
-    ? `${styles.FeedbackContent} ${styles.edit}`
-    : styles.FeedbackContent;
-
   const { mutate } = useMutateFeedback({
     id: feedback.id,
     workId,
@@ -47,7 +43,7 @@ export default function FeedbackContent({ feedback }) {
   };
 
   return !isEditMode ? (
-    <li className={classNames}>
+    <li className={styles.FeedbackContent}>
       <div className={styles.top}>
         <Profile user={user} date={feedback.updatedAt} />
         <KebabMenu onEdit={handleEditClick} onDelete={handleDelete} />
@@ -55,7 +51,7 @@ export default function FeedbackContent({ feedback }) {
       <p className={styles.text}>{feedback.content}</p>
     </li>
   ) : (
-    <li className={classNames}>
+    <li className={styles.FeedbackContent}>
       <div className={styles.top}>
         <Profile user={user} date={feedback.updatedAt} />
         <UpdateFeedbackForm

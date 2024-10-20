@@ -21,14 +21,12 @@ export default function FeedbackList({ id }) {
   return isEmpty ? (
     <EmptyFeedbacks />
   ) : (
-    <>
-      <ul className={styles.FeedbackList}>
-        {pages.map((page) => {
-          return page.list.map((feedback) => {
-            return <FeedbackContent key={feedback.id} feedback={feedback} />;
-          });
-        })}
-      </ul>
+    <ul className={styles.FeedbackList}>
+      {pages.map((page) => {
+        return page.list.map((feedback) => {
+          return <FeedbackContent key={feedback.id} feedback={feedback} />;
+        });
+      })}
       {hasNextPage && !isFetchingNextPage && (
         <button onClick={fetchNextPage} className={styles.loadMoreButton}>
           더 불러오기
@@ -40,6 +38,6 @@ export default function FeedbackList({ id }) {
       {!hasNextPage && !isFetchingNextPage && (
         <Message msg="더 불러올 댓글이 없습니다." height="40px" />
       )}
-    </>
+    </ul>
   );
 }
