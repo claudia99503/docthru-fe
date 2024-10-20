@@ -49,7 +49,7 @@ export default function FeedbackContent({ feedback }) {
   return !isEditMode ? (
     <li className={classNames}>
       <div className={styles.top}>
-        <Profile user={user} size="small" />
+        <Profile user={user} date={feedback.updatedAt} />
         <KebabMenu onEdit={handleEditClick} onDelete={handleDelete} />
       </div>
       <p className={styles.text}>{feedback.content}</p>
@@ -57,7 +57,7 @@ export default function FeedbackContent({ feedback }) {
   ) : (
     <li className={classNames}>
       <div className={styles.top}>
-        <Profile user={user} size="small" />
+        <Profile user={user} date={feedback.updatedAt} />
         <UpdateFeedbackForm
           onSubmit={handleUpdateSubmit}
           initialData={feedback}
