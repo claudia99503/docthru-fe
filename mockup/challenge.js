@@ -474,7 +474,7 @@ export const participantsList = {
       "nickname": "테스트1",
       "grade": "EXPERT",
       "challengeId": 1,
-      "content": "NEXTJS 공식 문서에서 기본적인 개념과 페이지 구조에 대한 내용을 번역했습니다.",
+      "content": "NEXTJS 공식 문서에서 기본적인 개념과 페이지 구조에 대한 내용을 번역했습니다.NEXTJS 공식 문서에서 기본적인 개념과 페이지 구조에 대한 내용을 번역했습니다.NEXTJS 공식 문서에서 기본적인 개념과 페이지 구조에 대한 내용을 번역했습니다.NEXTJS 공식 문서에서 기본적인 개념과 페이지 구조에 대한 내용을 번역했습니다.NEXTJS 공식 문서에서 기본적인 개념과 페이지 구조에 대한 내용을 번역했습니다.NEXTJS 공식 문서에서 기본적인 개념과 페이지 구조에 대한 내용을 번역했습니다.NEXTJS 공식 문서에서 기본적인 개념과 페이지 구조에 대한 내용을 번역했습니다.NEXTJS 공식 문서에서 기본적인 개념과 페이지 구조에 대한 내용을 번역했습니다.NEXTJS 공식 문서에서 기본적인 개념과 페이지 구조에 대한 내용을 번역했습니다.NEXTJS 공식 문서에서 기본적인 개념과 페이지 구조에 대한 내용을 번역했습니다.NEXTJS 공식 문서에서 기본적인 개념과 페이지 구조에 대한 내용을 번역했습니다.NEXTJS 공식 문서에서 기본적인 개념과 페이지 구조에 대한 내용을 번역했습니다.NEXTJS 공식 문서에서 기본적인 개념과 페이지 구조에 대한 내용을 번역했습니다.",
       "lastModifiedAt": "2024-02-17T02:42:44.580Z",
       "likeCount": 15,
       "isLiked": false
@@ -496,7 +496,7 @@ export const participantsList = {
       "nickname": "테스트31",
       "grade": "NORMAL",
       "challengeId": 3,
-      "content": "MODERNJS와 관련된 최신 기술 문서를 번역했습니다.",
+      "content": "MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.",
       "lastModifiedAt": "2024-09-19T04:35:44.678Z",
       "likeCount": 31,
       "isLiked": false

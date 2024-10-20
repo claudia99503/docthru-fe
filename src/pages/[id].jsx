@@ -80,13 +80,13 @@ export default function ChallengeDetailPage() {
 
     // console.log('deadline', deadline);
     // console.log('today', today);
-    
+
     if (deadline <= today) {
       return false;
     } else return true;
   };
   // -----------------------------------------------
-  
+
   return (
     <>
       <Head>
@@ -98,7 +98,7 @@ export default function ChallengeDetailPage() {
       </Head>
       <div className={styles.mainContainer}>
         <ChallengeDetailInfo list={data} />
-        {getPassedDeadline(data?.deadline) ? <></> : <BestRecWork />}
+        {!getPassedDeadline(data?.deadline) && <BestRecWork list={workList.bestList} />}
         <ParticipationStatus list={workList} />
       </div>
     </>

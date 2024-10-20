@@ -1,0 +1,42 @@
+.AllBestRecCards {
+  margin-top: 53px;
+  width: 842px;
+  height: 36px;
+  border-bottom: 1px solid var(--grey-200);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--grey-400);
+}
+
+.user-info {
+  display: flex;
+  gap: 16px;
+  color: var(--grey-800);
+}
+
+.bestWork-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bestWork-text {
+  margin-top: 16px;
+  width: 841px;
+  max-height: 179px;
+  overflow: hidden;
+}
+
+.bestWork-text.expanded {
+  max-height: none;
+}
+
+.btn {
+  display: flex;
+  gap: 4px;
+  color: var(--grey-800);
+  margin-bottom: 12px;
+}
