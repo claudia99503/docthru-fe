@@ -1,7 +1,7 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import TextArea from '../common/form/TextArea';
 import styles from './FeedbackForm.module.css';
-import Svg from '../common/Svg';
+import cn from 'clsx';
 
 export default function FeedbackForm() {
   const formMethods = useForm();

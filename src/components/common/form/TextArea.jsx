@@ -18,14 +18,14 @@ export default function TextArea({
   const addError = errors[name] && styles.error;
 
   return (
-    <div className={`${styles.TextArea} ${className}`}>
+    <div className={`${styles.TextArea}`}>
       {label && (
         <label htmlFor={name} className={styles['TextArea-label']}>
           {label}
         </label>
       )}
       <textarea
-        className={addError}
+        className={`${addError} ${className}`}
         {...register(name, {
           ...validations,
           onBlur: () => trigger(name),
