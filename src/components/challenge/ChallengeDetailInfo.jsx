@@ -43,7 +43,6 @@ const ChallengeDetailInfo = ({ list }) => {
             <div className={styles.description}>{list.description}</div>
             <div className={styles['user-profile']}>
               <Profile user={user} width="24px" type="simple" />
-              <span>{user.nickname}</span>
             </div>
           </div>
           <Container

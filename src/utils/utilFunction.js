@@ -15,3 +15,10 @@ export const formatDate = (dateString) => {
   const day = date.getDate().toString().padStart(2, '0'); // 일
   return `${year}/${month}/${day}`;
 };
+
+// 날짜에 시간까지 형식 변환 'YY/MM/DD HH:MM'
+export const formatDateTime = (dateString) => {
+  const date = new Date(dateString);
+  const time = date.toTimeString().toString().slice(0, 5)
+  return formatDate(dateString) + ` ${time}`
+};

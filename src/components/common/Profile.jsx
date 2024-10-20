@@ -17,23 +17,30 @@ export function ProfileImage({ user, width = '32px' }) {
 
 export function Profile({ user, size, type }) {
   const userGrade = user.grade === 'EXPERT' ? '전문가' : '일반';
-  const isTypeSimple = type === 'simple';
+  // const isTypeSimple = type === 'simple';
+  const isTypeNotSimple = type + '';
   const isSmall = size === 'small';
 
-  if (isTypeSimple) {
+  if (isTypeNotSimple) {
+    console.log(type + '');
+  }
+
+  if (isTypeNotSimple.includes('simple')) {
     return (
       <div className={styles.simple}>
         <ProfileImage width="24px" user={user} />
         <span className={styles.name}>{user.nickname}</span>
+        {isTypeNotSimple.includes('2') && (
+          <span className={styles.grade}>{userGrade}</span>
+        )}
       </div>
     );
   }
-
   return (
     <div className={styles.Profile}>
       <ProfileImage user={user} width={isSmall ? '24px' : '32px'} />
       <div className={styles.texts}>
-        <span className={styles.name}>{ user.nickname || '기본사용자'}</span>
+        <span className={styles.name}>{user.nickname || '기본사용자'}</span>
         <span className={styles.grade}>{userGrade}</span>
       </div>
     </div>
