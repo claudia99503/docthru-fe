@@ -28,13 +28,17 @@ export default function FeedbackForm() {
         className={styles.FeedbackForm}
         onSubmit={handleSubmit(handleResetAfterSubmit)}
       >
-        <TextArea name="content" placeholder="피드백을 남겨주세요" />
+        <TextArea
+          name="content"
+          placeholder="피드백을 남겨주세요"
+          className={styles.textArea}
+        />
         <button
           className={styles.submitButton}
           type="submit"
           disabled={!isValid}
         >
-          <Svg name="arrowDownSubmit" width="40" className={styles.icon} />
+          등록
         </button>
       </form>
     </FormProvider>

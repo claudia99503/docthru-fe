@@ -6,6 +6,7 @@ export default function TextArea({
   label = false,
   placeholder = '내용을 입력해 주세요',
   validations,
+  className,
 }) {
   const {
     register,
@@ -17,7 +18,7 @@ export default function TextArea({
   const addError = errors[name] && styles.error;
 
   return (
-    <div className={styles.TextArea}>
+    <div className={`${styles.TextArea} ${className}`}>
       {label && (
         <label htmlFor={name} className={styles['TextArea-label']}>
           {label}

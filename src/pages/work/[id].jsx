@@ -33,3 +33,7 @@ export default function WorkDetailPage() {
     </>
   );
 }
+
+WorkDetailPage.getLayout = function getLayout(page) {
+  return <Layout className={styles.narrower}>{page}</Layout>;
+};

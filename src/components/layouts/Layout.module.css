@@ -11,6 +11,10 @@
   flex-direction: column;
 }
 
+.main.detail {
+  max-width: 890px;
+}
+
 @media only screen and (max-width: 1199px) {
   .main {
     padding: 16px 24px 40px;
