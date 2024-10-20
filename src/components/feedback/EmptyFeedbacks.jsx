@@ -1,14 +1,17 @@
 import styles from './EmptyFeedbacks.module.css';
 import Image from 'next/image';
-
-import styles from './EmptyComments.module.scss';
 import assets from '@/variables/images';
 
-export default function EmptyComments() {
+export default function EmptyFeedbacks() {
   return (
-    <div className={styles.EmptyComments}>
-      <Image width="140px" src={assets.images.replyEmpty} priority={true} />
-      <p>아직 댓글이 없어요, 지금 댓글을 달아보세요!</p>
+    <div className={styles.EmptyFeedbacks}>
+      <Image
+        width={140}
+        height={140}
+        src={assets.images.replyEmpty}
+        priority={true}
+      />
+      <p className={styles.text}>아직 피드백이 없어요. 피드백을 달아주세요!</p>
     </div>
   );
 }
