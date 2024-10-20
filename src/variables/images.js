@@ -5,6 +5,7 @@ const assets = {
     alignRight: '/assets/icons/ic_align_right.svg',
     arrowDown: '/assets/icons/ic_arrow_down.svg',
     arrowDownCircle: '/assets/icons/ic_arrow_down_circle.svg',
+    arrowDownSubmit: '/assets/icons/ic_arrow_down_submit.svg',
     arrowLeft: '/assets/icons/ic_arrow_left.svg',
     arrowMainRight: '/assets/icons/ic_arrow_main_right.svg',
     arrowRight: '/assets/icons/ic_arrow_right.svg',
@@ -53,7 +54,7 @@ const assets = {
     logo: '/assets/images/img_logo.svg',
     profileAdmin: '/assets/images/img_profile_admin.svg',
     profileMember: '/assets/images/img_profile_member.svg',
+    replyEmpty: '/assets/images/img_reply_empty.svg',
   },
 };
-
 export default assets;

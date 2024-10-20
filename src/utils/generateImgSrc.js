@@ -5,6 +5,8 @@ const __dirname = path.join();
 const assets = {};
 
 const assetsPath = path.join(__dirname, 'public/assets');
+const outputPath = path.join(__dirname, 'src/variables/images.js');
+
 const categories = fs.readdirSync(assetsPath).filter((item) => {
   const category = path.join(assetsPath, item);
   return fs.statSync(category).isDirectory();
@@ -43,5 +45,14 @@ categories.forEach((category) => {
   }, {});
   assets[category] = result;
 });
-// console로 나온 이미지 객체 복붙해서 씀
-console.log(assets);
+
+// assets 객체를 문자열로 변환
+const fileContent = `const assets = ${JSON.stringify(
+  assets,
+  null,
+  2
+)};\nexport default assets;`;
+
+// 파일 작성
+fs.writeFileSync(outputPath, fileContent, 'utf-8');
+console.log(`assets 객체가 ${outputPath}에 저장되었습니다.`);

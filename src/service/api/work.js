@@ -23,7 +23,12 @@ export async function deleteWork(id) {
 }
 
 export async function getWorkFeedbacks(id) {
-  const res = await axios.delete(`${PATH}/${id}/feedbacks`);
+  const res = await axios.get(`${PATH}/${id}/feedbacks`);
+  return res.data;
+}
+
+export async function createWorkFeedback(id, data) {
+  const res = await axios.post(`${PATH}/${id}/feedbacks`, data);
   return res.data;
 }
 

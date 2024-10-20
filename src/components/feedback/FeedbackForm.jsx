@@ -1,10 +1,14 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import TextArea from '../common/form/TextArea';
 import styles from './FeedbackForm.module.css';
-import cn from 'clsx';
+import { useCreateFeedback } from '@/service/mutations/work';
+import { useRouter } from 'next/router';
 
 export default function FeedbackForm() {
   const formMethods = useForm();
+  const router = useRouter();
+  const { id } = router.query;
+  const s = styles;
 
   const {
     handleSubmit,
@@ -12,32 +16,26 @@ export default function FeedbackForm() {
     formState: { isValid },
   } = formMethods;
 
-  const handleNewCommentSubmit = (data) => {
-    const newComment = { content: data['create-comment-content'] };
-    mutate(newComment);
-  };
+  const { mutate } = useCreateFeedback(id);
 
-  const handleResetAfterSubmit = (data) => {
-    handleNewCommentSubmit(data);
+  const handleFeedbackSubmit = (data) => {
+    mutate(data);
+    console.log(data);
     reset();
   };
 
   return (
     <FormProvider {...formMethods}>
       <form
-        className={styles.FeedbackForm}
-        onSubmit={handleSubmit(handleResetAfterSubmit)}
+        className={s.FeedbackForm}
+        onSubmit={handleSubmit(handleFeedbackSubmit)}
       >
         <TextArea
           name="content"
           placeholder="피드백을 남겨주세요"
-          className={styles.textArea}
+          className={s.textArea}
         />
-        <button
-          className={styles.submitButton}
-          type="submit"
-          disabled={!isValid}
-        >
+        <button className={s.submitButton} type="submit" disabled={!isValid}>
           등록
         </button>
       </form>

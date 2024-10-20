@@ -5,7 +5,7 @@ import WorkDetail from '@/components/work/WorkDetail';
 import { useGetWork, useGeWorkFeedbacks } from '@/service/queries/work';
 import Loader from '@/components/common/Loader';
 import Svg, { IconSvg } from '@/components/common/Svg';
-import FeedbackForm from '@/components/work/FeedbackForm';
+import FeedbackForm from '@/components/feedback/FeedbackForm';
 
 export default function WorkDetailPage() {
   const router = useRouter();

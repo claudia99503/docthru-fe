@@ -20,8 +20,17 @@ export function useGetWork(id) {
 
 export function useGeWorkFeedbacks(id) {
   return useQuery({
-    queryKey: workKey.feedbacks(),
-    queryFn: () => getWorkFeedbacks(id),
+    queryKey: workKey.feedbacks(id),
+    queryFn: ({ pageParam = null }) =>
+      getWorkFeedbacks(id, { cursor: pageParam }),
+    initialPageParam: null,
+    getNextPageParam: (lastPage) => {
+      if (!lastPage.meta.hasNext) {
+        return undefined;
+      }
+      return lastPage.meta.nextCursor;
+    },
+    keepPreviousData: true,
     enabled: !!id,
   });
 }
