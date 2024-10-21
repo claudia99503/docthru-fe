@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import styles from './Modal.module.scss';
+import styles from './TwoBtnModal.module.css';
 import { createPortal } from 'react-dom';
 import Button from '../common/Button';
 import Image from 'next/image';
