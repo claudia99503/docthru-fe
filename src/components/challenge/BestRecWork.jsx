@@ -9,13 +9,9 @@ import SeveralBestRecCards from './SeveralBestRecCards';
 
 import styles from './BestRecWork.module.css';
 import images from '@/variables/images';
-import { useState } from 'react';
-
 SwiperCore.use([Navigation]);
 
 const BestRecWork = ({ list }) => {
-  const [btnPos, setBtnPos] = useState();
-
   const getLastI = (i) => {
     return i == list.length - 1 ? 'last' : 'notLast';
   };

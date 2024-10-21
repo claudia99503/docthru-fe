@@ -2,14 +2,14 @@ import { useState } from 'react';
 
 import LikeButton from '../common/LikeButton';
 import { Profile } from '../common/Profile';
-import { formatDateTime } from '@/utils/utilFunction';
+import { formatDate } from '@/utils/utilFunction';
 
 import styles from './SeveralBestRecCards.module.css';
 import images from '@/variables/images';
 
 const SeveralBestRecCards = ({ list, index }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  console.log(index);
+
   // const { list = [], meta = {} } = challengeList || {};
   const lastModifiedAt = list.lastModifiedAt;
 
@@ -28,7 +28,7 @@ const SeveralBestRecCards = ({ list, index }) => {
           <Profile user={list} type="simple2" />
           <LikeButton data={list} />
         </div>
-        <span>{formatDateTime(lastModifiedAt)}</span>
+        <span>{formatDate(lastModifiedAt, true)}</span>
       </div>
       <div className={styles['bestWork-content']}>
         <div

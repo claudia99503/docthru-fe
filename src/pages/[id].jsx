@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
+import { useGetChallengeDetail } from '@/service/queries/challenge';
+import { useGetWorkList } from '@/service/queries/work';
+
 import Head from 'next/head';
 import Loader from '@/components/common/Loader';
 
-import ChallengeDetailInfo from '../components/challenge/ChallengeDetailInfo';
-import ParticipationStatus from '../components/challenge/ParticipationStatus';
-
-import styles from '../styles/pages/Home.module.css';
-
-import { useGetChallengeDetail } from '@/service/queries/challenge';
-import { useGetWorkList } from '@/service/queries/work';
-import { challengeDetail, participantsList } from '../../mockup/challenge';
+import ChallengeDetailInfo from '@/components/challenge/ChallengeDetailInfo';
+import ParticipationStatus from '@/components/challenge/ParticipationStatus';
 import BestRecWork from '@/components/challenge/BestRecWork';
+
+import styles from '@/styles/pages/Home.module.css';
+// import { challengeDetail, participantsList } from '../../mockup/challenge';
 
 export default function ChallengeDetailPage() {
   const router = useRouter();
   const { id: challengeId } = router.query;
-  const [validId, setValidId] = useState(null);
+  const [validId, setValidId] = useState(null); 
 
   useEffect(() => {
     if (challengeId) {
@@ -25,51 +25,49 @@ export default function ChallengeDetailPage() {
     }
   }, [challengeId]);
 
-  const challengeData = challengeDetail;
-  const worksData = participantsList;
+  const { data: challengeData, refetch: refetchChallenge, isLoading: isChallengeLoading} = useGetChallengeDetail(validId, {
+    enabled: !!validId,
+  });
+
+  const { data: worksData, refetch: refetchWork, isLoading: isWorkLoading } = useGetWorkList(validId, {
+    enabled: !!validId,
+  });
+  
+  useEffect(() => {
+    if (validId) {
+      refetchChallenge();  
+      refetchWork();        
+    }
+  }, [validId, refetchChallenge, refetchWork]);
+
+  if ( isChallengeLoading || isWorkLoading ) {
+    return <Loader />;
+  }
 
   //추후 삭제 예정 - 해당 챌린지와 챌린지에 참여한 사람만 나타냄
-  const data = challengeData[challengeId - 1];
+  // const challengeData = challengeDetail;
+  // const worksData = participantsList;
+  // const data = challengeData[challengeId - 1];
 
-  const bestList = worksData?.bestList.filter((item) => {
-    if (item.challengeId == challengeId) return item;
-  });
-  const list = worksData?.list.filter((item) => {
-    if (item.challengeId == challengeId) return item;
-  });
-  const meta = {
-    current: 1,
-    totalCount: list.length,
-    totalPages: Math.ceil(list.length / 5),
-  };
+  // const bestList = worksData?.bestList.filter((item) => {
+  //   if (item.challengeId == challengeId) return item;
+  // });
+  // const list = worksData?.list.filter((item) => {
+  //   if (item.challengeId == challengeId) return item;
+  // });
+  // const meta = {
+  //   current: 1,
+  //   totalCount: list.length,
+  //   totalPages: Math.ceil(list.length / 5),
+  // };
 
-  const workList = {
-    bestList: bestList,
-    list: list,
-    meta: meta,
-  };
+  // const workList = {
+  //   bestList: bestList,
+  //   list: list,
+  //   meta: meta,
+  // };
   // ------------------------------------------------------------------
 
-  // const { data: challengeData, isPending, refetch: refetchChallenge, isFetching } = useGetChallengeDetail(validId, {
-  //   enabled: !!validId,
-  //   queryKey: ['detailedChallenge', validId],
-  // });
-
-  // const { data: worksData, isWorkPending, refetch: refetchWork } = useGetWorkList(validId, {
-  //   enabled: !!validId,
-  //   queryKey: ['workList', validId],
-  // });
-
-  // useEffect(() => {
-  //   if (validId) {
-  //     refetchChallenge();
-  //     refetchWork();
-  //   }
-  // }, [validId, refetchChallenge, refetchWork]);
-
-  // if ((isPending) || isWorkPending) {
-  //   return <Loader />;
-  // }
   // console.log('cdata', challengeData);
   // console.log('wdata', worksData);
 
@@ -77,9 +75,6 @@ export default function ChallengeDetailPage() {
   const getPassedDeadline = (date) => {
     const today = new Date();
     const deadline = new Date(date);
-
-    // console.log('deadline', deadline);
-    // console.log('today', today);
 
     if (deadline <= today) {
       return false;
@@ -97,9 +92,9 @@ export default function ChallengeDetailPage() {
         />
       </Head>
       <div className={styles.mainContainer}>
-        <ChallengeDetailInfo list={data} />
-        {!getPassedDeadline(data?.deadline) && <BestRecWork list={workList.bestList} />}
-        <ParticipationStatus list={workList} />
+        <ChallengeDetailInfo list={challengeData} />
+        {worksData?.bestList && <BestRecWork list={worksData.bestList} />}
+        <ParticipationStatus list={worksData} />
       </div>
     </>
   );

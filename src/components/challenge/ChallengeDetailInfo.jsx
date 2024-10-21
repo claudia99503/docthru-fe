@@ -10,9 +10,7 @@ const ChallengeDetailInfo = ({ list }) => {
   const [type, setType] = useState('beginning');
   const [progress, setProgress] = useState(true);
 
-  const user = list?.applications[0].user;
-  // const user = list?.applications[0].user;
-  // console.log(list)
+  const user = list?.user;
 
   const getTypes = () => {
     const today = new Date();

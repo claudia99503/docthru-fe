@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Image from 'next/image';
 
 import { Profile } from '../common/Profile';
 import LikeButton from '../common/LikeButton';
@@ -9,7 +10,6 @@ import images from '@/variables/images';
 const ParticipationStatus = ({ list }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const bestList = list?.bestList;
   const userList = list?.list;
   const pageList = list?.meta;
 
@@ -20,7 +20,7 @@ const ParticipationStatus = ({ list }) => {
 
   const totalPages = pageList?.totalPages;
 
-  const filteredData = userList.sort((a, b) => {
+  const filteredData = userList?.sort((a, b) => {
     return b.likeCount - a.likeCount;
   });
 
@@ -45,7 +45,7 @@ const ParticipationStatus = ({ list }) => {
 
   return (
     <>
-      {filteredData.length > 0 ? (
+      {filteredData?.length > 0 ? (
         <div className={styles.ParticipationStatus}>
           <div className={styles['ParticipationStatus-top']}>
             <span>참여 현황</span>

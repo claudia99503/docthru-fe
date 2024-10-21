@@ -51,8 +51,6 @@ export default function Home(initialData) {
     handleOptionChange(option)
   }, [currentPage, searchTerm]);
 
-  console.log('list', list)
-
   return (
     <>
       <Head>
