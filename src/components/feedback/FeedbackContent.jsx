@@ -5,9 +5,12 @@ import { useMutateFeedback } from '@/service/mutations/feedback';
 import UpdateFeedbackForm from './UpdatedFeedbackForm';
 import KebabMenu from '../common/KebabMenu';
 import cn from '@/utils/clsx';
+import { useDeleteModal } from '@/hooks/useModal';
 
 export default function FeedbackContent({ feedback }) {
   const [isEditMode, setIsEditMode] = useState(false);
+
+  const { onModalOpen, Modal } = useDeleteModal();
 
   const { user } = feedback;
 
@@ -43,7 +46,15 @@ export default function FeedbackContent({ feedback }) {
     <li className={cn(styles.FeedbackContent)}>
       <div className={styles.top}>
         <Profile user={user} date={feedback.updatedAt} />
-        <KebabMenu onEdit={handleEditClick} onDelete={handleDelete} />
+        <KebabMenu
+          onEdit={handleEditClick}
+          onDelete={() =>
+            onModalOpen({
+              msg: '피드백을 삭제하시겠어요?',
+              action: handleDelete,
+            })
+          }
+        />
       </div>
       <p className={styles.text}>{feedback.content}</p>
     </li>
