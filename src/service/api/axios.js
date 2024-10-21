@@ -1,4 +1,5 @@
 import axios from 'axios';
+import CAN_USE_DOM from '@/utils/canUseDom';
 
 const API_URL = process.env.NEXT_PUBLIC_DEV_API_URL;
 
@@ -11,7 +12,7 @@ const instance = axios.create({
 });
 instance.interceptors.request.use(
   (config) => {
-    if (typeof window !== 'undefined') {
+    if (CAN_USE_DOM) {
       const accessToken = localStorage.getItem('accessToken');
       if (accessToken) {
         config.headers['Authorization'] = `Bearer ${accessToken}`;
@@ -30,7 +31,7 @@ instance.interceptors.response.use(
 
     //refreshToken handle
     if (
-      typeof window !== 'undefined' &&
+      CAN_USE_DOM &&
       error.response?.status === 401 &&
       !originalRequest._retry
     ) {

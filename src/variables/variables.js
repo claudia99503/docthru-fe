@@ -4,4 +4,4 @@ export const pages = [
 ];
 
 export const PUBLIC_ROUTES = ['/', '/auth/login', '/auth/sign-up'];
-export const AUTH_ROUTES = ['/auth/login', '/auth/sign-up'];
+export const AUTH_ROUTES = ['/auth/login', '/auth/sig-up'];

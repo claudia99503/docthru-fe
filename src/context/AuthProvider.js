@@ -16,6 +16,7 @@ export function AuthProvider({ children }) {
   const [accessToken, setAccessToken] = useState(null);
   const { onModalOpen, Modal: AuthModal, isModalOpen } = useAlertModal();
   const [isLoading, setIsLoading] = useState(false);
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -53,7 +54,14 @@ export function AuthProvider({ children }) {
         const { accessToken } = data;
         localStorage.setItem('accessToken', accessToken);
         queryClient.invalidateQueries({ queryKey: ['user'] });
-        getMe();
+        getMe().then(() => {
+          setIsRedirecting(true);
+          onModalOpen({
+            msg: '로그인 되었습니다.',
+            path: '/',
+            action: () => setIsRedirecting(false),
+          });
+        });
       }
     },
     onSettled: () => setIsLoading(false),
@@ -69,7 +77,14 @@ export function AuthProvider({ children }) {
         localStorage.setItem('accessToken', accessToken);
         queryClient.invalidateQueries({ queryKey: ['user'] });
 
-        getMe();
+        getMe().then(() => {
+          setIsRedirecting(true);
+          onModalOpen({
+            msg: '가입이 완료되었습니다.',
+            path: '/',
+            action: () => setIsRedirecting(false),
+          });
+        });
       }
     },
     onSettled: () => setIsLoading(false),
@@ -83,6 +98,7 @@ export function AuthProvider({ children }) {
         login: loginMutation,
         signUp: signUpMutation,
         isModalOpen,
+        isRedirecting,
       }}
     >
       {children}
