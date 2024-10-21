@@ -1,6 +1,32 @@
-.AllBestRecCards {
+.SeveralBestRecCards {
+  background-color: var(--grey-50);
+  border-radius: 16px;
+  border: 2px solid var(--grey-100);
+  padding: 0 22px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 324px;
+}
+
+.SeveralBestRecCards-badge {
+  position: absolute;
+  left: -2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 132px;
+  height: 34px;
+  border-radius: 14px 0;
+  background-color: var(--brand-black);
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.content-top {
   margin-top: 53px;
-  width: 842px;
   height: 36px;
   border-bottom: 1px solid var(--grey-200);
   display: flex;
@@ -24,8 +50,8 @@
 }
 
 .bestWork-text {
+  width: 100%;
   margin-top: 16px;
-  width: 841px;
   max-height: 179px;
   overflow: hidden;
 }

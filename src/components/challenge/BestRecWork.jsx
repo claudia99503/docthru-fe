@@ -1,44 +1,81 @@
-import Slider from 'react-slick';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore from 'swiper';
+import { Navigation } from 'swiper/modules';
 
-import AllBestRecCards from './AllBestRecCards';
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+import SeveralBestRecCards from './SeveralBestRecCards';
 
 import styles from './BestRecWork.module.css';
 import images from '@/variables/images';
+import { useState } from 'react';
 
-const NextArrow = (props) => {
-  const { className, onClick } = props;
-
-  return (
-    <div className={`${className} ${styles.nextArrow}`} onClick={onClick}>
-      {/* 원하는 화살표 디자인 */}
-      <img src="/path-to-your-icon/arrow-right.svg" alt="Next" />
-    </div>
-  );
-};
-
-const PrevArrow = (props) => {
-  const { className, onClick } = props;
-  return (
-    <div className={`${className} ${styles.prevArrow}`} onClick={onClick}>
-      {/* 원하는 화살표 디자인 */}
-      <img src="/path-to-your-icon/arrow-left.svg" alt="Prev" />
-    </div>
-  );
-};
+SwiperCore.use([Navigation]);
 
 const BestRecWork = ({ list }) => {
-  console.log(list);
+  const [btnPos, setBtnPos] = useState();
+
+  const getLastI = (i) => {
+    return i == list.length - 1 ? 'last' : 'notLast';
+  };
+
+  const getPrevBtnStyles = (i) => {
+    if(i == 0){
+      return { opacity:0.3 }
+    }
+
+    if(i == list.length - 1) {
+      return { left: '786px' }
+    } 
+  }
+
+  const getNextBtnStyles = (i) => {
+    if(i == list.length - 1) {
+      return { left: '836px', opacity:0.3 }
+    }
+  }
+
 
   return (
-    <div className={styles.BestRecWork}>
-      <div className={styles['bestRecWork-badge']}>
-        <img src={images.icons.medal} alt="bestRecWork-badge icon" />
-        <span>최다 추천 번역</span>
-      </div>
-      {list.map((best) => (
-        <AllBestRecCards key={best.id} list={best} />
-      ))}
-    </div>
+    <>
+      {list.length == 1 ? (
+        <div className={styles.BestRecWork}>
+          <SeveralBestRecCards list={list[0]} />
+        </div>
+      ) : (
+        <Swiper
+          navigation={{
+            nextEl: '.next-button',
+            prevEl: '.prev-button',
+          }}
+          autoplay={false}
+          spaceBetween={-42}
+          slidesPerView={1}
+          loop={false}
+          className={styles.BestRecWork}
+        >
+          {list?.map((best, i) => (
+            <SwiperSlide key={i} className={styles['slide-box']}>
+              <SeveralBestRecCards
+                key={best.id}
+                list={best}
+                index={getLastI(i)}
+              />
+              <button className={`prev-button ${styles['prev-button']}`} style={getPrevBtnStyles(i)}>
+                <img
+                  src={images.buttons.arrowRight}
+                  style={{ rotate: '180deg' }}
+                />
+              </button>
+              <button className={`next-button ${styles['next-button']}`} style={getNextBtnStyles(i)}>
+                <img src={images.buttons.arrowRight} />
+              </button>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
+    </>
   );
 };
 

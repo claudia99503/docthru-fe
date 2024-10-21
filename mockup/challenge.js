@@ -500,6 +500,17 @@ export const participantsList = {
       "lastModifiedAt": "2024-09-19T04:35:44.678Z",
       "likeCount": 31,
       "isLiked": false
+    },
+    {
+      "id": 26,
+      "userId": 26,
+      "nickname": "테스트26",
+      "grade": "NORMAL",
+      "challengeId": 3,
+      "content": "MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.",
+      "lastModifiedAt": "2024-08-19T04:35:44.678Z",
+      "likeCount": 31,
+      "isLiked": true
     }
   ],
   "list": [
@@ -784,9 +795,9 @@ export const participantsList = {
       "nickname": "테스트26",
       "grade": "NORMAL",
       "challengeId": 3,
-      "content": "MODERNJS와 관련된 최신 기술 문서를 번역했습니다.",
-      "lastModifiedAt": "2024-11-27T13:44:12.789Z",
-      "likeCount": 11,
+      "content": "MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.MODERNJS와 관련된 최신 기술 문서를 번역했습니다.",
+      "lastModifiedAt": "2024-08-19T04:35:44.678Z",
+      "likeCount": 31,
       "isLiked": true
     },
     {

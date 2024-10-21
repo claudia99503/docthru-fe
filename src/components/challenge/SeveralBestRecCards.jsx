@@ -1,23 +1,32 @@
 import { useState } from 'react';
 
-import styles from './AllBestRecCards.module.css';
-import images from '@/variables/images';
-import { formatDateTime } from '@/utils/utilFunction';
 import LikeButton from '../common/LikeButton';
 import { Profile } from '../common/Profile';
+import { formatDateTime } from '@/utils/utilFunction';
 
-const AllBestRecCards = ({ list }) => {
+import styles from './SeveralBestRecCards.module.css';
+import images from '@/variables/images';
+
+const SeveralBestRecCards = ({ list, index }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  // console.log(list);
+  console.log(index);
   // const { list = [], meta = {} } = challengeList || {};
-  const lastModifiedAt = list.lastModifiedAt
+  const lastModifiedAt = list.lastModifiedAt;
+
+  const getWidth = () => {
+    return index == 'notLast' ? {width:'826px'} : {width:'890px'}
+  }
 
   return (
-    <>
-      <div className={styles.AllBestRecCards}>
+    <div className={styles.SeveralBestRecCards} style={getWidth()}>
+      <div className={styles['SeveralBestRecCards-badge']}>
+        <img src={images.icons.medal} alt="bestRecWork-badge icon" />
+        <span>최다 추천 번역</span>
+      </div>
+      <div className={styles['content-top']}>
         <div className={styles['user-info']}>
-          <Profile user={list} type='simple2' /> 
-          <LikeButton data = {list} />
+          <Profile user={list} type="simple2" />
+          <LikeButton data={list} />
         </div>
         <span>{formatDateTime(lastModifiedAt)}</span>
       </div>
@@ -44,8 +53,8 @@ const AllBestRecCards = ({ list }) => {
           </button>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
-export default AllBestRecCards;
+export default SeveralBestRecCards;
