@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-// import { useGetChallenges } from '@/service/queries/challenge';
-import { challengeList } from '../../mockup/challenge'
+import { useGetChallenges } from '@/service/queries/challenge';
+import { challengeList } from '../../mockup/challenge';
 
 import Head from 'next/head';
 import ChallengeSearchBarLarge from '../components/common/ChallengeSearchBarLarge';
@@ -50,7 +50,6 @@ export default function Home() {
   // 현재 페이지의 데이터만 추출
   const currentList =
   list?.slice((currentPage - 1) * limit, currentPage * limit);
-  // console.log('currentList', currentList)
 
   return (
     <>

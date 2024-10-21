@@ -22,8 +22,18 @@ export async function deleteWork(id) {
   return res.data;
 }
 
-export async function getWorkFeedbacks(id) {
-  const res = await axios.delete(`${PATH}/${id}/feedbacks`);
+export async function getWorkFeedbacks(
+  id,
+  { cursorId = null, limit = 3 } = {}
+) {
+  const res = await axios.get(`${PATH}/${id}/feedbacks`, {
+    params: { cursorId, limit },
+  });
+  return res.data;
+}
+
+export async function createWorkFeedback(id, data) {
+  const res = await axios.post(`${PATH}/${id}/feedbacks`, data);
   return res.data;
 }
 

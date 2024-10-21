@@ -22,12 +22,9 @@ const InfoContainer = ({ deadline, maxParticipants }) => {
         alt="person icon"
         className={styles.icon}
       />
-      <span className={styles.text}>
-        {maxParticipants}
-      </span>
+      <span className={styles.text}>{maxParticipants}</span>
     </div>
   );
 };
 
 export default InfoContainer;
-

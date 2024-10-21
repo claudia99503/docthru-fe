@@ -30,7 +30,12 @@ const ChallengeDropdown = ({ onOptionChange }) => {
         <ul className={styles['dropdown-list']}>
           <div className={styles['dropdown-out']}>
             <span>필터</span>
-            <img src={images.icons.out} alt="out" onClick={toggleDropdown} style={{cursor:'pointer'}}/>
+            <img
+              src={images.icons.out}
+              alt="out"
+              onClick={toggleDropdown}
+              style={{ cursor: 'pointer' }}
+            />
           </div>
           {[
             'Next.js',

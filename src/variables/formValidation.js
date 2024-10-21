@@ -34,3 +34,10 @@ export const AUTH = {
     ...minMaxLength(8, 14),
   },
 };
+
+export const FEEDBACK = {
+  CONTENT: {
+    required: '내용을 입력해 주세요',
+    ...minMaxLength(1, 500),
+  },
+};

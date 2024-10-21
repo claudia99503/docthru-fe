@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { getWorkList, getWork, getWorkFeedbacks } from '@/service/api/work';
 import { workKey } from '@/variables/queryKeys';
 
@@ -12,16 +12,24 @@ export function useGetWorkList(id) {
 
 export function useGetWork(id) {
   return useQuery({
-    queryKey: workKey.detail(),
+    queryKey: workKey.detail(id),
     queryFn: () => getWork(id),
     enabled: !!id,
   });
 }
 
 export function useGeWorkFeedbacks(id) {
-  return useQuery({
-    queryKey: workKey.feedbacks(),
-    queryFn: () => getWorkFeedbacks(id),
+  return useInfiniteQuery({
+    queryKey: workKey.feedbacks(id),
+    queryFn: ({ pageParam = null }) =>
+      getWorkFeedbacks(id, { cursorId: pageParam }),
+    getNextPageParam: (lastPage) => {
+      if (!lastPage.meta.hasNext) {
+        return undefined;
+      }
+      return lastPage.meta.nextCursor;
+    },
+    keepPreviousData: true,
     enabled: !!id,
   });
 }

@@ -27,7 +27,7 @@ const Card = ({ data, site }) => {
           <img src={images.icons.arrowMainRight} alt="arrow icon" />
         </button>
       );
-    } else if(site == 'done'){
+    } else if (site == 'done') {
       return (
         <button
           className={`${styles.challengeButton} ${
@@ -40,7 +40,7 @@ const Card = ({ data, site }) => {
           <img src={images.icons.document} alt="document icon" />
         </button>
       );
-    } 
+    }
   };
 
   const getCondition = () => {

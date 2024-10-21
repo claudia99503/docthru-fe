@@ -57,7 +57,7 @@ export function useModalAction() {
   };
 }
 
-export const useModal = () => {
+export const useAlertModal = () => {
   const { modalRef, onModalOpen, onModalClose, isModalOpen, modalMsg } =
     useModalAction();
 

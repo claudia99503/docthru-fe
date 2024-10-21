@@ -1,5 +1,6 @@
 .Input,
-.PasswordInput {
+.PasswordInput,
+.TextArea {
   display: flex;
   width: 100%;
   flex-direction: column;

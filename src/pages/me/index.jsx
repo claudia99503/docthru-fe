@@ -51,8 +51,6 @@ export default function MyChallengePage() {
     currentPage * limit
   );
 
-  console.log(currentPage);
-
   return (
     <>
       <Head>

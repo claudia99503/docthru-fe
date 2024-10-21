@@ -57,6 +57,7 @@ export function AuthHeader() {
           alt="logo"
           width={320}
           height={72}
+          priority
         />
       </Link>
     </header>

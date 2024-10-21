@@ -6,9 +6,13 @@
   margin: 0 auto;
   display: flex;
   align-self: center;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
+}
+
+.main.detail {
+  max-width: 890px;
 }
 
 @media only screen and (max-width: 1199px) {

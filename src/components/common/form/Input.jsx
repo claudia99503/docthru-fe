@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import styles from './inputField.module.css';
+import styles from './inputFields.module.css';
 
 export default function Input({
   name,
@@ -7,6 +7,7 @@ export default function Input({
   placeholder = '입력해 주세요',
   validations = {},
   type = 'text',
+  className = '',
 }) {
   const {
     register,
@@ -26,7 +27,7 @@ export default function Input({
         </label>
       )}
       <input
-        className={addError}
+        className={`${addError} ${className}`}
         {...register(name, {
           ...validations,
           onBlur: () => trigger(name),
