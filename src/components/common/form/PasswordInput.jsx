@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import styles from './inputField.module.css';
+import styles from './inputFields.module.css';
 import assets from '@/variables/images';
 import { useFormContext } from 'react-hook-form';
 

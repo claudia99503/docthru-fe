@@ -1,17 +1,16 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { work, feedbacks } from '../../../mockup/work';
 import WorkDetail from '@/components/work/WorkDetail';
-import { useGetWork, useGeWorkFeedbacks } from '@/service/queries/work';
+import { useGetWork } from '@/service/queries/work';
 import Loader from '@/components/common/Loader';
+import FeedbackForm from '@/components/feedback/FeedbackForm';
+import FeedbackList from '@/components/feedback/FeedbackList';
 
 export default function WorkDetailPage() {
   const router = useRouter();
   const { id } = router.query;
 
   const { data, isPending } = useGetWork(id);
-
-  // const {data} = useGeWorkFeedbacks();
 
   if (isPending) {
     return <Loader />;
@@ -27,6 +26,12 @@ export default function WorkDetailPage() {
         />
       </Head>
       <WorkDetail data={data} />
+      <FeedbackForm />
+      <FeedbackList id={id} />
     </>
   );
 }
+
+WorkDetailPage.getLayout = function getLayout(page) {
+  return <Layout className={styles.narrower}>{page}</Layout>;
+};

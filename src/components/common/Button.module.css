@@ -1,0 +1,23 @@
+.button-black {
+  background-color: var(--brand-black);
+  color: var(--brand-white);
+}
+
+.button-black:hover {
+  background-color: var(--brand-yellow);
+  border: 1px solid var(--brand-black);
+  color: var(--brand-black);
+}
+
+.button-black:active {
+  background-color: var(--grey-800);
+}
+.button-yellow {
+  background-color: var(--brand-yellow);
+  color: var(--brand-white);
+}
+
+.button:disabled {
+  background-color: (--grey-800);
+  cursor: not-allowed;
+}

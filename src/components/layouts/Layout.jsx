@@ -5,15 +5,17 @@ import { useCallback, useEffect } from 'react';
 import Loader from '../common/Loader';
 import { useAuth } from '@/hooks/useAuth';
 import { PUBLIC_ROUTES, AUTH_ROUTES } from '@/variables/variables';
-import { useModal } from '@/hooks/useModal';
+import { useAlertModal } from '@/hooks/useModal';
 
-export default function Layout({ children }) {
+export default function Layout({ children, className = '' }) {
   const router = useRouter();
 
   const isPublicRoute = PUBLIC_ROUTES.includes(router.pathname);
   const isAuthPage = AUTH_ROUTES.includes(router.pathname);
   const isAdminRoute = router.pathname.startsWith('/admin');
   const isAuthRoute = router.pathname.startsWith('/auth');
+
+  const isDetailPage = /\[.*\]/.test(router.pathname);
 
   const { user, isLoading } = useAuth(!isPublicRoute);
 
@@ -54,7 +56,9 @@ export default function Layout({ children }) {
       ) : (
         <MemberHeader user={user} />
       )}
-      <main className={styles.main}>{children}</main>
+      <main className={`${styles.main} ${isDetailPage && styles.detail}`}>
+        {children}
+      </main>
     </>
   );
 }

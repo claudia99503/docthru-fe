@@ -3,6 +3,7 @@ import DocTypeChip from '@/components/common/DocTypeChip';
 import { Profile } from '@/components/common/Profile';
 import LikeButton from '@/components/common/LikeButton';
 import KebabMenu from '@/components/common/KebabMenu';
+import { formatDate } from '@/utils/utilFunction';
 
 export default function WorkDetail({ data }) {
   if (!data) {
@@ -18,9 +19,12 @@ export default function WorkDetail({ data }) {
         <KebabMenu />
       </div>
       <DocTypeChip field={challenge.field} docType={challenge.docType} />
-      <div className={styles['user-info']}>
-        <Profile user={rest} type="simple" />
-        <LikeButton data={data} isButton={true} />
+      <div className={styles.info}>
+        <div className={styles['user-info']}>
+          <Profile user={rest} type="simple" />
+          <LikeButton data={data} isButton={true} />
+        </div>
+        <time className={styles.time}>{formatDate(data.createdAt)}</time>
       </div>
       <p className={styles.content}>{data.content}</p>
     </section>

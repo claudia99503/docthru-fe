@@ -10,8 +10,11 @@ import '@/styles/globals.css';
 import React from 'react';
 import Layout from '@/components/layouts/Layout';
 import Head from 'next/head';
+import { useAlertModal } from '@/hooks/useModal';
 
 export default function App({ Component, pageProps }) {
+  const { Modal, onModalOpen } = useAlertModal();
+
   const [queryClient] = React.useState(
     () =>
       new QueryClient({
@@ -27,6 +30,7 @@ export default function App({ Component, pageProps }) {
         mutationCache: new MutationCache({
           onError: (error) => {
             console.error('Mutation Error', error.message || 'Unknown Error');
+            onModalOpen({ msg: error.message });
           },
         }),
       })
@@ -43,6 +47,7 @@ export default function App({ Component, pageProps }) {
             <Layout>
               <Component {...pageProps} />
             </Layout>
+            <Modal />
           </AuthProvider>
         </HydrationBoundary>
         <ReactQueryDevtools initialIsOpen={false} />

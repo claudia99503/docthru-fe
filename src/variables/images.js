@@ -5,6 +5,7 @@ const assets = {
     alignRight: '/assets/icons/ic_align_right.svg',
     arrowDown: '/assets/icons/ic_arrow_down.svg',
     arrowDownCircle: '/assets/icons/ic_arrow_down_circle.svg',
+    arrowDownSubmit: '/assets/icons/ic_arrow_down_submit.svg',
     arrowLeft: '/assets/icons/ic_arrow_left.svg',
     arrowMainRight: '/assets/icons/ic_arrow_main_right.svg',
     arrowRight: '/assets/icons/ic_arrow_right.svg',
@@ -13,9 +14,12 @@ const assets = {
     bellEmpty: '/assets/icons/ic_bell_empty.svg',
     bold: '/assets/icons/ic_bold.svg',
     bulletList: '/assets/icons/ic_bullet_list.svg',
+    calender: '/assets/icons/ic_calender.svg',
     crown: '/assets/icons/ic_crown.svg',
     deadline: '/assets/icons/ic_deadline.svg',
+    diagonal: '/assets/icons/ic_diagonal.svg',
     document: '/assets/icons/ic_document.svg',
+    down: '/assets/icons/ic_down.svg',
     eyeOff: '/assets/icons/ic_eye_off.svg',
     eyeOn: '/assets/icons/ic_eye_on.svg',
     filterBlack: '/assets/icons/ic_filter_black.svg',
@@ -50,7 +54,7 @@ const assets = {
     logo: '/assets/images/img_logo.svg',
     profileAdmin: '/assets/images/img_profile_admin.svg',
     profileMember: '/assets/images/img_profile_member.svg',
+    replyEmpty: '/assets/images/img_reply_empty.svg',
   },
 };
-
 export default assets;

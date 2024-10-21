@@ -1,8 +1,8 @@
 import { FormProvider, useForm } from 'react-hook-form';
-import styles from './form.module.css';
-import Input from './Input';
+import styles from './userForms.module.css';
+import Input from '../common/form/Input';
 import { AUTH } from '@/variables/formValidation';
-import PasswordInput from './PasswordInput';
+import PasswordInput from '../common/form/PasswordInput';
 import { useAuth } from '@/hooks/useAuth';
 import Loader from '../common/Loader';
 
@@ -17,8 +17,6 @@ export default function LoginForm() {
   } = formMethods;
 
   const handleLoginSubmit = (data) => {
-    console.log(data);
-
     login.mutate(data, {
       onSuccess: () => {
         console.log('로그인 됨');
