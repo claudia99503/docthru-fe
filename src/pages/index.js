@@ -1,55 +1,57 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { useGetChallenges } from '@/service/queries/challenge';
-import { challengeList } from '../../mockup/challenge';
 
 import Head from 'next/head';
-import ChallengeSearchBarLarge from '../components/common/ChallengeSearchBarLarge';
-import images from '../variables/images';
+import ChallengeSearchBarLarge from '@/components/common/ChallengeSearchBarLarge';
+import images from '@/variables/images';
 import Loader from '@/components/common/Loader';
 import Pagination from '@/components/application/Pagination';
 
 import AllCardSection from '@/components/challenge/AllCardSection';
-import ChallengeDropdown from '../components/challenge/ChallengeDropdown';
+import ChallengeDropdown from '@/components/challenge/ChallengeDropdown';
 
-import styles from '../styles/pages/Home.module.css';
+import styles from '@/styles/pages/Home.module.css';
 
-import { keepPreviousData } from '@tanstack/react-query';
+import { dehydrate, QueryClient } from '@tanstack/react-query';
+import { getChallengeList } from '@/service/api/challenge';
 
-export default function Home() {
+export default function Home(initialData) {
   const router = useRouter();
   const [limit, setLimit] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-
   const [selectedOption, setSelectedOption] = useState({
     field: '',
     docType: '',
     status: '',
   });
-  // const { data, isPending } = useGetChallenges(selectedOption, {
-  //   enabled: true,
-  // });
-  // const { meta = {}, list = [] } = data || {};
-  const { meta = {}, list = [] } = challengeList || {};
-  const { totalPages, currentPage : page } = meta;
-  const [currentPage, setCurrentPage] = useState(page);
 
+  const { data = initialData, isPending } = useGetChallenges(selectedOption, {
+    enabled: true,
+  });
+  const { meta = {}, list = [] } = data || {};
+  const totalPages = meta.totalPages
 
-  // if (isPending) {
-  //   return <Loader />;
-  // }
-
-  // console.log('list', list)
-  // console.log('meta', meta)
-  
   const handleOptionChange = (option) => {
-    setSelectedOption((pev) => ({ ...pev, option }));
+    setSelectedOption((pev) => ({ ...pev, ...option }));
   };
-  
-  // 현재 페이지의 데이터만 추출
-  const currentList =
-  list?.slice((currentPage - 1) * limit, currentPage * limit);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedOption.field, selectedOption.docType, selectedOption.status]);
+
+  useEffect(() => {
+    const option = {
+      search: searchTerm,
+      page: currentPage
+    }
+
+    handleOptionChange(option)
+  }, [currentPage, searchTerm]);
+
+  console.log('list', list)
 
   return (
     <>
@@ -78,19 +80,48 @@ export default function Home() {
           setSearchTerm={setSearchTerm}
         />
       </div>
-      <div>
-        <AllCardSection
-          list={currentList}
-          searchTerm={searchTerm}
-          selectedOption={selectedOption}
-          site={'home'}
-        />
-      </div>
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages} // 계산된 totalPages 사용
-        onPageChange={setCurrentPage}
-      />
+      {isPending ? (
+        <Loader />
+      ) : (
+        <>
+          <div>
+            <AllCardSection
+              list={list}
+              searchTerm={searchTerm}
+              selectedOption={selectedOption}
+              site={'home'}
+            />
+          </div>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages} // 계산된 totalPages 사용
+            onPageChange={setCurrentPage}
+          />
+        </>
+      )}
     </>
   );
 }
+
+// 서버 사이드 렌더링에서 데이터 가져오기
+// export async function getServerSideProps(context) {
+//   const queryClient = new QueryClient();
+
+//   const initialOptions = {
+//     field: '',
+//     docType: '',
+//     status: '',
+//     page: 1,
+//     limit: 5,
+//   };
+
+//   await queryClient.prefetchQuery(['challenges', initialOptions], () =>
+//     getChallengeList(initialOptions)
+//   );
+
+//   return {
+//     props: {
+//       dehydratedState: dehydrate(queryClient),
+//     },
+//   };
+// }
