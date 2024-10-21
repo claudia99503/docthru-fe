@@ -42,7 +42,9 @@
 }
 
 .button:disabled {
-  background-color: (--grey-800);
+  background-color: var(--grey-300);
+  color: var(--grey-50);
+  border: none;
   cursor: not-allowed;
 }
 

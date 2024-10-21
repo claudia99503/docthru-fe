@@ -29,11 +29,6 @@ export default function WorkDetailPage() {
       <WorkDetail data={data} />
       <FeedbackForm />
       <FeedbackList id={id} />
-
-      <Button variant="black">블랙 </Button>
-      <Button variant="yellow">옐로우 </Button>
-      <Button variant="yellow-border">옐로우보더 </Button>
-      <Button variant="white-border">화이트보더 </Button>
     </>
   );
 }
