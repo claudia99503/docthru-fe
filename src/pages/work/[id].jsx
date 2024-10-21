@@ -5,6 +5,7 @@ import { useGetWork } from '@/service/queries/work';
 import Loader from '@/components/common/Loader';
 import FeedbackForm from '@/components/feedback/FeedbackForm';
 import FeedbackList from '@/components/feedback/FeedbackList';
+import Button from '@/components/common/Button';
 
 export default function WorkDetailPage() {
   const router = useRouter();
@@ -28,10 +29,11 @@ export default function WorkDetailPage() {
       <WorkDetail data={data} />
       <FeedbackForm />
       <FeedbackList id={id} />
+
+      <Button variant="black">블랙 </Button>
+      <Button variant="yellow">옐로우 </Button>
+      <Button variant="yellow-border">옐로우보더 </Button>
+      <Button variant="white-border">화이트보더 </Button>
     </>
   );
 }
-
-WorkDetailPage.getLayout = function getLayout(page) {
-  return <Layout className={styles.narrower}>{page}</Layout>;
-};
