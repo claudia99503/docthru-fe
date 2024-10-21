@@ -9,7 +9,8 @@
     "build": "next build",
     "lint": "next lint",
     "image": "nodemon src/utils/generateImgSrc.js",
-    "sprite": "nodemon src/utils/generateSprite.js"
+    "sprite": "nodemon src/utils/generateSprite.js",
+    "server": "node server.js"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.55.2",
