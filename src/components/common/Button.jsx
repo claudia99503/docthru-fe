@@ -3,11 +3,17 @@ import cn from '@/utils/clsx';
 
 export default function Button({
   children,
-  variant = 'primary',
+  variant = 'black',
   disabled = false,
   onClick,
   type = 'button',
   className = '',
+  borderRadius = '12px',
+  width = '',
+  height = '',
+  padding = '',
+  fontSize = '16px',
+  fontWeight = '600',
 }) {
   return (
     <button
@@ -19,6 +25,7 @@ export default function Button({
       onClick={onClick}
       disabled={disabled}
       type={type}
+      style={{ borderRadius, width, height, padding, fontSize, fontWeight }}
     >
       {children}
     </button>
