@@ -1,19 +1,23 @@
 .button-black {
   background-color: var(--brand-black);
+  border: 2px solid var(--brand-black);
   color: var(--brand-white);
 }
 
 .button-black:hover {
   background-color: var(--brand-yellow);
+  border: 2px solid var(--brand-yellow);
   color: var(--brand-black);
 }
 
 .button-yellow {
   background-color: var(--brand-yellow);
+  border: 2px solid var(--brand-yellow);
   color: var(--brand-black);
 }
 .button-yellow:hover {
   background-color: var(--brand-black);
+  border: 2px solid var(--brand-black);
   color: var(--brand-yellow);
 }
 
@@ -39,6 +43,16 @@
   background-color: #fff;
   border: 2px solid var(--brand-yellow);
   color: var(--brand-yellow);
+}
+
+.button-cancel {
+  background-color: #ffe7e7;
+  border: 2px solid #ffe7e7;
+  color: #f24744;
+}
+
+.button-cancel:hover {
+  border: 2px solid #f24744;
 }
 
 .button:disabled {
