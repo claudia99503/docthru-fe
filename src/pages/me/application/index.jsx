@@ -49,7 +49,7 @@ export default function MyApplicationPage() {
     setSelectedOption(option);
     setCurrentPage(1);
   };
-
+린
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
