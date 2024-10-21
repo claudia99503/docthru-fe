@@ -36,10 +36,20 @@ export async function updateChallenge(id, data) {
   return res.data;
 }
 
-/** /:id DELETE - 상세 챌린지 삭제 - 어드민 */
+
+/** /:id DELETE - 챌린지 취소 - 챌린지 신청한 유저 */
 export async function deleteChallenges(id) {
-  const res = await axios.delete(`${PATH}/${id}`);
-  return res.data;
+  try {
+    const res = await axios.delete(`/challenges/${id}/cancel`);
+    return res.data;
+  } catch (error) {
+    // 에러 처리
+    if (error.response) {
+      throw new Error(error.response.data.message || '삭제 요청 실패');
+    } else {
+      throw new Error('서버와의 통신 중 오류 발생');
+    }
+  }
 }
 
 /** /:id/participation POST - 번역 챌린지 참여 */
@@ -53,3 +63,10 @@ export async function getChallengeOriginal(id) {
   const res = await axios.get(`${PATH}/${id}/original`);
   return res.data;
 }
+
+/** POST - 챌린지 및 어플리케이션 생성 */
+export async function createChallengeApplication(data) {
+  const res = await axios.post(`${PATH}/application`, data);
+  return res.data;
+}
+

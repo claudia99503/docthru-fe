@@ -1,35 +1,44 @@
-import axios from './axios';
+import axios from "./axios";
 
-const PATH = '/users/me/challenges';
+const PATH = "/users/me/challenges";
 
 /** /challenges/ongoing GET - 진행중인 챌린지 조회 */
 export async function getOnGoingChallenge(params) {
-  const res = await axios.get(`${PATH}/ongoing`, {params});
+  const res = await axios.get(`${PATH}/ongoing`, { params });
   return res.data;
-};
+}
 
 /** /challenges/completed GET - 완료된 챌린지 조회 */
-export async function getCompletedChallenge( params) {
-  const res = await axios.get(`${PATH}/completed`, {params});
+export async function getCompletedChallenge(params) {
+  const res = await axios.get(`${PATH}/completed`, { params });
   return res.data;
-};
+}
 
 // *****구분선***** //
 
-// 내가 신청한 챌린지 목록 조회
-export async function getMyApplications(params) {
-  const res = await axios.get(`${PATH}`, { params });
-  return res.data;
-}
+// 내가 신청한 챌린지 조회
+export const getChallengeApplications = async ({
+  status, // 신청 상태: WAITING | ACCEPTED | REJECTED
+  sortBy = "appliedAt", // 기본 정렬 기준: 신청 날짜 (appliedAt)
+  sortOrder = "desc", // 최신 항목이 위로 오도록 내림차순 정렬 (desc)
+  search = "",
+  page = 1,
+  limit = 10,
+} = {}) => {
+  try {
+    const params = {
+      status,
+      sortBy,
+      sortOrder,
+      search,
+      page,
+      limit,
+    };
 
-// 내가 신청한 특정 챌린지 상세 조회
-export async function getMyApplicationById(applicationId) {
-  const res = await axios.get(`${PATH}/${applicationId}`);
-  return res.data;
-}
+    const response = await axios.get(`${PATH}/applications`, { params });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
-// 내가 신청한 챌린지 취소
-export async function cancelApplication(applicationId) {
-  const res = await axios.put(`${PATH}/${applicationId}/cancel`);
-  return res.data;
-}
