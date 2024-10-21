@@ -2,14 +2,13 @@ import { useState } from 'react';
 
 import { Profile } from '../common/Profile';
 import LikeButton from '../common/LikeButton';
-import Image from 'next/image';
 
 import styles from './ParticipationStatus.module.css';
 import images from '@/variables/images';
 
 const ParticipationStatus = ({ list }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  
+
   const bestList = list?.bestList;
   const userList = list?.list;
   const pageList = list?.meta;
@@ -44,7 +43,6 @@ const ParticipationStatus = ({ list }) => {
     return rank < 10 ? '0' + rank : rank;
   };
 
-
   return (
     <>
       {filteredData.length > 0 ? (
@@ -60,13 +58,13 @@ const ParticipationStatus = ({ list }) => {
                   onClick={() => handlePageChange('prev')}
                   disabled={currentPage === 1}
                 >
-                  <img src={images.icons.arrowLeft} />
+                  <img src={images.icons.arrowLeft} alt="arrowLeft icon" />
                 </button>
                 <button
                   onClick={() => handlePageChange('next')}
                   disabled={currentPage === totalPages}
                 >
-                  <img src={images.icons.arrowRight} />
+                  <img src={images.icons.arrowRight} alt='arrowRight icon'/>
                 </button>
               </>
             </div>

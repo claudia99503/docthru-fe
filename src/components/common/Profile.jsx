@@ -22,10 +22,6 @@ export function Profile({ user, size, type, date }) {
   const isTypeNotSimple = type + '';
   const isSmall = size === 'small';
 
-  if (isTypeNotSimple) {
-    console.log(type + '');
-  }
-
   if (isTypeNotSimple.includes('simple')) {
     return (
       <div className={styles.simple}>
