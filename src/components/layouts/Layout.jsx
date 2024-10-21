@@ -15,7 +15,7 @@ export default function Layout({ children, className = '' }) {
   const isAdminRoute = router.pathname.startsWith('/admin');
   const isAuthRoute = router.pathname.startsWith('/auth');
 
-  const isDetailPage = /\[.*\]/.test(router.pathname);
+  const isNarrowerPage = /\[.*\]|\/new/.test(router.pathname);
 
   const { user, isLoading } = useAuth(!isPublicRoute);
 
@@ -56,7 +56,7 @@ export default function Layout({ children, className = '' }) {
       ) : (
         <MemberHeader user={user} />
       )}
-      <main className={`${styles.main} ${isDetailPage && styles.detail}`}>
+      <main className={`${styles.main} ${isNarrowerPage && styles.detail}`}>
         {children}
       </main>
     </>

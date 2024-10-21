@@ -7,6 +7,7 @@ export default function Svg({
   type = 'icon',
   isActive = false,
   className,
+  addName = '',
 }) {
   const calculatedHeight = height || width;
 
@@ -16,9 +17,18 @@ export default function Svg({
     <svg
       width={width}
       height={calculatedHeight}
-      className={cn(name, type, className, { active: isActive })}
+      className={cn(className, { active: isActive })}
     >
-      <use href={`/assets/${type}s_sprite.svg/#${prefix}_${name}`} />
+      <use
+        href={`/assets/${type}s_sprite.svg/#${prefix}_${name}`}
+        className={cn(name)}
+      />
+      {addName && (
+        <use
+          href={`/assets/${type}s_sprite.svg/#${prefix}_${addName}`}
+          className={cn(addName)}
+        />
+      )}
     </svg>
   );
 }

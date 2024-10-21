@@ -15,12 +15,27 @@
 }
 
 .submitButton {
-  background-color: var(--brand-black);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  color: var(--brand-yellow);
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.submitButton :global(.circle) {
+  width: 40px;
+  height: 40px;
+  fill: var(--brand-black);
+}
+
+.submitButton :global(.arrowDown) {
+  color: var(--brand-yellow);
+  transform: scale(0.6);
+  transform-origin: center;
+}
+
+.submitButton:disabled :global(.circle) {
+  fill: var(--grey-300);
+}
+
+.submitButton:disabled :global(.arrowDown) {
+  color: var(--grey-50);
 }
