@@ -9,6 +9,10 @@
   align-self: flex-start;
 }
 
+.no-form {
+  max-width: 100%;
+}
+
 .loadMoreButton {
   background-color: var(--grey-100);
   color: var(--grey-500);

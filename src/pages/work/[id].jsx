@@ -29,7 +29,7 @@ export default function WorkDetailPage() {
       <WorkDetail data={data} />
       {isClosed || <FeedbackForm id={id} />}
 
-      <FeedbackList id={id} />
+      <FeedbackList id={id} isClosedChallenge={isClosed} />
     </>
   );
 }
