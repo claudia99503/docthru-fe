@@ -14,12 +14,7 @@ const assets = {
     bold: '/assets/icons/ic_bold.svg',
     bulletList: '/assets/icons/ic_bullet_list.svg',
     calender: '/assets/icons/ic_calender.svg',
-<<<<<<< HEAD
-    checkboxIn: '/assets/icons/ic_checkbox_in.svg',
-    checkboxOut: '/assets/icons/ic_checkbox_out.svg',
-=======
     check: '/assets/icons/ic_check.svg',
->>>>>>> 28768b6 (:sparkles: [Feat] TwoBtnModal 컴포넌트 추가 두개 버튼 모달)
     circle: '/assets/icons/ic_circle.svg',
     crown: '/assets/icons/ic_crown.svg',
     deadline: '/assets/icons/ic_deadline.svg',
@@ -48,16 +43,11 @@ const assets = {
     person: '/assets/icons/ic_person.svg',
     personWhite: '/assets/icons/ic_person_white.svg',
     plus: '/assets/icons/ic_plus.svg',
-    radioIn: '/assets/icons/ic_radio_in.svg',
-    radioOut: '/assets/icons/ic_radio_out.svg',
     search: '/assets/icons/ic_search.svg',
     secondRank: '/assets/icons/ic_second_rank.svg',
     thirdRank: '/assets/icons/ic_third_rank.svg',
     toggleDown: '/assets/icons/ic_toggle_down.svg',
     toggleUp: '/assets/icons/ic_toggle_up.svg',
-    up: '/assets/icons/ic_up.svg',
-    down: '/assets/icons/ic_down.svg',
-    calender: '/assets/icons/ic_calender.svg'
   },
   images: {
     black: '/assets/images/img_black.svg',

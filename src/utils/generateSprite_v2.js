@@ -35,25 +35,57 @@ const createIdName = (str) => {
   return `${prefix}_${toCamelCase}`;
 };
 
-// icons 폴더의 SVG 파일 처리 (fill, stroke 속성을 모두 currentColor로 변경)
+// 아이콘 SVG 파일 처리 함수 (fill="none"을 제거하고, fill/stroke 속성을 CSS 변수로 변경)
 const processIconsSvgFile = (filePath) => {
   let svgContent = fs.readFileSync(filePath, 'utf8');
 
-  // 모든 fill과 stroke를 currentColor로 변경
-  svgContent = svgContent.replace(
-    /\sfill\s*=\s*['"][^'"]+['"]/gi,
-    ' fill="currentColor"'
-  );
-  svgContent = svgContent.replace(
-    /\sstroke\s*=\s*['"][^'"]+['"]/gi,
-    ' stroke="currentColor"'
-  );
+  // symbol 내의 fill="none" 제거
+  svgContent = svgContent.replace(/\sfill="none"/gi, '');
 
-  // <svg> 태그의 fill 속성만 제거
-  svgContent = svgContent.replace(
-    /(<svg[^>]+)\sfill\s*=\s*['"][^'"]+['"]/gi,
-    '$1'
-  );
+  // 각 SVG 태그에 대해 fill과 stroke를 CSS 변수로 변경
+  const svgElements = [
+    'path',
+    'circle',
+    'rect',
+    'polygon',
+    'ellipse',
+    'line',
+    'polyline',
+  ];
+
+  svgElements.forEach((tag) => {
+    const regex = new RegExp(`<${tag}([^>]*)\/>`, 'gi'); // self-closing 태그를 처리하는 정규식
+    svgContent = svgContent.replace(regex, (match, attributes) => {
+      // fill과 stroke 속성을 추출
+      const fillMatch = attributes.match(/\sfill\s*=\s*['"]([^'"]+)['"]/);
+      const strokeMatch = attributes.match(/\sstroke\s*=\s*['"]([^'"]+)['"]/);
+
+      // 각각의 속성 값을 유지하고 변수로 설정
+      const originalFill = fillMatch ? fillMatch[1] : null;
+      const originalStroke = strokeMatch ? strokeMatch[1] : null;
+
+      // 기존의 fill과 stroke 속성을 제거
+      attributes = attributes.replace(/\sfill\s*=\s*['"][^'"]+['"]/gi, '');
+      attributes = attributes.replace(/\sstroke\s*=\s*['"][^'"]+['"]/gi, '');
+
+      // 필요한 속성만 추가 (self-closing 태그를 올바르게 닫음)
+      if (originalFill && originalStroke) {
+        // 여기서 태그 속성 추가 시, 슬래시 전에 fill과 stroke를 추가합니다.
+        return `<${tag} ${attributes.trim()} fill="var(--${tag}-fill, ${originalFill})" stroke="var(--${tag}-stroke, ${originalStroke})" />`;
+      }
+
+      if (originalFill) {
+        return `<${tag} ${attributes.trim()} fill="var(--${tag}-fill, ${originalFill})" />`;
+      }
+
+      if (originalStroke) {
+        return `<${tag} ${attributes.trim()} stroke="var(--${tag}-stroke, ${originalStroke})" />`;
+      }
+
+      // 아무 속성도 없으면 self-closing 태그로 반환
+      return `<${tag} ${attributes.trim()} />`;
+    });
+  });
 
   // height와 width 제거
   svgContent = removeDimensions(svgContent);
@@ -72,7 +104,7 @@ const processImagesSvgFile = (filePath) => {
 };
 
 // 폴더에서 SVG 파일을 읽고 스프라이트 파일 생성
-const generateSprite = (folderPath, outputFileName, processSvgFile, prefix) => {
+const generateSprite = (folderPath, outputFileName, processSvgFile) => {
   const svgFiles = fs
     .readdirSync(folderPath)
     .filter((file) => path.extname(file) === '.svg');
@@ -103,8 +135,8 @@ const generateSprite = (folderPath, outputFileName, processSvgFile, prefix) => {
   console.log(`SVG sprite generated at ${outputFilePath}`);
 };
 
-// icons 스프라이트 생성 (assets/icons_sprite.svg) - 모든 fill, stroke을 currentColor로 변경하고, height와 width 제거
-generateSprite(iconsPath, 'icons_sprite.svg', processIconsSvgFile, 'ic');
+// icons 스프라이트 생성 (assets/icons_sprite.svg) - fill, stroke 속성을 유지하고 CSS 변수로 변경
+generateSprite(iconsPath, 'icons_sprite.svg', processIconsSvgFile);
 
 // images 스프라이트 생성 (assets/images_sprite.svg) - fill과 stroke는 그대로 두고, height와 width만 제거
-generateSprite(imagesPath, 'images_sprite.svg', processImagesSvgFile, 'img');
+generateSprite(imagesPath, 'images_sprite.svg', processImagesSvgFile);
