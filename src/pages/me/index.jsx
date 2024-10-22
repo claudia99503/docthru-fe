@@ -16,10 +16,14 @@ export default function MyChallengePage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(5);
-  const [params, setParams] = useState();
+  const [params, setParams] = useState(
+    {
+      limit : 5
+    }
+  );
 
-  const { data, isPending } = useGetOnGoingChallenge();
-  const { challenges : list = [], meta = {} } = data || {};
+  const { data, isPending } = useGetOnGoingChallenge(params);
+  const { list = [], meta = {} } = data || {};
   const { totalPages } = meta;
 
   // console.log('data', data)
@@ -30,27 +34,27 @@ export default function MyChallengePage() {
     return <Loader />;
   }
 
-  const filteredData = list?.filter((item) => {
-    const today = new Date();
-    const deadline = new Date(item.deadline);
+  // const filteredData = list?.filter((item) => {
+  //   const today = new Date();
+  //   const deadline = new Date(item.deadline);
 
-    if (
-      searchTerm &&
-      !item.title.toLowerCase().includes(searchTerm.toLowerCase())
-    ) {
-      return false;
-    }
+  //   if (
+  //     searchTerm &&
+  //     !item.title.toLowerCase().includes(searchTerm.toLowerCase())
+  //   ) {
+  //     return false;
+  //   }
 
-    if (deadline > today) {
-      return item;
-    }
-  });
+  //   if (deadline > today) {
+  //     return item;
+  //   }
+  // });
 
   // 현재 페이지의 데이터만 추출
-  const currentList = filteredData?.slice(
-    (currentPage - 1) * limit,
-    currentPage * limit
-  );
+  // const currentList = list?.slice(
+  //   (currentPage - 1) * limit,
+  //   currentPage * limit
+  // );
 
   return (
     <>
@@ -72,9 +76,9 @@ export default function MyChallengePage() {
           />
         </div>
         <AllCardSection
-          list={currentList}
+          list={list}
           searchTerm={searchTerm}
-          site={'home'}
+          site={'ongoing'}
         />
       </div>
       {list.length > 0 && (

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useGetChallenges } from '@/service/queries/challenge';
+import { useGetCompletedChallenge } from '@/service/queries/user';
 
 import Head from 'next/head';
 import TabNavigation from '../../../components/layouts/TabNavigation';
@@ -16,9 +16,13 @@ export default function MyFinishedChallengePage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(5);
-  const [params, setParams] = useState();
+  const [params, setParams] = useState(
+    {
+      limit : 5
+    }
+  );
 
-  const { data, isPending } = useGetChallenges(params);
+  const { data, isPending } = useGetCompletedChallenge(params);
   const { list = [], meta = {} } = data || {};
   const { totalPages } = meta;
 
@@ -30,27 +34,27 @@ export default function MyFinishedChallengePage() {
     return <Loader />;
   }
 
-  const filteredData = list.filter((item) => {
-    const today = new Date();
-    const deadline = new Date(item.deadline);
+  // const filteredData = list.filter((item) => {
+  //   const today = new Date();
+  //   const deadline = new Date(item.deadline);
 
-    if (
-      searchTerm &&
-      !item.title.toLowerCase().includes(searchTerm.toLowerCase())
-    ) {
-      return false;
-    }
+  //   if (
+  //     searchTerm &&
+  //     !item.title.toLowerCase().includes(searchTerm.toLowerCase())
+  //   ) {
+  //     return false;
+  //   }
 
-    if (deadline <= today) {
-      return item;
-    }
-  });
+  //   if (deadline <= today) {
+  //     return item;
+  //   }
+  // });
 
-  // 현재 페이지의 데이터만 추출
-  const currentList = filteredData?.slice(
-    (currentPage - 1) * limit,
-    currentPage * limit
-  );
+  // // 현재 페이지의 데이터만 추출
+  // const currentList = filteredData?.slice(
+  //   (currentPage - 1) * limit,
+  //   currentPage * limit
+  // );
   
   return (
     <>
@@ -72,7 +76,7 @@ export default function MyFinishedChallengePage() {
           />
         </div>
         <AllCardSection
-          list={currentList}
+          list={list}
           searchTerm={searchTerm}
           site={'done'}
         />

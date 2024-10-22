@@ -19,11 +19,17 @@ const ChallengeDetailInfo = ({ list }) => {
     if(deadline <= today) {
       setProgress(false);
     }
-    
+
   // 추후 작업 기록 여부 확인으로 변경 필요 
-    if (user?.userId == 4) {
-      setType('continuation');
-    }
+    // console.log('wdata', participants);
+    // console.log('user', list.userId);
+    // const participant = participants?.filter((item) => {
+    //   console.log(item.userId)
+    //   if(item.userId == list?.userId) {
+    //     setType('beginning');
+    //   }
+    // })
+    // console.log(participant)
   // -----------------------------------------------
   };
 

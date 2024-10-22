@@ -65,7 +65,9 @@ export default function ChallengeDetailPage() {
 
   if (isChallengeLoading || isWorkLoading) {
     return <Loader />;
-  }
+  }  
+
+  // const participants = worksData?.list?.map(item => ( {userId: item.userId}))
 
   //추후 삭제 예정 - 해당 챌린지와 챌린지에 참여한 사람만 나타냄
   // const challengeData = challengeDetail;
@@ -92,7 +94,7 @@ export default function ChallengeDetailPage() {
   // ------------------------------------------------------------------
 
   // console.log('cdata', challengeData);
-  // console.log('wdata', worksData);
+
 
   // 추후 util로 분리 예정
   const getPassedDeadline = (date) => {

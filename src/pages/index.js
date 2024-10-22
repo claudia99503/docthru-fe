@@ -32,7 +32,7 @@ export default function Home(initialData) {
     enabled: true,
   });
   const { meta = {}, list = [] } = data || {};
-  const totalPages = meta.totalPages
+  const { totalPages } = meta;
 
   const handleOptionChange = (option) => {
     setSelectedOption((pev) => ({ ...pev, ...option }));

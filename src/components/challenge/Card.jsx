@@ -5,8 +5,18 @@ import KebabMenu from '../common/KebabMenu';
 import images from '../../variables/images';
 
 import styles from './Card.module.css';
+import { useEffect, useState } from 'react';
 
 const Card = ({ data, site }) => {
+  const [myData, setMyData] = useState(data)
+
+  
+  useEffect(() => {
+    if (site !== 'home' && myData?.challenge) {
+      setMyData(myData.challenge);
+    }
+  }, [site, myData]);
+
   const formatDeadline = (dateTime) => {
     const date = new Date(dateTime);
 
@@ -15,13 +25,13 @@ const Card = ({ data, site }) => {
   };
 
   const getBtn = () => {
-    if (site == 'ongoing') {
+    if (myData) {
       return (
         <button
           className={`${styles.challengeButton} ${
-            router.pathname === `/work/${data.id}` ? styles.active : ''
+            router.pathname === `/work/${myData.id}` ? styles.active : ''
           }`}
-          onClick={() => handleTabClick(`/work/${data.id}`)}
+          onClick={() => handleTabClick(`/work/edit`)}
         >
           <span>도전 계속하기</span>
           <img src={images.icons.arrowMainRight} alt="arrow icon" />
@@ -31,9 +41,9 @@ const Card = ({ data, site }) => {
       return (
         <button
           className={`${styles.challengeButton} ${
-            router.pathname === `/work/${data.id}` ? styles.active : ''
+            router.pathname === `/work/${myData.id}` ? styles.active : ''
           }`}
-          onClick={() => handleTabClick(`/work/${data.id}`)}
+          onClick={() => handleTabClick(`/work/${myData.id}`)}
           style={{ border: 'none' }}
         >
           <span>내 작업물 보기</span>
@@ -45,9 +55,9 @@ const Card = ({ data, site }) => {
 
   const getCondition = () => {
     const today = new Date();
-    const deadline = new Date(data.deadline);
+    const deadline = new Date(myData.deadline);
 
-    if (today >= deadline) {
+    if (today >= deadline || myData.progress) {
       return (
         <div
           className={styles['condition-chip']}
@@ -57,7 +67,7 @@ const Card = ({ data, site }) => {
           <span>챌린지가 마감되었어요</span>
         </div>
       );
-    } else if (data.participants === data.maxParticipants) {
+    } else if (myData.participants === myData.maxParticipants && !myData.progress) {
       return (
         <div
           className={styles['condition-chip']}
@@ -88,11 +98,11 @@ const Card = ({ data, site }) => {
         </div>
         <div
           className={styles['challenge-title']}
-          onClick={() => handleTabClick(`/${data.id}`)}
+          onClick={() => handleTabClick(`/${myData.id}`)}
         >
-          {data.title}{' '}
+          {myData.title}{' '}
         </div>
-        <DocTypeChip field={data.field} docType={data.docType} />
+        <DocTypeChip field={myData.field} docType={myData.docType} />
       </div>
       <div className={styles['card-bottom']}>
         <div className={styles['info-row']}>
@@ -102,7 +112,7 @@ const Card = ({ data, site }) => {
               alt="deadline icon"
               className={styles.icon}
             />
-            <span className={styles.text}>{formatDeadline(data.deadline)}</span>
+            <span className={styles.text}>{formatDeadline(myData.deadline)}</span>
           </div>
           <div style={{ display: 'flex' }}>
             <img
@@ -111,7 +121,7 @@ const Card = ({ data, site }) => {
               className={styles.icon}
             />
             <span className={styles.text}>
-              {data.participants}/{data.maxParticipants} 참여중
+              {myData.participants}/{myData.maxParticipants} 참여중
             </span>
           </div>
         </div>
