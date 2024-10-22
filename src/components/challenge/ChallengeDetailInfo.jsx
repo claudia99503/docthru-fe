@@ -10,7 +10,7 @@ const ChallengeDetailInfo = ({ list }) => {
   const [type, setType] = useState('beginning');
   const [progress, setProgress] = useState(true);
 
-  const user = list?.user;
+  const user = list?.writer;
 
   const getTypes = () => {
     const today = new Date();
@@ -40,7 +40,7 @@ const ChallengeDetailInfo = ({ list }) => {
             <DocTypeChip field={list.field} docType={list.docType} />
             <div className={styles.description}>{list.description}</div>
             <div className={styles['user-profile']}>
-              <Profile user={user} width="24px" type="simple" />
+              {user && <Profile user={user} width="24px" type="simple2" /> }
             </div>
           </div>
           <Container
