@@ -4,8 +4,14 @@ import styles from './UpdateFeedbackForm.module.css';
 import TextArea from '../common/form/TextArea';
 import { FEEDBACK } from '@/variables/formValidation';
 import Button from '../common/Button';
+import cn from '@/utils/clsx';
 
-export default function UpdateFeedbackForm({ onSubmit, initialData, onClick }) {
+export default function UpdateFeedbackForm({
+  onSubmit,
+  initialData,
+  onClick,
+  className,
+}) {
   const formMethods = useForm();
 
   const {
@@ -28,26 +34,14 @@ export default function UpdateFeedbackForm({ onSubmit, initialData, onClick }) {
         onSubmit={handleSubmit(onSubmit)}
         className={styles.UpdateFeedbackForm}
       >
-        <TextArea
-          name="content"
-          validations={FEEDBACK.CONTENT}
-          className={styles.textarea}
-        />
-        <div className={styles['button-container']}>
-          <Button
-            variant="cancel"
-            onClick={onClick}
-            className={styles.button}
-            borderRadius="8px"
-            fontSize="14px"
-            padding="4px 10px"
-          >
+        <div className={cn(styles['button-container'], className)}>
+          <button variant="cancel" onClick={onClick} className={styles.cancel}>
             취소
-          </Button>
+          </button>
           <Button
             disabled={!isValid}
             type="submit"
-            className={styles.button}
+            className={styles.update}
             borderRadius="8px"
             fontSize="14px"
             padding="4px 10px"
@@ -56,6 +50,11 @@ export default function UpdateFeedbackForm({ onSubmit, initialData, onClick }) {
             수정 완료
           </Button>
         </div>
+        <TextArea
+          name="content"
+          validations={FEEDBACK.CONTENT}
+          className={styles.textarea}
+        />
       </form>
     </FormProvider>
   );

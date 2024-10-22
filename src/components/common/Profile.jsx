@@ -2,6 +2,7 @@ import styles from './Profile.module.css';
 import Image from 'next/image';
 import assets from '@/variables/images';
 import { formatDate } from '@/utils/utilFunction';
+import cn from '@/utils/clsx';
 
 export function ProfileImage({ user, width = '32px' }) {
   const isUser = user.role === 'USER';
@@ -16,7 +17,7 @@ export function ProfileImage({ user, width = '32px' }) {
   );
 }
 
-export function Profile({ user = {}, size, type, date }) {
+export function Profile({ user = {}, size, type, date, className }) {
   const userGrade = user?.grade === 'EXPERT' ? '전문가' : '일반';
   // const isTypeSimple = type === 'simple';
   const isTypeNotSimple = type + '';
@@ -24,7 +25,7 @@ export function Profile({ user = {}, size, type, date }) {
 
   if (isTypeNotSimple.includes('simple')) {
     return (
-      <div className={styles.simple}>
+      <div className={cn(styles.simple, className)}>
         <ProfileImage width="24px" user={user} />
         <span className={styles.name}>{user.nickname}</span>
         {isTypeNotSimple.includes('2') && (
@@ -36,7 +37,7 @@ export function Profile({ user = {}, size, type, date }) {
 
   if (date) {
     return (
-      <div className={styles.Profile}>
+      <div className={cn(styles.simple, className)}>
         <ProfileImage user={user} />
         <div className={styles.texts}>
           <span className={styles.name}>{user.nickname}</span>
@@ -47,7 +48,7 @@ export function Profile({ user = {}, size, type, date }) {
   }
 
   return (
-    <div className={styles.Profile}>
+    <div className={cn(styles.simple, className)}>
       <ProfileImage user={user} width={isSmall ? '24px' : '32px'} />
       <div className={styles.texts}>
         <span className={styles.name}>{user.nickname || '기본사용자'}</span>

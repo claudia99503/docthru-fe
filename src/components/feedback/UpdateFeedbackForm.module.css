@@ -11,8 +11,24 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .textarea {
   background-color: #fff;
+}
+
+.cancel {
+  padding: 4px 20px;
+  background-color: #fff;
+  border: 2px solid var(--grey-800);
+  border-radius: 8px;
+}
+
+.cancel:hover {
+  padding: 4px 20px;
+  background-color: var(--grey-100);
+  border: 2px solid var(--grey-800);
+  border-radius: 8px;
 }

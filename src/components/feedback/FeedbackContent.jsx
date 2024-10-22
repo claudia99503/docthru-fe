@@ -76,6 +76,7 @@ export default function FeedbackContent({ feedback }) {
               onSubmit={handleUpdateSubmit}
               initialData={feedback}
               onClick={handleCancelClick}
+              className={styles.buttons}
             />
           </div>
         </li>

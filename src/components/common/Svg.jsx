@@ -18,6 +18,7 @@ export default function Svg({
       width={width}
       height={calculatedHeight}
       className={cn(className, { active: isActive })}
+      aria-label={name}
     >
       <use
         href={`/assets/${type}s_sprite.svg/#${prefix}_${name}`}
