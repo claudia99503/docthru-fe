@@ -16,6 +16,8 @@ import ChallengeDropdown from '../components/challenge/ChallengeDropdown';
 import styles from '../styles/pages/Home.module.css';
 
 import { keepPreviousData } from '@tanstack/react-query';
+import { AuthProvider } from '../context/AuthProvider';
+import Notification from '../components/layouts/Notification';
 
 export default function Home() {
   const router = useRouter();
@@ -52,7 +54,7 @@ export default function Home() {
   );
 
   return (
-    <>
+    <AuthProvider>
       <Head>
         <title>챌린지 목록 페이지</title>
       </Head>
@@ -70,6 +72,8 @@ export default function Home() {
             className={styles.icon}
           />
         </button>
+        {/* Notification 컴포넌트를 여기로 이동 */}
+        <Notification />
       </div>
       <div className={styles.SearchContainer}>
         <ChallengeDropdown onOptionChange={handleOptionChange} />
@@ -91,6 +95,6 @@ export default function Home() {
         totalPages={totalPages} // 계산된 totalPages 사용
         onPageChange={setCurrentPage}
       />
-    </>
+    </AuthProvider>
   );
 }
