@@ -1,5 +1,5 @@
 .BestRecWork {
-  max-width: 890px; 
+  max-width: 890px;
 }
 
 .next-button {
@@ -7,6 +7,13 @@
   left: 776px;
   top: 5px;
   z-index: 10;
+  background-color: var(--brand-black);
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .prev-button {
@@ -14,8 +21,11 @@
   left: 726px;
   top: 5px;
   z-index: 10;
-}
-
-.slide-box:nth-last-child() {
-  width: 100px;
+  background-color: var(--brand-black);
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

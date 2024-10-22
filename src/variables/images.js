@@ -10,6 +10,7 @@ const assets = {
     arrowMainRight: '/assets/icons/ic_arrow_main_right.svg',
     arrowRight: '/assets/icons/ic_arrow_right.svg',
     arrowUp: '/assets/icons/ic_arrow_up.svg',
+    arrowWhite: '/assets/icons/ic_arrow_white.svg',
     bellAlert: '/assets/icons/ic_bell_alert.svg',
     bellEmpty: '/assets/icons/ic_bell_empty.svg',
     bold: '/assets/icons/ic_bold.svg',

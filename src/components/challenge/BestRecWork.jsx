@@ -17,21 +17,20 @@ const BestRecWork = ({ list }) => {
   };
 
   const getPrevBtnStyles = (i) => {
-    if(i == 0){
-      return { opacity:0.3 }
+    if (i == 0) {
+      return { opacity: 0.3 };
     }
 
-    if(i == list.length - 1) {
-      return { left: '786px' }
-    } 
-  }
+    if (i == list.length - 1) {
+      return { left: '786px' };
+    }
+  };
 
   const getNextBtnStyles = (i) => {
-    if(i == list.length - 1) {
-      return { left: '836px', opacity:0.3 }
+    if (i == list.length - 1) {
+      return { left: '836px', opacity: 0.3 };
     }
-  }
-
+  };
 
   return (
     <>
@@ -58,14 +57,21 @@ const BestRecWork = ({ list }) => {
                 list={best}
                 index={getLastI(i)}
               />
-              <button className={`prev-button ${styles['prev-button']}`} style={getPrevBtnStyles(i)}>
+              <button
+                className={`prev-button ${styles['prev-button']}`}
+                style={getPrevBtnStyles(i)}
+              >
                 <img
-                  src={images.buttons.arrowRight}
+                  src={images.icons.arrowWhite}
                   style={{ rotate: '180deg' }}
+                  alt="icon arrow white"
                 />
               </button>
-              <button className={`next-button ${styles['next-button']}`} style={getNextBtnStyles(i)}>
-                <img src={images.buttons.arrowRight} />
+              <button
+                className={`next-button ${styles['next-button']}`}
+                style={getNextBtnStyles(i)}
+              >
+                <img src={images.icons.arrowWhite} alt="icon arrow white" />
               </button>
             </SwiperSlide>
           ))}
