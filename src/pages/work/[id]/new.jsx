@@ -1,6 +1,10 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
+//challengeId 받아야됨...
 export default function CreateWorkPage() {
+  const router = useRouter();
+
   return (
     <>
       <Head>

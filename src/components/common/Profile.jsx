@@ -19,7 +19,7 @@ export function ProfileImage({ user, width = '32px' }) {
 
 export function Profile({ user = {}, size, type, date, className }) {
   const userGrade = user?.grade === 'EXPERT' ? '전문가' : '일반';
-  // const isTypeSimple = type === 'simple';
+  const isAdmin = user.role === 'ADMIN';
   const isTypeNotSimple = type + '';
   const isSmall = size === 'small';
 
@@ -31,6 +31,7 @@ export function Profile({ user = {}, size, type, date, className }) {
         {isTypeNotSimple.includes('2') && (
           <span className={styles.grade}>{userGrade}</span>
         )}
+        {isAdmin && <span className={styles.grade}>어드민</span>}
       </div>
     );
   }
