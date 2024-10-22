@@ -4,8 +4,24 @@ import { useRouter } from "next/router";
 import styles from "../../styles/pages/application/CreateApplicationPage.module.css";
 import { createChallengeApplication } from "../../service/api/challenge";
 import Loader from "../../components/common/Loader";
+import FieldSelection from "../../components/application/FieldSelection";
+import DocTypeSelection from "../../components/application/DocTypeSelection";
+import assets from "../../variables/images";
 
-export default function CreateApplicationPage() {
+const fieldMapping = {
+  "Next.js": "NEXTJS",
+  API: "API",
+  Career: "CAREER",
+  "Modern JS": "MODERNJS",
+  Web: "WEB",
+};
+
+const docTypeMapping = {
+  "공식 문서": "OFFICIAL",
+  블로그: "BLOG",
+};
+
+const CreateApplicationPage = () => {
   const [formData, setFormData] = useState({
     title: "",
     docUrl: "",
@@ -16,9 +32,11 @@ export default function CreateApplicationPage() {
     description: "",
   });
 
-  const [selectedDate, setSelectedDate] = useState(""); // 화면에서만 표시 될 날짜
+  const [selectedDate, setSelectedDate] = useState(""); // 화면에서만 표시될 날짜
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [fieldDropdownOpen, setFieldDropdownOpen] = useState(false);
+  const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
   const router = useRouter();
 
   const handleInputChange = (e) => {
@@ -29,22 +47,32 @@ export default function CreateApplicationPage() {
     }));
   };
 
-  // 날짜 변경
-  const handleDateChange = (e) => {
-    const date = e.target.value;
-    const formattedDate = new Date(date).toISOString();
-    setSelectedDate(date); // 선택한 날짜를 업데이트 (YYYY-MM-DD)
+  const handleFieldSelect = (value) => {
     setFormData((prevData) => ({
       ...prevData,
-      deadline: formattedDate, // ISO 형식으로 폼 데이터 업데이트
+      field: value, // UI상으로는 선택한 값 유지
+    }));
+    setFieldDropdownOpen(false);
+  };
+
+  const handleDocTypeSelect = (value) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      docType: value, // UI상으로는 선택한 값 유지
+    }));
+    setDocTypeDropdownOpen(false);
+  };
+
+  const handleDateChange = (e) => {
+    const date = e.target.value;
+    setSelectedDate(date);
+    setFormData((prevData) => ({
+      ...prevData,
+      deadline: new Date(date).toISOString(), // ISO 형식으로 변환하여 저장
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-
+  const validateForm = () => {
     const {
       title,
       docUrl,
@@ -63,33 +91,38 @@ export default function CreateApplicationPage() {
       !maxParticipants ||
       !description
     ) {
-      setError("모든 필드를 입력해주세요.");
+      return "모든 필드를 입력해주세요.";
+    }
+    return null;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    const errorMsg = validateForm();
+    if (errorMsg) {
+      setError(errorMsg);
       setLoading(false);
       return;
     }
 
     const dataToSend = {
-      title,
-      docUrl,
-      field,
-      docType,
-      deadline,
-      maxParticipants: Number(maxParticipants),
-      description,
+      title: formData.title,
+      docUrl: formData.docUrl,
+      field: fieldMapping[formData.field],
+      docType: docTypeMapping[formData.docType],
+      deadline: formData.deadline,
+      maxParticipants: Number(formData.maxParticipants),
+      description: formData.description,
     };
 
-    console.log("전송할 데이터:", JSON.stringify(dataToSend, null, 2));
-
     try {
-      const response = await createChallengeApplication(dataToSend);
-      console.log("챌린지 생성 성공:", response);
+      await createChallengeApplication(dataToSend);
       alert("챌린지 신청이 성공적으로 완료되었습니다!");
       router.push("/me/application");
     } catch (error) {
-      console.error(
-        "챌린지 생성 실패:",
-        error.response ? error.response.data : error.message
-      );
       setError("챌린지 생성 중 오류가 발생했습니다. 다시 시도해주세요.");
     } finally {
       setLoading(false);
@@ -107,13 +140,14 @@ export default function CreateApplicationPage() {
       </Head>
       <div className={styles.CreateApplicationPage}>
         <h1 className={styles["application-title"]}>신규 챌린지 신청</h1>
-
         {loading && <Loader msg="챌린지를 생성 중입니다" />}
-
         {!loading && (
           <form className={styles.form} onSubmit={handleSubmit}>
             <label className={styles.label}>제목</label>
-            <div className={styles["input-wrapper"]}>
+            <div
+              className={styles["input-wrapper"]}
+              style={{ borderRadius: "12px" }}
+            >
               <input
                 type="text"
                 name="title"
@@ -125,7 +159,10 @@ export default function CreateApplicationPage() {
             </div>
 
             <label className={styles.label}>원문 링크</label>
-            <div className={styles["input-wrapper"]}>
+            <div
+              className={styles["input-wrapper"]}
+              style={{ borderRadius: "12px" }}
+            >
               <input
                 type="text"
                 name="docUrl"
@@ -137,39 +174,66 @@ export default function CreateApplicationPage() {
             </div>
 
             <label className={styles.label}>분야</label>
-            <div className={styles["input-wrapper"]}>
+            <div
+              className={styles["input-wrapper"]}
+              style={{ borderRadius: "4px" }}
+            >
               <input
                 type="text"
                 name="field"
-                placeholder="분야를 입력해주세요"
+                placeholder="분야를 선택해주세요"
                 className={styles["select-input"]}
                 value={formData.field}
-                onChange={handleInputChange}
+                readOnly
               />
-              <img src="/assets/icons/ic_down.svg" className={styles.icon} />
+              <img
+                src={fieldDropdownOpen ? assets.icons.up : assets.icons.down}
+                className={styles.icon}
+                onClick={() => setFieldDropdownOpen(!fieldDropdownOpen)}
+              />
+              {fieldDropdownOpen && (
+                <div className={styles.dropdownContainer}>
+                  <FieldSelection onOptionChange={handleFieldSelect} />
+                </div>
+              )}
             </div>
 
-            <label className={styles.label}>문서타입</label>
-            <div className={styles["input-wrapper"]}>
+            <label className={styles.label}>문서 타입</label>
+            <div
+              className={styles["input-wrapper"]}
+              style={{ borderRadius: "4px" }}
+            >
               <input
                 type="text"
                 name="docType"
-                placeholder="문서타입을 입력해주세요"
+                placeholder="문서타입을 선택해주세요"
                 className={styles["select-input"]}
                 value={formData.docType}
-                onChange={handleInputChange}
+                readOnly
               />
-              <img src="/assets/icons/ic_down.svg" className={styles.icon} />
+              <img
+                src={docTypeDropdownOpen ? assets.icons.up : assets.icons.down}
+                className={styles.icon}
+                onClick={() => setDocTypeDropdownOpen(!docTypeDropdownOpen)}
+              />
+              {docTypeDropdownOpen && (
+                <div className={styles.dropdownContainer}>
+                  <DocTypeSelection onOptionChange={handleDocTypeSelect} />
+                </div>
+              )}
             </div>
 
             <label className={styles.label}>마감일</label>
-            <div className={styles["input-wrapper"]}>
+            <div
+              className={styles["input-wrapper"]}
+              style={{ borderRadius: "12px" }}
+            >
               <input
                 type="text"
                 name="deadline"
                 placeholder="YYYY-MM-DD"
                 className={styles.input}
-                value={selectedDate} // 화면에 표시할 날짜
+                value={selectedDate}
                 readOnly
               />
               <input
@@ -178,7 +242,7 @@ export default function CreateApplicationPage() {
                 onChange={handleDateChange}
               />
               <img
-                src="/assets/icons/ic_calender.svg"
+                src={assets.icons.calender}
                 className={styles.icon}
                 onClick={() =>
                   document.querySelector(`.${styles.dateInput}`).showPicker()
@@ -186,15 +250,23 @@ export default function CreateApplicationPage() {
               />
             </div>
 
-            <label className={styles.label}>최대인원</label>
-            <div className={styles["input-wrapper"]}>
+            <label className={styles.label}>최대 인원</label>
+            <div
+              className={styles["input-wrapper"]}
+              style={{ borderRadius: "12px" }}
+            >
               <input
-                type="number"
+                type="text"
                 name="maxParticipants"
                 placeholder="인원을 입력해주세요"
                 className={styles.input}
                 value={formData.maxParticipants}
-                onChange={handleInputChange}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (/^\d*$/.test(value)) {
+                    handleInputChange(e); // 숫자만 허용
+                  }
+                }}
               />
             </div>
 
@@ -205,9 +277,14 @@ export default function CreateApplicationPage() {
               className={styles.textarea}
               value={formData.description}
               onChange={handleInputChange}
+              style={{ borderRadius: "12px" }}
             ></textarea>
 
-            <button className={styles["submit-button"]} type="submit">
+            <button
+              className={styles["submit-button"]}
+              type="submit"
+              style={{ borderRadius: "8px" }}
+            >
               신청하기
             </button>
           </form>
@@ -217,5 +294,6 @@ export default function CreateApplicationPage() {
       </div>
     </>
   );
-}
+};
 
+export default CreateApplicationPage;
