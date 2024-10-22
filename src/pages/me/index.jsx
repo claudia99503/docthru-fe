@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useGetOnGoingChallenge } from '@/service/queries/user';
-import { challengeList } from '../../../mockup/challenge';
 
 import Head from 'next/head';
 import TabNavigation from '../../components/layouts/TabNavigation';
@@ -14,20 +13,22 @@ import AllCardSection from '@/components/challenge/AllCardSection';
 import styles from '../../styles/pages/Home.module.css';
 
 export default function MyChallengePage() {
-  const [params, setParams] = useState({
-    limit: 5,
-  });
-
-  const { list = [], meta = {} } = challengeList || {};
-  const { totalPages, page = 1 } = meta;
   const [searchTerm, setSearchTerm] = useState('');
-  const [currentPage, setCurrentPage] = useState(page);
+  const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(5);
+  const [params, setParams] = useState();
 
-  // const { data, isPending } = useGetOnGoingChallenge(params);
-  // if (isPending) {
-  //   return <Loader />;
-  // }
+  const { data, isPending } = useGetOnGoingChallenge();
+  const { challenges : list = [], meta = {} } = data || {};
+  const { totalPages } = meta;
+
+  // console.log('data', data)
+  // console.log('list', list)
+  // console.log('meta', meta)
+
+  if (isPending) {
+    return <Loader />;
+  }
 
   const filteredData = list?.filter((item) => {
     const today = new Date();
@@ -76,7 +77,7 @@ export default function MyChallengePage() {
           site={'home'}
         />
       </div>
-      {meta && (
+      {list.length > 0 && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages} // 계산된 totalPages 사용

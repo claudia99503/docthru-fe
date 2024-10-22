@@ -11,8 +11,9 @@ export function useGetChallenges(queryParams) {
 
 export function useGetChallengeDetail(id) {
   return useQuery({
-    queryKey: ['detailedChallenge'],
+    queryKey: ['detailedChallenge', id],
     queryFn: () => getChallenge(id),
     enabled: !!id,
+    cacheTime: 0
   });
 }

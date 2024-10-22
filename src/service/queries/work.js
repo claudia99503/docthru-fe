@@ -2,11 +2,12 @@ import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { getWorkList, getWork, getWorkFeedbacks } from '@/service/api/work';
 import { workKey } from '@/variables/queryKeys';
 
-export function useGetWorkList(id) {
+export function useGetWorkList(id, queryParams) {
   return useQuery({
-    queryKey: ['worksList'],
-    queryFn: () => getWorkList(id),
+    queryKey: ['worksList', id, queryParams],
+    queryFn: () => getWorkList(id, queryParams),
     enabled: !!id,
+    cacheTime: 0
   });
 }
 
