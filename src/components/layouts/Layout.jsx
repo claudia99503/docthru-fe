@@ -31,12 +31,10 @@ export default function Layout({ children }) {
   const { Modal, onModalOpen } = useAlertModal();
 
   const handleRedirects = useCallback(() => {
-    if (!isRedirecting) {
-      if (!user) {
-        if (!routes.isPublicRoute) {
-          onModalOpen({ msg: '로그인이 필요합니다.', path: '/auth/login' });
-          return;
-        }
+    if (!isRedirecting && !isLoading) {
+      if (!user && !routes.isPublicRoute) {
+        onModalOpen({ msg: '로그인이 필요합니다.', path: '/auth/login' });
+        return;
       }
 
       if (user && routes.isAuthPage) {
@@ -58,14 +56,10 @@ export default function Layout({ children }) {
   ]);
 
   useEffect(() => {
-    if (!isLoading || user === undefined) {
+    if (!isLoading && !isRedirecting && user !== undefined) {
       handleRedirects();
     }
-  }, [handleRedirects, isLoading, user]);
-
-  if (isLoading || isRedirecting) {
-    return <Loader />;
-  }
+  }, [handleRedirects, isLoading, isRedirecting, user]);
 
   const renderHeader = () => {
     if (routes.isAuthRoute) return <AuthHeader />;

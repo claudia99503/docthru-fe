@@ -15,7 +15,8 @@ export default function WorkDetailPage() {
   if (isPending) {
     return <Loader />;
   }
-
+  // console.log(data);
+  const { isClosed } = data;
   return (
     <>
       <Head>
@@ -26,7 +27,8 @@ export default function WorkDetailPage() {
         />
       </Head>
       <WorkDetail data={data} />
-      <FeedbackForm id={id} />
+      {isClosed || <FeedbackForm id={id} />}
+
       <FeedbackList id={id} />
     </>
   );

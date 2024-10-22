@@ -32,7 +32,7 @@ export default function Home(initialData) {
     enabled: true,
   });
   const { meta = {}, list = [] } = data || {};
-  const totalPages = meta.totalPages
+  const totalPages = meta.totalPages;
 
   const handleOptionChange = (option) => {
     setSelectedOption((pev) => ({ ...pev, ...option }));
@@ -40,15 +40,20 @@ export default function Home(initialData) {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm, selectedOption.field, selectedOption.docType, selectedOption.status]);
+  }, [
+    searchTerm,
+    selectedOption.field,
+    selectedOption.docType,
+    selectedOption.status,
+  ]);
 
   useEffect(() => {
     const option = {
       search: searchTerm,
-      page: currentPage
-    }
+      page: currentPage,
+    };
 
-    handleOptionChange(option)
+    handleOptionChange(option);
   }, [currentPage, searchTerm]);
 
   return (

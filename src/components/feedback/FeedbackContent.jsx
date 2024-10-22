@@ -42,10 +42,9 @@ export default function FeedbackContent({ feedback }) {
     );
   };
 
-  return !isEditMode ? (
-    <li className={cn(styles.FeedbackContent)}>
-      <div className={styles.top}>
-        <Profile user={user} date={feedback.updatedAt} />
+  const renderKebab = () => {
+    if (feedback.isEditable)
+      return (
         <KebabMenu
           onEdit={handleEditClick}
           onDelete={() =>
@@ -55,19 +54,33 @@ export default function FeedbackContent({ feedback }) {
             })
           }
         />
-      </div>
-      <p className={styles.text}>{feedback.content}</p>
-    </li>
-  ) : (
-    <li className={cn(styles.FeedbackContent, styles.edit)}>
-      <div className={styles.top}>
-        <Profile user={user} date={feedback.updatedAt} />
-        <UpdateFeedbackForm
-          onSubmit={handleUpdateSubmit}
-          initialData={feedback}
-          onClick={handleCancelClick}
-        />
-      </div>
-    </li>
+      );
+    else return;
+  };
+
+  return (
+    <>
+      {!isEditMode ? (
+        <li className={cn(styles.FeedbackContent)}>
+          <div className={styles.top}>
+            <Profile user={user} date={feedback.updatedAt} />
+            {renderKebab()}
+          </div>
+          <p className={styles.text}>{feedback.content}</p>
+        </li>
+      ) : (
+        <li className={cn(styles.FeedbackContent, styles.edit)}>
+          <div className={styles.top}>
+            <Profile user={user} date={feedback.updatedAt} />
+            <UpdateFeedbackForm
+              onSubmit={handleUpdateSubmit}
+              initialData={feedback}
+              onClick={handleCancelClick}
+            />
+          </div>
+        </li>
+      )}
+      <Modal />
+    </>
   );
 }

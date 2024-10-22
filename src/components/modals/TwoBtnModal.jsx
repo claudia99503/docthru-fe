@@ -15,8 +15,10 @@ function TwoBtnModal(
         src={assets.icons.check}
         width={24}
         height={24}
+        alt="check icon"
         className={styles.check}
       />
+
       <p className={styles['modal-msg']}>{msg}</p>
       <div className={styles.buttons}>
         <Button
