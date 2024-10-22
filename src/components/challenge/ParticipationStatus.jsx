@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 import { Profile } from '../common/Profile';
@@ -6,108 +7,105 @@ import LikeButton from '../common/LikeButton';
 
 import styles from './ParticipationStatus.module.css';
 import images from '@/variables/images';
+import Message from '../common/Message';
 
-const ParticipationStatus = ({ list }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-
+const ParticipationStatus = ({ list, onPageChange }) => {
+  const router = useRouter();
   const userList = list?.list;
   const pageList = list?.meta;
 
-  // console.log(pageList);
-  // console.log(userList);
-
-  const itemsPerPage = 5;
-
+  const [currentPage, setCurrentPage] = useState(pageList?.currentPage);
   const totalPages = pageList?.totalPages;
 
-  const filteredData = userList?.sort((a, b) => {
-    return b.likeCount - a.likeCount;
-  });
-
-  // 현재 페이지에 맞는 유저 리스트만 가져오기
-  const currentUsers = filteredData?.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  const msg = `아직 참여한 도전자가 없어요, 지금 바로 도전해보세요!`
 
   const handlePageChange = (direction) => {
     if (direction === 'next' && currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
+      onPageChange(currentPage + 1);
     } else if (direction === 'prev' && currentPage > 1) {
       setCurrentPage(currentPage - 1);
+      onPageChange(currentPage - 1);
     }
   };
 
   const rank = (index) => {
-    const rank = index + 1 + (currentPage - 1) * itemsPerPage;
+    const rank = index + 1 + (currentPage - 1) * 5;
     return rank < 10 ? '0' + rank : rank;
   };
 
   return (
     <>
-      {filteredData?.length > 0 ? (
-        <div className={styles.ParticipationStatus}>
-          <div className={styles['ParticipationStatus-top']}>
-            <span>참여 현황</span>
-            <div className={styles.pagination}>
-              <span>
-                {currentPage} / {totalPages}
-              </span>
-              <>
-                <button
-                  onClick={() => handlePageChange('prev')}
-                  disabled={currentPage === 1}
-                >
-                  <img src={images.icons.arrowLeft} alt="arrowLeft icon" />
-                </button>
-                <button
-                  onClick={() => handlePageChange('next')}
-                  disabled={currentPage === totalPages}
-                >
-                  <img src={images.icons.arrowRight} alt='arrowRight icon'/>
-                </button>
-              </>
+      <div className={styles.ParticipationStatus}>
+        {userList?.length > 0 ? (
+          <>
+            <div className={styles['ParticipationStatus-top']}>
+              <span>참여 현황</span>
+              <div className={styles.pagination}>
+                <span>
+                  {currentPage} / {totalPages}
+                </span>
+                <>
+                  <button
+                    onClick={() => handlePageChange('prev')}
+                    disabled={currentPage === 1}
+                  >
+                    <img src={images.icons.arrowLeft} alt="arrowLeft icon" />
+                  </button>
+                  <button
+                    onClick={() => handlePageChange('next')}
+                    disabled={currentPage === totalPages}
+                  >
+                    <img src={images.icons.arrowRight} alt="arrowRight icon" />
+                  </button>
+                </>
+              </div>
             </div>
-          </div>
-          <div>
-            {currentUsers.map((participant, index) => (
-              <div key={participant.id} className={styles['participant-row']}>
-                <div className={styles['participant-left']}>
-                  {currentPage == 1 && index == 0 ? (
-                    <div className={styles['first-rank']}>
-                      <img
-                        src={images.icons.crown}
-                        alt="Crown Icon"
-                        className={styles['icon-crown']}
-                      />
-                      <span>{rank(index)}</span>
+            <div>
+              {userList?.map((participant, index) => (
+                <div key={participant.id} className={styles['participant-row']}>
+                  <div className={styles['participant-left']}>
+                    {currentPage == 1 && index == 0 ? (
+                      <div className={styles['first-rank']}>
+                        <img
+                          src={images.icons.crown}
+                          alt="Crown Icon"
+                          className={styles['icon-crown']}
+                        />
+                        <span>{rank(index)}</span>
+                      </div>
+                    ) : (
+                      <div className={styles.rank}>{rank(index)}</div>
+                    )}
+                    <div className={styles['participant-info']}>
+                      {participant && <Profile user={participant} />}
                     </div>
-                  ) : (
-                    <div className={styles.rank}>{rank(index)}</div>
-                  )}
-                  <div className={styles['participant-info']}>
-                    <Profile user={participant} />
+                  </div>
+                  <div className={styles['participant-right']}>
+                    {participant && <LikeButton data={participant} />}
+                    <button
+                      type="button"
+                      onClick={() => router.push(`/work/${userList[index].id}`)}
+                    >
+                      <span>작업물 보기</span>
+                      <Image
+                        src={images.icons.arrowRight}
+                        alt="arrow icon"
+                        width={30}
+                        height={30}
+                      />
+                    </button>
                   </div>
                 </div>
-                <div className={styles['participant-right']}>
-                  <LikeButton data={participant} />
-                  <button type="button">
-                    <span>작업물 보기</span>
-                    <Image
-                      src={images.icons.arrowRight}
-                      alt="arrow icon"
-                      width={30}
-                      height={30}
-                    />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      ) : (
-        <> </>
-      )}
+              ))}
+            </div>
+          </>
+        ) : (
+          <>
+            <Message msg={msg} />
+          </>
+        )}
+      </div>
     </>
   );
 };
