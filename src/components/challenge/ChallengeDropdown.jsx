@@ -93,7 +93,7 @@ const ChallengeDropdown = ({ onOptionChange }) => {
           </div>
           <div className={styles['dropdown-category']}>
             <span className={styles['dropdown-title']}>분야</span>
-            <ul>
+            <ul className={styles['dropdown-gap']}>
               {filter.map((filter, index) => (
                 <li
                   className={styles['dropdown-checkbox']}
@@ -117,7 +117,7 @@ const ChallengeDropdown = ({ onOptionChange }) => {
           </div>
           <div className={styles['dropdown-category']}>
             <span className={styles['dropdown-title']}>문서 타입</span>
-            <ul>
+            <ul className={styles['dropdown-gap']}>
               {docType.map((docType, index) => (
                 <li
                   className={styles['dropdown-radio']}
@@ -141,7 +141,7 @@ const ChallengeDropdown = ({ onOptionChange }) => {
           </div>
           <div className={styles['dropdown-category']}>
             <span className={styles['dropdown-title']}>상태</span>
-            <ul>
+            <ul className={styles['dropdown-gap']}>
               {progress.map((progress, index) => (
                 <li
                   className={styles['dropdown-radio']}

@@ -60,6 +60,9 @@
 .dropdown-category {
   border-bottom: 1px solid #e5e5e5;
   padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 .dropdown-checkbox {
   display: flex;
@@ -93,6 +96,11 @@
   font-weight: 600;
   color: #ffffff;
   cursor: pointer;
+}
+.dropdown-gap {
+  display: flex;
+  flex-direction: column;
+  gap: 7.5px;
 }
 
 @media (max-width: 743px) and (min-width: 375px) {
