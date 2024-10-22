@@ -14,6 +14,7 @@ const assets = {
     bold: '/assets/icons/ic_bold.svg',
     bulletList: '/assets/icons/ic_bullet_list.svg',
     calender: '/assets/icons/ic_calender.svg',
+    chatBubbles: '/assets/icons/ic_chat_bubbles.svg',
     check: '/assets/icons/ic_check.svg',
     circle: '/assets/icons/ic_circle.svg',
     crown: '/assets/icons/ic_crown.svg',
@@ -54,7 +55,6 @@ const assets = {
     logo: '/assets/images/img_logo.svg',
     profileAdmin: '/assets/images/img_profile_admin.svg',
     profileMember: '/assets/images/img_profile_member.svg',
-    replyEmpty: '/assets/images/img_reply_empty.svg',
   },
 };
 export default assets;
