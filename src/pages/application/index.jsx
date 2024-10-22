@@ -198,7 +198,7 @@ const CreateApplicationPage = () => {
               )}
             </div>
 
-            <label className={styles.label}>문서타입</label>
+            <label className={styles.label}>문서 타입</label>
             <div
               className={styles["input-wrapper"]}
               style={{ borderRadius: "4px" }}
@@ -250,7 +250,7 @@ const CreateApplicationPage = () => {
               />
             </div>
 
-            <label className={styles.label}>최대인원</label>
+            <label className={styles.label}>최대 인원</label>
             <div
               className={styles["input-wrapper"]}
               style={{ borderRadius: "12px" }}
@@ -277,10 +277,14 @@ const CreateApplicationPage = () => {
               className={styles.textarea}
               value={formData.description}
               onChange={handleInputChange}
-              style={{ borderRadius: "6px" }}
+              style={{ borderRadius: "12px" }}
             ></textarea>
 
-            <button className={styles["submit-button"]} type="submit">
+            <button
+              className={styles["submit-button"]}
+              type="submit"
+              style={{ borderRadius: "8px" }}
+            >
               신청하기
             </button>
           </form>
@@ -293,4 +297,3 @@ const CreateApplicationPage = () => {
 };
 
 export default CreateApplicationPage;
-
