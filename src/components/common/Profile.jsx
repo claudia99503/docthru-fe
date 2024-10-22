@@ -5,7 +5,7 @@ import { formatDate } from '@/utils/utilFunction';
 import cn from '@/utils/clsx';
 
 export function ProfileImage({ user, width = '32px' }) {
-  const isUser = user.role === 'USER';
+  const isUser = user?.role === 'USER';
   const imgSrc = isUser
     ? assets.images.profileMember
     : assets.images.profileAdmin;
