@@ -47,6 +47,9 @@ const assets = {
     thirdRank: '/assets/icons/ic_third_rank.svg',
     toggleDown: '/assets/icons/ic_toggle_down.svg',
     toggleUp: '/assets/icons/ic_toggle_up.svg',
+    up: '/assets/icons/ic_up.svg',
+    down: '/assets/icons/ic_down.svg',
+    calender: '/assets/icons/ic_calender.svg'
   },
   images: {
     black: '/assets/images/img_black.svg',
