@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useGetCompletedChallenge } from '@/service/queries/user';
 
@@ -16,46 +16,35 @@ export default function MyFinishedChallengePage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(5);
-  const [params, setParams] = useState(
-    {
-      limit : 5
-    }
-  );
+  const [params, setParams] = useState({});
 
-  const { data, isPending } = useGetCompletedChallenge(params);
+  const { data, isPending } = useGetCompletedChallenge(params, {
+    enabled: true,
+  });
   const { list = [], meta = {} } = data || {};
   const { totalPages } = meta;
 
-  // console.log('data', data)
-  // console.log('list', list)
-  // console.log('meta', meta)
+  console.log('data', data);
+  console.log('list', list);
+  console.log('meta', meta);
 
-  if (isPending) {
-    return <Loader />;
-  }
+  const handleOptionChange = (option) => {
+    setParams((pev) => ({ ...pev, ...option }));
+  };
 
-  // const filteredData = list.filter((item) => {
-  //   const today = new Date();
-  //   const deadline = new Date(item.deadline);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
 
-  //   if (
-  //     searchTerm &&
-  //     !item.title.toLowerCase().includes(searchTerm.toLowerCase())
-  //   ) {
-  //     return false;
-  //   }
+  useEffect(() => {
+    const option = {
+      keyword: searchTerm,
+      page: currentPage,
+    };
 
-  //   if (deadline <= today) {
-  //     return item;
-  //   }
-  // });
+    handleOptionChange(option);
+  }, [currentPage, searchTerm]);
 
-  // // 현재 페이지의 데이터만 추출
-  // const currentList = filteredData?.slice(
-  //   (currentPage - 1) * limit,
-  //   currentPage * limit
-  // );
-  
   return (
     <>
       <Head>
@@ -75,18 +64,22 @@ export default function MyFinishedChallengePage() {
             setSearchTerm={setSearchTerm}
           />
         </div>
-        <AllCardSection
-          list={list}
-          searchTerm={searchTerm}
-          site={'done'}
-        />
       </div>
-      {list.length > 0 && (
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages} // 계산된 totalPages 사용
-          onPageChange={setCurrentPage}
-        />
+      {isPending ? (
+        <Loader />
+      ) : (
+        <>
+          <div>
+            <AllCardSection list={list} searchTerm={searchTerm} site={'done'} />
+          </div>
+          {list.length > 0 && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages} // 계산된 totalPages 사용
+              onPageChange={setCurrentPage}
+            />
+          )}
+        </>
       )}
     </>
   );
