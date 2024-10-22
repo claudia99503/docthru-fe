@@ -4,15 +4,18 @@ import images from '../../variables/images';
 
 const ChallengeDropdown = ({ onOptionChange }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('필터');
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   const handleOptionClick = (option) => {
-    setSelectedOption(option);
-    onOptionChange(option); // 상위 컴포넌트로 선택된 옵션 전달
+    const selectedOption = {
+      'field': option?.field,
+      'docType': option?.docType,
+      'progress': option?.progress,
+    }
+    onOptionChange(selectedOption); // 상위 컴포넌트로 선택된 옵션 전달
     setIsOpen(false);
   };
 
@@ -38,22 +41,42 @@ const ChallengeDropdown = ({ onOptionChange }) => {
             />
           </div>
           {[
-            'Next.js',
-            'Modern JS',
+            'NEXTJS',
+            'MODERNJS',
             'API',
-            'Web',
-            'Career',
-            '공식 문서',
-            '블로그',
-            '진행중',
-            '마감',
-          ].map((option, index) => (
+            'WEB',
+            'CAREER',
+          ].map((field, index) => (
             <li
               key={index}
               className={styles['dropdown-item']}
-              onClick={() => handleOptionClick(option)}
+              onClick={() => handleOptionClick({'field': field})}
             >
-              {option}
+              {field}
+            </li>
+          ))}
+          {[
+            'OFFICIAL',
+            'BLOG',
+          ].map((docType, index) => (
+            <li
+              key={index}
+              className={styles['dropdown-item']}
+              onClick={() => handleOptionClick({'docType': docType})}
+            >
+              {docType}
+            </li>
+          ))}
+          {[
+            'false',
+            'true',
+          ].map((progress, index) => (
+            <li
+              key={index}
+              className={styles['dropdown-item']}
+              onClick={() => handleOptionClick({'progress': progress})}
+            >
+              {progress}
             </li>
           ))}
         </ul>

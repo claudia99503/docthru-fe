@@ -22,11 +22,7 @@ export default function Home(initialData) {
   const [limit, setLimit] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedOption, setSelectedOption] = useState({
-    field: '',
-    docType: '',
-    status: '',
-  });
+  const [selectedOption, setSelectedOption] = useState({});
 
   const { data = initialData, isPending } = useGetChallenges(selectedOption, {
     enabled: true,
@@ -35,21 +31,24 @@ export default function Home(initialData) {
   const { totalPages } = meta;
 
   const handleOptionChange = (option) => {
-    setSelectedOption((pev) => ({ ...pev, ...option }));
+    setSelectedOption((pev) => ({...pev, ...option }));
   };
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm, selectedOption.field, selectedOption.docType, selectedOption.status]);
+  }, [searchTerm, selectedOption?.field, selectedOption?.docType, selectedOption?.progress]);
 
   useEffect(() => {
     const option = {
-      search: searchTerm,
+      field: selectedOption?.field,
+      docType: selectedOption?.docType,
+      progress: selectedOption.progress,
+      keyword: searchTerm,
       page: currentPage
     }
 
     handleOptionChange(option)
-  }, [currentPage, searchTerm]);
+  }, [currentPage, searchTerm, selectedOption?.field, selectedOption?.docType, selectedOption?.progress]);
 
   return (
     <>
@@ -72,7 +71,7 @@ export default function Home(initialData) {
         </button>
       </div>
       <div className={styles.SearchContainer}>
-        <ChallengeDropdown onOptionChange={handleOptionChange} />
+        <ChallengeDropdown onOptionChange={setSelectedOption} />
         <ChallengeSearchBarLarge
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}

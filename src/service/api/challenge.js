@@ -6,16 +6,16 @@ const PATH = '/challenges';
 export async function getChallengeList({
   field,
   docType,
-  status,
-  search,
+  progress,
+  keyword,
   page = '1',
   limit = '5',
 }) {
   const params = {
     ...(field && { field }),
     ...(docType && { docType }),
-    ...(status && { status }),
-    ...(search && { search }),
+    ...(progress && { progress }),
+    ...(keyword && { keyword }),
     ...(page && { page }),
     ...(limit && { limit }),
   };

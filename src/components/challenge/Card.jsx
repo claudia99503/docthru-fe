@@ -8,9 +8,8 @@ import styles from './Card.module.css';
 import { useEffect, useState } from 'react';
 
 const Card = ({ data, site }) => {
-  const [myData, setMyData] = useState(data)
+  const [myData, setMyData] = useState(data);
 
-  
   useEffect(() => {
     if (site !== 'home' && myData?.challenge) {
       setMyData(myData.challenge);
@@ -25,7 +24,7 @@ const Card = ({ data, site }) => {
   };
 
   const getBtn = () => {
-    if (myData) {
+    if (site == 'onGoing') {
       return (
         <button
           className={`${styles.challengeButton} ${
@@ -39,16 +38,16 @@ const Card = ({ data, site }) => {
       );
     } else if (site == 'done') {
       return (
-        <button
-          className={`${styles.challengeButton} ${
-            router.pathname === `/work/${myData.id}` ? styles.active : ''
-          }`}
-          onClick={() => handleTabClick(`/work/${myData.id}`)}
-          style={{ border: 'none' }}
-        >
-          <span>내 작업물 보기</span>
-          <img src={images.icons.document} alt="document icon" />
-        </button>
+          <button
+            className={`${styles.challengeButton} ${
+              router.pathname === `/work/${myData.id}` ? styles.active : ''
+            }`}
+            onClick={() => handleTabClick(`/work/${myData.id}`)}
+            style={{ border: 'none' }}
+          >
+            <span>내 작업물 보기</span>
+            <img src={images.icons.document} alt="document icon" />
+          </button>
       );
     }
   };
@@ -67,7 +66,10 @@ const Card = ({ data, site }) => {
           <span>챌린지가 마감되었어요</span>
         </div>
       );
-    } else if (myData.participants === myData.maxParticipants && !myData.progress) {
+    } else if (
+      myData.participants === myData.maxParticipants &&
+      !myData.progress
+    ) {
       return (
         <div
           className={styles['condition-chip']}
@@ -112,7 +114,9 @@ const Card = ({ data, site }) => {
               alt="deadline icon"
               className={styles.icon}
             />
-            <span className={styles.text}>{formatDeadline(myData.deadline)}</span>
+            <span className={styles.text}>
+              {formatDeadline(myData.deadline)}
+            </span>
           </div>
           <div style={{ display: 'flex' }}>
             <img
