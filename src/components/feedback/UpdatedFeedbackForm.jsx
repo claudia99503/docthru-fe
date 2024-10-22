@@ -32,12 +32,7 @@ export default function UpdateFeedbackForm({ onSubmit, initialData, onClick }) {
           <button variant="cancel" onClick={onClick} className="small">
             취소
           </button>
-          <button
-            variant="primary"
-            disabled={!isValid}
-            type="submit"
-            className="small"
-          >
+          <button disabled={!isValid} type="submit" className="small">
             수정 완료
           </button>
         </div>

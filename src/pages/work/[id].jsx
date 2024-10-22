@@ -5,6 +5,7 @@ import { useGetWork } from '@/service/queries/work';
 import Loader from '@/components/common/Loader';
 import FeedbackForm from '@/components/feedback/FeedbackForm';
 import FeedbackList from '@/components/feedback/FeedbackList';
+import Button from '@/components/common/Button';
 
 export default function WorkDetailPage() {
   const router = useRouter();
@@ -31,7 +32,3 @@ export default function WorkDetailPage() {
     </>
   );
 }
-
-WorkDetailPage.getLayout = function getLayout(page) {
-  return <Layout className={styles.narrower}>{page}</Layout>;
-};

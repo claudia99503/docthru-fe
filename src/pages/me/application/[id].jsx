@@ -1,140 +1,57 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 import ChallengeStatusBadge from "../../../components/application/ChallengeStatusBadge";
 import DocTypeChip from "../../../components/common/DocTypeChip";
 import InfoContainer from "../../../components/challenge/InfoContainer";
-import KebabMenu from "../../../components/common/KebabMenu";
+import CancelMenu from "../../../components/common/CancelMenu";
+import { getChallenge, deleteChallenges } from "../../../service/api/challenge";
+import Loader from "../../../components/common/Loader";
 import styles from "../../../styles/pages/application/MyApplicationDetailPage.module.css";
-
-const seedData = [
-  {
-    id: 1023,
-    docType: "OFFICIAL",
-    field: "NEXTJS",
-    title: "Next.js - App Router: Routing Fundamentals",
-    maxParticipants: 10,
-    applicationDate: "2024-01-16T09:00:00",
-    deadline: "2024-02-24T23:59:59",
-    status: "WAITING",
-    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
-  },
-  {
-    id: 1022,
-    docType: "BLOG",
-    field: "API",
-    title: "Fetch API, 너는 에러를 제대로 핸들링 하고 있는가?(dailydev)",
-    maxParticipants: 5,
-    applicationDate: "2024-01-16T10:00:00",
-    deadline: "2024-02-23T23:59:59",
-    status: "WAITING",
-    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
-  },
-  {
-    id: 1021,
-    docType: "OFFICIAL",
-    field: "API",
-    title: "Fetch API, 너는 에러를 제대로 핸들링 하고 있는가?(dailydev)",
-    maxParticipants: 10,
-    applicationDate: "2024-01-15T12:00:00",
-    deadline: "2024-02-22T23:59:59",
-    status: "WAITING",
-    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
-  },
-  {
-    id: 1020,
-    docType: "BLOG",
-    field: "Career",
-    title: "개발자로서 자신만의 브랜드를 구축하는 방법(dailydev)",
-    maxParticipants: 5,
-    applicationDate: "2024-01-14T08:00:00",
-    deadline: "2024-02-22T23:59:59",
-    status: "REJECTED",
-    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
-  },
-  {
-    id: 1019,
-    docType: "OFFICIAL",
-    field: "NEXTJS",
-    title: "Next.js - App Router: Routing Fundamentals",
-    maxParticipants: 10,
-    applicationDate: "2024-01-13T14:00:00",
-    deadline: "2024-02-22T23:59:59",
-    status: "ACCEPTED",
-    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
-  },
-  {
-    id: 1018,
-    docType: "OFFICIAL",
-    field: "API",
-    title: "Fetch API, 너는 에러를 제대로 핸들링 하고 있는가?(dailydev)",
-    maxParticipants: 5,
-    applicationDate: "2024-01-12T10:00:00",
-    deadline: "2024-02-22T23:59:59",
-    status: "REJECTED",
-    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
-  },
-  {
-    id: 1017,
-    docType: "OFFICIAL",
-    field: "API",
-    title: "Fetch API, 너는 에러를 제대로 핸들링 하고 있는가?(dailydev)",
-    maxParticipants: 10,
-    applicationDate: "2024-01-11T15:00:00",
-    deadline: "2024-02-22T23:59:59",
-    status: "ACCEPTED",
-    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
-  },
-  {
-    id: 1016,
-    docType: "BLOG",
-    field: "Career",
-    title: "개발자로서 자신만의 브랜드를 구축하는 방법(dailydev)",
-    maxParticipants: 5,
-    applicationDate: "2024-01-10T09:00:00",
-    deadline: "2024-02-22T23:59:59",
-    status: "ACCEPTED",
-    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
-  },
-  {
-    id: 1015,
-    docType: "BLOG",
-    field: "NEXTJS",
-    title: "Next.js - App Router: Routing Fundamentals",
-    maxParticipants: 10,
-    applicationDate: "2024-01-09T08:00:00",
-    deadline: "2024-02-22T23:59:59",
-    status: "ACCEPTED",
-    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
-  },
-  {
-    id: 1014,
-    docType: "BLOG",
-    field: "NEXTJS",
-    title: "Next.js - App Router: Routing Fundamentals",
-    maxParticipants: 10,
-    applicationDate: "2024-01-08T09:00:00",
-    deadline: "2024-02-22T23:59:59",
-    status: "DELETED",
-    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
-  },
-  {
-    id: 2022,
-    docType: "OFFICIAL",
-    field: "NEXTJS",
-    title: "Next.js - App Router: Routing Fundamentals",
-    maxParticipants: 10,
-    applicationDate: "2024-01-16T09:00:00",
-    deadline: "2024-02-24T23:59:59",
-    status: "WAITING",
-    docUrl: "https://www.youtube.com/embed/T8S8aS9vswE",
-  },
-];
 
 export default function MyApplicationDetailPage() {
   const router = useRouter();
   const { id } = router.query;
 
-  const challenge = seedData.find((item) => item.id === Number(id));
+  const [challenge, setChallenge] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (id) {
+      const fetchChallenge = async () => {
+        try {
+          setLoading(true);
+          const data = await getChallenge(id);
+          setChallenge(data);
+        } catch (error) {
+          setError("챌린지를 불러오는데 실패했습니다.");
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchChallenge();
+    }
+  }, [id]);
+
+  const handleDelete = async () => {
+    try {
+      await deleteChallenges(id);
+      alert("챌린지가 취소되었습니다.");
+      router.push("/me/application");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  if (loading) {
+    return <Loader msg="챌린지를 불러오는 중" />;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   if (!challenge) {
     return <div>해당 챌린지를 찾을 수 없습니다.</div>;
@@ -154,7 +71,7 @@ export default function MyApplicationDetailPage() {
 
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>{challenge.title}</h1>
-          <KebabMenu />
+          <CancelMenu onDelete={handleDelete} />
         </div>
 
         <div className={styles.docTypeContainer}>
@@ -164,7 +81,7 @@ export default function MyApplicationDetailPage() {
         <p className={styles.description}>{challenge.description}</p>
 
         <InfoContainer
-          applicationDate={challenge.applicationDate}
+          applicationDate={challenge.createdAt}
           deadline={challenge.deadline}
           maxParticipants={challenge.maxParticipants}
         />
