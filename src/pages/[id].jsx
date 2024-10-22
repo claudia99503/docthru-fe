@@ -12,12 +12,15 @@ import ParticipationStatus from '@/components/challenge/ParticipationStatus';
 import BestRecWork from '@/components/challenge/BestRecWork';
 
 import styles from '@/styles/pages/Home.module.css';
-// import { challengeDetail, participantsList } from '../../mockup/challenge';
 
 export default function ChallengeDetailPage() {
   const router = useRouter();
   const { id: challengeId } = router.query;
-  const [validId, setValidId] = useState(null); 
+  const [validId, setValidId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedOption, setSelectedOption] = useState({
+    page: 1,
+  });
 
   useEffect(() => {
     if (challengeId) {
@@ -25,22 +28,42 @@ export default function ChallengeDetailPage() {
     }
   }, [challengeId]);
 
-  const { data: challengeData, refetch: refetchChallenge, isLoading: isChallengeLoading} = useGetChallengeDetail(validId, {
+  const {
+    data: challengeData,
+    refetch: refetchChallenge,
+    isLoading: isChallengeLoading,
+  } = useGetChallengeDetail(validId, {
     enabled: !!validId,
   });
 
-  const { data: worksData, refetch: refetchWork, isLoading: isWorkLoading } = useGetWorkList(validId, {
+  const {
+    data: worksData,
+    refetch: refetchWork,
+    isLoading: isWorkLoading,
+  } = useGetWorkList(validId, selectedOption, {
     enabled: !!validId,
   });
-  
+
+  const handleOptionChange = (option) => {
+    setSelectedOption((pev) => ({ ...pev, ...option }));
+  };
+
   useEffect(() => {
     if (validId) {
-      refetchChallenge();  
-      refetchWork();        
+      refetchChallenge();
+      refetchWork();
     }
   }, [validId, refetchChallenge, refetchWork]);
 
-  if ( isChallengeLoading || isWorkLoading ) {
+  useEffect(() => {
+    const option = {
+      page: currentPage,
+    };
+
+    handleOptionChange(option);
+  }, [currentPage]);
+
+  if (isChallengeLoading || isWorkLoading) {
     return <Loader />;
   }
 
@@ -91,11 +114,17 @@ export default function ChallengeDetailPage() {
           content="챌린지에 대한 상세 정보를 제공합니다."
         />
       </Head>
-      <div className={styles.mainContainer}>
-        <ChallengeDetailInfo list={challengeData} />
-        {worksData?.bestList && <BestRecWork list={worksData.bestList} />}
-        <ParticipationStatus list={worksData} />
-      </div>
+      {challengeData ? (
+        <div className={styles.mainContainer}>
+          <ChallengeDetailInfo list={challengeData} />
+          {worksData?.bestList && !getPassedDeadline(challengeData.deadline) ? (
+            <BestRecWork list={worksData.bestList} />
+          ) : null}
+          <ParticipationStatus list={worksData} onPageChange={setCurrentPage} />
+        </div>
+      ) : (
+        <>챌린지 X || 권한 없음 || 경로 확인 필요</>
+      )}
     </>
   );
 }

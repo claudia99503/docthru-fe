@@ -10,8 +10,8 @@ import images from '@/variables/images';
 const SeveralBestRecCards = ({ list, index }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // const { list = [], meta = {} } = challengeList || {};
-  const lastModifiedAt = list.lastModifiedAt;
+  // const lastModifiedAt = list.lastModifiedAt;
+  const lastModifiedAt = list.createdAt;
 
   const getWidth = () => {
     return index == 'notLast' ? {width:'826px'} : {width:'890px'}

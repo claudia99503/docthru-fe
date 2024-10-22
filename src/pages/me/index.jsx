@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useGetOnGoingChallenge } from '@/service/queries/user';
 
@@ -19,7 +19,7 @@ export default function MyChallengePage() {
   const [params, setParams] = useState();
 
   const { data, isPending } = useGetOnGoingChallenge();
-  const { list = [], meta = {} } = data || {};
+  const { challenges : list = [], meta = {} } = data || {};
   const { totalPages } = meta;
 
   // console.log('data', data)
@@ -77,7 +77,7 @@ export default function MyChallengePage() {
           site={'home'}
         />
       </div>
-      {meta && (
+      {list.length > 0 && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages} // 계산된 totalPages 사용

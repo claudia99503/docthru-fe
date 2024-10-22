@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useGetChallenges } from '@/service/queries/challenge';
 
@@ -51,7 +51,7 @@ export default function MyFinishedChallengePage() {
     (currentPage - 1) * limit,
     currentPage * limit
   );
-  console.log(currentList);
+  
   return (
     <>
       <Head>
@@ -77,7 +77,7 @@ export default function MyFinishedChallengePage() {
           site={'done'}
         />
       </div>
-      {meta && (
+      {list.length > 0 && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages} // 계산된 totalPages 사용

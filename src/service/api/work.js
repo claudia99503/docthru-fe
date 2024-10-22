@@ -39,7 +39,7 @@ export async function createWorkFeedback(id, data) {
 
 // *****구분선***** //
 /** /:id GET - 챌린지 상세 조회 */
-export async function getWorkList(id) {
-  const res = await axios.get(`${PATH}/list/${id}`);
+export async function getWorkList(id, params) {
+  const res = await axios.get(`${PATH}/list/${id}`, {params});
   return res.data;
 }
