@@ -4,15 +4,13 @@ import styles from './AllCardSection.module.css';
 
 const AllCardSection = ({
   list,
-  searchTerm, 
-  selectedOption,
   site,
 }) => {
 
   return (
     <>
       <div className={styles.challengeTableWrapper}>
-        { list? (
+        { list.length > 0? (
           <>
             <div className={styles.AllCardSection}>
               {list.map((challenge) => (

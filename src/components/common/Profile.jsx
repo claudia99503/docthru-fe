@@ -16,8 +16,8 @@ export function ProfileImage({ user, width = '32px' }) {
   );
 }
 
-export function Profile({ user, size, type, date }) {
-  const userGrade = user.grade === 'EXPERT' ? '전문가' : '일반';
+export function Profile({ user = {}, size, type, date }) {
+  const userGrade = user?.grade === 'EXPERT' ? '전문가' : '일반';
   // const isTypeSimple = type === 'simple';
   const isTypeNotSimple = type + '';
   const isSmall = size === 'small';

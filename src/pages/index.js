@@ -90,11 +90,13 @@ export default function Home(initialData) {
               site={'home'}
             />
           </div>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages} // 계산된 totalPages 사용
-            onPageChange={setCurrentPage}
-          />
+          {list.length > 0 && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages} // 계산된 totalPages 사용
+              onPageChange={setCurrentPage}
+            />
+          )}
         </>
       )}
     </>
