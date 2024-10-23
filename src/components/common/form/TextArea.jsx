@@ -28,7 +28,6 @@ export default function TextArea({
         className={`${addError} ${className}`}
         {...register(name, {
           ...validations,
-          onBlur: () => trigger(name),
           onChange: () => trigger(name),
         })}
         onFocus={() => {

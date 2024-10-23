@@ -6,6 +6,17 @@
   padding: 48px;
   gap: 16px;
 }
+
+.chatIcon {
+  width: 140px;
+  height: 140px;
+}
+
+.disabled {
+  --path-fill: var(--grey-50);
+  --circle-fill: var(--grey-300);
+}
+
 .text {
   font-size: 16px;
   font-weight: 400;

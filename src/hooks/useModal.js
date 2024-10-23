@@ -1,6 +1,7 @@
 'use client';
 
 import AlertModal from '@/components/modals/AlertModal';
+import TwoBtnModal from '@/components/modals/TwoBtnModal';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 
@@ -31,7 +32,14 @@ export function useModalAction() {
     }
   };
 
-  const onModalClose = () => {
+  const onModalCancel = () => {
+    if (modalRef.current) {
+      modalRef.current.close();
+      setIsModalOpen(false);
+    }
+  };
+
+  const onModalConfirm = () => {
     if (modalRef.current) {
       modalRef.current.close();
       setIsModalOpen(false);
@@ -51,20 +59,47 @@ export function useModalAction() {
   return {
     modalRef,
     onModalOpen,
-    onModalClose,
+    onModalConfirm,
     isModalOpen,
     modalMsg,
+    onModalCancel,
   };
 }
 
 export const useAlertModal = () => {
-  const { modalRef, onModalOpen, onModalClose, isModalOpen, modalMsg } =
+  const { modalRef, onModalOpen, onModalConfirm, isModalOpen, modalMsg } =
     useModalAction();
 
   const Modal = () => {
     return (
       isModalOpen && (
-        <AlertModal msg={modalMsg} ref={modalRef} onClose={onModalClose} />
+        <AlertModal msg={modalMsg} ref={modalRef} onClose={onModalConfirm} />
+      )
+    );
+  };
+
+  return { Modal, onModalOpen };
+};
+
+export const useDeleteModal = () => {
+  const {
+    modalRef,
+    onModalOpen,
+    onModalConfirm,
+    onModalCancel,
+    isModalOpen,
+    modalMsg,
+  } = useModalAction();
+
+  const Modal = () => {
+    return (
+      isModalOpen && (
+        <TwoBtnModal
+          msg={modalMsg}
+          ref={modalRef}
+          onConfirm={onModalConfirm}
+          onCancel={onModalCancel}
+        />
       )
     );
   };

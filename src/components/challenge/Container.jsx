@@ -23,6 +23,10 @@ const Container = ({
     return `${date.toLocaleString('ko-KR', options)} 마감`;
   };
 
+  const getUri = () => {
+    return !list.isParticipated ? `/work/${id}/edit` : `/work/?Id=${id}/new`;
+  }
+
   const getButtonType = () => {
     return !list.isParticipated ? '작업 도전하기' : '도전 계속하기';
   };
@@ -55,7 +59,8 @@ const Container = ({
             <button
               className={styles['gray-button']}
               style={getButtonStyles()}
-              onClick={() => router.push(`/work/create/?Id=${id}`)}
+              
+              onClick={() => router.push(getUri)}
             >
               {getButtonType()}
             </button>
@@ -67,7 +72,7 @@ const Container = ({
           <button
             className={styles['gray-button']}
             style={getButtonStyles()}
-            onClick={() => router.push(`/work/edit/?Id=${id}`)}
+            onClick={() => router.push(getUri)}
           >
             {getButtonType()}
           </button>

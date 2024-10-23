@@ -6,10 +6,22 @@
   padding: 16px;
   background-color: var(--grey-50);
   border-radius: 12px;
+  position: relative;
 }
 .top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
+}
+
+.edit .top {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.buttons {
+  position: absolute;
+  top: 17px;
 }

@@ -9,14 +9,22 @@ export default function WorkDetail({ data }) {
   if (!data) {
     return <div>데이터 없음</div>;
   }
+  const id = data.id;
+  const { challenge, isEditable, ...rest } = data;
 
-  const { challenge, ...rest } = data;
+  const handleEdit = (id) => {
+    router.push('edit');
+  };
+
+  const handleDelete = () => {};
 
   return (
     <section className={styles.WorkDetail}>
       <div className={styles.heading}>
         <h1 className={styles.title}>{data.challenge.title}</h1>
-        <KebabMenu />
+        {isEditable && (
+          <KebabMenu onEdit={handleEdit} onDelete={handleDelete} />
+        )}
       </div>
       <DocTypeChip field={challenge.field} docType={challenge.docType} />
       <div className={styles.info}>
