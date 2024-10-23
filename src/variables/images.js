@@ -9,14 +9,17 @@ const assets = {
     arrowMainRight: '/assets/icons/ic_arrow_main_right.svg',
     arrowRight: '/assets/icons/ic_arrow_right.svg',
     arrowUp: '/assets/icons/ic_arrow_up.svg',
-    arrowWhite: '/assets/icons/ic_arrow_white.svg',
     bellAlert: '/assets/icons/ic_bell_alert.svg',
     bellEmpty: '/assets/icons/ic_bell_empty.svg',
     bold: '/assets/icons/ic_bold.svg',
     bulletList: '/assets/icons/ic_bullet_list.svg',
     calender: '/assets/icons/ic_calender.svg',
+<<<<<<< HEAD
     checkboxIn: '/assets/icons/ic_checkbox_in.svg',
     checkboxOut: '/assets/icons/ic_checkbox_out.svg',
+=======
+    check: '/assets/icons/ic_check.svg',
+>>>>>>> 28768b6 (:sparkles: [Feat] TwoBtnModal 컴포넌트 추가 두개 버튼 모달)
     circle: '/assets/icons/ic_circle.svg',
     crown: '/assets/icons/ic_crown.svg',
     deadline: '/assets/icons/ic_deadline.svg',
@@ -58,7 +61,6 @@ const assets = {
   },
   images: {
     black: '/assets/images/img_black.svg',
-    check: '/assets/images/img_check.svg',
     logo: '/assets/images/img_logo.svg',
     profileAdmin: '/assets/images/img_profile_admin.svg',
     profileMember: '/assets/images/img_profile_member.svg',

@@ -11,6 +11,7 @@ export default function TextArea({
   const {
     register,
     formState: { errors },
+    trigger,
     clearErrors,
   } = useFormContext();
 
@@ -27,6 +28,7 @@ export default function TextArea({
         className={`${addError} ${className}`}
         {...register(name, {
           ...validations,
+          onChange: () => trigger(name),
         })}
         onFocus={() => {
           clearErrors(name);

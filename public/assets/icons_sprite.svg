@@ -66,6 +66,10 @@
 <path d="M2.84766 10.25H24.4865" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
 </symbol>
 
+<symbol id="ic_check" viewBox="0 0 11 10">
+<path d="M1.10718 5.34911L4.18753 8.50003L9.75004 1.35718" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
+
 <symbol id="ic_circle" viewBox="0 0 40 40"
  >
   <circle class="circle" cx="20" cy="20" r="20" fill="currentColor"/>

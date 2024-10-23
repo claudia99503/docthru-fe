@@ -32,7 +32,7 @@ export default function FeedbackForm({ id }) {
         <TextArea
           name="content"
           placeholder="피드백을 남겨주세요"
-          className={s.textArea}
+          className={s.textarea}
           validations={FEEDBACK.CONTENT}
         />
         <button className={s.submitButton} type="submit" disabled={!isValid}>

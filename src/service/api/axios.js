@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { createLogout } from './auth';
 
 // const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const API_URL = process.env.NEXT_PUBLIC_DEV_API_URL;
@@ -14,9 +13,9 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('accessToken');
-      if (token) {
-        config.headers['Authorization'] = `Bearer ${token}`;
+      const accessToken = localStorage.getItem('accessToken');
+      if (accessToken) {
+        config.headers['Authorization'] = `Bearer ${accessToken}`;
       }
     }
 

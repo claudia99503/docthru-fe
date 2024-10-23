@@ -28,7 +28,11 @@ export default function UpdateFeedbackForm({ onSubmit, initialData, onClick }) {
         onSubmit={handleSubmit(onSubmit)}
         className={styles.UpdateFeedbackForm}
       >
-        <TextArea name="content" validations={FEEDBACK.CONTENT} />
+        <TextArea
+          name="content"
+          validations={FEEDBACK.CONTENT}
+          className={styles.textarea}
+        />
         <div className={styles['button-container']}>
           <Button
             variant="cancel"
@@ -47,6 +51,7 @@ export default function UpdateFeedbackForm({ onSubmit, initialData, onClick }) {
             borderRadius="8px"
             fontSize="14px"
             padding="4px 10px"
+            variant="black"
           >
             수정 완료
           </Button>
