@@ -4,19 +4,26 @@ import Image from 'next/image';
 import assets from '../../variables/images';
 import styles from './Notification.module.css';
 import { fetchNotifications, markAsRead } from '../../service/api/notification';
+import Loader from '../common/Loader';
 
 const Notification = () => {
   const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [loading, setLoading] = useState(false); // 로딩 상태 추가
+  const [error, setError] = useState(null); // 에러 상태 추가
   const { user } = useAuth();
 
   const getNotifications = async () => {
     if (!user) return;
+    setLoading(true);
     try {
-      const response = await fetchNotifications(user.id, true); // includeRead를 true로 설정
+      const response = await fetchNotifications(user.id, true);
       setNotifications(response);
+      setError(null);
     } catch (error) {
-      console.error('알림을 가져오는 중 오류가 발생했습니다:', error);
+      setError('알림을 가져오는 중 문제가 발생했습니다. 다시 시도해주세요.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -84,7 +91,11 @@ const Notification = () => {
       </button>
       {showNotifications && (
         <div className={styles.notificationList}>
-          {notifications.length > 0 ? (
+          {loading ? ( // 로딩 중일 때 Loader 컴포넌트 표시
+            <Loader msg="알림을 불러오는 중" />
+          ) : error ? ( // 에러가 있으면 에러 메시지 표시
+            <p>{error}</p>
+          ) : notifications.length > 0 ? (
             notifications.map((notification) => (
               <div
                 key={notification.id}
