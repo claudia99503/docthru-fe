@@ -30,7 +30,7 @@ const ChallengeDetailInfo = ({ list, id }) => {
             <DocTypeChip field={list.field} docType={list.docType} />
             <div className={styles.description}>{list.description}</div>
             <div className={styles['user-profile']}>
-              {user && <Profile user={user} width="24px" type="simple2" />}
+              {user && <Profile user={user} width="24px" type="simple" />}
             </div>
           </div>
           <Container

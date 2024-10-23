@@ -1,11 +1,12 @@
 .ChallengeSearchBarLarge {
   display: flex;
   align-items: center;
-  background-color: #ffffff;
+  background-color: white;
   border: 1px solid var(--grey-200);
   border-radius: 20px;
   height: 40px;
   width: 100%;
+  min-width: 672px;
 }
 
 .icon {
@@ -16,7 +17,6 @@
   flex-grow: 1;
   border: none;
   background-color: transparent;
-  font-family: Pretendard;
   font-weight: 400;
   color: var(--grey-400);;
   padding-left: 8px;
@@ -29,11 +29,6 @@
 
 /* 데스크탑 버전 */
 @media (min-width: 1200px) {
-  .ChallengeSearchBar {
-    max-width: 996px;
-    width: 100%;
-  }
-
   .input {
     font-size: 16px;
     line-height: 19.09px;
@@ -43,7 +38,7 @@
 /* 태블릿 버전 */
 @media (min-width: 744px) and (max-width: 1199px) {
   .ChallengeSearchBarLarge {
-    max-width: 696px;
+    min-width: 576px;
   }
 
   .input {
@@ -55,7 +50,7 @@
 /* 모바일 버전 */
 @media (max-width: 743px) {
   .ChallengeSearchBarLarge {
-    max-width: 343px;
+    min-width: 237px;
   }
 
   .input {

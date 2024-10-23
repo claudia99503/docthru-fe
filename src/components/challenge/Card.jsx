@@ -92,7 +92,7 @@ const Card = ({ data, site }) => {
   function onDelete() {}
 
   return (
-    <div className={styles.card}>
+    <div className={styles.Card}>
       <div className={styles['card-top']}>
         {getCondition()}
         <div className={`${styles.menuButton}`}>

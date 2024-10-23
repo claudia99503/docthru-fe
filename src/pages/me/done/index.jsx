@@ -50,7 +50,7 @@ export default function MyFinishedChallengePage() {
           content="사용자가 완료한 챌린지 목록을 확인하는 페이지입니다."
         />
       </Head>
-      <div>
+      <div className={styles['tab-container']}>
         <div>
           <TabNavigation activeTab="completed" />
         </div>
@@ -65,7 +65,7 @@ export default function MyFinishedChallengePage() {
         <Loader />
       ) : (
         <>
-          <div>
+          <div className={styles['card-container']}>
             <AllCardSection list={list} searchTerm={searchTerm} site={'done'} />
           </div>
           {list.length > 0 && (

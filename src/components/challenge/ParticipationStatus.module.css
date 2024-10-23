@@ -1,17 +1,16 @@
 .ParticipationStatus {
-  width: 890px;
-  gap: 24px;
+  width: 100%;
+  gap: 12px;
+  min-height: 165px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   border: 2px solid var(--grey-800);
   border-radius: 16px;
   padding: 16px 24px 23px;
   font-size: 18px;
   font-weight: 600;
   color: var(--grey-800);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  min-height: 165px;
-  justify-content: center;
 }
 
 .ParticipationStatus-top {
@@ -40,6 +39,13 @@
   text-align: center;
 }
 
+.participants-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
 .participant-row {
   display: flex;
   align-items: center;
@@ -53,9 +59,6 @@
   border-bottom: none;
   margin-top: 0;
   padding-bottom: 0;
-}
-
-.participant-info {
 }
 
 .participant-left {
@@ -109,4 +112,13 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+}
+
+/* 태블릿 버전 */
+@media (min-width: 744px) and (max-width: 1199px) {
+
+}
+
+/* 모바일 버전 */
+@media (max-width: 743px) {
 }

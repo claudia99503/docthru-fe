@@ -50,7 +50,7 @@ export default function MyChallengePage() {
           content="사용자가 현재 참여 중인 챌린지 목록을 확인하는 페이지입니다."
         />
       </Head>
-      <div>
+      <div className={styles['tab-container']}>
         <div>
           <TabNavigation activeTab="ongoing" />
         </div>
@@ -65,7 +65,7 @@ export default function MyChallengePage() {
         <Loader />
       ) : (
         <>
-          <div>
+          <div className={styles['card-container']}>
             <AllCardSection
               list={list}
               searchTerm={searchTerm}

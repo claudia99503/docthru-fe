@@ -50,7 +50,12 @@ const Container = ({ list, id }) => {
       {!isMobile ? (
         <>
           <div className={styles['view-original-button-row']}>
-            <button className={styles['primary-button']}>원문 보기</button>
+            <button
+              className={styles['primary-button']}
+              onClick={() => router.push(`/work/new/?id=${id}`)}
+            >
+              <a href={list.docUrl}>원문 링크</a>
+            </button>
           </div>
           <div className={styles['challenge-button-row']}>
             <button
@@ -64,7 +69,12 @@ const Container = ({ list, id }) => {
         </>
       ) : (
         <div className={styles['mobile-buttons-row']}>
-          <button className={styles['primary-button']}>원문 보기</button>
+          <button
+            className={styles['primary-button']}
+            onClick={() => router.push(`/work/new/?id=${id}`)}
+          >
+            원문 보기
+          </button>
           <button
             className={styles['gray-button']}
             style={getButtonStyles()}
