@@ -8,7 +8,7 @@ const TokenService = {
   get: () => (CAN_USE_DOM ? localStorage.getItem('accessToken') : null),
   set: (token) => CAN_USE_DOM && localStorage.setItem('accessToken', token),
   remove: () => CAN_USE_DOM && localStorage.removeItem('accessToken'),
-  redirectToLogin: () => CAN_USE_DOM && (window.location.href = '/login'),
+  redirectToLogin: () => CAN_USE_DOM && (window.location.href = '/auth/login'),
 };
 
 const instance = axios.create({
@@ -53,7 +53,7 @@ instance.interceptors.response.use(
 
     // 401 에러 처리
     if (CAN_USE_DOM && error.response?.status === 401) {
-      const subCode = error.response?.data?.subCode;
+      const subCode = error.response?.data?.error?.subCode;
 
       switch (subCode) {
         // 토큰 만료 (401.1)
@@ -116,6 +116,7 @@ instance.interceptors.response.use(
         // 기본 401 에러
         default: {
           console.error('비인가 접근입니다');
+
           break;
         }
       }
@@ -123,7 +124,7 @@ instance.interceptors.response.use(
       return Promise.reject({
         status: error.response.status,
         subCode,
-        message: error.response?.data?.message || '인증 실패',
+        message: error.response?.data?.error?.message || '인증 실패',
       });
     }
 
