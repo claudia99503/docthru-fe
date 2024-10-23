@@ -38,16 +38,16 @@ const Card = ({ data, site }) => {
       );
     } else if (site == 'done') {
       return (
-          <button
-            className={`${styles.challengeButton} ${
-              router.pathname === `/work/${myData.id}` ? styles.active : ''
-            }`}
-            onClick={() => handleTabClick(`/work/${myData.id}`)}
-            style={{ border: 'none' }}
-          >
-            <span>내 작업물 보기</span>
-            <img src={images.icons.document} alt="document icon" />
-          </button>
+        <button
+          className={`${styles.challengeButton} ${
+            router.pathname === `/work/${myData.id}` ? styles.active : ''
+          }`}
+          onClick={() => handleTabClick(`/work/${myData.id}`)}
+          style={{ border: 'none' }}
+        >
+          <span>내 작업물 보기</span>
+          <img src={images.icons.document} alt="document icon" />
+        </button>
       );
     }
   };
@@ -91,13 +91,20 @@ const Card = ({ data, site }) => {
   function onEdit() {}
   function onDelete() {}
 
+  const isAdmin = false;
+
   return (
     <div className={styles.Card}>
       <div className={styles['card-top']}>
         {getCondition()}
-        <div className={`${styles.menuButton}`}>
-          <KebabMenu onEdit={onEdit} onDelete={onDelete} />
-        </div>
+        {isAdmin ? (
+          <div className={`${styles.menuButton}`}>
+            <KebabMenu onEdit={onEdit} onDelete={onDelete} />
+          </div>
+        ) : (
+          <></>
+        )}
+
         <div
           className={styles['challenge-title']}
           onClick={() => handleTabClick(`/${myData.id}`)}
