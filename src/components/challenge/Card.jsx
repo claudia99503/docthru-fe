@@ -23,8 +23,9 @@ const Card = ({ data, site }) => {
     return `${date.toLocaleString('ko-KR', options)} 마감`;
   };
 
+  console.log(site)
   const getBtn = () => {
-    if (site == 'onGoing') {
+    if (site == 'ongoing') {
       return (
         <button
           className={`${styles.challengeButton} ${
