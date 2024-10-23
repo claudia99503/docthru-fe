@@ -9,7 +9,7 @@ export async function getChallengeList({
   status,
   search,
   page = '1',
-  limit = '10',
+  limit = '5',
 }) {
   const params = {
     ...(field && { field }),

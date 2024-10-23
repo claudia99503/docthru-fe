@@ -10,6 +10,8 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-height: 165px;
+  justify-content: center;
 }
 
 .ParticipationStatus-top {

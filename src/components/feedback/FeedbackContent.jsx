@@ -4,62 +4,84 @@ import { Profile } from '../common/Profile';
 import { useMutateFeedback } from '@/service/mutations/feedback';
 import UpdateFeedbackForm from './UpdatedFeedbackForm';
 import KebabMenu from '../common/KebabMenu';
+import cn from '@/utils/clsx';
+import { useDeleteModal } from '@/hooks/useModal';
 
 export default function FeedbackContent({ feedback }) {
   const [isEditMode, setIsEditMode] = useState(false);
-  const [action, setAction] = useState('');
 
-  const { user, workId } = feedback;
+  const { onModalOpen, Modal } = useDeleteModal();
 
-  const { mutate } = useMutateFeedback({
-    id: feedback.id,
-    workId,
-    action,
-  });
+  const { user } = feedback;
+
+  const { mutate } = useMutateFeedback({});
 
   const handleEditClick = () => {
     setIsEditMode(true);
-    setAction('edit');
   };
 
   const handleCancelClick = () => {
     setIsEditMode(false);
-    setAction('');
   };
 
   const handleDelete = () => {
-    setAction('delete');
-    mutate();
-  };
-  const handleUpdateSubmit = (data) => {
-    const updateFeedback = { content: data.content };
-    mutate(updateFeedback, {
-      onSuccess: () => {
-        console.log('successUpdateFeedback', updateFeedback);
-        setIsEditMode(false);
-        setAction('');
-      },
-    });
+    mutate({ id: feedback.id, action: 'delete' });
   };
 
-  return !isEditMode ? (
-    <li className={styles.FeedbackContent}>
-      <div className={styles.top}>
-        <Profile user={user} date={feedback.updatedAt} />
-        <KebabMenu onEdit={handleEditClick} onDelete={handleDelete} />
-      </div>
-      <p className={styles.text}>{feedback.content}</p>
-    </li>
-  ) : (
-    <li className={styles.FeedbackContent}>
-      <div className={styles.top}>
-        <Profile user={user} date={feedback.updatedAt} />
-        <UpdateFeedbackForm
-          onSubmit={handleUpdateSubmit}
-          initialData={feedback}
-          onClick={handleCancelClick}
+  const handleUpdateSubmit = (data) => {
+    const content = data.content.trim('');
+    const updateFeedback = { content };
+    mutate(
+      { id: feedback.id, action: 'edit', ...updateFeedback },
+      {
+        onSuccess: () => {
+          console.log('successUpdateFeedback', updateFeedback);
+          setIsEditMode(false);
+        },
+      }
+    );
+  };
+
+  const renderKebab = () => {
+    if (feedback.isEditable)
+      return (
+        <KebabMenu
+          onEdit={handleEditClick}
+          onDelete={() =>
+            onModalOpen({
+              msg: '피드백을 삭제하시겠어요?',
+              action: handleDelete,
+            })
+          }
         />
-      </div>
-    </li>
+      );
+    else return;
+  };
+
+  return (
+    <>
+      {!isEditMode ? (
+        <li className={cn(styles.FeedbackContent)}>
+          <div className={styles.top}>
+            <Profile user={user} date={feedback.updatedAt} />
+            {renderKebab()}
+          </div>
+          <p className={styles.text}>{feedback.content}</p>
+        </li>
+      ) : (
+        <li className={cn(styles.FeedbackContent, styles.edit)}>
+          <div className={styles.top}>
+            <Profile user={user} date={feedback.updatedAt} />
+            <UpdateFeedbackForm
+              onSubmit={handleUpdateSubmit}
+              initialData={feedback}
+              onClick={handleCancelClick}
+              className={styles.buttons}
+            />
+          </div>
+        </li>
+      )}
+      <Modal />
+    </>
   );
 }

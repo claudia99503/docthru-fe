@@ -12,16 +12,12 @@ export default function Button({
   width = '',
   height = '',
   padding = '',
-  fontSize = '16px',
-  fontWeight = '600',
+  fontSize = '',
+  fontWeight = '',
 }) {
   return (
     <button
-      className={cn(
-        styles.button,
-        styles[`button-${variant}`],
-        className && styles[className]
-      )}
+      className={cn(styles.button, styles[`button-${variant}`], className)}
       onClick={onClick}
       disabled={disabled}
       type={type}

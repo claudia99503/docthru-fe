@@ -6,6 +6,7 @@ import { useLogout } from '@/hooks/useAuth';
 
 export default function ProfileDropDown({ user }) {
   const logout = useLogout();
+  console.log(user);
 
   const isUser = user?.role === 'USER';
 

@@ -24,12 +24,12 @@ const createIdName = (str) => {
   const prefix = splitName[0];
 
   const toCamelCase = splitName
-    .splice(1) // 언더스코어로 분리
+    .splice(1)
     .map((word, index) =>
       index === 0
         ? word
         : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-    ) // 첫 글자만 대문자로
+    )
     .join('');
 
   return `${prefix}_${toCamelCase}`;
