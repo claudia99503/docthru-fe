@@ -5,18 +5,14 @@ import assets from '@/variables/images';
 import { useRouter } from 'next/router';
 
 const Container = ({
-  deadline,
-  participants,
-  maxParticipants,
-  progress = false,
-  id,
-  type,
+  list,
+  id
 }) => {
   const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
   const router = useRouter();
 
   const getButtonStyles = () => {
-    return progress
+    return !list.progress
       ? { backgroundColor: '#262626', color: '#FFFFFF' }
       : { backgroundColor: '#E5E5E5', color: '#737373' };
   };
@@ -27,8 +23,8 @@ const Container = ({
     return `${date.toLocaleString('ko-KR', options)} 마감`;
   };
 
-  const getButtonType = (type) => {
-    return type == 'start' ? '작업 도전하기' : '도전 계속하기';
+  const getButtonType = () => {
+    return !list.isParticipated ? '작업 도전하기' : '도전 계속하기';
   };
 
   return (
@@ -39,14 +35,14 @@ const Container = ({
           alt="deadline icon"
           className={styles.icon}
         />
-        <span className={styles.text}>{formatDeadline(deadline)}</span>
+        <span className={styles.text}>{formatDeadline(list.deadline)}</span>
         <img
           src={assets.icons.person}
           alt="person icon"
           className={styles.icon}
         />
         <span className={styles.text}>
-          {participants}/{maxParticipants}
+          {list.participants}/{list.maxParticipants}
         </span>
       </div>
 
@@ -61,7 +57,7 @@ const Container = ({
               style={getButtonStyles()}
               onClick={() => router.push(`/work/create/?Id=${id}`)}
             >
-              {getButtonType(type)}
+              {getButtonType()}
             </button>
           </div>
         </>
@@ -73,7 +69,7 @@ const Container = ({
             style={getButtonStyles()}
             onClick={() => router.push(`/work/edit/?Id=${id}`)}
           >
-            {getButtonType(type)}
+            {getButtonType()}
           </button>
         </div>
       )}

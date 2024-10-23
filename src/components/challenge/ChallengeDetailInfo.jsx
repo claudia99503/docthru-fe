@@ -7,28 +7,18 @@ import Container from './Container';
 import styles from './ChallengeDetailInfo.module.css';
 
 const ChallengeDetailInfo = ({ list, id }) => {
-  const [type, setType] = useState('start');
-  const [progress, setProgress] = useState(true);
   const [paramId, setParamId] = useState(list.id);
 
   const user = list?.writer;
 
   const getTypes = () => {
-    const today = new Date();
-    const deadline = new Date(list?.deadline);
-    
-    if(deadline <= today) {
-      setProgress(false);
-    }
-
-    if(list.isParticipated) {
-      setType('keep')
-      setParamId(id)
+    if (list.isParticipated) {
+      setParamId(id);
     }
   };
 
   useEffect(() => {
-    getTypes()
+    getTypes();
   }, []);
 
   return (
@@ -40,16 +30,12 @@ const ChallengeDetailInfo = ({ list, id }) => {
             <DocTypeChip field={list.field} docType={list.docType} />
             <div className={styles.description}>{list.description}</div>
             <div className={styles['user-profile']}>
-              {user && <Profile user={user} width="24px" type="simple2" /> }
+              {user && <Profile user={user} width="24px" type="simple2" />}
             </div>
           </div>
           <Container
-            deadline={list.deadline}
-            participants={list.participants}
-            maxParticipants={list.maxParticipants}
-            progress={progress}
+            list={list}
             id={paramId}
-            type={type}
           />
         </div>
       ) : (
