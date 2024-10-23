@@ -67,34 +67,7 @@ export default function ChallengeDetailPage() {
     return <Loader />;
   }  
 
-  // const participants = worksData?.list?.map(item => ( {userId: item.userId}))
-
-  //추후 삭제 예정 - 해당 챌린지와 챌린지에 참여한 사람만 나타냄
-  // const challengeData = challengeDetail;
-  // const worksData = participantsList;
-  // const data = challengeData[challengeId - 1];
-
-  // const bestList = worksData?.bestList.filter((item) => {
-  //   if (item.challengeId == challengeId) return item;
-  // });
-  // const list = worksData?.list.filter((item) => {
-  //   if (item.challengeId == challengeId) return item;
-  // });
-  // const meta = {
-  //   current: 1,
-  //   totalCount: list.length,
-  //   totalPages: Math.ceil(list.length / 5),
-  // };
-
-  // const workList = {
-  //   bestList: bestList,
-  //   list: list,
-  //   meta: meta,
-  // };
-  // ------------------------------------------------------------------
-
-  // console.log('cdata', challengeData);
-
+  const workId = worksData?.list?.find(work => work.userId === challengeData.userId)?.id;
 
   // 추후 util로 분리 예정
   const getPassedDeadline = (date) => {
@@ -107,6 +80,7 @@ export default function ChallengeDetailPage() {
   };
   // -----------------------------------------------
 
+
   return (
     <>
       <Head>
@@ -118,7 +92,7 @@ export default function ChallengeDetailPage() {
       </Head>
       {challengeData ? (
         <div className={styles.mainContainer}>
-          <ChallengeDetailInfo list={challengeData} />
+          <ChallengeDetailInfo list={challengeData} id={workId} />
           {worksData?.bestList && !getPassedDeadline(challengeData.deadline) ? (
             <BestRecWork list={worksData.bestList} />
           ) : null}

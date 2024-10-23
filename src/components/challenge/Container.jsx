@@ -2,15 +2,18 @@ import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import styles from './Container.module.css';
 import assets from '@/variables/images';
+import { useRouter } from 'next/router';
 
 const Container = ({
   deadline,
   participants,
   maxParticipants,
   progress = false,
+  id,
   type,
 }) => {
   const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
+  const router = useRouter();
 
   const getButtonStyles = () => {
     return progress
@@ -25,7 +28,7 @@ const Container = ({
   };
 
   const getButtonType = (type) => {
-    return type == 'beginning' ? '작업 도전하기' : '도전 계속하기';
+    return type == 'start' ? '작업 도전하기' : '도전 계속하기';
   };
 
   return (
@@ -53,7 +56,11 @@ const Container = ({
             <button className={styles['primary-button']}>원문 보기</button>
           </div>
           <div className={styles['challenge-button-row']}>
-            <button className={styles['gray-button']} style={getButtonStyles()}>
+            <button
+              className={styles['gray-button']}
+              style={getButtonStyles()}
+              onClick={() => router.push(`/work/create/?Id=${id}`)}
+            >
               {getButtonType(type)}
             </button>
           </div>
@@ -61,7 +68,11 @@ const Container = ({
       ) : (
         <div className={styles['mobile-buttons-row']}>
           <button className={styles['primary-button']}>원문 보기</button>
-          <button className={styles['gray-button']} style={getButtonStyles()}>
+          <button
+            className={styles['gray-button']}
+            style={getButtonStyles()}
+            onClick={() => router.push(`/work/edit/?Id=${id}`)}
+          >
             {getButtonType(type)}
           </button>
         </div>

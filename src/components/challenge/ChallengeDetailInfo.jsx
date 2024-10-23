@@ -6,9 +6,10 @@ import Container from './Container';
 
 import styles from './ChallengeDetailInfo.module.css';
 
-const ChallengeDetailInfo = ({ list }) => {
-  const [type, setType] = useState('beginning');
+const ChallengeDetailInfo = ({ list, id }) => {
+  const [type, setType] = useState('start');
   const [progress, setProgress] = useState(true);
+  const [paramId, setParamId] = useState(list.id);
 
   const user = list?.writer;
 
@@ -20,17 +21,10 @@ const ChallengeDetailInfo = ({ list }) => {
       setProgress(false);
     }
 
-  // 추후 작업 기록 여부 확인으로 변경 필요 
-    // console.log('wdata', participants);
-    // console.log('user', list.userId);
-    // const participant = participants?.filter((item) => {
-    //   console.log(item.userId)
-    //   if(item.userId == list?.userId) {
-    //     setType('beginning');
-    //   }
-    // })
-    // console.log(participant)
-  // -----------------------------------------------
+    if(list.isParticipated) {
+      setType('keep')
+      setParamId(id)
+    }
   };
 
   useEffect(() => {
@@ -54,6 +48,7 @@ const ChallengeDetailInfo = ({ list }) => {
             participants={list.participants}
             maxParticipants={list.maxParticipants}
             progress={progress}
+            id={paramId}
             type={type}
           />
         </div>

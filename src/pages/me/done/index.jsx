@@ -24,10 +24,6 @@ export default function MyFinishedChallengePage() {
   const { list = [], meta = {} } = data || {};
   const { totalPages } = meta;
 
-  console.log('data', data);
-  console.log('list', list);
-  console.log('meta', meta);
-
   const handleOptionChange = (option) => {
     setParams((pev) => ({ ...pev, ...option }));
   };
