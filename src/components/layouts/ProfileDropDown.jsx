@@ -6,15 +6,27 @@ import { useLogout } from '@/hooks/useAuth';
 
 export default function ProfileDropDown({ user }) {
   const logout = useLogout();
-  console.log(user);
-
-  const isUser = user?.role === 'USER';
-
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const dropDownRef = useRef(null);
 
+  const isUser = user?.role === 'USER';
+
   const toggleDropdown = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const handleLogout = async () => {
+    if (isLoggingOut) return;
+
+    try {
+      setIsLoggingOut(true);
+      await logout();
+    } catch (error) {
+      console.error('로그아웃 실패:', error);
+    } finally {
+      setIsLoggingOut(false);
+    }
   };
 
   useEffect(() => {
@@ -50,9 +62,10 @@ export default function ProfileDropDown({ user }) {
               <button
                 className={styles.logout}
                 type="button"
-                onClick={async () => await logout()}
+                onClick={handleLogout}
+                disabled={isLoggingOut}
               >
-                로그아웃
+                {isLoggingOut ? '로그아웃 중...' : '로그아웃'}
               </button>
             </li>
           </ul>
