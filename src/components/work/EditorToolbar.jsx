@@ -1,5 +1,6 @@
 import styles from './EditorToolbar.module.css';
 import Svg from '../common/Svg';
+import cn from '@/utils/clsx';
 
 const buttonConfig = [
   { name: 'bold', quillClass: 'bold' },
@@ -19,14 +20,14 @@ const IconButton = ({ name, quillClass, value }) => {
       type="button"
       {...(value && { value })}
     >
-      <Svg name={name} className={styles[`${name}`]} />
+      <Svg name={name} className={styles[name]} />
     </button>
   );
 };
 
 export default function EditorToolbar() {
   return (
-    <div id="toolbar" className={styles.toolbar}>
+    <div id="toolbar" className={styles.EditorToolbar}>
       {buttonConfig.map(({ name, quillClass, value }) => (
         <IconButton
           key={name}
@@ -36,18 +37,56 @@ export default function EditorToolbar() {
         />
       ))}
 
-      <select className="ql-color">
-        <option value="red"></option>
-        <option value="green"></option>
-        <option value="blue"></option>
-        <option value="orange"></option>
-        <option value="violet"></option>
-        <option value="black"></option>
-        <option defaultValue></option>
-      </select>
-      <button type="button" className={styles.colorButton}>
-        <Svg name="paint" className={styles.paint} />
-      </button>
+      <div className={styles['color-palette']}>
+        {/* 커스텀 SVG 색상 선택 버튼 */}
+        <button
+          type="button"
+          className={cn('ql-color', styles['color-button'])}
+        >
+          <Svg name="coloring" className={styles.coloring} />
+        </button>
+
+        {/* 색상 선택 항목 */}
+        <span className="ql-color ql-picker ql-color-picker">
+          <span className="ql-picker-options">
+            <span
+              className="ql-picker-item"
+              data-value="#e60000"
+              style={{ backgroundColor: '#e60000' }}
+            ></span>
+            <span
+              className="ql-picker-item"
+              data-value="#ff9900"
+              style={{ backgroundColor: '#ff9900' }}
+            ></span>
+            <span
+              className="ql-picker-item"
+              data-value="#ffff00"
+              style={{ backgroundColor: '#ffff00' }}
+            ></span>
+            <span
+              className="ql-picker-item"
+              data-value="#008a00"
+              style={{ backgroundColor: '#008a00' }}
+            ></span>
+            <span
+              className="ql-picker-item"
+              data-value="#0066cc"
+              style={{ backgroundColor: '#0066cc' }}
+            ></span>
+            <span
+              className="ql-picker-item"
+              data-value="#9933ff"
+              style={{ backgroundColor: '#9933ff' }}
+            ></span>
+            <span
+              className="ql-picker-item"
+              data-value="#ffffff"
+              style={{ backgroundColor: '#ffffff' }}
+            ></span>
+          </span>
+        </span>
+      </div>
     </div>
   );
 }

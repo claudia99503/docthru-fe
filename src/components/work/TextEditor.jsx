@@ -2,7 +2,8 @@ import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import Loader from '../common/Loader';
 import 'react-quill/dist/quill.snow.css';
-import EditorToolbar from './EditorToolBar';
+import EditorToolbar from './EditorToolbar';
+import styles from './TextEditor.module.css';
 
 const ReactQuill = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -31,15 +32,17 @@ export default function TextEditor() {
   }, [quillRef]);
 
   return (
-    <div>
+    <div className={styles.TextEditor}>
       <EditorToolbar />
-      <ReactQuill
-        ref={quillRef}
-        value={content}
-        onChange={handleContentChange}
-        modules={modules}
-      />
-      <p>Editor content:{content}</p>
+      <div className={styles.customEditor}>
+        <ReactQuill
+          ref={quillRef}
+          value={content}
+          onChange={handleContentChange}
+          modules={modules}
+          theme="default"
+        />
+      </div>
     </div>
   );
 }

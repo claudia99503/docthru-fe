@@ -16,7 +16,7 @@ export default function WorkDetailPage() {
     return <Loader />;
   }
   // console.log(data);
-  const { isClosed } = data;
+  // const { isClosed } = data;
   return (
     <>
       <Head>

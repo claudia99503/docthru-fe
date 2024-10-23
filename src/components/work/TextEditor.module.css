@@ -1,0 +1,20 @@
+.TextEditor {
+  width: 100%;
+}
+
+.TextEditor :global(.ql-container) {
+  min-height: 300px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.TextEditor :global(.ql-editor) {
+  padding: 12px 0;
+  line-height: 1.5;
+  min-height: 200px;
+}
+
+.TextEditor :global(.ql-toolbar) {
+  display: flex;
+  gap: 8px;
+}

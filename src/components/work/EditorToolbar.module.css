@@ -1,0 +1,38 @@
+.color-palette {
+  display: inline-block;
+  position: relative;
+}
+
+.color-button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 5px;
+}
+
+.color-palette :global(.ql-picker-options) {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 5px;
+  z-index: 10;
+  width: 160px;
+  border-radius: 12px;
+}
+
+.color-palette:hover :global(.ql-picker-options) {
+  display: block;
+}
+
+.color-palette :global(.ql-picker-item) {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 4px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+}
