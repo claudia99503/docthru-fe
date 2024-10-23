@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   gap: 34px;
+  line-height: 1;
 }
 .logo {
   width: 120px;

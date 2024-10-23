@@ -54,11 +54,16 @@ export function AuthProvider({ children }) {
         const { accessToken } = data;
         localStorage.setItem('accessToken', accessToken);
         queryClient.invalidateQueries({ queryKey: ['user'] });
-        getMe().then(() => {
+        getMe().then((user) => {
           setIsRedirecting(true);
+
+          const path = user.role === 'ADMIN' ? '/admin' : '/';
+          console.log('data', data);
+          console.log('path', path);
+
           onModalOpen({
             msg: '로그인 되었습니다.',
-            path: '/',
+            path,
             action: () => setIsRedirecting(false),
           });
         });

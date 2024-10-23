@@ -7,6 +7,8 @@ import Image from 'next/image';
 import Button from '@/components/common/Button';
 import cn from '@/utils/clsx';
 import Border from '@/components/common/Border';
+import ReactQuill from 'react-quill';
+import TextEditor from '@/components/work/TextEditor';
 
 //challengeId 받아야됨...
 export default function CreateWorkPage() {
@@ -60,11 +62,11 @@ export default function CreateWorkPage() {
         </div>
       </div>
 
-      <div>
-        <h1 className={styles.title}>도전하는 챌린지 제목</h1>
-      </div>
+      <h1 className={styles.title}>도전하는 챌린지 제목</h1>
 
       <Border gap="24px" />
+
+      <TextEditor />
     </>
   );
 }

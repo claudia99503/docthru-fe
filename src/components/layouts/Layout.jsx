@@ -42,8 +42,9 @@ export default function Layout({ children }) {
         return;
       }
 
-      if (user && routes.isAdminRoute && user.role !== 'ADMIN') {
-        onModalOpen({ msg: '권한이 없는 페이지 요청입니다.', path: '/' });
+      if (user && routes.isAdminRoute) {
+        if (user.role !== 'ADMIN')
+          onModalOpen({ msg: '권한이 없는 페이지 요청입니다.', path: '/' });
         return;
       }
     }
