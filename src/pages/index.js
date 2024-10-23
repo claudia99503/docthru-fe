@@ -1,60 +1,63 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { useGetChallenges } from '@/service/queries/challenge';
-import { challengeList } from '../../mockup/challenge';
 
 import Head from 'next/head';
-import ChallengeSearchBarLarge from '../components/common/ChallengeSearchBarLarge';
-import images from '../variables/images';
+import ChallengeSearchBarLarge from '@/components/common/ChallengeSearchBarLarge';
+import images from '@/variables/images';
 import Loader from '@/components/common/Loader';
 import Pagination from '@/components/application/Pagination';
 
 import AllCardSection from '@/components/challenge/AllCardSection';
-import ChallengeDropdown from '../components/challenge/ChallengeDropdown';
+import ChallengeDropdown from '@/components/challenge/ChallengeDropdown';
 
-import styles from '../styles/pages/Home.module.css';
+import styles from '@/styles/pages/Home.module.css';
 
-import { keepPreviousData } from '@tanstack/react-query';
-import { AuthProvider } from '../context/AuthProvider';
-import Notification from '../components/layouts/Notification';
+import { dehydrate, QueryClient } from '@tanstack/react-query';
+import { getChallengeList } from '@/service/api/challenge';
 
-export default function Home() {
+export default function Home(initialData) {
   const router = useRouter();
   const [limit, setLimit] = useState(5);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
   const [selectedOption, setSelectedOption] = useState({
     field: '',
     docType: '',
     status: '',
-    limit: 5,
   });
 
-  const [searchTerm, setSearchTerm] = useState('');
-  const { meta = {}, list = [] } = challengeList || {};
-  const { totalPages, page = 1 } = meta;
-  const [currentPage, setCurrentPage] = useState(page);
+  const { data = initialData, isPending } = useGetChallenges(selectedOption, {
+    enabled: true,
+  });
+  const { meta = {}, list = [] } = data || {};
+  const totalPages = meta.totalPages;
 
   const handleOptionChange = (option) => {
-    setSelectedOption((pev) => ({ ...pev, option }));
+    setSelectedOption((pev) => ({ ...pev, ...option }));
   };
 
-  // const { data, isPending } = useGetChallenges(selectedOption, {
-  //   enabled: true,
-  // });
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [
+    searchTerm,
+    selectedOption.field,
+    selectedOption.docType,
+    selectedOption.status,
+  ]);
 
-  // if (isPending) {
-  //   return <Loader />;
-  // }
+  useEffect(() => {
+    const option = {
+      search: searchTerm,
+      page: currentPage,
+    };
 
-  // 현재 페이지의 데이터만 추출
-  const currentList = list?.slice(
-    (currentPage - 1) * limit,
-    currentPage * limit
-  );
+    handleOptionChange(option);
+  }, [currentPage, searchTerm]);
 
   return (
-    <AuthProvider>
+    <>
       <Head>
         <title>챌린지 목록 페이지</title>
       </Head>
@@ -72,8 +75,6 @@ export default function Home() {
             className={styles.icon}
           />
         </button>
-        {/* Notification 컴포넌트를 여기로 이동 */}
-        <Notification />
       </div>
       <div className={styles.SearchContainer}>
         <ChallengeDropdown onOptionChange={handleOptionChange} />
@@ -82,19 +83,50 @@ export default function Home() {
           setSearchTerm={setSearchTerm}
         />
       </div>
-      <div>
-        <AllCardSection
-          list={currentList}
-          searchTerm={searchTerm}
-          selectedOption={selectedOption}
-          site={'home'}
-        />
-      </div>
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages} // 계산된 totalPages 사용
-        onPageChange={setCurrentPage}
-      />
-    </AuthProvider>
+      {isPending ? (
+        <Loader />
+      ) : (
+        <>
+          <div>
+            <AllCardSection
+              list={list}
+              searchTerm={searchTerm}
+              selectedOption={selectedOption}
+              site={'home'}
+            />
+          </div>
+          {list.length > 0 && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages} // 계산된 totalPages 사용
+              onPageChange={setCurrentPage}
+            />
+          )}
+        </>
+      )}
+    </>
   );
 }
+
+// 서버 사이드 렌더링에서 데이터 가져오기
+// export async function getServerSideProps(context) {
+//   const queryClient = new QueryClient();
+
+//   const initialOptions = {
+//     field: '',
+//     docType: '',
+//     status: '',
+//     page: 1,
+//     limit: 5,
+//   };
+
+//   await queryClient.prefetchQuery(['challenges', initialOptions], () =>
+//     getChallengeList(initialOptions)
+//   );
+
+//   return {
+//     props: {
+//       dehydratedState: dehydrate(queryClient),
+//     },
+//   };
+// }
