@@ -15,6 +15,8 @@ const assets = {
     bold: '/assets/icons/ic_bold.svg',
     bulletList: '/assets/icons/ic_bullet_list.svg',
     calender: '/assets/icons/ic_calender.svg',
+    chatBubbles: '/assets/icons/ic_chat_bubbles.svg',
+    check: '/assets/icons/ic_check.svg',
     checkboxIn: '/assets/icons/ic_checkbox_in.svg',
     checkboxOut: '/assets/icons/ic_checkbox_out.svg',
     circle: '/assets/icons/ic_circle.svg',
@@ -30,6 +32,7 @@ const assets = {
     firstRankWhite: '/assets/icons/ic_first_rank_white.svg',
     firstRankYellow: '/assets/icons/ic_first_rank_yellow.svg',
     fourthRank: '/assets/icons/ic_fourth_rank.svg',
+    giveUp: '/assets/icons/ic_give_up.svg',
     heartActive: '/assets/icons/ic_heart_active.svg',
     heartInactive: '/assets/icons/ic_heart_inactive.svg',
     italic: '/assets/icons/ic_italic.svg',
@@ -53,16 +56,12 @@ const assets = {
     toggleDown: '/assets/icons/ic_toggle_down.svg',
     toggleUp: '/assets/icons/ic_toggle_up.svg',
     up: '/assets/icons/ic_up.svg',
-    down: '/assets/icons/ic_down.svg',
-    calender: '/assets/icons/ic_calender.svg'
   },
   images: {
     black: '/assets/images/img_black.svg',
-    check: '/assets/images/img_check.svg',
     logo: '/assets/images/img_logo.svg',
     profileAdmin: '/assets/images/img_profile_admin.svg',
     profileMember: '/assets/images/img_profile_member.svg',
-    replyEmpty: '/assets/images/img_reply_empty.svg',
   },
 };
 export default assets;

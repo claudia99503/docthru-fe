@@ -5,7 +5,6 @@ import { useGetWork } from '@/service/queries/work';
 import Loader from '@/components/common/Loader';
 import FeedbackForm from '@/components/feedback/FeedbackForm';
 import FeedbackList from '@/components/feedback/FeedbackList';
-import Button from '@/components/common/Button';
 
 export default function WorkDetailPage() {
   const router = useRouter();
@@ -16,7 +15,8 @@ export default function WorkDetailPage() {
   if (isPending) {
     return <Loader />;
   }
-
+  // console.log(data);
+  const { isClosed } = data;
   return (
     <>
       <Head>
@@ -27,8 +27,9 @@ export default function WorkDetailPage() {
         />
       </Head>
       <WorkDetail data={data} />
-      <FeedbackForm />
-      <FeedbackList id={id} />
+      {isClosed || <FeedbackForm id={id} />}
+
+      <FeedbackList id={id} isClosedChallenge={isClosed} />
     </>
   );
 }

@@ -4,8 +4,9 @@ import EmptyFeedbacks from './EmptyFeedbacks';
 import FeedbackContent from './FeedbackContent';
 import Loader from '../common/Loader';
 import Message from '../common/Message';
+import cn from '@/utils/clsx';
 
-export default function FeedbackList({ id }) {
+export default function FeedbackList({ id, isClosedChallenge }) {
   if (!id) {
     return <div>id 없음</div>;
   }
@@ -21,7 +22,11 @@ export default function FeedbackList({ id }) {
   return isEmpty ? (
     <EmptyFeedbacks />
   ) : (
-    <ul className={styles.FeedbackList}>
+    <ul
+      className={cn(styles.FeedbackList, {
+        [styles['no-form']]: isClosedChallenge,
+      })}
+    >
       {pages.map((page) => {
         return page.list.map((feedback) => {
           return <FeedbackContent key={feedback.id} feedback={feedback} />;

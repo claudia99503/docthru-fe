@@ -2,13 +2,11 @@ import { useForm, FormProvider } from 'react-hook-form';
 import TextArea from '../common/form/TextArea';
 import styles from './FeedbackForm.module.css';
 import { useCreateFeedback } from '@/service/mutations/work';
-import { useRouter } from 'next/router';
 import Svg from '../common/Svg';
+import { FEEDBACK } from '@/variables/formValidation';
 
-export default function FeedbackForm() {
+export default function FeedbackForm({ id }) {
   const formMethods = useForm();
-  const router = useRouter();
-  const { id } = router.query;
   const s = styles;
 
   const {
@@ -34,13 +32,18 @@ export default function FeedbackForm() {
         <TextArea
           name="content"
           placeholder="피드백을 남겨주세요"
-          className={s.textArea}
+          className={s.textarea}
+          validations={FEEDBACK.CONTENT}
         />
         <button className={s.submitButton} type="submit" disabled={!isValid}>
-          <Svg name="arrowDown" className={styles.Svg} />
+          <Svg
+            addName="arrowDown"
+            name="circle"
+            className={styles.Svg}
+            width="40"
+          />
         </button>
       </form>
     </FormProvider>
   );
-  ß;
 }

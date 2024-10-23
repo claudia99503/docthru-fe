@@ -1,64 +1,82 @@
 import { useRouter } from 'next/router';
 import { AdminHeader, MemberHeader, AuthHeader } from './Headers';
 import styles from './Layout.module.css';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import Loader from '../common/Loader';
 import { useAuth } from '@/hooks/useAuth';
 import { PUBLIC_ROUTES, AUTH_ROUTES } from '@/variables/variables';
 import { useAlertModal } from '@/hooks/useModal';
 
-export default function Layout({ children, className = '' }) {
+export default function Layout({ children }) {
   const router = useRouter();
 
-  const isPublicRoute = PUBLIC_ROUTES.includes(router.pathname);
-  const isAuthPage = AUTH_ROUTES.includes(router.pathname);
-  const isAdminRoute = router.pathname.startsWith('/admin');
-  const isAuthRoute = router.pathname.startsWith('/auth');
+  const routes = useMemo(() => {
+    const isPublicRoute = PUBLIC_ROUTES.includes(router.pathname);
+    const isAuthPage = AUTH_ROUTES.includes(router.pathname);
+    const isAdminRoute = router.pathname.startsWith('/admin');
+    const isAuthRoute = router.pathname.startsWith('/auth');
+    //동적 경로와 new페이지는 max-width:890px
+    const isNarrowerPage = /\[.*\]|\/new/.test(router.route);
 
-  const isDetailPage = /\[.*\]/.test(router.pathname);
+    return {
+      isPublicRoute,
+      isAuthPage,
+      isAdminRoute,
+      isAuthRoute,
+      isNarrowerPage,
+    };
+  }, [router.route, router.pathname]);
 
-  const { user, isLoading } = useAuth(!isPublicRoute);
+  const { user, isLoading, isRedirecting } = useAuth(!routes.isPublicRoute);
+  const { Modal, onModalOpen } = useAlertModal();
 
   const handleRedirects = useCallback(() => {
-    if (!isLoading && user !== undefined) {
-      if (!user && !isPublicRoute) {
-        router.push('/auth/login');
-
+    if (!isRedirecting && !isLoading) {
+      if (!user && !routes.isPublicRoute) {
+        onModalOpen({ msg: '로그인이 필요합니다.', path: '/auth/login' });
         return;
       }
-      if (user && isAuthPage) {
-        router.push('/');
 
+      if (user && routes.isAuthPage) {
+        onModalOpen({ msg: '이미 로그인 되었습니다', path: '/' });
         return;
       }
-      if (user && isAdminRoute && user.role !== 'ADMIN') {
-        router.push('/');
+
+      if (user && routes.isAdminRoute) {
+        if (user.role !== 'ADMIN')
+          onModalOpen({ msg: '권한이 없는 페이지 요청입니다.', path: '/' });
+        return;
       }
     }
-  }, [isLoading, user, isPublicRoute, isAuthPage, isAdminRoute, router]);
+  }, [
+    user,
+    isRedirecting,
+    routes.isAuthPage,
+    routes.isAdminRoute,
+    router.asPath,
+  ]);
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!isLoading && !isRedirecting && user !== undefined) {
       handleRedirects();
     }
-  }, [handleRedirects, isLoading]);
+  }, [handleRedirects, isLoading, isRedirecting, user]);
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  const renderHeader = () => {
+    if (routes.isAuthRoute) return <AuthHeader />;
+    if (routes.isAdminRoute) return <AdminHeader user={user} />;
+    return <MemberHeader user={user} />;
+  };
 
   return (
     <>
-      {isAuthRoute ? (
-        <AuthHeader />
-      ) : isAdminRoute ? (
-        <AdminHeader user={user} />
-      ) : (
-        <MemberHeader user={user} />
-      )}
-      <main className={`${styles.main} ${isDetailPage && styles.detail}`}>
+      {renderHeader()}
+      <main
+        className={`${styles.main} ${routes.isNarrowerPage && styles.detail}`}
+      >
         {children}
       </main>
+      <Modal />
     </>
   );
 }

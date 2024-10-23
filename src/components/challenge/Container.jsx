@@ -2,6 +2,7 @@ import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import styles from './Container.module.css';
 import assets from '@/variables/images';
+import { useRouter } from 'next/router';
 
 const Container = ({
   deadline,
@@ -11,6 +12,8 @@ const Container = ({
   type,
 }) => {
   const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
+
+  const router = useRouter();
 
   const getButtonStyles = () => {
     return progress
@@ -60,7 +63,12 @@ const Container = ({
         </>
       ) : (
         <div className={styles['mobile-buttons-row']}>
-          <button className={styles['primary-button']}>원문 보기</button>
+          <button
+            className={styles['primary-button']}
+            onClick={() => router.push(`/work/${id}/new`)}
+          >
+            원문 보기
+          </button>
           <button className={styles['gray-button']} style={getButtonStyles()}>
             {getButtonType(type)}
           </button>

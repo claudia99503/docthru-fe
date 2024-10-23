@@ -3,8 +3,15 @@ import { useEffect } from 'react';
 import styles from './UpdateFeedbackForm.module.css';
 import TextArea from '../common/form/TextArea';
 import { FEEDBACK } from '@/variables/formValidation';
+import Button from '../common/Button';
+import cn from '@/utils/clsx';
 
-export default function UpdateFeedbackForm({ onSubmit, initialData, onClick }) {
+export default function UpdateFeedbackForm({
+  onSubmit,
+  initialData,
+  onClick,
+  className,
+}) {
   const formMethods = useForm();
 
   const {
@@ -27,15 +34,27 @@ export default function UpdateFeedbackForm({ onSubmit, initialData, onClick }) {
         onSubmit={handleSubmit(onSubmit)}
         className={styles.UpdateFeedbackForm}
       >
-        <TextArea name="content" validations={FEEDBACK.CONTENT} />
-        <div className={styles.btns}>
-          <button variant="cancel" onClick={onClick} className="small">
+        <div className={cn(styles['button-container'], className)}>
+          <button variant="cancel" onClick={onClick} className={styles.cancel}>
             취소
           </button>
-          <button disabled={!isValid} type="submit" className="small">
+          <Button
+            disabled={!isValid}
+            type="submit"
+            className={styles.update}
+            borderRadius="8px"
+            fontSize="14px"
+            padding="4px 10px"
+            variant="black"
+          >
             수정 완료
-          </button>
+          </Button>
         </div>
+        <TextArea
+          name="content"
+          validations={FEEDBACK.CONTENT}
+          className={styles.textarea}
+        />
       </form>
     </FormProvider>
   );

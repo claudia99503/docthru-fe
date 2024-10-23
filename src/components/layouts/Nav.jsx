@@ -12,7 +12,7 @@ export default function Nav({ links }) {
         <Link href="/">
           <Image
             className={styles.logo}
-            src={assets.images.navLogoLarge}
+            src={assets.images.logo}
             width={120}
             height={27}
             alt="Docthru logo"
