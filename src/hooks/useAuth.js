@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '@/context/AuthProvider';
 import { createLogout } from '@/service/api/auth';
 import { useRouter } from 'next/router';
+import { TokenService, resetAxiosAuth } from '@/service/api/axios'; // TokenService와 resetAxiosAuth import
 
 export function useAuth() {
   const context = useContext(AuthContext);
@@ -19,14 +20,44 @@ export function useLogout() {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isLoading } = useMutation({
     mutationFn: createLogout,
-    onSuccess: () => {
-      queryClient.setQueriesData(['user'], null);
-      localStorage.removeItem('accessToken');
-      router.reload();
+    onMutate: () => {
+      const previousUser = queryClient.getQueryData(['user']);
+      return { previousUser };
     },
+    onSuccess: () => {
+      queryClient.clear();
+
+      TokenService.remove();
+
+      resetAxiosAuth();
+
+      router.push('/');
+    },
+    onError: (error, variables, context) => {
+      if (context?.previousUser) {
+        queryClient.setQueryData(['user'], context.previousUser);
+      }
+      console.error('Logout failed:', error);
+
+      if (error?.response?.status === 401) {
+        TokenService.remove();
+        queryClient.clear();
+        resetAxiosAuth();
+        router.push('/');
+      }
+    },
+    mutationKey: ['logout'],
   });
 
-  return mutateAsync;
+  const handleLogout = async () => {
+    if (isLoading) return;
+
+    try {
+      await mutateAsync();
+    } catch (error) {}
+  };
+
+  return handleLogout;
 }

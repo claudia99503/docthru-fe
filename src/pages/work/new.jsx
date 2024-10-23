@@ -7,7 +7,6 @@ import Image from 'next/image';
 import Button from '@/components/common/Button';
 import cn from '@/utils/clsx';
 import Border from '@/components/common/Border';
-import ReactQuill from 'react-quill';
 import TextEditor from '@/components/work/TextEditor';
 
 //challengeId 받아야됨...
