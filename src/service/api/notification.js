@@ -1,7 +1,7 @@
 // service/api/notifications.js
-import axios from 'axios';
+import axios from './axios';
 
-const PATH = '/api/notifications';
+const PATH = '/notifications';
 
 /** GET - 사용자의 모든 알림 조회 */
 export async function fetchNotifications(userId, includeRead = false) {

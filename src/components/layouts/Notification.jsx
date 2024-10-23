@@ -18,8 +18,15 @@ const Notification = () => {
     setLoading(true);
     try {
       const response = await fetchNotifications(user.id, true);
-      setNotifications(response);
-      setError(null);
+
+      if (response.length === 0) {
+        // 알림이 없을 때는 에러가 아니라 알림이 없음을 처리
+        setNotifications([]);
+        setError(null);
+      } else {
+        setNotifications(response);
+        setError(null);
+      }
     } catch (error) {
       setError('알림을 가져오는 중 문제가 발생했습니다. 다시 시도해주세요.');
     } finally {
