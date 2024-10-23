@@ -7,12 +7,12 @@ import Container from './Container';
 import styles from './ChallengeDetailInfo.module.css';
 
 const ChallengeDetailInfo = ({ list, id }) => {
-  const [paramId, setParamId] = useState(list.id);
+  const [paramId, setParamId] = useState(list?.id);
 
   const user = list?.writer;
 
   const getTypes = () => {
-    if (list.isParticipated) {
+    if (list?.isParticipated) {
       setParamId(id);
     }
   };

@@ -4,10 +4,7 @@ import styles from './Container.module.css';
 import assets from '@/variables/images';
 import { useRouter } from 'next/router';
 
-const Container = ({
-  list,
-  id
-}) => {
+const Container = ({ list, id }) => {
   const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
   const router = useRouter();
 
@@ -24,11 +21,11 @@ const Container = ({
   };
 
   const getUri = () => {
-    return !list.isParticipated ? `/work/${id}/edit` : `/work/?Id=${id}/new`;
-  }
+    return list?.isParticipated ? `/work/new/?id=${id}` : `/work/${id}/edit`;
+  };
 
   const getButtonType = () => {
-    return !list.isParticipated ? '작업 도전하기' : '도전 계속하기';
+    return list.isParticipated ? '작업 도전하기' : '도전 계속하기';
   };
 
   return (
@@ -59,8 +56,7 @@ const Container = ({
             <button
               className={styles['gray-button']}
               style={getButtonStyles()}
-              
-              onClick={() => router.push(getUri)}
+              onClick={() => router.push(getUri())}
             >
               {getButtonType()}
             </button>
@@ -72,7 +68,7 @@ const Container = ({
           <button
             className={styles['gray-button']}
             style={getButtonStyles()}
-            onClick={() => router.push(getUri)}
+            onClick={() => router.push(getUri())}
           >
             {getButtonType()}
           </button>
