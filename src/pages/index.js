@@ -40,13 +40,10 @@ export default function Home(initialData) {
 
   useEffect(() => {
     const option = {
-      field: selectedOption?.field,
-      docType: selectedOption?.docType,
-      progress: selectedOption.progress,
       keyword: searchTerm,
       page: currentPage
     }
-
+    
     handleOptionChange(option)
   }, [currentPage, searchTerm, selectedOption?.field, selectedOption?.docType, selectedOption?.progress]);
 

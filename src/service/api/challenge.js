@@ -12,7 +12,7 @@ export async function getChallengeList({
   limit = '5',
 }) {
   const params = {
-    ...(field && { field }),
+    ...(field && { field: field.join(',') }),
     ...(docType && { docType }),
     ...(progress && { progress }),
     ...(keyword && { keyword }),
