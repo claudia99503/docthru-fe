@@ -75,3 +75,15 @@ select {
 :target {
   scroll-margin-block: 5ex;
 }
+
+.ql-editor strong {
+  font-weight: bold;
+}
+
+.ql-editor u {
+  text-decoration: underline;
+}
+
+.ql-editor em {
+  font-style: italic;
+}
