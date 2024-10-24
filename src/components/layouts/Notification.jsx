@@ -1,11 +1,19 @@
 // cNotification.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../context/AuthProvider';
 import Image from 'next/image';
 import assets from '../../variables/images';
 import styles from './Notification.module.css';
 import { fetchNotifications, markAsRead } from '../../service/api/notification';
 import Loader from '../common/Loader';
+import { format, compareAsc } from 'date-fns';
+import {
+  formatDistanceToNow,
+  isAfter,
+  subDays,
+  differenceInDays,
+} from 'date-fns';
+import { ko } from 'date-fns/locale';
 
 const Notification = () => {
   const [notifications, setNotifications] = useState([]);
@@ -13,12 +21,13 @@ const Notification = () => {
   const [loading, setLoading] = useState(false); // 로딩 상태 추가
   const [error, setError] = useState(null); // 에러 상태 추가
   const { user } = useAuth();
+  const notificationRef = useRef(null);
 
   const getNotifications = async () => {
     if (!user) return;
     setLoading(true);
     try {
-      const response = await fetchNotifications(user.id, true);
+      const response = await fetchNotifications(user.id, false);
       console.log('Received notifications:', response); // 디버깅용 로그
 
       if (response.length === 0) {
@@ -40,6 +49,22 @@ const Notification = () => {
   useEffect(() => {
     getNotifications();
   }, [user]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        notificationRef.current &&
+        !notificationRef.current.contains(event.target)
+      ) {
+        setShowNotifications(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleMarkAsRead = async (notificationId) => {
     try {
@@ -67,12 +92,31 @@ const Notification = () => {
   );
 
   const formatNotification = (notification) => {
-    console.log('알림 데이터:', notification);
-    return notification.content;
+    // 정규표현식을 사용하여 날짜 부분 제거
+    const content = notification.content.replace(
+      /\s*\(\d{4}-\d{2}-\d{2}\)\s*$/,
+      ''
+    );
+    return content;
+  };
+
+  const formatNotificationDate = (date) => {
+    const now = new Date();
+    const notificationDate = new Date(date);
+    const dayDifference = differenceInDays(now, notificationDate);
+
+    if (dayDifference < 7) {
+      return formatDistanceToNow(notificationDate, {
+        addSuffix: true,
+        locale: ko,
+      });
+    } else {
+      return format(notificationDate, 'yyyy. MM. dd', { locale: ko });
+    }
   };
 
   return (
-    <div className={styles.notificationContainer}>
+    <div className={styles.notificationContainer} ref={notificationRef}>
       <button
         onClick={toggleNotifications}
         className={styles.notificationButton}
@@ -101,21 +145,22 @@ const Notification = () => {
                 className={`${styles.notificationItem} ${
                   notification.isRead ? styles.read : styles.unread
                 }`}
+                onClick={() =>
+                  !notification.isRead && handleMarkAsRead(notification.id)
+                }
+                role={notification.isRead ? 'text' : 'button'}
+                tabIndex={notification.isRead ? -1 : 0}
               >
-                <p className={styles.notificationMessage}>
+                <div
+                  className={`${styles.notificationMessage} ${
+                    notification.isRead ? styles.notificationMessageRead : ''
+                  }`}
+                >
                   {formatNotification(notification)}
-                </p>
+                </div>
                 <p className={styles.notificationDate}>
-                  {new Date(notification.createdAt).toLocaleString()}
+                  {formatNotificationDate(notification.createdAt)}
                 </p>
-                {!notification.isRead && (
-                  <button
-                    onClick={() => handleMarkAsRead(notification.id)}
-                    className={styles.readButton}
-                  >
-                    읽음 처리
-                  </button>
-                )}
               </div>
             ))
           ) : (
