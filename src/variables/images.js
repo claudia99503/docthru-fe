@@ -45,7 +45,7 @@ const assets = {
     monitor: '/assets/icons/ic_monitor.svg',
     numberList: '/assets/icons/ic_number_list.svg',
     out: '/assets/icons/ic_out.svg',
-    paint: '/assets/icons/ic_paint.svg',
+    outCircle: '/assets/icons/ic_out_circle.svg',
     person: '/assets/icons/ic_person.svg',
     personWhite: '/assets/icons/ic_person_white.svg',
     plus: '/assets/icons/ic_plus.svg',

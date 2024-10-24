@@ -1,3 +1,4 @@
+'use client';
 import dynamic from 'next/dynamic';
 import {
   forwardRef,
@@ -8,6 +9,8 @@ import {
 } from 'react';
 import 'react-quill/dist/quill.snow.css';
 import styles from './TextEditor.module.css';
+import Toast from '../modals/Toast';
+import CAN_USE_DOM from '@/utils/canUseDom';
 
 const ReactQuill = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -15,10 +18,14 @@ const ReactQuill = dynamic(() => import('react-quill'), {
 });
 const TextEditor = forwardRef((props, ref) => {
   const quillRef = useRef(null);
-
+  const [hasDraft, setHasDraft] = useState(false);
   const [content, setContent] = useState('');
-
   const STORAGE_KEY = 'workContent';
+  let savedContent;
+
+  if (CAN_USE_DOM) {
+    savedContent = localStorage.getItem(STORAGE_KEY);
+  }
 
   const modules = {
     toolbar: [
@@ -44,24 +51,38 @@ const TextEditor = forwardRef((props, ref) => {
     },
   }));
 
+  const handleBringBackDraft = () => {
+    setContent(JSON.parse(savedContent));
+    setHasDraft(false);
+  };
+
   useEffect(() => {
-    const savedContent = localStorage.getItem(STORAGE_KEY);
     if (savedContent) {
-      setContent(JSON.parse(savedContent));
+      setHasDraft(true);
     }
   }, []);
 
   return (
-    <div className={styles.TextEditor}>
-      <ReactQuill
-        ref={quillRef}
-        value={content}
-        onChange={handleContentChange}
-        modules={modules}
-        theme="snow"
-        placeholder="번역 시작하기..."
-      />
-    </div>
+    <>
+      <div className={styles.TextEditor}>
+        <ReactQuill
+          ref={quillRef}
+          value={content}
+          onChange={handleContentChange}
+          modules={modules}
+          theme="snow"
+          placeholder="번역 시작하기..."
+        />
+      </div>
+      {hasDraft && (
+        <Toast
+          msg="임시 저장된 작업물이 있어요. 저장된 작업물을 불러오시겠어요??"
+          buttonDisplay="불러오기"
+          onConfirm={handleBringBackDraft}
+          onClose={() => setHasDraft(false)}
+        />
+      )}
+    </>
   );
 });
 

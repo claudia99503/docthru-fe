@@ -1,15 +1,45 @@
 .Toast {
-  display: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
+  max-width: 890px;
   padding: 8px;
   border-radius: 8px;
   background-color: var(--grey-50);
-  font-size: 14px;
-  font-weight: 500;
   border: 1px solid var(--grey-800);
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 99;
 }
 
+.Toast.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-20px);
+}
+
+.Toast.hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(20px);
+}
+
+.left {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+}
+
+.close {
+  padding: 0 6px;
+}
 .confirm {
-  font: size 14px;
+  font-size: 14px;
   font-weight: 600;
 }
