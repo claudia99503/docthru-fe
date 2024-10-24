@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useGetOnGoingChallenge } from '@/service/queries/user';
 
@@ -16,41 +16,30 @@ export default function MyChallengePage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(5);
-  const [params, setParams] = useState();
+  const [params, setParams] = useState({});
 
-  const { data, isPending } = useGetOnGoingChallenge();
-  const { challenges : list = [], meta = {} } = data || {};
+  const { data, isPending } = useGetOnGoingChallenge(params, {
+    enabled: true,
+  });
+  const { list = [], meta = {} } = data || {};
   const { totalPages } = meta;
 
-  // console.log('data', data)
-  // console.log('list', list)
-  // console.log('meta', meta)
+  const handleOptionChange = (option) => {
+    setParams((pev) => ({ ...pev, ...option }));
+  };
 
-  if (isPending) {
-    return <Loader />;
-  }
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
 
-  const filteredData = list?.filter((item) => {
-    const today = new Date();
-    const deadline = new Date(item.deadline);
+  useEffect(() => {
+    const option = {
+      keyword: searchTerm,
+      page: currentPage,
+    };
 
-    if (
-      searchTerm &&
-      !item.title.toLowerCase().includes(searchTerm.toLowerCase())
-    ) {
-      return false;
-    }
-
-    if (deadline > today) {
-      return item;
-    }
-  });
-
-  // 현재 페이지의 데이터만 추출
-  const currentList = filteredData?.slice(
-    (currentPage - 1) * limit,
-    currentPage * limit
-  );
+    handleOptionChange(option);
+  }, [currentPage, searchTerm]);
 
   return (
     <>
@@ -61,7 +50,7 @@ export default function MyChallengePage() {
           content="사용자가 현재 참여 중인 챌린지 목록을 확인하는 페이지입니다."
         />
       </Head>
-      <div>
+      <div className={styles['tab-container']}>
         <div>
           <TabNavigation activeTab="ongoing" />
         </div>
@@ -71,18 +60,26 @@ export default function MyChallengePage() {
             setSearchTerm={setSearchTerm}
           />
         </div>
-        <AllCardSection
-          list={currentList}
-          searchTerm={searchTerm}
-          site={'home'}
-        />
       </div>
-      {list.length > 0 && (
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages} // 계산된 totalPages 사용
-          onPageChange={setCurrentPage}
-        />
+      {isPending ? (
+        <Loader />
+      ) : (
+        <>
+          <div className={styles['card-container']}>
+            <AllCardSection
+              list={list}
+              searchTerm={searchTerm}
+              site={'ongoing'}
+            />
+          </div>
+          {list.length > 0 && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages} // 계산된 totalPages 사용
+              onPageChange={setCurrentPage}
+            />
+          )}
+        </>
       )}
     </>
   );

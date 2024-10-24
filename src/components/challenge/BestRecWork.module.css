@@ -1,12 +1,28 @@
 .BestRecWork {
+  width: 100%;
   max-width: 890px;
 }
 
-.next-button {
+.slide-box {
+  width: 100%;
+  max-width: 890px;
+  position: relative;
+}
+
+.pageBtn-box{
+  top: 8px;
+  right: 5.5rem;
   position: absolute;
-  left: 776px;
-  top: 5px;
-  z-index: 10;
+  display: flex;
+  gap: 10px;
+}
+
+.pageBtn-box.last{
+  top: 8px;
+  right: 1rem;
+}
+
+.next-button {
   background-color: var(--brand-black);
   width: 40px;
   height: 40px;
@@ -17,10 +33,6 @@
 }
 
 .prev-button {
-  position: absolute;
-  left: 726px;
-  top: 5px;
-  z-index: 10;
   background-color: var(--brand-black);
   width: 40px;
   height: 40px;
@@ -28,4 +40,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* 태블릿 버전 */
+@media (min-width: 744px) and (max-width: 1199px) {
+  .BestRecWork {
+    max-width: 889px;
+  }
+  .slide-box{
+    max-width: 889px;
+  }
+}
+
+/* 모바일 버전 */
+@media (max-width: 743px) {
+  .BestRecWork {
+    max-width: 695px;
+  }
+  .slide-box{
+    max-width: 695px;
+  }
 }

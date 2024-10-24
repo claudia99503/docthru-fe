@@ -11,6 +11,7 @@ import Message from '../common/Message';
 
 const ParticipationStatus = ({ list, onPageChange }) => {
   const router = useRouter();
+
   const userList = list?.list;
   const pageList = list?.meta;
 
@@ -61,7 +62,7 @@ const ParticipationStatus = ({ list, onPageChange }) => {
                 </>
               </div>
             </div>
-            <div>
+            <div className={styles['participants-list']}>
               {userList?.map((participant, index) => (
                 <div key={participant.id} className={styles['participant-row']}>
                   <div className={styles['participant-left']}>

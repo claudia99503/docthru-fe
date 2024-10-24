@@ -1,7 +1,7 @@
 .ChallengeDetailInfo {
   display: flex;
   gap: 24px;
-  max-width: 890px;
+  width: 100%;
 }
 
 .challenge-info {
@@ -9,16 +9,19 @@
   flex-direction: column;
   gap: 16px;
   align-items: flex-start;
+  width: 100%;
   min-width: 581px;
 }
 
 .title {
+  width: 100%;
   font-size: 24px;
   font-weight: 600;
   color: var(--grey-800);
 }
 
 .description {
+  width: 100%;
   font-size: 16px;
   font-weight: 400;
   color: var(--grey-700);
@@ -29,4 +32,37 @@
   font-size: 12px;
   font-weight: 500;
   color: var(--grey-800);
+}
+
+/* 태블릿 버전 */
+@media (min-width: 744px) and (max-width: 1199px) {
+  .ChallengeDetailInfo {
+    gap: 20px;
+  }
+
+  .challenge-info {
+    gap: 16px;
+    min-width: 429px;
+  }
+}
+
+/* 모바일 버전 */
+@media (max-width: 743px) {
+  .ChallengeDetailInfo {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .challenge-info {
+    gap: 16px;
+    min-width: 343px;
+  }
+
+  .title {
+    min-width: 343px;
+  }
+
+  .description {
+    min-width: 343px;
+  }
 }
