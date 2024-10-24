@@ -62,3 +62,20 @@
 .readButton:hover {
   background-color: #45a049;
 }
+
+.notificationMessage {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.errorMessage {
+  color: red;
+  padding: 10px;
+  text-align: center;
+}
+
+.noNotifications {
+  padding: 10px;
+  text-align: center;
+  color: #666;
+}
