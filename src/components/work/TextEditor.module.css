@@ -18,3 +18,15 @@
   display: flex;
   gap: 8px;
 }
+
+.TextEditor :global(.ql-editor strong) {
+  font-weight: bold;
+}
+
+.TextEditor :global(.ql-editor u) {
+  text-decoration: underline;
+}
+
+.TextEditor :global(.ql-editor em) {
+  font-style: italic;
+}
