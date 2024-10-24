@@ -1,0 +1,15 @@
+.Toast {
+  display: none;
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: var(--grey-50);
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid var(--grey-800);
+}
+
+.confirm {
+  font: size 14px;
+  font-weight: 600;
+}
