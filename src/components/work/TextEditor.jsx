@@ -1,8 +1,6 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
-import Loader from '../common/Loader';
 import 'react-quill/dist/quill.snow.css';
-import EditorToolbar from './EditorToolbar';
 import styles from './TextEditor.module.css';
 
 const ReactQuill = dynamic(() => import('react-quill'), {
@@ -15,10 +13,15 @@ export default function TextEditor() {
   const quillRef = useRef(null);
 
   const modules = {
-    toolbar: {
-      container: '#toolbar',
-      handlers: {},
-    },
+    toolbar: [
+      ['bold', 'italic', 'underline'],
+      [{ size: [] }],
+      [{ color: [] }, { background: [] }],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      [{ align: [] }],
+      ['link'],
+      ['clean'],
+    ],
   };
 
   const handleContentChange = (value) => {
@@ -34,26 +37,14 @@ export default function TextEditor() {
 
   return (
     <div className={styles.TextEditor}>
-      <EditorToolbar />
-      <div className={styles.customEditor}>
-        <ReactQuill
-          ref={quillRef}
-          value={content}
-          onChange={handleContentChange}
-          modules={modules}
-          theme="default"
-          formats={[
-            'bold',
-            'italic',
-            'underline',
-            'list',
-            'bullet',
-            'align',
-            'color',
-            'background',
-          ]}
-        />
-      </div>
+      <ReactQuill
+        ref={quillRef}
+        value={content}
+        onChange={handleContentChange}
+        modules={modules}
+        theme="snow"
+        placeholder="번역 시작하기..."
+      />
     </div>
   );
 }
