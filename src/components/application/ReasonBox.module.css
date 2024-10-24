@@ -1,0 +1,74 @@
+.ReasonBox {
+  width: 100%;
+  border: 1px solid var(--grey-200);
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 20px;
+  background-color: var(--grey-50);
+}
+
+.reason-header {
+  text-align: center;
+}
+
+.reason-title {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16.71px;
+  color: var(--grey-800);
+}
+
+.reason-content {
+  margin: 16px 0;
+  text-align: center;
+}
+
+.reason-text {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19.9px;
+  color: var(--grey-700);
+}
+
+.reason-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.user-info {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.71px;
+  color: var(--grey-700);
+}
+
+.line-icon {
+  margin: 0 8px;
+}
+
+.timestamp {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.71px;
+  color: var(--grey-500);
+}
+
+@media (min-width: 1200px) {
+  .ReasonBox {
+    min-height: 117px;
+  }
+}
+
+@media (min-width: 745px) and (max-width: 1199px) {
+  .ReasonBox {
+    max-height: 136px;
+  }
+}
+
+@media (max-width: 744px) {
+  .ReasonBox {
+    max-height: 149px;
+  }
+}
+
