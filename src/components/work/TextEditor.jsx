@@ -8,7 +8,7 @@ const ReactQuill = dynamic(() => import('react-quill'), {
   loading: () => <p>Loading Editor...</p>,
 });
 
-export default function TextEditor() {
+export default function TextEditor({ setEditorRef }) {
   const [content, setContent] = useState('');
   const quillRef = useRef(null);
 
@@ -24,16 +24,23 @@ export default function TextEditor() {
     ],
   };
 
+  // useEffect(() => {
+  //   const savedContent = localStorage.getItem('workContent');
+  //   if (savedContent && quillRef.current) {
+  //     const quillEditor = quillRef.current.getEditor();
+  //     quillEditor.setContents(JSON.parse(savedContent));
+  //   }
+  // }, []);
+
   const handleContentChange = (value) => {
     setContent(value);
   };
 
-  useEffect(() => {
-    if (quillRef.current && quillRef.current.getEditor) {
-      const quillInstance = quillRef.current.getEditor();
-      console.log('Quill instance:', quillInstance);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (quillRef.current) {
+  //     setEditorRef(quillRef.current);
+  //   }
+  // }, [quillRef, setEditorRef]);
 
   return (
     <div className={styles.TextEditor}>

@@ -87,15 +87,15 @@ export default function Layout({ children }) {
 
   useEffect(() => {
     if (!isLoading && !isRedirecting && user !== undefined) {
-      console.log('Running handleRedirects after loading completes');
+      // console.log('Running handleRedirects after loading completes');
       handleRedirects();
     } else {
-      console.log('Skipping handleRedirects due to loading/redirecting state');
+      // console.log('Skipping handleRedirects due to loading/redirecting state');
     }
   }, [handleRedirects, isLoading, isRedirecting, user]);
 
   if (isLoading || user === undefined) {
-    console.log('Displaying Loader');
+    // console.log('Displaying Loader');
     return <Loader />;
   }
 

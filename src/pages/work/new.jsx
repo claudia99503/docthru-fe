@@ -10,10 +10,19 @@ import Button from '@/components/common/Button';
 import cn from '@/utils/clsx';
 import Border from '@/components/common/Border';
 import TextEditor from '@/components/work/TextEditor';
+import { useRef } from 'react';
 
 //challengeId 받아야됨...
 export default function CreateWorkPage() {
-  const router = useRouter();
+  // const editorRef = useRef(null);
+
+  // const handleSave = () => {
+  //   if (editorRef) {
+  //     const content = editorRef.editor().getContents();
+  //     localStorage.setItem(STORAGE_KEY, JSON.stringify(content));
+  //     alert('임시저장되었습니다.');
+  //   }
+  // };
 
   return (
     <>
