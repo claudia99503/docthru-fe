@@ -14,15 +14,14 @@ import { useRef } from 'react';
 
 //challengeId 받아야됨...
 export default function CreateWorkPage() {
-  // const editorRef = useRef(null);
+  const textEditorRef = useRef(null); // 하위 컴포넌트 참조
 
-  // const handleSave = () => {
-  //   if (editorRef) {
-  //     const content = editorRef.editor().getContents();
-  //     localStorage.setItem(STORAGE_KEY, JSON.stringify(content));
-  //     alert('임시저장되었습니다.');
-  //   }
-  // };
+  // 상위에서 임시 저장 버튼 클릭 시 호출되는 함수
+  const handleSave = () => {
+    if (textEditorRef.current) {
+      textEditorRef.current.saveContent(); // 하위에서 제공되는 저장 함수 호출
+    }
+  };
 
   return (
     <>
@@ -62,6 +61,7 @@ export default function CreateWorkPage() {
           </Button>
           <Button
             variant="white-border"
+            onClick={handleSave}
             className={cn(styles.btn, styles.save)}
           >
             임시저장
@@ -76,7 +76,7 @@ export default function CreateWorkPage() {
 
       <Border gap="24px" />
 
-      <TextEditor />
+      <TextEditor ref={textEditorRef} />
     </>
   );
 }

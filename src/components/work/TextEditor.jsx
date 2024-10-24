@@ -1,5 +1,11 @@
 import dynamic from 'next/dynamic';
-import { useEffect, useRef, useState } from 'react';
+import {
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
+  useImperativeHandle,
+} from 'react';
 import 'react-quill/dist/quill.snow.css';
 import styles from './TextEditor.module.css';
 
@@ -7,10 +13,12 @@ const ReactQuill = dynamic(() => import('react-quill'), {
   ssr: false,
   loading: () => <p>Loading Editor...</p>,
 });
-
-export default function TextEditor({ setEditorRef }) {
-  const [content, setContent] = useState('');
+const TextEditor = forwardRef((props, ref) => {
   const quillRef = useRef(null);
+
+  const [content, setContent] = useState('');
+
+  const STORAGE_KEY = 'workContent';
 
   const modules = {
     toolbar: [
@@ -24,23 +32,24 @@ export default function TextEditor({ setEditorRef }) {
     ],
   };
 
-  // useEffect(() => {
-  //   const savedContent = localStorage.getItem('workContent');
-  //   if (savedContent && quillRef.current) {
-  //     const quillEditor = quillRef.current.getEditor();
-  //     quillEditor.setContents(JSON.parse(savedContent));
-  //   }
-  // }, []);
-
   const handleContentChange = (value) => {
     setContent(value);
   };
 
-  // useEffect(() => {
-  //   if (quillRef.current) {
-  //     setEditorRef(quillRef.current);
-  //   }
-  // }, [quillRef, setEditorRef]);
+  useImperativeHandle(ref, () => ({
+    saveContent: () => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(content));
+      alert('임시 저장되었습니다.');
+      console.log('Saved content:', content);
+    },
+  }));
+
+  useEffect(() => {
+    const savedContent = localStorage.getItem(STORAGE_KEY);
+    if (savedContent) {
+      setContent(JSON.parse(savedContent));
+    }
+  }, []);
 
   return (
     <div className={styles.TextEditor}>
@@ -54,4 +63,6 @@ export default function TextEditor({ setEditorRef }) {
       />
     </div>
   );
-}
+});
+
+export default TextEditor;
