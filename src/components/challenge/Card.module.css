@@ -1,6 +1,6 @@
-.card {
+.Card {
+  width: 100%;
   position: relative;
-  width: 996px;
   border: 2px solid var(--grey-800);
   border-radius: 12px;
   padding: 24px;
@@ -43,6 +43,10 @@
   line-height: 26.25px;
   color: var(--grey-700);
   margin-right: 10px;
+  white-space: nowrap;       
+  overflow: hidden;           
+  text-overflow: ellipsis;   
+  max-width: 98%;
 }
 
 .challenge-title:hover {
@@ -97,14 +101,12 @@
 
 @media (min-width: 744px) and (max-width: 1199px) {
   .card {
-    width: 696px;
     gap: 10px;
   }
 }
 
 @media (max-width: 743px) {
   .card {
-    width: 343px;
     gap: 10px;
   }
 
