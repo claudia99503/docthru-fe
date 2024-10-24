@@ -36,3 +36,7 @@
   cursor: pointer;
   border: 1px solid #ddd;
 }
+
+.EditorToolbar :global(.ql-align-left) {
+  text-align: left;
+}

@@ -26,10 +26,11 @@ export default function TextEditor() {
   };
 
   useEffect(() => {
-    if (quillRef.current) {
-      console.log('커스텀툴바');
+    if (quillRef.current && quillRef.current.getEditor) {
+      const quillInstance = quillRef.current.getEditor();
+      console.log('Quill instance:', quillInstance);
     }
-  }, [quillRef]);
+  }, []);
 
   return (
     <div className={styles.TextEditor}>
@@ -41,6 +42,16 @@ export default function TextEditor() {
           onChange={handleContentChange}
           modules={modules}
           theme="default"
+          formats={[
+            'bold',
+            'italic',
+            'underline',
+            'list',
+            'bullet',
+            'align',
+            'color',
+            'background',
+          ]}
         />
       </div>
     </div>
