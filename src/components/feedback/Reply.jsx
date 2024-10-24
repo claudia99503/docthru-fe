@@ -5,6 +5,7 @@ import UpdateFeedbackForm from './UpdatedFeedbackForm';
 import KebabMenu from '../common/KebabMenu';
 import { useDeleteModal } from '@/hooks/useModal';
 import styles from './FeedbackContent.module.css';
+import cn from '@/utils/clsx';
 
 function Reply({ reply, onDelete, onUpdate }) {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -14,18 +15,18 @@ function Reply({ reply, onDelete, onUpdate }) {
   const handleEdit = () => setIsEditMode(true);
   const handleCancel = () => setIsEditMode(false);
 
-  const handleDelete = () => {
-    onModalOpen({
+  const handleUpdate = (data) => {
+    onUpdate(reply.id, data);
+    setIsEditMode(false);
+  };
+
+  const handleDelete = async () => {
+    await onModalOpen({
       msg: '답글을 삭제하시겠어요?',
       action: () => {
         onDelete(reply.id);
       },
     });
-  };
-
-  const handleUpdate = (data) => {
-    onUpdate(reply.id, data);
-    setIsEditMode(false);
   };
 
   return (
@@ -42,12 +43,17 @@ function Reply({ reply, onDelete, onUpdate }) {
           <Modal />
         </>
       ) : (
-        <UpdateFeedbackForm
-          onSubmit={handleUpdate}
-          initialData={reply}
-          onClick={handleCancel}
-          className={styles.replyEdit}
-        />
+        <ul className={cn(styles.FeedbackContent, styles.edit)}>
+          <div className={styles.top}>
+            <Profile user={reply.user} date={reply.updatedAt} />
+            <UpdateFeedbackForm
+              onSubmit={handleUpdate}
+              initialData={reply}
+              onClick={handleCancel}
+              className={styles.buttons}
+            />
+          </div>
+        </ul>
       )}
     </div>
   );
