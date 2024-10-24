@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import styles from "../../styles/pages/application/EditApplicationPage.module.css";
-import { createChallengeApplication } from "../../service/api/challenge";
+import { getChallenge, updateChallenge } from "../../service/api/challenge";
 import Loader from "../../components/common/Loader";
 import FieldSelection from "../../components/application/FieldSelection";
 import DocTypeSelection from "../../components/application/DocTypeSelection";
@@ -22,6 +22,9 @@ const docTypeMapping = {
 };
 
 const EditApplicationPage = () => {
+  const router = useRouter();
+  const { id } = router.query;
+
   const [formData, setFormData] = useState({
     title: "",
     docUrl: "",
@@ -37,7 +40,41 @@ const EditApplicationPage = () => {
   const [error, setError] = useState(null);
   const [fieldDropdownOpen, setFieldDropdownOpen] = useState(false);
   const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
-  const router = useRouter();
+
+  useEffect(() => {
+    if (id) {
+      // 페이지가 로드될 때 데이터를 불러와 폼에 채움
+      const fetchChallenge = async () => {
+        try {
+          setLoading(true);
+          const data = await getChallenge(id); // API 호출로 챌린지 데이터를 가져옴
+          console.log("불러온 데이터:", data);
+          setFormData({
+            title: data.title || "",
+            docUrl: data.docUrl || "",
+            field: data.field || "",
+            docType: data.docType || "",
+            deadline: data.deadline
+              ? new Date(data.deadline).toISOString().substring(0, 10)
+              : "",
+            maxParticipants: data.maxParticipants || "",
+            description: data.description || "",
+          });
+          setSelectedDate(
+            data.deadline
+              ? new Date(data.deadline).toISOString().substring(0, 10)
+              : ""
+          );
+        } catch (error) {
+          setError("데이터를 불러오는 중 오류가 발생했습니다.");
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchChallenge();
+    }
+  }, [id]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -108,20 +145,22 @@ const EditApplicationPage = () => {
       return;
     }
 
+    // 수정하지 않으면 기존 값으로 전송
     const dataToSend = {
       title: formData.title,
       docUrl: formData.docUrl,
-      field: fieldMapping[formData.field],
-      docType: docTypeMapping[formData.docType],
-      deadline: formData.deadline,
+      field: formData.field || fieldMapping[challenge.field],
+      docType: formData.docType || docTypeMapping[challenge.docType],
+      deadline: new Date(formData.deadline).toISOString(),
       maxParticipants: Number(formData.maxParticipants),
       description: formData.description,
     };
 
+    console.log("전송한 데이터:", dataToSend);
+
     try {
-      await createChallengeApplication(dataToSend);
-      alert("챌린지 수정이 성공적으로 완료되었습니다!");
-      router.push("/me/application");
+      await updateChallenge(id, dataToSend); // 수정 API
+      router.push(`/admin/application/${id}`);
     } catch (error) {
       setError("챌린지 수정 중 오류가 발생했습니다. 다시 시도해주세요.");
     } finally {
@@ -264,7 +303,7 @@ const EditApplicationPage = () => {
                 onChange={(e) => {
                   const value = e.target.value;
                   if (/^\d*$/.test(value)) {
-                    handleInputChange(e);
+                    handleInputChange(e); // 숫자만 허용
                   }
                 }}
               />
@@ -297,3 +336,4 @@ const EditApplicationPage = () => {
 };
 
 export default EditApplicationPage;
+

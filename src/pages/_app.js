@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }) {
             staleTime: 60 * 1000,
             retry: 1,
           },
-          mutation: {
+          mutations: {
             retry: 1,
           },
         },

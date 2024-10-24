@@ -1,0 +1,30 @@
+.TextEditor {
+  width: 100%;
+}
+
+.TextEditor :global(.ql-container) {
+  border: none;
+  font-size: 16px;
+}
+
+.TextEditor :global(.ql-editor) {
+  padding: 32px 4px;
+  line-height: 1.5;
+  min-height: 200px;
+  border: none;
+}
+
+.TextEditor :global(.ql-toolbar) {
+  gap: 8px;
+  border: none;
+  padding: 0;
+}
+
+.TextEditor :global(.ql-editor.ql-blank::before) {
+  color: rgba(0, 0, 0, 0.6);
+  content: attr(data-placeholder);
+  font-style: italic;
+  pointer-events: none;
+  position: absolute;
+  left: 4px;
+}
