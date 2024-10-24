@@ -5,9 +5,11 @@ import ChallengeStatusBadge from "../../../components/application/ChallengeStatu
 import DocTypeChip from "../../../components/common/DocTypeChip";
 import InfoContainer from "../../../components/challenge/InfoContainer";
 import CancelMenu from "../../../components/common/CancelMenu";
+import ReasonBox from "../../../components/application/ReasonBox";
 import { getChallenge, deleteChallenges } from "../../../service/api/challenge";
 import Loader from "../../../components/common/Loader";
 import styles from "../../../styles/pages/application/MyApplicationDetailPage.module.css";
+import assets from "@/variables/images";
 
 export default function MyApplicationDetailPage() {
   const router = useRouter();
@@ -69,6 +71,19 @@ export default function MyApplicationDetailPage() {
       <div className={styles.pageContainer}>
         <ChallengeStatusBadge status={challenge.status} />
 
+        {(challenge.status === "REJECTED" ||
+          challenge.status === "DELETED") && (
+          <>
+            <ReasonBox
+              type={challenge.status === "REJECTED" ? "거절" : "삭제"}
+              message={challenge.message}
+              nickname="독스루 운영진"
+              updatedAt={challenge.updatedAt}
+            />
+            <div className={styles.bottomBorder} />
+          </>
+        )}
+
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>{challenge.title}</h1>
           <CancelMenu onDelete={handleDelete} />
@@ -100,10 +115,10 @@ export default function MyApplicationDetailPage() {
           ></iframe>
           <button
             className={styles.previewButton}
-            onClick={() => (window.location.href = challenge.docUrl)}
+            onClick={() => window.open(challenge.docUrl, '_blank')}
           >
             링크 열기
-            <img src="/assets/icons/ic_diagonal.svg" alt="링크 열기" />
+            <img src={assets.icons.diagonal} alt="링크 열기" />
           </button>
         </div>
       </div>
