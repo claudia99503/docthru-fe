@@ -14,8 +14,8 @@ import ChallengeDropdown from '@/components/challenge/ChallengeDropdown';
 
 import styles from '@/styles/pages/Home.module.css';
 
-import { dehydrate, QueryClient } from '@tanstack/react-query';
-import { getChallengeList } from '@/service/api/challenge';
+// import { dehydrate, QueryClient } from '@tanstack/react-query';
+// import { getChallengeList } from '@/service/api/challenge';
 import { useMediaQuery } from 'react-responsive';
 
 export default function Home(initialData) {
