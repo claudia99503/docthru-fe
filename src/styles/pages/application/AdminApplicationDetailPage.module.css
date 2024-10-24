@@ -1,7 +1,14 @@
 .pageContainer {
   width: 100%;
   box-sizing: border-box;
-  margin-top: 15px;
+  margin-top: 30px;
+}
+
+.idNumber {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--grey-200);
+  margin-bottom: 30px;
 }
 
 .titleContainer {
@@ -9,7 +16,6 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  margin-top: 30px;
 }
 
 .title {
@@ -29,7 +35,7 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 20.8px;
-  color: var(--grey-700);
+  color: var(--grey-800);
   max-width: 100%;
   margin-bottom: 30px;
   word-wrap: break-word;
@@ -38,7 +44,6 @@
 .bottomBorder {
   border-bottom: 1px solid var(--grey-200);
   margin-bottom: 25px;
-  margin-top: 20px;
 }
 
 .originalLink {
@@ -46,11 +51,10 @@
   font-weight: 600;
   font-size: 18px;
   line-height: 21.48px;
-  color: #262626;
+  color: var(--grey-800);
   margin-top: 30px;
 }
 
-/* 미리보기 */
 .previewContainer {
   position: relative;
   margin-top: 20px;
@@ -147,4 +151,51 @@
   }
 }
 
+.titleContainer {
+  margin-top: 20px;
+}
+
+.reasonBoxBorder {
+  border-bottom: 1px solid var(--grey-200);
+  margin: 20px 0;
+}
+
+.buttonContainer {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  border-top: 1px solid var(--grey-200);
+  padding-top: 30px;
+}
+
+.approveButton {
+  width: 153px;
+  height: 48px;
+  background-color: var(--grey-800);
+  border-radius: 12px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19.09px;
+}
+
+.rejectButton {
+  width: 153px;
+  height: 48px;
+  background-color: #ffe7e7;
+  border-radius: 12px;
+  color: #f24744;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19.09px;
+}
+
+@media (max-width: 743px) {
+  .approveButton,
+  .rejectButton {
+    width: 166px;
+    height: 40px;
+  }
+}
 
