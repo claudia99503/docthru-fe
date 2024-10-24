@@ -8,24 +8,31 @@ const Container = ({ list, id }) => {
   const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
   const router = useRouter();
 
-  const getButtonStyles = () => {
-    return !list.progress
-      ? { backgroundColor: '#262626', color: '#FFFFFF' }
-      : { backgroundColor: '#E5E5E5', color: '#737373' };
-  };
-
+  
   const formatDeadline = (dateTime) => {
     const date = new Date(dateTime);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return `${date.toLocaleString('ko-KR', options)} 마감`;
   };
 
-  const getUri = () => {
-    return list?.isParticipated ? `/work/new/?id=${id}` : `/work/${id}/edit`;
+  const getButtonStyles = (type) => {
+    if(type === 'style'){
+      return !list.progress
+        ? { backgroundColor: '#262626', color: '#FFFFFF' }
+        : { backgroundColor: '#E5E5E5', color: '#737373' };
+    } else if (type === 'action') {
+      return !list.progress
+      ? false
+      : true
+    }
   };
 
-  const getButtonType = () => {
-    return list.isParticipated ? '작업 도전하기' : '도전 계속하기';
+  const getStatus = (type) => {
+    if(type === 'uri'){
+      return !list?.isParticipated ? `/work/new/${id}` : `/work/${id}/edit`;
+    } else {
+      return !list.isParticipated ? '작업 도전하기' : '도전 계속하기';
+    }
   };
 
   return (
@@ -52,35 +59,37 @@ const Container = ({ list, id }) => {
           <div className={styles['view-original-button-row']}>
             <button
               className={styles['primary-button']}
-              onClick={() => router.push(`/work/new/?id=${id}`)}
+              onClick={() =>  window.open(list.docUrl)}
             >
-              <a href={list.docUrl}>원문 링크</a>
+              원문 링크
             </button>
           </div>
           <div className={styles['challenge-button-row']}>
             <button
               className={styles['gray-button']}
-              style={getButtonStyles()}
-              onClick={() => router.push(getUri())}
+              style={getButtonStyles('style')}
+              onClick={() => router.push(getStatus('uri'))}
+              disabled={getButtonStyles('action')}
             >
-              {getButtonType()}
+              {getStatus('btn')}
             </button>
           </div>
         </>
       ) : (
         <div className={styles['mobile-buttons-row']}>
           <button
-            className={styles['primary-button']}
-            onClick={() => router.push(`/work/new/?id=${id}`)}
-          >
-            원문 보기
-          </button>
+              className={styles['primary-button']}
+              onClick={() =>  window.open(list.docUrl)}
+            >
+              원문 링크
+            </button>
           <button
             className={styles['gray-button']}
-            style={getButtonStyles()}
-            onClick={() => router.push(getUri())}
+            style={getButtonStyles('style')}
+            onClick={() => router.push(getStatus('uri'))}
+            disabled={getButtonStyles('action')}
           >
-            {getButtonType()}
+            {getStatus('btn')}
           </button>
         </div>
       )}

@@ -4,7 +4,6 @@ import images from '../../variables/images';
 
 const ChallengeDropdown = ({ onOptionChange }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('필터');
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [selectedDocType, setSelectedDocType] = useState(null);
   const [selectedProgress, setSelectedProgress] = useState(null);
@@ -18,16 +17,6 @@ const ChallengeDropdown = ({ onOptionChange }) => {
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
-  };
-
-  const handleOptionClick = (option) => {
-    const selectedOption = {
-      'field': option?.field,
-      'docType': option?.docType,
-      'progress': option?.progress,
-    }
-    onOptionChange(selectedOption); // 상위 컴포넌트로 선택된 옵션 전달
-    setIsOpen(false);
   };
 
   const applyHandler = () => {
@@ -44,9 +33,9 @@ const ChallengeDropdown = ({ onOptionChange }) => {
       data.docType = 'BLOG';
     }
     if (progress[selectedProgress] === '진행중') {
-      data.progress = true;
+      data.progress = 'false';
     } else if (progress[selectedProgress] === '마감') {
-      data.progress = false;
+      data.progress = 'true';
     }
     
     onOptionChange(data);
