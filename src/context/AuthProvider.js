@@ -1,17 +1,14 @@
-import Loader from '@/components/common/Loader';
 import { useAlertModal } from '@/hooks/useModal';
 import { createLogin, createUser, getUserMe } from '@/service/api/auth';
-import CAN_USE_DOM from '@/utils/canUseDom';
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { createContext, useEffect, useState } from 'react';
 
 export const AuthContext = createContext({
-  user: undefined,
+  user: null,
   isLoading: false,
   login: () => {},
   signUp: () => {},
   isModalOpen: false,
-  isRedirecting: false,
 });
 
 export function AuthProvider({ children }) {
@@ -21,67 +18,48 @@ export function AuthProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
 
-  const cachedUser = queryClient.getQueryData(['user']);
-
   useEffect(() => {
-    if (CAN_USE_DOM) {
+    if (typeof window !== 'undefined') {
       const token = localStorage.getItem('accessToken');
+
       if (token) {
-        setAccessToken(token);
+        setAccessToken(localStorage.getItem('accessToken'));
       }
     }
   }, []);
 
-  useEffect(() => {
-    if (cachedUser === undefined) {
-      setIsLoading(true);
-    } else {
-      setIsLoading(false);
-    }
-  }, [cachedUser]);
-
   const {
-    data: userData,
+    data,
     isLoading: isUserLoading,
     refetch: getMe,
   } = useQuery({
     queryKey: ['user'],
     queryFn: getUserMe,
-    staleTime: 1000 * 60 * 5,
-    cacheTime: 1000 * 60 * 10,
+    staleTime: Infinity,
+    cacheTime: Infinity,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
-    enabled: !!accessToken && !cachedUser,
+    enabled: !!accessToken,
   });
 
   useEffect(() => {
-    if (userData) {
-      setIsLoading(false);
-    } else if (isUserLoading) {
-      setIsLoading(true);
-    } else {
-      setIsLoading(false);
-    }
-    console.log('User loading state:', isUserLoading);
-  }, [isUserLoading, userData]);
+    setIsLoading(isUserLoading);
+  }, [isUserLoading]);
 
   const loginMutation = useMutation({
     onMutate: () => setIsLoading(true),
     mutationFn: (data) => createLogin(data),
-    onSuccess: async (data) => {
+    onSuccess: (data) => {
       if (data && data.accessToken) {
         const { accessToken } = data;
         localStorage.setItem('accessToken', accessToken);
-        setAccessToken(accessToken);
-
         queryClient.invalidateQueries({ queryKey: ['user'] });
+        getMe().then((user) => {
+          setIsRedirecting(true);
 
-        await getMe();
-        setIsRedirecting(true);
-        onModalOpen({
-          msg: '로그인 되었습니다.',
-          path: '/',
-          action: () => setIsRedirecting(false),
+          if (user.role === 'ADMIN') {
+            window.location.href = '/admin';
+          }
         });
       }
     },
@@ -91,20 +69,20 @@ export function AuthProvider({ children }) {
   const signUpMutation = useMutation({
     onMutate: () => setIsLoading(true),
     mutationFn: (data) => createUser(data),
-    onSuccess: async (data) => {
+    onSuccess: (data) => {
+      console.log('Success:', data);
       if (data && data.accessToken) {
         const { accessToken } = data;
         localStorage.setItem('accessToken', accessToken);
-        setAccessToken(accessToken);
-
         queryClient.invalidateQueries({ queryKey: ['user'] });
 
-        await getMe(); // 사용자 정보 가져오기
-        setIsRedirecting(true);
-        onModalOpen({
-          msg: '가입이 완료되었습니다.',
-          path: '/',
-          action: () => setIsRedirecting(false),
+        getMe().then(() => {
+          setIsRedirecting(true);
+          onModalOpen({
+            msg: '가입이 완료되었습니다.',
+            path: '/',
+            action: () => setIsRedirecting(false),
+          });
         });
       }
     },
@@ -114,7 +92,7 @@ export function AuthProvider({ children }) {
   return (
     <AuthContext.Provider
       value={{
-        user: cachedUser || userData || null,
+        user: data,
         isLoading,
         login: loginMutation,
         signUp: signUpMutation,
