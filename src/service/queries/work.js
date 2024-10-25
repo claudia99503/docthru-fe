@@ -4,10 +4,10 @@ import { workKey } from '@/variables/queryKeys';
 
 export function useGetWorkList(id, queryParams) {
   return useQuery({
-    queryKey: ['worksList', id, queryParams],
+    queryKey: workKey.lists(),
     queryFn: () => getWorkList(id, queryParams),
     enabled: !!id,
-    cacheTime: 0
+    cacheTime: 0,
   });
 }
 

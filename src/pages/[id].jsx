@@ -32,15 +32,16 @@ export default function ChallengeDetailPage() {
   const {
     data: challengeData,
     refetch: refetchChallenge,
-    isLoading: isChallengeLoading,
+    isPending: isChallengeLoading,
   } = useGetChallengeDetail(validId, {
     enabled: !!validId,
   });
 
+  //오류나서 isPending으로 바꿔줬어요
   const {
     data: worksData,
     refetch: refetchWork,
-    isLoading: isWorkLoading,
+    isPending: isWorkLoading,
   } = useGetWorkList(validId, selectedOption, {
     enabled: !!validId,
   });
