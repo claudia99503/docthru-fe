@@ -1,11 +1,5 @@
 .ChallengeDetailInfo {
   display: flex;
-  gap: 24px;
-  width: 100%;
-}
-
-.challenge-info {
-  display: flex;
   flex-direction: column;
   gap: 16px;
   align-items: flex-start;
@@ -37,10 +31,6 @@
 /* 태블릿 버전 */
 @media (min-width: 744px) and (max-width: 1199px) {
   .ChallengeDetailInfo {
-    gap: 20px;
-  }
-
-  .challenge-info {
     gap: 16px;
     min-width: 429px;
   }
@@ -50,10 +40,6 @@
 @media (max-width: 743px) {
   .ChallengeDetailInfo {
     flex-direction: column;
-    gap: 20px;
-  }
-
-  .challenge-info {
     gap: 16px;
     min-width: 343px;
   }

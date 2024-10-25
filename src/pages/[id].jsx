@@ -6,6 +6,7 @@ import { useGetWorkList } from '@/service/queries/work';
 
 import Head from 'next/head';
 import Loader from '@/components/common/Loader';
+import Container from '@/components/challenge/Container';
 
 import ChallengeDetailInfo from '@/components/challenge/ChallengeDetailInfo';
 import ParticipationStatus from '@/components/challenge/ParticipationStatus';
@@ -67,22 +68,23 @@ export default function ChallengeDetailPage() {
     return <Loader />;
   }
 
-  
   // 추후 util로 분리 예정
   const getPassedDeadline = (date) => {
     const today = new Date();
     const deadline = new Date(date);
-    
+
     if (deadline <= today) {
       return false;
     } else return true;
   };
   // -----------------------------------------------
-  
-  const workId = worksData?.list?.find(work => work.userId === challengeData.userId)?.id;
-  
+
+  const workId = worksData?.list?.find(
+    (work) => work.userId === challengeData.userId
+  )?.id;
+
   const getParamId = () => {
-    return challengeData?.isParticipated ? workId : challengeData?.id 
+    return challengeData?.isParticipated ? workId : challengeData?.id;
   };
 
   return (
@@ -95,8 +97,11 @@ export default function ChallengeDetailPage() {
         />
       </Head>
       {challengeData ? (
-        <div className={styles.mainContainer}>
-          <ChallengeDetailInfo list={challengeData} id={getParamId() || 1} /> {/* 수정 필요 */}
+        <div className={styles.ChallengeDetailPage}>
+          <div className={styles['info-container']}>
+            <ChallengeDetailInfo list={challengeData}/>{' '}
+            <Container list={challengeData} id={getParamId()} />
+          </div>
           {worksData?.bestList && !getPassedDeadline(challengeData.deadline) ? (
             <BestRecWork list={worksData.bestList} />
           ) : null}
