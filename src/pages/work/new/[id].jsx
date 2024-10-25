@@ -1,7 +1,6 @@
 'use client';
 
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import styles from '@/styles/pages/work/mutateWork.module.css';
 import assets from '@/variables/images';
 import Link from 'next/link';
@@ -11,15 +10,28 @@ import cn from '@/utils/clsx';
 import Border from '@/components/common/Border';
 import TextEditor from '@/components/work/TextEditor';
 import { useRef } from 'react';
+import { useRouter } from 'next/router';
+import Loader from '@/components/common/Loader';
+import { useGiveUpChallenge } from '@/service/mutations/challenge';
 
 //challengeId 받아야됨...
 export default function CreateWorkPage() {
   const textEditorRef = useRef(null);
+  const router = useRouter();
+  const challengeId = router.query.id;
+
+  const { mutate } = useGiveUpChallenge();
+
+  if (!challengeId) return <Loader />;
 
   const handleSave = () => {
     if (textEditorRef.current) {
       textEditorRef.current.saveContent();
     }
+  };
+
+  const handleGiveUpChallenge = () => {
+    mutate(challengeId);
   };
 
   return (
@@ -50,6 +62,7 @@ export default function CreateWorkPage() {
             variant="cancel"
             className={cn(styles.btn, styles.cancel)}
             width="60"
+            onClick={handleGiveUpChallenge}
           >
             <span>포기</span>
             <Image
@@ -76,7 +89,7 @@ export default function CreateWorkPage() {
 
       <Border gap="24px" />
 
-      <TextEditor ref={textEditorRef} />
+      <TextEditor ref={textEditorRef} id={challengeId} />
     </>
   );
 }

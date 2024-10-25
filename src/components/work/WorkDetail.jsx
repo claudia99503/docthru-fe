@@ -4,7 +4,7 @@ import { Profile } from '@/components/common/Profile';
 import LikeButton from '@/components/common/LikeButton';
 import KebabMenu from '@/components/common/KebabMenu';
 import { formatDate } from '@/utils/utilFunction';
-import { useMutateLikes } from '@/service/mutations/work';
+import { useDeleteWork, useMutateLikes } from '@/service/mutations/work';
 import { useDeleteModal } from '@/hooks/useModal';
 
 export default function WorkDetail({ data }) {
@@ -12,25 +12,31 @@ export default function WorkDetail({ data }) {
     return <div>데이터 없음</div>;
   }
 
-  const id = data.wordId;
-  const { onModalOpen, Modal } = useDeleteModal(id);
-
+  const { onModalOpen, Modal } = useDeleteModal();
   const { mutate: LikeMutate } = useMutateLikes(id, data.isLiked);
+  const { mutate: deleteWork } = useDeleteWork();
 
+  const { workId } = data;
   const { challenge, isEditable, ...rest } = data;
 
-  const handleEdit = (id) => {
-    router.push(`/work/${id}/edit`);
+  const handleEdit = (workId) => {
+    router.push(`/work/${workId}/edit`);
   };
 
-  const handleDelete = () => {};
+  const handleDelete = (workId) => {
+    if (workId) {
+      deleteWork(workId);
+    }
+  };
 
   const clickDelete = () => {
     onModalOpen({ msg: '삭제하시겠습니까?', action: () => handleDelete });
   };
 
   const toggleLikeButton = () => {
-    LikeMutate(id);
+    if (workId) {
+      LikeMutate(id);
+    }
   };
 
   return (
