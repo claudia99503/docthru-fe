@@ -1,3 +1,5 @@
+'use client';
+
 import { useRouter } from 'next/router';
 import { AdminHeader, MemberHeader, AuthHeader } from './Headers';
 import styles from './Layout.module.css';
