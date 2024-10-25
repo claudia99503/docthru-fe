@@ -14,47 +14,46 @@ import ChallengeDropdown from '@/components/challenge/ChallengeDropdown';
 
 import styles from '@/styles/pages/Home.module.css';
 
-import { dehydrate, QueryClient } from '@tanstack/react-query';
-import { getChallengeList } from '@/service/api/challenge';
+// import { dehydrate, QueryClient } from '@tanstack/react-query';
+// import { getChallengeList } from '@/service/api/challenge';
+import { useMediaQuery } from 'react-responsive';
 
 export default function Home(initialData) {
+  const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
   const router = useRouter();
+  
   const [limit, setLimit] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedOption, setSelectedOption] = useState({
-    field: '',
-    docType: '',
-    status: '',
-  });
+  const [selectedOption, setSelectedOption] = useState({});
 
   const { data = initialData, isPending } = useGetChallenges(selectedOption, {
     enabled: true,
   });
   const { meta = {}, list = [] } = data || {};
-  const totalPages = meta.totalPages;
+  const { totalPages } = meta;
 
   const handleOptionChange = (option) => {
-    setSelectedOption((pev) => ({ ...pev, ...option }));
+    setSelectedOption((pev) => ({...pev, ...option }));
   };
 
   useEffect(() => {
+    setLimit(isMobile ? 4 : 5);
+  }, [isMobile]);
+
+  useEffect(() => {
     setCurrentPage(1);
-  }, [
-    searchTerm,
-    selectedOption.field,
-    selectedOption.docType,
-    selectedOption.status,
-  ]);
+  }, [searchTerm, limit, selectedOption?.field, selectedOption?.docType, selectedOption?.progress]);
 
   useEffect(() => {
     const option = {
-      search: searchTerm,
+      keyword: searchTerm,
       page: currentPage,
-    };
-
-    handleOptionChange(option);
-  }, [currentPage, searchTerm]);
+      limit: limit
+    }
+    
+    handleOptionChange(option)
+  }, [currentPage, limit, searchTerm, selectedOption?.field, selectedOption?.docType, selectedOption?.progress]);
 
   return (
     <>
@@ -77,7 +76,7 @@ export default function Home(initialData) {
         </button>
       </div>
       <div className={styles.SearchContainer}>
-        <ChallengeDropdown onOptionChange={handleOptionChange} />
+        <ChallengeDropdown onOptionChange={setSelectedOption} />
         <ChallengeSearchBarLarge
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
@@ -87,7 +86,7 @@ export default function Home(initialData) {
         <Loader />
       ) : (
         <>
-          <div>
+          <div className={styles['card-container']}>
             <AllCardSection
               list={list}
               searchTerm={searchTerm}

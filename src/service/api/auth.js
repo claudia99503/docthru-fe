@@ -13,19 +13,11 @@ export async function createUser(data) {
 }
 
 export async function createLogin(data) {
-  const res = await axios.post(`${PATH}/login`, data, {
-    withCredentials: true,
-  });
+  const res = await axios.post(`${PATH}/login`, data);
   return res.data;
 }
 
 export async function createLogout() {
-  const res = await axios.post(
-    `${PATH}/logout`,
-    {},
-    {
-      withCredentials: true,
-    }
-  );
+  const res = await axios.post(`${PATH}/logout`);
   return res.data;
 }

@@ -3,16 +3,15 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 996px;
   margin: 0;
-  width: 100%;
 }
 
 .SearchBarWithDropdown > * {
-  flex-shrink: 0;
+  flex-shrink: 1;
   margin-right: 5px;
 }
 
 .SearchBarWithDropdown > *:last-child {
   margin-right: 0;
 }
+

@@ -161,20 +161,18 @@ export default function FeedbackContent({ feedback }) {
               />
             )}
           </div>
-
-          {showReplyForm && (
-            <ReplyForm
-              onSubmit={handleReplySubmit}
-              onCancel={() => setShowReplyForm(false)}
-            />
-          )}
-
           {isRepliesOpen && (
             <RepliesList
               workId={feedback.workId}
               feedback={feedback}
               onDelete={handleReplyDelete}
               onUpdate={handleReplyUpdate}
+            />
+          )}
+          {showReplyForm && (
+            <ReplyForm
+              onSubmit={handleReplySubmit}
+              onCancel={() => setShowReplyForm(false)}
             />
           )}
         </li>

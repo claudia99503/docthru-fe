@@ -84,3 +84,8 @@ main.small {
   max-width: 890px;
   width: 100%;
 }
+
+textarea {
+  resize: none;
+  box-sizing: border-box;
+}

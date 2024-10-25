@@ -1,45 +1,89 @@
+'use client';
 import dynamic from 'next/dynamic';
-import { useEffect, useRef, useState } from 'react';
-import Loader from '../common/Loader';
+import {
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
+  useImperativeHandle,
+} from 'react';
 import 'react-quill/dist/quill.snow.css';
-import EditorToolbar from './EditorToolBar';
+import styles from './TextEditor.module.css';
+import Toast from '../modals/Toast';
+import CAN_USE_DOM from '@/utils/canUseDom';
 
 const ReactQuill = dynamic(() => import('react-quill'), {
   ssr: false,
   loading: () => <p>Loading Editor...</p>,
 });
-
-export default function TextEditor() {
-  const [content, setContent] = useState('');
+const TextEditor = forwardRef((props, ref) => {
   const quillRef = useRef(null);
+  const [hasDraft, setHasDraft] = useState(false);
+  const [content, setContent] = useState('');
+  const STORAGE_KEY = 'workContent';
+  let savedContent;
+
+  if (CAN_USE_DOM) {
+    savedContent = localStorage.getItem(STORAGE_KEY);
+  }
 
   const modules = {
-    toolbar: {
-      container: '#toolbar',
-      handlers: {},
-    },
+    toolbar: [
+      ['bold', 'italic', 'underline'],
+      [{ size: [] }],
+      [{ color: [] }, { background: [] }],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      [{ align: [] }],
+      ['link'],
+      ['clean'],
+    ],
   };
 
   const handleContentChange = (value) => {
     setContent(value);
   };
 
+  useImperativeHandle(ref, () => ({
+    saveContent: () => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(content));
+      alert('임시 저장되었습니다.');
+      console.log('Saved content:', content);
+    },
+  }));
+
+  const handleBringBackDraft = () => {
+    setContent(JSON.parse(savedContent));
+    setHasDraft(false);
+  };
+
   useEffect(() => {
-    if (quillRef.current) {
-      console.log('커스텀툴바');
+    if (savedContent) {
+      setHasDraft(true);
     }
-  }, [quillRef]);
+  }, []);
 
   return (
-    <div>
-      <EditorToolbar />
-      <ReactQuill
-        ref={quillRef}
-        value={content}
-        onChange={handleContentChange}
-        modules={modules}
-      />
-      <p>Editor content:{content}</p>
-    </div>
+    <>
+      <div className={styles.TextEditor}>
+        <ReactQuill
+          ref={quillRef}
+          value={content}
+          onChange={handleContentChange}
+          modules={modules}
+          theme="snow"
+          placeholder="번역 시작하기..."
+        />
+      </div>
+      {hasDraft && (
+        <Toast
+          msg="임시 저장된 작업물이 있어요. 저장된 작업물을 불러오시겠어요??"
+          buttonDisplay="불러오기"
+          onConfirm={handleBringBackDraft}
+          onClose={() => setHasDraft(false)}
+        />
+      )}
+    </>
   );
-}
+});
+
+export default TextEditor;

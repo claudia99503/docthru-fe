@@ -3,13 +3,31 @@ import axios from "./axios";
 const PATH = "/users/me/challenges";
 
 /** /challenges/ongoing GET - 진행중인 챌린지 조회 */
-export async function getOnGoingChallenge(params) {
+export async function getOnGoingChallenge({
+  keyword,
+  page = '1',
+  limit = '5', }) {
+  const params = {
+    ...(keyword && { keyword }),
+    ...(page && { page }),
+    ...(limit && { limit }),
+  };
+
   const res = await axios.get(`${PATH}/ongoing`, { params });
   return res.data;
 }
 
 /** /challenges/completed GET - 완료된 챌린지 조회 */
-export async function getCompletedChallenge(params) {
+export async function getCompletedChallenge({
+  keyword,
+  page = '1',
+  limit = '5', }) {
+  const params = {
+    ...(keyword && { keyword }),
+    ...(page && { page }),
+    ...(limit && { limit }),
+  };
+
   const res = await axios.get(`${PATH}/completed`, { params });
   return res.data;
 }

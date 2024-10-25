@@ -57,15 +57,9 @@ export function AuthProvider({ children }) {
         getMe().then((user) => {
           setIsRedirecting(true);
 
-          const path = user.role === 'ADMIN' ? '/admin' : '/';
-          console.log('data', data);
-          console.log('path', path);
-
-          onModalOpen({
-            msg: '로그인 되었습니다.',
-            path,
-            action: () => setIsRedirecting(false),
-          });
+          if (user.role === 'ADMIN') {
+            window.location.href = '/admin';
+          }
         });
       }
     },
