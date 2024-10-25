@@ -9,18 +9,22 @@ import Button from '@/components/common/Button';
 import cn from '@/utils/clsx';
 import Border from '@/components/common/Border';
 import TextEditor from '@/components/work/TextEditor';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import Loader from '@/components/common/Loader';
 import { useGiveUpChallenge } from '@/service/mutations/challenge';
+import { useCreateWork } from '@/service/mutations/work';
 
 //challengeId 받아야됨...
 export default function CreateWorkPage() {
+  const [content, setContent] = useState('');
+
   const textEditorRef = useRef(null);
   const router = useRouter();
   const challengeId = router.query.id;
 
   const { mutate } = useGiveUpChallenge();
+  const { mutate: createWork } = useCreateWork();
 
   if (!challengeId) return <Loader />;
 
@@ -32,6 +36,15 @@ export default function CreateWorkPage() {
 
   const handleGiveUpChallenge = () => {
     mutate(challengeId);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const data = { content };
+    console.log('data', data);
+
+    createWork({ id: challengeId, data });
   };
 
   return (
@@ -79,7 +92,11 @@ export default function CreateWorkPage() {
           >
             임시저장
           </Button>
-          <Button variant="black" className={cn(styles.btn, styles.submit)}>
+          <Button
+            variant="black"
+            className={cn(styles.btn, styles.submit)}
+            onClick={handleSubmit}
+          >
             제출하기
           </Button>
         </div>
@@ -89,7 +106,12 @@ export default function CreateWorkPage() {
 
       <Border gap="24px" />
 
-      <TextEditor ref={textEditorRef} id={challengeId} />
+      <TextEditor
+        ref={textEditorRef}
+        id={challengeId}
+        content={content}
+        setContent={setContent}
+      />
     </>
   );
 }

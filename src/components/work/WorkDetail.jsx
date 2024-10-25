@@ -12,8 +12,10 @@ export default function WorkDetail({ data }) {
     return <div>데이터 없음</div>;
   }
 
+  const { isLiked } = data;
+
   const { onModalOpen, Modal } = useDeleteModal();
-  const { mutate: LikeMutate } = useMutateLikes(id, data.isLiked);
+  const { mutate: LikeMutate } = useMutateLikes(isLiked);
   const { mutate: deleteWork } = useDeleteWork();
 
   const { workId } = data;
@@ -30,12 +32,15 @@ export default function WorkDetail({ data }) {
   };
 
   const clickDelete = () => {
-    onModalOpen({ msg: '삭제하시겠습니까?', action: () => handleDelete });
+    onModalOpen({
+      msg: '삭제하시겠습니까?',
+      action: (workId) => handleDelete(workId),
+    });
   };
 
   const toggleLikeButton = () => {
     if (workId) {
-      LikeMutate(id);
+      LikeMutate({ id: workId, isLiked });
     }
   };
 

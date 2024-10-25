@@ -16,11 +16,10 @@ const ReactQuill = dynamic(() => import('react-quill'), {
   ssr: false,
   loading: () => <p>Loading Editor...</p>,
 });
-const TextEditor = forwardRef(({ workId }, ref) => {
+const TextEditor = forwardRef(({ id, content, setContent }, ref) => {
   const quillRef = useRef(null);
   const [hasDraft, setHasDraft] = useState(false);
-  const [content, setContent] = useState('');
-  const STORAGE_KEY = `work_${workId}`;
+  const STORAGE_KEY = `work_${id}`;
   let savedContent;
 
   if (CAN_USE_DOM) {

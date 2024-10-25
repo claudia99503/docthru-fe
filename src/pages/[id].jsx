@@ -31,15 +31,16 @@ export default function ChallengeDetailPage() {
   const {
     data: challengeData,
     refetch: refetchChallenge,
-    isLoading: isChallengeLoading,
+    isPending: isChallengeLoading,
   } = useGetChallengeDetail(validId, {
     enabled: !!validId,
   });
 
+  //오류나서 isPending으로 바꿔줬어요
   const {
     data: worksData,
     refetch: refetchWork,
-    isLoading: isWorkLoading,
+    isPending: isWorkLoading,
   } = useGetWorkList(validId, selectedOption, {
     enabled: !!validId,
   });
@@ -67,22 +68,23 @@ export default function ChallengeDetailPage() {
     return <Loader />;
   }
 
-  
   // 추후 util로 분리 예정
   const getPassedDeadline = (date) => {
     const today = new Date();
     const deadline = new Date(date);
-    
+
     if (deadline <= today) {
       return false;
     } else return true;
   };
   // -----------------------------------------------
-  
-  const workId = worksData?.list?.find(work => work.userId === challengeData.userId)?.id;
-  
+
+  const workId = worksData?.list?.find(
+    (work) => work.userId === challengeData.userId
+  )?.id;
+
   const getParamId = () => {
-    return challengeData?.isParticipated ? workId : challengeData?.id 
+    return challengeData?.isParticipated ? workId : challengeData?.id;
   };
 
   return (
@@ -96,7 +98,8 @@ export default function ChallengeDetailPage() {
       </Head>
       {challengeData ? (
         <div className={styles.mainContainer}>
-          <ChallengeDetailInfo list={challengeData} id={getParamId() || 1} /> {/* 수정 필요 */}
+          <ChallengeDetailInfo list={challengeData} id={getParamId() || 1} />{' '}
+          {/* 수정 필요 */}
           {worksData?.bestList && !getPassedDeadline(challengeData.deadline) ? (
             <BestRecWork list={worksData.bestList} />
           ) : null}
