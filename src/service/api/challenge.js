@@ -36,7 +36,6 @@ export async function updateChallenge(id, data) {
   return res.data;
 }
 
-
 /** /:id DELETE - 챌린지 취소 - 챌린지 신청한 유저 */
 export async function deleteChallenges(id) {
   try {
@@ -69,7 +68,6 @@ export async function createChallengeApplication(data) {
   const res = await axios.post(`${PATH}/application`, data);
   return res.data;
 }
-
 
 /** GET - 챌린지 전체 조회 (챌린지 신청 관리) - 어드민 전용 */
 export async function getAllChallengeApplications({
@@ -130,4 +128,11 @@ export async function updateChallengeAdmin({
   } catch (error) {
     throw new Error(error.response?.data?.message || '챌린지 수정 실패');
   }
+}
+
+// work 페이지에서 챌린지 참여 포기
+
+export async function deleteChallengeParticipation(challengeId) {
+  const res = await axios.delete(`${PATH}/${challengeId}/participations`);
+  return res.data;
 }

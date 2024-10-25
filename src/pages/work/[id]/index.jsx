@@ -19,6 +19,7 @@ export default function WorkDetailPage() {
   if (!data) {
     return <p>데이터 없음</p>;
   }
+
   console.log(data);
   const { isClosed } = data;
   return (
