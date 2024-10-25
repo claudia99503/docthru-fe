@@ -84,7 +84,7 @@ export default function ChallengeDetailPage() {
   )?.id;
 
   const getParamId = () => {
-    return challengeData?.isParticipated ? workId : challengeData?.id;
+    return challengeData?.isParticipated ? {id: workId, new: false} : {id: challengeData?.id, new: true};
   };
 
   return (
@@ -100,7 +100,7 @@ export default function ChallengeDetailPage() {
         <div className={styles.ChallengeDetailPage}>
           <div className={styles['info-container']}>
             <ChallengeDetailInfo list={challengeData}/>{' '}
-            <Container list={challengeData} id={getParamId()} />
+            <Container list={challengeData} workBtn={getParamId()} />
           </div>
           {worksData?.bestList && !getPassedDeadline(challengeData.deadline) ? (
             <BestRecWork list={worksData.bestList} />

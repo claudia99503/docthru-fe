@@ -1,14 +1,15 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
-import styles from './Container.module.css';
-import assets from '@/variables/images';
 import { useRouter } from 'next/router';
 
-const Container = ({ list, id }) => {
+import assets from '@/variables/images';
+
+import styles from './Container.module.css';
+
+const Container = ({ list, workBtn }) => {
   const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
   const router = useRouter();
 
-  
   const formatDeadline = (dateTime) => {
     const date = new Date(dateTime);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -26,12 +27,12 @@ const Container = ({ list, id }) => {
       : true
     }
   };
-
+  
   const getStatus = (type) => {
     if(type === 'uri'){
-      return !list?.isParticipated ? `/work/new/${id}` : `/work/${id}/edit`;
+      return workBtn.new ? `/work/new/${workBtn.id}` : `/work/${workBtn.id}/edit`;
     } else {
-      return !list.isParticipated ? '작업 도전하기' : '도전 계속하기';
+      return workBtn.new ? '작업 도전하기' : '도전 계속하기';
     }
   };
 
