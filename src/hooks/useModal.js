@@ -13,6 +13,7 @@ export function useModalAction() {
 
   const router = useRouter();
   const modalRef = useRef(null);
+  const actionRef = useRef(null);
 
   useEffect(() => {
     if (isModalOpen && modalRef.current) {
@@ -21,21 +22,28 @@ export function useModalAction() {
   }, [isModalOpen]);
 
   const onModalOpen = ({ msg = '', path = null, action = null }) => {
-    setIsModalOpen(true);
-    setModalMsg(msg);
+    return new Promise((resolve) => {
+      setIsModalOpen(true);
+      setModalMsg(msg);
 
-    if (path) {
-      setRedirectTo(path);
-    }
-    if (action) {
-      setNextAction(action);
-    }
+      if (path) {
+        setRedirectTo(path);
+      }
+      if (action) {
+        actionRef.current = () => {
+          action();
+          resolve();
+        };
+        setNextAction(() => actionRef.current);
+      }
+    });
   };
 
   const onModalCancel = () => {
     if (modalRef.current) {
       modalRef.current.close();
       setIsModalOpen(false);
+      actionRef.current = null;
     }
   };
 
@@ -49,9 +57,9 @@ export function useModalAction() {
         setRedirectTo(null);
       }
 
-      if (typeof nextAction === 'function') {
-        nextAction();
-        setNextAction(null);
+      if (typeof actionRef.current === 'function') {
+        actionRef.current();
+        actionRef.current = null;
       }
     }
   };
