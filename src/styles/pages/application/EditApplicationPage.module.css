@@ -83,6 +83,8 @@
   margin-bottom: 30px;
   font-size: 16px;
   color: var(--grey-900);
+  resize: none;
+  box-sizing: border-box;
 }
 
 .textarea::placeholder {
@@ -143,3 +145,4 @@
     padding: 14px;
   }
 }
+

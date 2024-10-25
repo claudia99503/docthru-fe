@@ -53,10 +53,11 @@ const Card = ({ data, site }) => {
   };
 
   const getCondition = () => {
-    const today = new Date();
-    const deadline = new Date(myData.deadline);
+    // const today = new Date();
+    // const deadline = new Date(myData.deadline);
 
-    if (today >= deadline || myData.progress) {
+    // if (today >= deadline || myData.progress) {
+    if (myData.progress) {
       return (
         <div
           className={styles['condition-chip']}

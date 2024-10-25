@@ -65,21 +65,25 @@ export default function ChallengeDetailPage() {
 
   if (isChallengeLoading || isWorkLoading) {
     return <Loader />;
-  }  
+  }
 
-  const workId = worksData?.list?.find(work => work.userId === challengeData.userId)?.id;
-
+  
   // 추후 util로 분리 예정
   const getPassedDeadline = (date) => {
     const today = new Date();
     const deadline = new Date(date);
-
+    
     if (deadline <= today) {
       return false;
     } else return true;
   };
   // -----------------------------------------------
-
+  
+  const workId = worksData?.list?.find(work => work.userId === challengeData.userId)?.id;
+  
+  const getParamId = () => {
+    return challengeData?.isParticipated ? workId : challengeData?.id 
+  };
 
   return (
     <>
@@ -92,7 +96,7 @@ export default function ChallengeDetailPage() {
       </Head>
       {challengeData ? (
         <div className={styles.mainContainer}>
-          <ChallengeDetailInfo list={challengeData} id={workId} />
+          <ChallengeDetailInfo list={challengeData} id={getParamId() || 1} /> {/* 수정 필요 */}
           {worksData?.bestList && !getPassedDeadline(challengeData.deadline) ? (
             <BestRecWork list={worksData.bestList} />
           ) : null}

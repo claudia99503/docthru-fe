@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 import DocTypeChip from '../common/DocTypeChip';
 import { Profile } from '../common/Profile';
 import Container from './Container';
@@ -7,20 +5,8 @@ import Container from './Container';
 import styles from './ChallengeDetailInfo.module.css';
 
 const ChallengeDetailInfo = ({ list, id }) => {
-  const [paramId, setParamId] = useState(list?.id);
-
   const user = list?.writer;
-
-  const getTypes = () => {
-    if (list?.isParticipated) {
-      setParamId(id);
-    }
-  };
-
-  useEffect(() => {
-    getTypes();
-  }, []);
-
+  
   return (
     <>
       {list ? (
@@ -35,7 +21,7 @@ const ChallengeDetailInfo = ({ list, id }) => {
           </div>
           <Container
             list={list}
-            id={paramId}
+            id={id}
           />
         </div>
       ) : (

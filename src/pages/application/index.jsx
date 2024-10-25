@@ -68,7 +68,7 @@ const CreateApplicationPage = () => {
     setSelectedDate(date);
     setFormData((prevData) => ({
       ...prevData,
-      deadline: new Date(date).toISOString(), // ISO 형식으로 변환하여 저장
+      deadline: new Date(date).toISOString(),
     }));
   };
 
@@ -297,3 +297,4 @@ const CreateApplicationPage = () => {
 };
 
 export default CreateApplicationPage;
+
