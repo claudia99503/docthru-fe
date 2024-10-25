@@ -13,7 +13,7 @@ export function useModalAction() {
 
   const router = useRouter();
   const modalRef = useRef(null);
-  const actionRef = useRef(null); // nextAction을 ref로 관리
+  const actionRef = useRef(null);
 
   useEffect(() => {
     if (isModalOpen && modalRef.current) {
