@@ -1,7 +1,8 @@
 import axios from 'axios';
 import CAN_USE_DOM from '@/utils/canUseDom';
 
-const API_URL = process.env.NEXT_PUBLIC_DEV_API_URL;
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL;
 
 export const TokenService = {
   TOKEN_KEY: 'accessToken',
@@ -11,19 +12,12 @@ export const TokenService = {
     CAN_USE_DOM && localStorage.setItem(TokenService.TOKEN_KEY, token),
   remove: () => {
     if (CAN_USE_DOM) {
-      try {
-        localStorage.removeItem(TokenService.TOKEN_KEY);
-      } catch (error) {
-        console.error('Failed to remove token:', error);
-      }
+      localStorage.removeItem(TokenService.TOKEN_KEY);
     }
   },
   redirectToLogin: () => {
-    if (CAN_USE_DOM) {
-      const currentPath = window.location.pathname;
-      if (currentPath !== '/auth/login') {
-        window.location.href = '/auth/login';
-      }
+    if (CAN_USE_DOM && window.location.pathname !== '/auth/login') {
+      window.location.href = '/auth/login';
     }
   },
 };
@@ -35,29 +29,22 @@ const instance = axios.create({
     'Content-Type': 'application/json',
   },
 });
+instance.interceptors.request.use(
+  (config) => {
+    const token = TokenService.get();
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export const resetAxiosAuth = () => {
   delete instance.defaults.headers.common['Authorization'];
 };
-
-instance.interceptors.request.use(
-  (config) => {
-    try {
-      const token = TokenService.get();
-      if (token) {
-        config.headers['Authorization'] = `Bearer ${token}`;
-      }
-      return config;
-    } catch (error) {
-      console.error('Request interceptor error:', error);
-      return Promise.reject(error);
-    }
-  },
-  (error) => {
-    console.error('Request interceptor error:', error);
-    return Promise.reject(error);
-  }
-);
 
 instance.interceptors.response.use(
   (res) => res,
@@ -67,22 +54,6 @@ instance.interceptors.response.use(
 
       if (!CAN_USE_DOM) {
         return Promise.reject(error);
-      }
-
-      if (error.response?.status === 400) {
-        return Promise.reject({
-          status: error.response.status,
-          message: '이메일 또는 비밀번호가 올바르지 않습니다.',
-          handled: true,
-        });
-      }
-
-      if (error.response?.status === 409) {
-        return Promise.reject({
-          status: error.response.status,
-          message: '이미 존재하는 이메일입니다.',
-          handled: true,
-        });
       }
 
       if (error.response?.status === 401) {
@@ -97,10 +68,7 @@ instance.interceptors.response.use(
             ) {
               originalRequest._retry = true;
               try {
-                const response = await instance.post(
-                  '/users/token/refresh',
-                  {}
-                );
+                const response = await instance.post('/users/token/refresh');
                 const { accessToken } = response.data;
 
                 if (accessToken) {
@@ -146,11 +114,19 @@ instance.interceptors.response.use(
         });
       }
 
-      if (!error.response && error.request) {
-        console.error('Network error:', error.request);
+      if (error.response?.status === 400) {
         return Promise.reject({
-          status: 0,
-          message: '네트워크 연결을 확인해주세요.',
+          status: error.response.status,
+          message: '이메일 또는 비밀번호가 올바르지 않습니다.',
+          handled: true,
+        });
+      }
+
+      if (error.response?.status === 409) {
+        return Promise.reject({
+          status: error.response.status,
+          message: '이미 존재하는 이메일입니다.',
+          handled: true,
         });
       }
 

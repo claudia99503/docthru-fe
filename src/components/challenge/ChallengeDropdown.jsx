@@ -4,7 +4,6 @@ import images from '../../variables/images';
 
 const ChallengeDropdown = ({ onOptionChange }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('필터');
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [selectedDocType, setSelectedDocType] = useState(null);
   const [selectedProgress, setSelectedProgress] = useState(null);
@@ -20,42 +19,33 @@ const ChallengeDropdown = ({ onOptionChange }) => {
     setIsOpen(!isOpen);
   };
 
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
-    onOptionChange(option); // 상위 컴포넌트로 선택된 옵션 전달
-    setIsOpen(false);
-  };
-
   const applyHandler = () => {
     const appliedFilters = filter.filter((_, index) => selectedFilters[index]);
     const data = {
-      filter: appliedFilters,
+      field: appliedFilters,
       docType: selectedDocType,
       progress: selectedProgress,
     };
 
     if (docType[selectedDocType] === '공식문서') {
-      // console.log('OFFICIAL');
       data.docType = 'OFFICIAL';
     } else if (docType[selectedDocType] === '블로그') {
-      // console.log('BLOG');
       data.docType = 'BLOG';
     }
     if (progress[selectedProgress] === '진행중') {
-      // console.log('true');
-      data.progress = true;
+      data.progress = 'false';
     } else if (progress[selectedProgress] === '마감') {
-      // console.log('false');
-      data.progress = false;
+      data.progress = 'true';
     }
-    // console.log(docType[selectedDocType]);
-    // console.log(appliedFilters);
-    // console.log(progress[selectedProgress]);
-    console.log(data);
+    
+    onOptionChange(data);
+    setIsOpen(false);
   };
+
   const handleDocTypeClick = (index) => {
     setSelectedDocType(index);
   };
+
   const handleProgressClick = (index) => {
     setSelectedProgress(index);
   };
@@ -64,6 +54,8 @@ const ChallengeDropdown = ({ onOptionChange }) => {
     setSelectedFilters([]);
     setSelectedDocType(null);
     setSelectedProgress(null);
+    onOptionChange('');
+    setIsOpen(false);
   };
 
   const filter = ['NEXTJS', 'MODERNJS', 'API', 'WEB', 'CAREER'];

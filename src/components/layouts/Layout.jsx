@@ -1,3 +1,5 @@
+'use client';
+
 import { useRouter } from 'next/router';
 import { AdminHeader, MemberHeader, AuthHeader } from './Headers';
 import styles from './Layout.module.css';
@@ -38,7 +40,6 @@ export default function Layout({ children }) {
       }
 
       if (user && routes.isAuthPage) {
-        onModalOpen({ msg: '이미 로그인 되었습니다', path: '/' });
         return;
       }
 

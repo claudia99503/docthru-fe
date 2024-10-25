@@ -6,16 +6,16 @@ const PATH = '/challenges';
 export async function getChallengeList({
   field,
   docType,
-  status,
-  search,
+  progress,
+  keyword,
   page = '1',
   limit = '5',
 }) {
   const params = {
-    ...(field && { field }),
+    ...(field && { field: field.join(',') }),
     ...(docType && { docType }),
-    ...(status && { status }),
-    ...(search && { search }),
+    ...(progress && { progress }),
+    ...(keyword && { keyword }),
     ...(page && { page }),
     ...(limit && { limit }),
   };
@@ -70,3 +70,64 @@ export async function createChallengeApplication(data) {
   return res.data;
 }
 
+
+/** GET - 챌린지 전체 조회 (챌린지 신청 관리) - 어드민 전용 */
+export async function getAllChallengeApplications({
+  page = 1,
+  limit = 10,
+  sortBy = 'createdAt',
+  sortOrder = 'desc',
+  keyword = '',
+  status = '',
+} = {}) {
+  try {
+    const params = {
+      page,
+      limit,
+      sortBy: status ? 'status' : sortBy, // status가 있을 경우 sortBy를 'status'로 설정
+      sortOrder: status || sortOrder, // status가 있을 경우 sortOrder를 상태 값으로 설정
+      ...(keyword && { keyword }), // 검색어가 있을 경우에만 추가
+    };
+
+    // API 호출
+    const response = await axios.get(`${PATH}/application`, { params });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || '챌린지 목록 조회 실패');
+  }
+}
+
+/** PATCH - 어드민 챌린지 수정 (챌린지 상태 변경 포함) */
+export async function updateChallengeAdmin({
+  challengeId,
+  title,
+  field,
+  docType,
+  description,
+  docUrl,
+  deadline,
+  progress,
+  maxParticipants,
+  status,
+  message,
+}) {
+  try {
+    const body = {
+      ...(title && { title }),
+      ...(field && { field }),
+      ...(docType && { docType }),
+      ...(description && { description }),
+      ...(docUrl && { docUrl }),
+      ...(deadline && { deadline }),
+      ...(progress !== undefined && { progress }), // boolean 값 체크
+      ...(maxParticipants && { maxParticipants }),
+      ...(status && { status }),
+      ...(message && { message }),
+    };
+
+    const response = await axios.patch(`${PATH}/${challengeId}`, body);
+    return response.data; // 수정된 챌린지 정보 반환
+  } catch (error) {
+    throw new Error(error.response?.data?.message || '챌린지 수정 실패');
+  }
+}

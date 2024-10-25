@@ -24,11 +24,11 @@ const getDocTypeLabel = (docType) => {
   return docType === "OFFICIAL" ? "공식문서" : "블로그";
 };
 
-const ChallengeTable = ({ data }) => {
+const ChallengeTable = ({ data, routerPath = "/me/application/" }) => {
   const router = useRouter();
 
   const handleRowClick = (id) => {
-    router.push(`/me/application/${id}`);
+    router.push(`${routerPath}${id}`);
   };
 
   return (

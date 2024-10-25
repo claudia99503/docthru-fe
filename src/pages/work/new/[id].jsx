@@ -1,3 +1,5 @@
+'use client';
+
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styles from '@/styles/pages/work/mutateWork.module.css';
@@ -8,15 +10,23 @@ import Button from '@/components/common/Button';
 import cn from '@/utils/clsx';
 import Border from '@/components/common/Border';
 import TextEditor from '@/components/work/TextEditor';
+import { useRef } from 'react';
 
 //challengeId 받아야됨...
 export default function CreateWorkPage() {
-  const router = useRouter();
+  const textEditorRef = useRef(null);
+
+  const handleSave = () => {
+    if (textEditorRef.current) {
+      textEditorRef.current.saveContent();
+    }
+  };
 
   return (
     <>
       <Head>
         <title>작업 도전하기</title>
+
         <meta
           name="description"
           content="새로운 작업을 도전하고 생성하는 페이지입니다."
@@ -51,6 +61,7 @@ export default function CreateWorkPage() {
           </Button>
           <Button
             variant="white-border"
+            onClick={handleSave}
             className={cn(styles.btn, styles.save)}
           >
             임시저장
@@ -65,7 +76,7 @@ export default function CreateWorkPage() {
 
       <Border gap="24px" />
 
-      <TextEditor />
+      <TextEditor ref={textEditorRef} />
     </>
   );
 }

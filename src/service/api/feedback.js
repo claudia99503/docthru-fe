@@ -4,6 +4,16 @@ const WORK_PATH = '/works';
 const FEEDBACK_PATH = '/feedbacks';
 const REPLY_PATH = '/replies';
 
+export const getReplies = async (feedbackId, { cursorId, limit }) => {
+  const response = await axios.get(`/replies/${feedbackId}`, {
+    params: {
+      cursorId,
+      limit,
+    },
+  });
+  return response.data;
+};
+
 export async function getFeedbacks(workId, params = {}) {
   const res = await axios.get(`${WORK_PATH}/${workId}/feedbacks`, {
     params: {

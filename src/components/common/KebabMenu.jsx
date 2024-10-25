@@ -16,9 +16,10 @@ export default function KebabMenu({ onEdit, onDelete }) {
     onEdit();
   };
 
-  const handleClickDelete = () => {
+  const handleClickDelete = async (e) => {
+    e.stopPropagation();
+    await onDelete();
     setIsOpen(false);
-    onDelete();
   };
 
   useEffect(() => {

@@ -6,16 +6,31 @@ import { formatDate } from '@/utils/utilFunction';
 
 import styles from './SeveralBestRecCards.module.css';
 import images from '@/variables/images';
+import { useMediaQuery } from 'react-responsive';
 
-const SeveralBestRecCards = ({ list, index }) => {
+const SeveralBestRecCards = ({ list, last }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   // const lastModifiedAt = list.lastModifiedAt;
   const lastModifiedAt = list.createdAt;
+  const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
+  const isTablet = useMediaQuery({
+    query: '(min-width: 744px) and (max-width: 1199px)',
+  });
 
   const getWidth = () => {
-    return index == 'notLast' ? {width:'826px'} : {width:'890px'}
-  }
+    if (isMobile) {
+      return !last
+        ? { maxWidth: '655px', width: '89%' }
+        : { maxWidth: '696px' };
+    } else if (isTablet) {
+      return !last
+        ? { maxWidth: '825px', width: '91%' }
+        : { maxWidth: '890px' };
+    } else {
+      return !last ? { maxWidth: '826px' } : { maxWidth: 'none' };
+    }
+  };
 
   return (
     <div className={styles.SeveralBestRecCards} style={getWidth()}>

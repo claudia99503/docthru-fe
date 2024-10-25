@@ -15,7 +15,11 @@ export default function WorkDetailPage() {
   if (isPending) {
     return <Loader />;
   }
-  // console.log(data);
+
+  if (!data) {
+    return <p>데이터 없음</p>;
+  }
+  console.log(data);
   const { isClosed } = data;
   return (
     <>
