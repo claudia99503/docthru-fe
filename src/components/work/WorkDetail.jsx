@@ -68,7 +68,10 @@ export default function WorkDetail({ data }) {
           </div>
           <time className={styles.time}>{formatDate(data.createdAt)}</time>
         </div>
-        <p className={styles.content}>{data.content}</p>
+        <p
+          className={styles.content}
+          dangerouslySetInnerHTML={{ __html: data.content }}
+        ></p>
       </section>
       <Modal />
     </>

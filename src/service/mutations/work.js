@@ -5,6 +5,7 @@ import {
   createWorkLike,
   deleteWork,
   deleteWorkUnlike,
+  updateWork,
 } from '../api/work';
 import { challengeKey, workKey } from '@/variables/queryKeys';
 import { useRouter } from 'next/router';
@@ -66,7 +67,7 @@ export function useCreateWork() {
       await queryClient.invalidateQueries({
         queryKey: challengeKey.list(variables.id),
       });
-      await queryClient.refetchQueries(workKey.detail(variables.id));
+      await queryClient.refetchQueries(workKey.list(variables.id));
       router.push(`/work/${data.id}`);
     },
   });
@@ -84,6 +85,23 @@ export function useDeleteWork() {
         queryKey: workKey.detail(variables.id),
       });
       router.push(`/me`);
+    },
+  });
+}
+
+export function useUpdateWork() {
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
+  return useMutation({
+    mutationFn: ({ id, data }) => updateWork(id, data),
+    onSuccess: async (data, variables) => {
+      console.log('successMutation: 작업물 수정 성공');
+      await queryClient.invalidateQueries({
+        queryKey: challengeKey.list(variables.id),
+      });
+      await queryClient.refetchQueries(workKey.detail(variables.id));
+      router.push(`/work/${data.id}`);
     },
   });
 }
