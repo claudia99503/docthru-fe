@@ -11,15 +11,11 @@ export default function WorkDetail({ data }) {
   if (!data) {
     return <div>데이터 없음</div>;
   }
-
-  const { isLiked } = data;
+  const { isLike: isLiked, workId, challenge, isEditable, ...rest } = data;
 
   const { onModalOpen, Modal } = useDeleteModal();
-  const { mutate: LikeMutate } = useMutateLikes(isLiked);
+  const { mutate: LikeMutate } = useMutateLikes(workId, isLiked);
   const { mutate: deleteWork } = useDeleteWork();
-
-  const { workId } = data;
-  const { challenge, isEditable, ...rest } = data;
 
   const handleEdit = (workId) => {
     router.push(`/work/${workId}/edit`);
@@ -50,7 +46,10 @@ export default function WorkDetail({ data }) {
         <div className={styles.heading}>
           <h1 className={styles.title}>{data.challenge.title}</h1>
           {isEditable && (
-            <KebabMenu onEdit={() => handleEdit(id)} onDelete={clickDelete} />
+            <KebabMenu
+              onEdit={() => handleEdit(id)}
+              onDelete={() => clickDelete(workId)}
+            />
           )}
         </div>
         <DocTypeChip field={challenge.field} docType={challenge.docType} />
