@@ -15,6 +15,7 @@ export default function WorkForm({
   setContent,
   submitAction,
   giveUpAction,
+  isAdmin,
 }) {
   const textEditorRef = useRef(null);
 
@@ -46,14 +47,16 @@ export default function WorkForm({
         </Link>
 
         <div className={styles.buttons}>
-          <Button
-            variant="cancel"
-            className={cn(styles.btn, styles.cancel)}
-            width="60"
-            onClick={giveUpAction}
-          >
-            <span>포기</span>
-          </Button>
+          {!isAdmin && (
+            <Button
+              variant="cancel"
+              className={cn(styles.btn, styles.cancel)}
+              width="60"
+              onClick={giveUpAction}
+            >
+              <span>포기</span>
+            </Button>
+          )}
           <Button
             variant="white-border"
             onClick={handleSave}

@@ -8,7 +8,7 @@ import { useDeleteWork, useMutateLikes } from '@/service/mutations/work';
 import { useDeleteModal } from '@/hooks/useModal';
 import { useRouter } from 'next/router';
 
-export default function WorkDetail({ data }) {
+export default function WorkDetail({ isAdmin, data }) {
   const router = useRouter();
 
   if (!data) {
@@ -22,7 +22,10 @@ export default function WorkDetail({ data }) {
   const { mutate: deleteWork } = useDeleteWork();
 
   const handleEdit = (workId) => {
-    router.push(`/work/${workId}/edit`);
+    const editPath = isAdmin
+      ? `/admin/work/${workId}/edit`
+      : `/work/${workId}/edit`;
+    return router.push(editPath);
   };
 
   const handleDelete = (workId) => {
