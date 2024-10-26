@@ -7,8 +7,9 @@ import TextEditor from '@/components/work/TextEditor';
 import styles from './WorkForm.module.css';
 import cn from '@/utils/clsx';
 import assets from '@/variables/images';
-
+import Loader from '../common/Loader';
 export default function WorkForm({
+  id,
   title,
   content,
   setContent,
@@ -27,6 +28,8 @@ export default function WorkForm({
     e.preventDefault();
     submitAction();
   };
+
+  if (!id) return <Loader />;
 
   return (
     <>
@@ -73,6 +76,7 @@ export default function WorkForm({
       <Border gap="24px" />
 
       <TextEditor
+        id={id}
         ref={textEditorRef}
         content={content}
         setContent={setContent}

@@ -28,7 +28,7 @@ export default function CreateWorkPage() {
         />
       </Head>
       <WorkForm
-        title="작업 도전하기"
+        id={`challenge_${challengeId}`}
         content={content}
         setContent={setContent}
         submitAction={handleCreateWork}
