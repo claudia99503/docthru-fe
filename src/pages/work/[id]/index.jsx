@@ -9,7 +9,6 @@ import FeedbackList from '@/components/feedback/FeedbackList';
 export default function WorkDetailPage() {
   const router = useRouter();
   const { id } = router.query;
-
   const { data, isPending } = useGetWork(id);
 
   if (isPending) {

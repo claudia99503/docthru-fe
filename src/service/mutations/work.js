@@ -23,14 +23,14 @@ export function useCreateFeedback(id) {
   });
 }
 
-export function useMutateLikes(id, isLiked) {
+export function useMutateLikes(id) {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: ({ isLiked }) => {
       return isLiked ? deleteWorkUnlike(id) : createWorkLike(id);
     },
-    onMutate: async () => {
+    onMutate: async ({ isLiked }) => {
       await queryClient.cancelQueries(workKey.detail(id));
 
       const prevData = queryClient.getQueryData(workKey.detail(id));

@@ -17,6 +17,7 @@ const assets = {
     calender: '/assets/icons/ic_calender.svg',
     chatBubbles: '/assets/icons/ic_chat_bubbles.svg',
     check: '/assets/icons/ic_check.svg',
+    checkCircle: '/assets/icons/ic_check_circle.svg',
     checkboxIn: '/assets/icons/ic_checkbox_in.svg',
     checkboxOut: '/assets/icons/ic_checkbox_out.svg',
     circle: '/assets/icons/ic_circle.svg',
@@ -39,6 +40,7 @@ const assets = {
     italic: '/assets/icons/ic_italic.svg',
     kebab: '/assets/icons/ic_kebab.svg',
     keyboard: '/assets/icons/ic_keyboard.svg',
+    line: '/assets/icons/ic_line.svg',
     list: '/assets/icons/ic_list.svg',
     meatballsMenu: '/assets/icons/ic_meatballs_menu.svg',
     medal: '/assets/icons/ic_medal.svg',
@@ -58,7 +60,6 @@ const assets = {
     toggleUp: '/assets/icons/ic_toggle_up.svg',
     underline: '/assets/icons/ic_underline.svg',
     up: '/assets/icons/ic_up.svg',
-    line: '/assets/icons/ic_line.svg'
   },
   images: {
     black: '/assets/images/img_black.svg',

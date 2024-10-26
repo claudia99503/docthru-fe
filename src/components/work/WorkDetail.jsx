@@ -6,15 +6,19 @@ import KebabMenu from '@/components/common/KebabMenu';
 import { formatDate } from '@/utils/utilFunction';
 import { useDeleteWork, useMutateLikes } from '@/service/mutations/work';
 import { useDeleteModal } from '@/hooks/useModal';
+import { useRouter } from 'next/router';
 
 export default function WorkDetail({ data }) {
+  const router = useRouter();
+
   if (!data) {
     return <div>데이터 없음</div>;
   }
+
   const { isLike: isLiked, workId, challenge, isEditable, ...rest } = data;
 
   const { onModalOpen, Modal } = useDeleteModal();
-  const { mutate: LikeMutate } = useMutateLikes(workId, isLiked);
+  const { mutate: LikeMutate } = useMutateLikes(workId);
   const { mutate: deleteWork } = useDeleteWork();
 
   const handleEdit = (workId) => {
@@ -23,14 +27,14 @@ export default function WorkDetail({ data }) {
 
   const handleDelete = (workId) => {
     if (workId) {
-      deleteWork(workId);
+      deleteWork({ id: workId });
     }
   };
 
   const clickDelete = () => {
     onModalOpen({
-      msg: '삭제하시겠습니까?',
-      action: (workId) => handleDelete(workId),
+      msg: '정말 삭제하시겠습니까?',
+      action: () => handleDelete(workId),
     });
   };
 
@@ -47,7 +51,7 @@ export default function WorkDetail({ data }) {
           <h1 className={styles.title}>{data.challenge.title}</h1>
           {isEditable && (
             <KebabMenu
-              onEdit={() => handleEdit(id)}
+              onEdit={() => handleEdit(workId)}
               onDelete={() => clickDelete(workId)}
             />
           )}
