@@ -8,6 +8,8 @@ import styles from './WorkForm.module.css';
 import cn from '@/utils/clsx';
 import assets from '@/variables/images';
 import Loader from '../common/Loader';
+import Svg from '../common/Svg';
+
 export default function WorkForm({
   id,
   title,
@@ -33,18 +35,9 @@ export default function WorkForm({
   if (!id) return <Loader />;
 
   return (
-    <>
+    <section className={styles.WorkForm}>
       <div className={styles.top}>
-        <Link href="/">
-          <Image
-            className={styles.logo}
-            src={assets.images.logo}
-            alt="logo"
-            width={120}
-            height={27}
-            priority
-          />
-        </Link>
+        <h1 className={styles.title}>{title}</h1>
 
         <div className={styles.buttons}>
           {!isAdmin && (
@@ -54,7 +47,13 @@ export default function WorkForm({
               width="60"
               onClick={giveUpAction}
             >
-              <span>포기</span>
+              포기
+              <Image
+                src={assets.icons.giveUp}
+                width={24}
+                height={24}
+                alt="icon"
+              />
             </Button>
           )}
           <Button
@@ -74,9 +73,7 @@ export default function WorkForm({
         </div>
       </div>
 
-      <h1 className={styles.title}>{title}</h1>
-
-      <Border gap="24px" />
+      <Border gap="16px" />
 
       <TextEditor
         id={id}
@@ -84,6 +81,6 @@ export default function WorkForm({
         content={content}
         setContent={setContent}
       />
-    </>
+    </section>
   );
 }

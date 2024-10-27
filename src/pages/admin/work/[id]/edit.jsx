@@ -6,6 +6,7 @@ import WorkForm from '@/components/work/WorkForm';
 import Head from 'next/head';
 import Loader from '@/components/common/Loader';
 import { useGetWork } from '@/service/queries/work';
+import SourceViewer from '@/components/work/SourceViewer';
 
 export default function AdminEditWorkPage() {
   const [content, setContent] = useState('');

@@ -1,6 +1,7 @@
 .top {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   margin: 24px 0;
 }
@@ -12,7 +13,7 @@
 
 .cancel {
   display: flex;
-  gap: 5px;
+  gap: 6px;
   padding: 11px 12px;
   justify-content: center;
   align-items: center;
@@ -20,10 +21,4 @@
 
 .btn {
   padding: 6px 10px;
-}
-
-.title {
-  display: flex;
-  align-self: flex-start;
-  width: 100%;
 }

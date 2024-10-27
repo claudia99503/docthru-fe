@@ -4,6 +4,9 @@ import { useCreateWork } from '@/service/mutations/work';
 import WorkForm from '@/components/work/WorkForm';
 import { useGiveUpChallenge } from '@/service/mutations/challenge';
 import Head from 'next/head';
+import SourceViewer from '@/components/work/SourceViewer';
+import Loader from '@/components/common/Loader';
+import { useGetChallengeDetail } from '@/service/queries/challenge';
 
 export default function CreateWorkPage() {
   const [content, setContent] = useState('');
@@ -12,11 +15,19 @@ export default function CreateWorkPage() {
 
   const { mutate: createWork } = useCreateWork();
   const { mutate: giveUpChallenge } = useGiveUpChallenge();
-
+  const { data: challengeData, isPending } = useGetChallengeDetail(
+    challengeId,
+    {
+      enabled: !!challengeId,
+    }
+  );
   const handleCreateWork = () => {
     createWork({ id: challengeId, data: { content } });
   };
 
+  console.log(challengeData);
+
+  if (isPending) return <Loader />;
   return (
     <>
       <Head>
@@ -29,11 +40,13 @@ export default function CreateWorkPage() {
       </Head>
       <WorkForm
         id={`challenge_${challengeId}`}
+        title={challengeData.title}
         content={content}
         setContent={setContent}
         submitAction={handleCreateWork}
         giveUpAction={() => giveUpChallenge(challengeId)}
       />
+      <SourceViewer docUrl={challengeData.docUrl} />
     </>
   );
 }
