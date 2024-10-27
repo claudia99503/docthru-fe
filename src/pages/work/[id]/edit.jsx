@@ -6,16 +6,20 @@ import WorkForm from '@/components/work/WorkForm';
 import Head from 'next/head';
 import Loader from '@/components/common/Loader';
 import { useGetWork } from '@/service/queries/work';
+import SourceViewer from '@/components/work/SourceViewer';
 
 export default function EditWorkPage() {
+  const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState('');
   const router = useRouter();
   const workId = router.query.id;
 
+  const { data, isPending } = useGetWork(workId);
   const { mutate: updateWork } = useUpdateWork();
   const { mutate: giveUpChallenge } = useGiveUpChallenge();
+  console.log(data);
 
-  const { data, isPending } = useGetWork(workId);
+  const challengeId = data?.challenge?.id;
 
   useEffect(() => {
     if (data && data.content) {
@@ -39,11 +43,18 @@ export default function EditWorkPage() {
         />
       </Head>
       <WorkForm
-        id={workId}
+        id={`challenge_${challengeId}`}
+        title={data.challenge.title}
         content={content}
         setContent={setContent}
         submitAction={handleUpdateWork}
-        giveUpAction={() => giveUpChallenge(challenge.id)}
+        giveUpAction={() => giveUpChallenge(challengeId)}
+        isOpen={isOpen}
+      />
+      <SourceViewer
+        docUrl={data.challenge.docUrl}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
       />
     </>
   );
