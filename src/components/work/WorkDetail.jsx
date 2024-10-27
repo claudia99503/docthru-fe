@@ -7,6 +7,8 @@ import { formatDate } from '@/utils/utilFunction';
 import { useDeleteWork, useMutateLikes } from '@/service/mutations/work';
 import { useDeleteModal } from '@/hooks/useModal';
 import { useRouter } from 'next/router';
+import 'react-quill/dist/quill.snow.css';
+import cn from '@/utils/clsx';
 
 export default function WorkDetail({ isAdmin, data }) {
   const router = useRouter();
@@ -73,10 +75,13 @@ export default function WorkDetail({ isAdmin, data }) {
           </div>
           <time className={styles.time}>{formatDate(data.createdAt)}</time>
         </div>
-        <p
-          className={styles.content}
-          dangerouslySetInnerHTML={{ __html: data.content }}
-        ></p>
+        <div className={cn('ql-snow', styles.container)}>
+          <div
+            q
+            className={cn(styles.content, 'ql-editor')}
+            dangerouslySetInnerHTML={{ __html: data.content }}
+          ></div>
+        </div>
       </section>
       <Modal />
     </>
