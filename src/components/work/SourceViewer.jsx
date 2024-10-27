@@ -6,8 +6,7 @@ import Image from 'next/image';
 import assets from '@/variables/images';
 import cn from '@/utils/clsx';
 
-export default function SourceViewer({ docUrl }) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function SourceViewer({ docUrl, isOpen, setIsOpen }) {
   const [isClosing, setIsClosing] = useState(false);
 
   const openPanel = () => {
@@ -30,7 +29,7 @@ export default function SourceViewer({ docUrl }) {
   }, [isClosing]);
 
   return (
-    <section className={styles.SourceViewer}>
+    <>
       {!isOpen && (
         <button
           type="button"
@@ -42,6 +41,7 @@ export default function SourceViewer({ docUrl }) {
             width={24}
             height={24}
             alt="list icon"
+            className={styles['list-icon']}
           />
           <span className={styles.text}>원문</span>
         </button>
@@ -64,6 +64,6 @@ export default function SourceViewer({ docUrl }) {
           <Iframe docUrl={docUrl} width="100%" height="100%" />
         </section>
       )}
-    </section>
+    </>
   );
 }

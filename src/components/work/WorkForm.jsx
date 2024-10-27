@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import Button from '@/components/common/Button';
 import Border from '@/components/common/Border';
@@ -8,7 +7,8 @@ import styles from './WorkForm.module.css';
 import cn from '@/utils/clsx';
 import assets from '@/variables/images';
 import Loader from '../common/Loader';
-import Svg from '../common/Svg';
+import { useAuth } from '@/context/AuthProvider';
+import Logo from '../layouts/Logo';
 
 export default function WorkForm({
   id,
@@ -17,8 +17,10 @@ export default function WorkForm({
   setContent,
   submitAction,
   giveUpAction,
-  isAdmin,
+  isOpen,
 }) {
+  const { user } = useAuth();
+  const isAdmin = user?.role === 'ADMIN';
   const textEditorRef = useRef(null);
 
   const handleSave = () => {
@@ -35,45 +37,52 @@ export default function WorkForm({
   if (!id) return <Loader />;
 
   return (
-    <section className={styles.WorkForm}>
+    <section
+      className={cn(styles.WorkForm)}
+      style={isOpen ? { margin: '0 18px 0 auto' } : { margin: '0 auto' }}
+    >
       <div className={styles.top}>
         <h1 className={styles.title}>{title}</h1>
+        <div className={styles['top-mobile']}>
+          <Logo className={styles.logo} />
 
-        <div className={styles.buttons}>
-          {!isAdmin && (
+          <div className={styles.buttons}>
+            {!isAdmin && (
+              <Button
+                variant="cancel"
+                className={cn(styles.btn, styles.cancel)}
+                width="60"
+                onClick={giveUpAction}
+              >
+                포기
+                <Image
+                  src={assets.icons.giveUp}
+                  width={24}
+                  height={24}
+                  alt="icon"
+                  className={styles['cancel-icon']}
+                />
+              </Button>
+            )}
             <Button
-              variant="cancel"
-              className={cn(styles.btn, styles.cancel)}
-              width="60"
-              onClick={giveUpAction}
+              variant="white-border"
+              onClick={handleSave}
+              className={cn(styles.btn, styles.save)}
             >
-              포기
-              <Image
-                src={assets.icons.giveUp}
-                width={24}
-                height={24}
-                alt="icon"
-              />
+              임시저장
             </Button>
-          )}
-          <Button
-            variant="white-border"
-            onClick={handleSave}
-            className={cn(styles.btn, styles.save)}
-          >
-            임시저장
-          </Button>
-          <Button
-            variant="black"
-            className={cn(styles.btn, styles.submit)}
-            onClick={handleSubmit}
-          >
-            제출하기
-          </Button>
+            <Button
+              variant="black"
+              className={cn(styles.btn, styles.submit)}
+              onClick={handleSubmit}
+            >
+              제출하기
+            </Button>
+          </div>
         </div>
       </div>
 
-      <Border gap="16px" />
+      <Border gap="24px" mobileGap="12px" className={styles.border} />
 
       <TextEditor
         id={id}

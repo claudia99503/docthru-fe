@@ -10,6 +10,7 @@ import { useGetChallengeDetail } from '@/service/queries/challenge';
 
 export default function CreateWorkPage() {
   const [content, setContent] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const challengeId = router.query.id;
 
@@ -45,8 +46,13 @@ export default function CreateWorkPage() {
         setContent={setContent}
         submitAction={handleCreateWork}
         giveUpAction={() => giveUpChallenge(challengeId)}
+        isOpen={isOpen}
       />
-      <SourceViewer docUrl={challengeData.docUrl} />
+      <SourceViewer
+        docUrl={challengeData.docUrl}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
     </>
   );
 }

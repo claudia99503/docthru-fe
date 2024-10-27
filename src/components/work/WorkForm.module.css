@@ -1,3 +1,10 @@
+.WorkForm {
+  width: 100%;
+  max-width: 890px;
+  margin: 0 auto;
+  padding: 24px 18px 0 24px;
+}
+
 .top {
   display: flex;
   justify-content: space-between;
@@ -11,6 +18,10 @@
   gap: 8px;
 }
 
+.logo {
+  display: none;
+}
+
 .cancel {
   display: flex;
   gap: 6px;
@@ -21,4 +32,35 @@
 
 .btn {
   padding: 6px 10px;
+}
+
+@media only screen and (max-width: 529px) {
+  .WorkForm {
+    width: 100%;
+    max-width: 890px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  .btn {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+  .cancel-icon {
+    display: none;
+  }
+  .logo {
+    display: block;
+  }
+  .top {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .top-mobile {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+  }
 }

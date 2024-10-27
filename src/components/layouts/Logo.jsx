@@ -3,11 +3,13 @@ import Link from 'next/link';
 import styles from './Logo.module.css';
 import cn from '@/utils/clsx';
 import assets from '@/variables/images';
-export default function Logo({ isAuthPage }) {
+export default function Logo({ isAuthPage, className }) {
   return (
-    <Link href="/">
+    <Link href="/" className={className}>
       <Image
-        className={cn(styles.logo, { [styles['auth-page-logo']]: isAuthPage })}
+        className={cn(styles.logo, {
+          [styles['auth-page-logo']]: isAuthPage,
+        })}
         src={assets.images.logo}
         alt="logo"
         width={320}
