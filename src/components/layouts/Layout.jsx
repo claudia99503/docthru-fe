@@ -7,10 +7,10 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { PUBLIC_ROUTES, AUTH_ROUTES } from '@/variables/variables';
 import { useAlertModal } from '@/hooks/useModal';
+import cn from '@/utils/clsx';
 
 export default function Layout({ children }) {
   const router = useRouter();
-
   const routes = useMemo(() => {
     const isPublicRoute = PUBLIC_ROUTES.includes(router.pathname);
     const isAuthPage = AUTH_ROUTES.includes(router.pathname);
@@ -19,6 +19,8 @@ export default function Layout({ children }) {
     //동적 경로와 new페이지는 max-width:890px
     const isNarrowerPage = /\[.*\]|\/new/.test(router.route);
     const isUserRoute = router.pathname.startsWith('/me');
+    const isTextEditPage =
+      router.route === '/work/new/[id]' || router.route === '/work/[id]/edit';
 
     return {
       isPublicRoute,
@@ -27,6 +29,7 @@ export default function Layout({ children }) {
       isAuthRoute,
       isNarrowerPage,
       isUserRoute,
+      isTextEditPage,
     };
   }, [router.route, router.pathname]);
 
@@ -80,7 +83,10 @@ export default function Layout({ children }) {
     <>
       {renderHeader()}
       <main
-        className={`${styles.main} ${routes.isNarrowerPage && styles.detail}`}
+        className={cn(styles.main, {
+          [styles['text-edit']]: routes.isTextEditPage,
+          [styles.detail]: routes.isNarrowerPage && !routes.isTextEditPage,
+        })}
       >
         {children}
       </main>
