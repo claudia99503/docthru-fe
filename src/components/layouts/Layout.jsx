@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { AdminHeader, MemberHeader, AuthHeader } from './Headers';
 import styles from './Layout.module.css';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import Loader from '../common/Loader';
 import { useAuth } from '@/hooks/useAuth';
 import { PUBLIC_ROUTES, AUTH_ROUTES } from '@/variables/variables';
 import { useAlertModal } from '@/hooks/useModal';
@@ -19,6 +18,7 @@ export default function Layout({ children }) {
     const isAuthRoute = router.pathname.startsWith('/auth');
     //동적 경로와 new페이지는 max-width:890px
     const isNarrowerPage = /\[.*\]|\/new/.test(router.route);
+    const isUserRoute = router.pathname.startsWith('/me');
 
     return {
       isPublicRoute,
@@ -26,10 +26,11 @@ export default function Layout({ children }) {
       isAdminRoute,
       isAuthRoute,
       isNarrowerPage,
+      isUserRoute,
     };
   }, [router.route, router.pathname]);
 
-  const { user, isLoading, isRedirecting } = useAuth(!routes.isPublicRoute);
+  const { user, isLoading, isRedirecting } = useAuth();
   const { Modal, onModalOpen } = useAlertModal();
 
   const handleRedirects = useCallback(() => {
@@ -48,6 +49,12 @@ export default function Layout({ children }) {
           onModalOpen({ msg: '권한이 없는 페이지 요청입니다.', path: '/' });
         return;
       }
+
+      if (user && routes.isUserRoute) {
+        if (user.role === 'ADMIN') {
+          router.push('/admin');
+        }
+      }
     }
   }, [
     user,
@@ -65,7 +72,7 @@ export default function Layout({ children }) {
 
   const renderHeader = () => {
     if (routes.isAuthRoute) return <AuthHeader />;
-    if (routes.isAdminRoute) return <AdminHeader user={user} />;
+    if (user?.role === 'ADMIN') return <AdminHeader user={user} />;
     return <MemberHeader user={user} />;
   };
 

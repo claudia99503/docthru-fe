@@ -9,6 +9,7 @@ import { useGetWork } from '@/service/queries/work';
 
 export default function AdminEditWorkPage() {
   const [content, setContent] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const workId = router.query.id;
   const isAdmin = router.pathname.startsWith('/admin');
@@ -25,10 +26,19 @@ export default function AdminEditWorkPage() {
   }, [data]);
 
   const handleUpdateWork = () => {
-    updateWork({ id: workId, data: { content } });
+    setIsLoading(true);
+    updateWork(
+      { id: workId, data: { content } },
+      {
+        onSuccess: () => {
+          setIsLoading(false);
+        },
+      }
+    );
   };
-
-  if (isPending) return <Loader />;
+  useEffect(() => {
+    if (isPending || isLoading) return <Loader />;
+  });
 
   return (
     <>

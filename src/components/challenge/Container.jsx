@@ -8,7 +8,6 @@ const Container = ({ list, id }) => {
   const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
   const router = useRouter();
 
-  
   const formatDeadline = (dateTime) => {
     const date = new Date(dateTime);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -16,19 +15,17 @@ const Container = ({ list, id }) => {
   };
 
   const getButtonStyles = (type) => {
-    if(type === 'style'){
+    if (type === 'style') {
       return !list.progress
         ? { backgroundColor: '#262626', color: '#FFFFFF' }
         : { backgroundColor: '#E5E5E5', color: '#737373' };
     } else if (type === 'action') {
-      return !list.progress
-      ? false
-      : true
+      return !list.progress ? false : true;
     }
   };
 
   const getStatus = (type) => {
-    if(type === 'uri'){
+    if (type === 'uri') {
       return !list?.isParticipated ? `/work/new/${id}` : `/work/${id}/edit`;
     } else {
       return !list.isParticipated ? '작업 도전하기' : '도전 계속하기';
@@ -59,7 +56,7 @@ const Container = ({ list, id }) => {
           <div className={styles['view-original-button-row']}>
             <button
               className={styles['primary-button']}
-              onClick={() =>  window.open(list.docUrl)}
+              onClick={() => window.open(list.docUrl)}
             >
               원문 링크
             </button>
@@ -78,11 +75,11 @@ const Container = ({ list, id }) => {
       ) : (
         <div className={styles['mobile-buttons-row']}>
           <button
-              className={styles['primary-button']}
-              onClick={() =>  window.open(list.docUrl)}
-            >
-              원문 링크
-            </button>
+            className={styles['primary-button']}
+            onClick={() => window.open(list.docUrl)}
+          >
+            원문 링크
+          </button>
           <button
             className={styles['gray-button']}
             style={getButtonStyles('style')}
