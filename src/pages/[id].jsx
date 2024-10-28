@@ -46,7 +46,7 @@ export default function ChallengeDetailPage() {
   });
 
   const handleOptionChange = (option) => {
-    setSelectedOption((pev) => ({ ...pev, ...option }));
+    setSelectedOption((prev) => ({ ...prev, ...option }));
   };
 
   useEffect(() => {

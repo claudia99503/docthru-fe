@@ -4,9 +4,8 @@ import { useRouter } from 'next/router';
 
 import { useGiveUpChallenge } from '@/service/mutations/challenge';
 
-import assets from '@/variables/images';
-
 import styles from './Container.module.css';
+import Svg from '../common/Svg';
 
 const Container = ({ list }) => {
   const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
@@ -57,14 +56,14 @@ const Container = ({ list }) => {
   return (
     <div className={styles.container}>
       <div className={styles['info-row']}>
-        <img
-          src={assets.icons.deadline}
+        <Svg
+          name='deadline'
           alt="deadline icon"
           className={styles.icon}
         />
         <span className={styles.text}>{formatDeadline(list.deadline)}</span>
-        <img
-          src={assets.icons.person}
+        <Svg
+          name='person'
           alt="person icon"
           className={styles.icon}
         />

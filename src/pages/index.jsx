@@ -18,7 +18,7 @@ import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { getChallengeList } from '@/service/api/challenge';
 import { useMediaQuery } from 'react-responsive';
 
-export default function Home({ dehydratedState }) {
+export default function Home( ) {
   const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
   const router = useRouter();
 
@@ -27,7 +27,7 @@ export default function Home({ dehydratedState }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedOption, setSelectedOption] = useState({});
 
-  const { data = dehydratedState, isPending } = useGetChallenges(selectedOption, {
+  const { data, isPending } = useGetChallenges(selectedOption, {
     enabled: true,
   });
   
@@ -119,7 +119,7 @@ export default function Home({ dehydratedState }) {
   );
 }
 
-// 서버 사이드 렌더링에서 데이터 가져오기
+// 서버 사이드 렌더링
 export async function getServerSideProps(context) {
   const queryClient = new QueryClient();
 

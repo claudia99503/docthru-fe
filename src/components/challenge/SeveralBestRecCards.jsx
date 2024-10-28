@@ -1,12 +1,12 @@
 import { useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 import LikeButton from '../common/LikeButton';
 import { Profile } from '../common/Profile';
 import { formatDate } from '@/utils/utilFunction';
 
 import styles from './SeveralBestRecCards.module.css';
-import images from '@/variables/images';
-import { useMediaQuery } from 'react-responsive';
+import Svg from '../common/Svg';
 
 const SeveralBestRecCards = ({ list, last }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -35,7 +35,7 @@ const SeveralBestRecCards = ({ list, last }) => {
   return (
     <div className={styles.SeveralBestRecCards} style={getWidth()}>
       <div className={styles['SeveralBestRecCards-badge']}>
-        <img src={images.icons.medal} alt="bestRecWork-badge icon" />
+        <Svg name='medal' alt="bestRecWork-badge icon" width='16' />
         <span>최다 추천 번역</span>
       </div>
       <div className={styles['content-top']}>
@@ -56,15 +56,15 @@ const SeveralBestRecCards = ({ list, last }) => {
         {!isExpanded ? (
           <button className={styles.btn} onClick={() => setIsExpanded(true)}>
             <span>더보기</span>
-            <img
-              src={images.icons.arrowDownCircle}
+            <Svg
+              name='arrowDownCircle'
               alt="arrowDownCircle icon"
             />
           </button>
         ) : (
           <button className={styles.btn} onClick={() => setIsExpanded(false)}>
             <span>접기</span>
-            <img src={images.icons.arrowUp} alt="arrowUp icon" />
+            <Svg name='arrowUp' alt="arrowUp icon" />
           </button>
         )}
       </div>
