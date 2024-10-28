@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import axios from '@/service/api/axios';
 import Edit from '@/components/myPage/edit';
@@ -6,12 +6,44 @@ import Profile from '../../components/myPage/Profile';
 import styles from './Profile.module.css';
 
 export default function ProfileIndex() {
-  const [userId, setUserId] = useState(null);
   const [profileData, setProfileData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isUpdating, setIsUpdating] = useState(false);
   const [error, setError] = useState(null);
+  const [userId, setUserId] = useState(null);
   const router = useRouter();
 
+  const fetchProfileData = useCallback(async (currentUserId) => {
+    if (!currentUserId) return;
+
+    try {
+      const token = localStorage.getItem('accessToken');
+      console.log('Fetching profile for userId:', currentUserId);
+
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_DEV_API_URL}/profiles/${currentUserId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log('Profile data received:', response.data);
+      setProfileData(response.data);
+      setError(null);
+    } catch (error) {
+      console.error('Profile fetch error:', error);
+      setError(
+        error.response?.data?.message || '프로필을 불러오는데 실패했습니다.'
+      );
+    } finally {
+      setIsLoading(false);
+      setIsUpdating(false);
+    }
+  }, []);
+
+  // 토큰에서 userId 추출 및 초기 데이터 로드
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
     if (token) {
@@ -19,6 +51,7 @@ export default function ProfileIndex() {
         const payload = token.split('.')[1];
         const decoded = JSON.parse(window.atob(payload));
         setUserId(decoded.userId);
+        fetchProfileData(decoded.userId);
       } catch (error) {
         console.error('토큰 디코드 실패:', error);
         setError('토큰 디코드 실패');
@@ -27,42 +60,33 @@ export default function ProfileIndex() {
     } else {
       router.replace('/login');
     }
-  }, []);
+  }, [fetchProfileData, router]);
 
-  useEffect(() => {
-    if (!userId) return;
-
-    const fetchProfileData = async () => {
+  const handleProfileUpdate = useCallback(
+    async (updatedData) => {
       try {
-        const token = localStorage.getItem('accessToken');
+        setIsUpdating(true);
+        // 기존 데이터 임시 저장
+        const tempData = {
+          ...profileData,
+          ...updatedData,
+        };
+        // 임시 데이터로 UI 업데이트
+        setProfileData(tempData);
 
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_DEV_API_URL}/profiles/${userId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        setProfileData(response.data);
-        setError(null);
+        // 새로운 데이터 fetching
+        await fetchProfileData(userId);
       } catch (error) {
-        console.error('Profile fetch error:', error);
-        setError(
-          error.response?.data?.message || '프로필을 불러오는데 실패했습니다.'
-        );
-      } finally {
-        setIsLoading(false);
+        console.error('Profile update error:', error);
+        setError('프로필 업데이트에 실패했습니다.');
       }
-    };
+    },
+    [fetchProfileData, userId, profileData]
+  );
 
-    fetchProfileData();
-  }, [userId]);
-
-  if (!userId || isLoading) {
+  if (isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div className={styles.loadingContainer}>
         <p>Loading...</p>
       </div>
     );
@@ -70,11 +94,11 @@ export default function ProfileIndex() {
 
   if (error) {
     return (
-      <div className="text-center text-red-600 py-8">
-        <p>Error: {error}</p>
+      <div className={styles.errorContainer}>
+        <p className={styles.errorText}>Error: {error}</p>
         <button
-          onClick={() => window.location.reload()}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+          onClick={() => fetchProfileData(userId)}
+          className={styles.retryButton}
         >
           다시 시도
         </button>
@@ -84,17 +108,28 @@ export default function ProfileIndex() {
 
   return (
     <div className={styles.mainContent}>
-      <Edit
-        userInfo={{
-          ...profileData.user,
-          userId: profileData.userId,
-        }}
-      />
-      <Profile
-        profileData={profileData}
-        userId={userId}
-        onUpdate={(updatedData) => setProfileData(updatedData)}
-      />
+      {profileData && (
+        <>
+          <Edit
+            userInfo={{
+              ...profileData.user,
+              userId: profileData.userId,
+            }}
+          />
+          <Profile
+            profileData={profileData}
+            userId={userId}
+            onUpdate={handleProfileUpdate}
+          />
+          {isUpdating && (
+            <div className={styles.updateOverlay}>
+              <div className={styles.updateModal}>
+                <p>업데이트 중...</p>
+              </div>
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 }
