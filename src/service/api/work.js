@@ -7,8 +7,8 @@ export async function getWork(id) {
   return res.data;
 }
 
-export async function createWork(data) {
-  const res = await axios.post(PATH, data);
+export async function createWork(id, data) {
+  const res = await axios.post(`${PATH}/${id}`, data);
   return res.data;
 }
 
@@ -37,9 +37,19 @@ export async function createWorkFeedback(id, data) {
   return res.data;
 }
 
+export async function createWorkLike(id) {
+  const res = await axios.post(`${PATH}/${id}/likes`);
+  return res.data;
+}
+
+export async function deleteWorkUnlike(id) {
+  const res = await axios.delete(`${PATH}/${id}/likes`);
+  return res.data;
+}
+
 // *****구분선***** //
 /** /:id GET - 챌린지 상세 조회 */
 export async function getWorkList(id, params) {
-  const res = await axios.get(`${PATH}/list/${id}`, {params});
+  const res = await axios.get(`${PATH}/list/${id}`, { params });
   return res.data;
 }

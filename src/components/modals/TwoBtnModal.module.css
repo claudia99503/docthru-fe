@@ -1,14 +1,15 @@
 .TwoBtnModal {
-  width: 298px;
-  height: 202px;
+  max-width: 327px;
   background-color: #fff;
-  padding: 20px;
+  padding: 24px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 32px;
+  width: 100%;
+  border: 2px solid var(--grey-800);
 }
 
 .modal-msg {
@@ -18,9 +19,17 @@
   text-align: center;
 }
 .buttons {
-  padding-top: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
 }

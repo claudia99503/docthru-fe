@@ -9,17 +9,16 @@ import FeedbackList from '@/components/feedback/FeedbackList';
 export default function WorkDetailPage() {
   const router = useRouter();
   const { id } = router.query;
-
   const { data, isPending } = useGetWork(id);
 
   if (isPending) {
-    return <Loader />;
+    return <Loader msg="작업물 생성 페이지로 이동중" />;
   }
 
   if (!data) {
     return <p>데이터 없음</p>;
   }
-  console.log(data);
+
   const { isClosed } = data;
   return (
     <>

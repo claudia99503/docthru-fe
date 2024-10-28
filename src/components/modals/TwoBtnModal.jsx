@@ -2,31 +2,32 @@ import { forwardRef } from 'react';
 import styles from './TwoBtnModal.module.css';
 import { createPortal } from 'react-dom';
 import Button from '../common/Button';
-import Image from 'next/image';
-import assets from '@/variables/images';
+import Svg from '../common/Svg';
 
 function TwoBtnModal(
-  { msg, onCancel, onConfirm, btnOne = '아니요', btnTwo = '네' },
+  {
+    msg = '정말 삭제하시겠어요?',
+    onCancel,
+    onConfirm,
+    btnOne = '아니요',
+    btnTwo = '네',
+  },
   ref
 ) {
   return createPortal(
-    <dialog ref={ref} className={styles.DeleteModal}>
-      <Image
-        src={assets.icons.check}
-        width={24}
-        height={24}
-        alt="check icon"
-        className={styles.check}
-      />
-
-      <p className={styles['modal-msg']}>{msg}</p>
+    <dialog ref={ref} className={styles.TwoBtnModal}>
+      <div className={styles.check}>
+        <Svg name="checkCircle" />
+        <p className={styles['modal-msg']}>{msg}</p>
+      </div>
       <div className={styles.buttons}>
         <Button
-          variant="black-border"
+          variant="white-border"
           className={styles.cancel}
           onClick={onCancel}
+          s
           type="button"
-          padding="10px 0"
+          padding="8px 0"
           width="90px"
         >
           <span>{btnOne}</span>
@@ -36,7 +37,7 @@ function TwoBtnModal(
           className={styles.delete}
           onClick={onConfirm}
           type="button"
-          padding="10px 0"
+          padding="8px 0"
           width="90px"
         >
           <span>{btnTwo}</span>

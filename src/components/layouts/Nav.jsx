@@ -1,23 +1,14 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './Nav.module.css';
-import assets from '@/variables/images';
-import Image from 'next/image';
+import Logo from './Logo';
 
 export default function Nav({ links }) {
   const pathname = usePathname();
   return (
     <nav className={styles.Nav}>
       <ul className={styles.lists}>
-        <Link href="/">
-          <Image
-            className={styles.logo}
-            src={assets.images.logo}
-            width={120}
-            height={27}
-            alt="Docthru logo"
-          />
-        </Link>
+        <Logo />
         {links.map((link) => {
           const isActive = pathname === link.path;
           return (

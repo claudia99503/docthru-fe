@@ -4,14 +4,13 @@ import { useRouter } from 'next/router';
 import { AdminHeader, MemberHeader, AuthHeader } from './Headers';
 import styles from './Layout.module.css';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import Loader from '../common/Loader';
 import { useAuth } from '@/hooks/useAuth';
 import { PUBLIC_ROUTES, AUTH_ROUTES } from '@/variables/variables';
 import { useAlertModal } from '@/hooks/useModal';
+import cn from '@/utils/clsx';
 
 export default function Layout({ children }) {
   const router = useRouter();
-
   const routes = useMemo(() => {
     const isPublicRoute = PUBLIC_ROUTES.includes(router.pathname);
     const isAuthPage = AUTH_ROUTES.includes(router.pathname);
@@ -19,6 +18,9 @@ export default function Layout({ children }) {
     const isAuthRoute = router.pathname.startsWith('/auth');
     //동적 경로와 new페이지는 max-width:890px
     const isNarrowerPage = /\[.*\]|\/new/.test(router.route);
+    const isUserRoute = router.pathname.startsWith('/me');
+    const isTextEditPage =
+      router.route === '/work/new/[id]' || router.route === '/work/[id]/edit';
 
     return {
       isPublicRoute,
@@ -26,10 +28,12 @@ export default function Layout({ children }) {
       isAdminRoute,
       isAuthRoute,
       isNarrowerPage,
+      isUserRoute,
+      isTextEditPage,
     };
   }, [router.route, router.pathname]);
 
-  const { user, isLoading, isRedirecting } = useAuth(!routes.isPublicRoute);
+  const { user, isLoading, isRedirecting } = useAuth();
   const { Modal, onModalOpen } = useAlertModal();
 
   const handleRedirects = useCallback(() => {
@@ -48,6 +52,12 @@ export default function Layout({ children }) {
           onModalOpen({ msg: '권한이 없는 페이지 요청입니다.', path: '/' });
         return;
       }
+
+      if (user && routes.isUserRoute) {
+        if (user.role === 'ADMIN') {
+          router.push('/admin');
+        }
+      }
     }
   }, [
     user,
@@ -65,7 +75,7 @@ export default function Layout({ children }) {
 
   const renderHeader = () => {
     if (routes.isAuthRoute) return <AuthHeader />;
-    if (routes.isAdminRoute) return <AdminHeader user={user} />;
+    if (user?.role === 'ADMIN') return <AdminHeader user={user} />;
     return <MemberHeader user={user} />;
   };
 
@@ -73,7 +83,10 @@ export default function Layout({ children }) {
     <>
       {renderHeader()}
       <main
-        className={`${styles.main} ${routes.isNarrowerPage && styles.detail}`}
+        className={cn(styles.main, {
+          [styles['text-edit']]: routes.isTextEditPage,
+          [styles.detail]: routes.isNarrowerPage && !routes.isTextEditPage,
+        })}
       >
         {children}
       </main>

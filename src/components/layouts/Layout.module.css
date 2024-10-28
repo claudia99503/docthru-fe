@@ -15,6 +15,14 @@
   max-width: 890px;
 }
 
+.main.text-edit {
+  padding: 0;
+  max-width: none;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+}
+
 @media only screen and (max-width: 1199px) {
   .main {
     padding: 16px 24px 40px;
@@ -24,5 +32,9 @@
 @media only screen and (max-width: 743px) and (min-width: 375px) {
   .main {
     padding: 16px;
+  }
+
+  .main.text-edit {
+    flex-direction: column-reverse;
   }
 }

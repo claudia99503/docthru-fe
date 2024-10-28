@@ -1,0 +1,319 @@
+// components/profile/ProfileInfo.js
+import { useState, useCallback, memo } from 'react';
+import axios from 'axios';
+import styles from './ProfileInfo.module.css';
+
+const ProfileView = memo(({ profile, isOwner, onEdit }) => {
+  const formatCareer = (career) => {
+    return career !== undefined && career !== null
+      ? `경력 ${career}년차`
+      : '경력 미설정';
+  };
+
+  // 새 프로필인지 여부 확인
+  const isNewProfile =
+    !profile.position &&
+    !profile.bio &&
+    !profile.location &&
+    profile.career === null &&
+    (!profile.skills || profile.skills.length === 0) &&
+    (!profile.preferredFields || profile.preferredFields.length === 0) &&
+    !profile.githubUrl;
+
+  if (isOwner && isNewProfile) {
+    return (
+      <div className={styles.welcomeContainer}>
+        <h3 className={styles.welcomeTitle}>환영합니다!</h3>
+        <p className={styles.welcomeText}>
+          프로필을 설정하고 다른 개발자들과 소통해보세요.
+        </p>
+        <button onClick={onEdit} className={styles.welcomeButton}>
+          프로필 설정하기
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div className={styles.header}>
+        <h3 className={styles.position}>
+          {profile.position || '포지션을 설정해주세요'}
+        </h3>
+        {isOwner && (
+          <button onClick={onEdit} className={styles.editButton}>
+            {profile.position ? '수정' : '설정하기'}
+          </button>
+        )}
+      </div>
+
+      <div className={styles.infoLine}>
+        <span>{profile.location || '지역 미설정'}</span>
+        <span className={styles.dot}>•</span>
+        <span>{formatCareer(profile.career)}</span>
+      </div>
+
+      <div className={styles.section}>
+        <h4 className={styles.sectionTitle}>자기소개</h4>
+        <p className={styles.bio}>{profile.bio || '자기소개를 작성해주세요'}</p>
+      </div>
+
+      <div className={styles.section}>
+        <h4 className={styles.sectionTitle}>기술 스택</h4>
+        {profile.skills?.length > 0 ? (
+          <div className={styles.tagContainer}>
+            {profile.skills.map((skill) => (
+              <span key={skill} className={styles.skillTag}>
+                {skill}
+              </span>
+            ))}
+          </div>
+        ) : (
+          <p className={styles.emptyText}>
+            보유하고 계신 기술 스택을 추가해주세요
+          </p>
+        )}
+      </div>
+
+      <div className={styles.section}>
+        <h4 className={styles.sectionTitle}>선호 분야</h4>
+        {profile.preferredFields?.length > 0 ? (
+          <div className={styles.tagContainer}>
+            {profile.preferredFields.map((field) => (
+              <span key={field} className={styles.fieldTag}>
+                {field}
+              </span>
+            ))}
+          </div>
+        ) : (
+          <p className={styles.emptyText}>
+            선호하시는 개발 분야를 추가해주세요
+          </p>
+        )}
+      </div>
+
+      <div className={styles.section}>
+        <h4 className={styles.sectionTitle}>GitHub</h4>
+        {profile.githubUrl ? (
+          <a
+            href={profile.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.githubLink}
+          >
+            {profile.githubUrl}
+          </a>
+        ) : (
+          <p className={styles.emptyText}>GitHub 프로필 주소를 추가해주세요</p>
+        )}
+      </div>
+    </div>
+  );
+});
+
+const ProfileForm = memo(({ editForm, onSubmit, onCancel, onChange }) => {
+  const handleArrayInputChange = (field, value) => {
+    // 빈 문자열이나 공백만 있는 경우 빈 배열 반환
+    if (!value.trim()) {
+      onChange(field, []);
+      return;
+    }
+
+    // 배열 처리
+    const items = value.split(',').map((item) => item.trim());
+    onChange(field, items);
+  };
+
+  const handleCareerChange = (e) => {
+    const value = e.target.value;
+    if (value === '' || (!isNaN(value) && parseInt(value) >= 0)) {
+      onChange('career', value === '' ? null : parseInt(value));
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // 제출 시 필드 정제
+    const formData = {
+      ...editForm,
+      skills: editForm.skills || [],
+      preferredFields: editForm.preferredFields || [],
+    };
+    onSubmit(e, formData);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <div className={styles.formGroup}>
+        <label className={styles.label}>자기소개</label>
+        <textarea
+          className={styles.textarea}
+          value={editForm.bio || ''}
+          onChange={(e) => onChange('bio', e.target.value || null)}
+          placeholder="자신을 소개해주세요"
+        />
+      </div>
+
+      <div className={styles.gridTwo}>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>위치</label>
+          <input
+            type="text"
+            className={styles.input}
+            value={editForm.location || ''}
+            onChange={(e) => onChange('location', e.target.value || null)}
+            placeholder="서울, 경기 등"
+          />
+        </div>
+
+        <div className={styles.formGroup}>
+          <label className={styles.label}>경력 (년차)</label>
+          <input
+            type="number"
+            className={styles.input}
+            value={editForm.career ?? ''}
+            onChange={handleCareerChange}
+            min="0"
+            placeholder="0"
+          />
+        </div>
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>직무</label>
+        <input
+          type="text"
+          className={styles.input}
+          value={editForm.position || ''}
+          onChange={(e) => onChange('position', e.target.value || null)}
+          placeholder="프론트엔드 개발자, 백엔드 개발자 등"
+        />
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>기술 스택 (쉼표로 구분)</label>
+        <input
+          type="text"
+          className={styles.input}
+          value={editForm.skills?.join(', ') || ''}
+          onChange={(e) => handleArrayInputChange('skills', e.target.value)}
+          placeholder="JavaScript, React, Node.js"
+        />
+        <small className={styles.helperText}>
+          쉼표(,)로 구분하여 입력해주세요
+        </small>
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>선호 분야 (쉼표로 구분)</label>
+        <input
+          type="text"
+          className={styles.input}
+          value={editForm.preferredFields?.join(', ') || ''}
+          onChange={(e) =>
+            handleArrayInputChange('preferredFields', e.target.value)
+          }
+          placeholder="웹 프론트엔드, 백엔드, DevOps"
+        />
+        <small className={styles.helperText}>
+          쉼표(,)로 구분하여 입력해주세요
+        </small>
+      </div>
+
+      <div className={styles.formGroup}>
+        <label className={styles.label}>GitHub URL</label>
+        <input
+          type="url"
+          className={styles.input}
+          value={editForm.githubUrl || ''}
+          onChange={(e) => onChange('githubUrl', e.target.value || null)}
+          placeholder="https://github.com/username"
+        />
+      </div>
+
+      <div className={styles.buttonGroup}>
+        <button type="submit" className={styles.submitButton}>
+          저장
+        </button>
+        <button
+          type="button"
+          onClick={onCancel}
+          className={styles.cancelButton}
+        >
+          취소
+        </button>
+      </div>
+    </form>
+  );
+});
+
+export default function ProfileInfo({
+  profile: initialProfile,
+  isOwner,
+  onUpdate,
+}) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editForm, setEditForm] = useState({
+    ...initialProfile,
+    skills: initialProfile.skills || [],
+    preferredFields: initialProfile.preferredFields || [],
+  });
+
+  const handleInputChange = useCallback((field, value) => {
+    setEditForm((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  }, []);
+
+  const handleSubmit = async (e, formData) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem('accessToken');
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_DEV_API_URL}/profiles/${initialProfile.userId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setEditForm(response.data);
+      setIsEditing(false);
+      if (onUpdate) {
+        onUpdate(response.data);
+      }
+    } catch (error) {
+      console.error('프로필 업데이트 실패:', error);
+    }
+  };
+
+  const handleCancel = useCallback(() => {
+    setEditForm(initialProfile);
+    setIsEditing(false);
+  }, [initialProfile]);
+
+  const handleEdit = useCallback(() => {
+    setIsEditing(true);
+  }, []);
+
+  return (
+    <div className={styles.container}>
+      {isEditing ? (
+        <ProfileForm
+          editForm={editForm}
+          onSubmit={handleSubmit}
+          onCancel={handleCancel}
+          onChange={handleInputChange}
+        />
+      ) : (
+        <ProfileView
+          profile={initialProfile}
+          isOwner={isOwner}
+          onEdit={handleEdit}
+        />
+      )}
+    </div>
+  );
+}

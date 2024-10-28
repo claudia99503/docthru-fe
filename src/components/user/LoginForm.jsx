@@ -5,6 +5,7 @@ import { AUTH } from '@/variables/formValidation';
 import PasswordInput from '../common/form/PasswordInput';
 import { useAuth } from '@/hooks/useAuth';
 import Loader from '../common/Loader';
+import Link from 'next/link';
 
 export default function LoginForm() {
   const formMethods = useForm();
@@ -26,7 +27,7 @@ export default function LoginForm() {
   };
 
   if (isLoading) {
-    return <Loader />;
+    return <Loader msg="로그인 중" />;
   }
 
   return (
@@ -56,6 +57,12 @@ export default function LoginForm() {
           </button>
         </form>
       </FormProvider>
+      <p className={styles.text}>
+        회원이 아니신가요?
+        <Link href="/auth/sign-up" className={styles.link}>
+          회원가입하기
+        </Link>
+      </p>
     </>
   );
 }
