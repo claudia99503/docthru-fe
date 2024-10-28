@@ -7,27 +7,29 @@
 }
 
 .page-button {
-  font-family: Pretendard;
   font-weight: 500;
   font-size: 14px;
   line-height: 16.71px;
-  color: #a3a3a3;
+  color: var(--grey-400);
   margin: 0 8px;
   border: none;
   background: none;
   cursor: pointer;
+  width: 40px;
+  padding: 4px ;
 }
+
 
 .active {
   width: 40px;
   height: 40px;
   border-radius: 8px;
-  background-color: #262626 !important;
-  color: #ffc117 !important;
+  background-color: var(--grey-800)!important;
+  color: var(--brand-yellow) !important;
 }
 
 .page-button:hover {
-  color: #262626;
+  color: var(--grey-800);
 }
 
 .arrow-button {
@@ -37,11 +39,11 @@
 }
 
 .disabled-arrow {
-  stroke: #a3a3a3 !important;
+  stroke: var(--grey-400)!important;
 }
 
 .enabled-arrow {
-  stroke: #262626 !important;
+  stroke: var(--grey-800) !important;
 }
 
 /* 모바일 */
