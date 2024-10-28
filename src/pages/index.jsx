@@ -21,7 +21,7 @@ import { useMediaQuery } from 'react-responsive';
 export default function Home(initialData) {
   const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
   const router = useRouter();
-  
+
   const [limit, setLimit] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
@@ -34,7 +34,7 @@ export default function Home(initialData) {
   const { totalPages } = meta;
 
   const handleOptionChange = (option) => {
-    setSelectedOption((pev) => ({...pev, ...option }));
+    setSelectedOption((pev) => ({ ...pev, ...option }));
   };
 
   useEffect(() => {
@@ -43,17 +43,30 @@ export default function Home(initialData) {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm, limit, selectedOption?.field, selectedOption?.docType, selectedOption?.progress]);
+  }, [
+    searchTerm,
+    limit,
+    selectedOption?.field,
+    selectedOption?.docType,
+    selectedOption?.progress,
+  ]);
 
   useEffect(() => {
     const option = {
       keyword: searchTerm,
       page: currentPage,
-      limit: limit
-    }
-    
-    handleOptionChange(option)
-  }, [currentPage, limit, searchTerm, selectedOption?.field, selectedOption?.docType, selectedOption?.progress]);
+      limit: limit,
+    };
+
+    handleOptionChange(option);
+  }, [
+    currentPage,
+    limit,
+    searchTerm,
+    selectedOption?.field,
+    selectedOption?.docType,
+    selectedOption?.progress,
+  ]);
 
   return (
     <>

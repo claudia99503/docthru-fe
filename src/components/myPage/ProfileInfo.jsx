@@ -1,15 +1,8 @@
-// components/profile/ProfileInfo.js
 import { useState, useCallback, memo } from 'react';
 import axios from 'axios';
 import styles from './ProfileInfo.module.css';
 
-const ProfileView = memo(({ profile, isOwner, onEdit }) => {
-  const formatCareer = (career) => {
-    return career !== undefined && career !== null
-      ? `경력 ${career}년차`
-      : '경력 미설정';
-  };
-
+const ProfileView = memo(({ profile, isOwner, onEdit, userName }) => {
   // 새 프로필인지 여부 확인
   const isNewProfile =
     !profile.position &&
@@ -20,6 +13,19 @@ const ProfileView = memo(({ profile, isOwner, onEdit }) => {
     (!profile.preferredFields || profile.preferredFields.length === 0) &&
     !profile.githubUrl;
 
+  // 다른 사용자의 빈 프로필일 경우
+  if (!isOwner && isNewProfile) {
+    return (
+      <div className={styles.welcomeContainer}>
+        <h3 className={styles.emptyProfileTitle}>아직 프로필이 없어요</h3>
+        <p className={styles.emptyProfileText}>
+          {userName}님은 아직 프로필을 설정하지 않았어요.
+        </p>
+      </div>
+    );
+  }
+
+  // 본인의 빈 프로필일 경우
   if (isOwner && isNewProfile) {
     return (
       <div className={styles.welcomeContainer}>
@@ -50,7 +56,11 @@ const ProfileView = memo(({ profile, isOwner, onEdit }) => {
       <div className={styles.infoLine}>
         <span>{profile.location || '지역 미설정'}</span>
         <span className={styles.dot}>•</span>
-        <span>{formatCareer(profile.career)}</span>
+        <span>
+          {profile.career !== undefined && profile.career !== null
+            ? `경력 ${profile.career}년차`
+            : '경력 미설정'}
+        </span>
       </div>
 
       <div className={styles.section}>
@@ -70,7 +80,9 @@ const ProfileView = memo(({ profile, isOwner, onEdit }) => {
           </div>
         ) : (
           <p className={styles.emptyText}>
-            보유하고 계신 기술 스택을 추가해주세요
+            {isOwner
+              ? '보유하고 계신 기술 스택을 추가해주세요'
+              : '기술 스택 미설정'}
           </p>
         )}
       </div>
@@ -87,7 +99,9 @@ const ProfileView = memo(({ profile, isOwner, onEdit }) => {
           </div>
         ) : (
           <p className={styles.emptyText}>
-            선호하시는 개발 분야를 추가해주세요
+            {isOwner
+              ? '선호하시는 개발 분야를 추가해주세요'
+              : '선호 분야 미설정'}
           </p>
         )}
       </div>
@@ -104,22 +118,24 @@ const ProfileView = memo(({ profile, isOwner, onEdit }) => {
             {profile.githubUrl}
           </a>
         ) : (
-          <p className={styles.emptyText}>GitHub 프로필 주소를 추가해주세요</p>
+          <p className={styles.emptyText}>
+            {isOwner
+              ? 'GitHub 프로필 주소를 추가해주세요'
+              : 'GitHub 프로필 미설정'}
+          </p>
         )}
       </div>
     </div>
   );
 });
 
+// 프로필 편집 폼 컴포넌트
 const ProfileForm = memo(({ editForm, onSubmit, onCancel, onChange }) => {
   const handleArrayInputChange = (field, value) => {
-    // 빈 문자열이나 공백만 있는 경우 빈 배열 반환
     if (!value.trim()) {
       onChange(field, []);
       return;
     }
-
-    // 배열 처리
     const items = value.split(',').map((item) => item.trim());
     onChange(field, items);
   };
@@ -133,7 +149,6 @@ const ProfileForm = memo(({ editForm, onSubmit, onCancel, onChange }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // 제출 시 필드 정제
     const formData = {
       ...editForm,
       skills: editForm.skills || [],
@@ -251,12 +266,13 @@ export default function ProfileInfo({
   profile: initialProfile,
   isOwner,
   onUpdate,
+  userName,
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editForm, setEditForm] = useState({
     ...initialProfile,
-    skills: initialProfile.skills || [],
-    preferredFields: initialProfile.preferredFields || [],
+    skills: initialProfile?.skills || [],
+    preferredFields: initialProfile?.preferredFields || [],
   });
 
   const handleInputChange = useCallback((field, value) => {
@@ -312,6 +328,7 @@ export default function ProfileInfo({
           profile={initialProfile}
           isOwner={isOwner}
           onEdit={handleEdit}
+          userName={userName}
         />
       )}
     </div>

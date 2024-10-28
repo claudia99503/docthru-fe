@@ -99,7 +99,6 @@ export default function ChallengeDetailPage() {
       {challengeData ? (
         <div className={styles.mainContainer}>
           <ChallengeDetailInfo list={challengeData} id={getParamId() || 1} />{' '}
-          {/* 수정 필요 */}
           {worksData?.bestList && !getPassedDeadline(challengeData.deadline) ? (
             <BestRecWork list={worksData.bestList} />
           ) : null}

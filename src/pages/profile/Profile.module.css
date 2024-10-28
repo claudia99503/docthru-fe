@@ -1,7 +1,20 @@
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+.mainContent {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0px !important;
+  display: flex;
+  flex-direction: column;
+  padding-left: 183px;
+  gap: 45px;
+  padding-top: 40px;
+}
+
+.wrapper {
+}
+
+.profileEditHug {
+  display: flex;
+  flex-direction: column;
 }
 
 .content {

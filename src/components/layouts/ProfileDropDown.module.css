@@ -4,6 +4,12 @@
   position: relative;
 }
 
+.modalHug {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
 .dropdown-menu {
   position: absolute;
   display: flex;
