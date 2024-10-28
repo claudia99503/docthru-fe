@@ -10,6 +10,7 @@ import Loader from '@/components/common/Loader';
 import ChallengeDetailInfo from '@/components/challenge/ChallengeDetailInfo';
 import ParticipationStatus from '@/components/challenge/ParticipationStatus';
 import BestRecWork from '@/components/challenge/BestRecWork';
+import Container from '@/components/challenge/Container';
 
 import styles from '@/styles/pages/Home.module.css';
 
@@ -97,8 +98,11 @@ export default function ChallengeDetailPage() {
         />
       </Head>
       {challengeData ? (
-        <div className={styles.mainContainer}>
-          <ChallengeDetailInfo list={challengeData} id={getParamId() || 1} />{' '}
+        <div className={styles.ChallengeDetailPage}>
+          <div className={styles['info-container']}>
+            <ChallengeDetailInfo list={challengeData} />{' '}
+            <Container list={challengeData} workBtn={getParamId()} />
+          </div>
           {worksData?.bestList && !getPassedDeadline(challengeData.deadline) ? (
             <BestRecWork list={worksData.bestList} />
           ) : null}
@@ -110,3 +114,4 @@ export default function ChallengeDetailPage() {
     </>
   );
 }
+
