@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import styles from "./AdminModal.module.css";
 import assets from "../../variables/images";
+import { useAlertModal } from "../../hooks/useModal";
+import Image from "next/image";
 
 export default function AdminModal({ type, onClose, onSubmit }) {
   const [message, setMessage] = useState("");
+  const { onModalOpen } = useAlertModal();
 
   const handleChange = (e) => {
     setMessage(e.target.value);
@@ -18,6 +21,13 @@ export default function AdminModal({ type, onClose, onSubmit }) {
 
     onSubmit(formData);
     onClose();
+
+    onModalOpen({
+      msg:
+        status === "REJECTED"
+          ? "챌린지가 거절되었습니다"
+          : "챌린지가 삭제되었습니다",
+    });
   };
 
   const handleModalClick = (e) => {
@@ -31,11 +41,13 @@ export default function AdminModal({ type, onClose, onSubmit }) {
           <span className={styles.title}>
             {type === "reject" ? "거절 사유" : "삭제 사유"}
           </span>
-          <img
+          <Image
             src={assets.icons.out}
             alt="닫기"
             className={styles.closeButton}
             onClick={onClose}
+            width={24}
+            height={24}
           />
         </div>
         <div className={styles.modalBody}>
@@ -58,4 +70,3 @@ export default function AdminModal({ type, onClose, onSubmit }) {
     </div>
   );
 }
-

@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './ChallengeSearchBar.module.css';
 import images from '../../variables/images';
+import Image from 'next/image';
 
 const ChallengeSearchBar = ({ searchTerm, setSearchTerm }) => {
   const handleInputChange = (e) => {
@@ -9,10 +10,12 @@ const ChallengeSearchBar = ({ searchTerm, setSearchTerm }) => {
 
   return (
     <div className={styles.ChallengeSearchBar}>
-      <img
+      <Image
         src={images.icons.search}
         alt="Search Icon"
         className={styles.icon}
+        width={24}
+        height={24}
       />
       <input
         type="text"
