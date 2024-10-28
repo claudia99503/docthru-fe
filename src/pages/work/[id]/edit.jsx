@@ -21,6 +21,8 @@ export default function EditWorkPage() {
 
   const challengeId = data?.challenge?.id;
 
+  console.log(data);
+
   useEffect(() => {
     if (data && data.content) {
       setContent(data.content);
@@ -31,7 +33,7 @@ export default function EditWorkPage() {
     updateWork({ id: workId, data: { content } });
   };
 
-  if (isPending) return <Loader />;
+  if (isPending) return <Loader msg="작업물 불러오는 중" />;
 
   return (
     <>
