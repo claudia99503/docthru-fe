@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './EditProfilePage.module.css';
+import styles from '../edit/editprofilepage.module.css';
 import { useState } from 'react';
 import images from '../../../variables/images';
 import Image from 'next/image';
