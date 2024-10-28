@@ -21,22 +21,22 @@
   align-items: center;
 }
 
-.submitButton :global(.circle) {
+.submitButton :global(.arrowCircle .circle) {
   width: 40px;
   height: 40px;
-  fill: var(--brand-black);
+  --circle-fill: var(--brand-black);
 }
 
-.submitButton :global(.arrowDown) {
-  color: var(--brand-yellow);
+.submitButton :global(.arrowCircle .arrowDown) {
+  --path-fill: var(--brand-yellow);
   transform: scale(0.6);
   transform-origin: center;
 }
 
-.submitButton:disabled :global(.circle) {
-  fill: var(--grey-300);
+.submitButton:disabled :global(.arrowCircle .circle) {
+  --circle-fill: var(--grey-100);
 }
 
-.submitButton:disabled :global(.arrowDown) {
-  color: var(--grey-50);
+.submitButton:disabled :global(.arrowCircle .arrowDown) {
+  --path-fill: var(--grey-50);
 }

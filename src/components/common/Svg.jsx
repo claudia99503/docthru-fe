@@ -5,7 +5,6 @@ export default function Svg({
   width = '24',
   height,
   type = 'icon',
-  isActive = false,
   className,
   addName = '',
 }) {
@@ -17,7 +16,7 @@ export default function Svg({
     <svg
       width={width}
       height={calculatedHeight}
-      className={cn(className, { active: isActive })}
+      className={cn('Svg', className)}
       aria-label={name}
     >
       <use

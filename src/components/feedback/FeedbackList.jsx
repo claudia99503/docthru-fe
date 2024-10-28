@@ -20,7 +20,7 @@ export default function FeedbackList({ id, isClosedChallenge }) {
   const isEmpty = pages[0]?.list.length === 0 || pages?.length === 0;
 
   return isEmpty ? (
-    <EmptyFeedbacks />
+    <EmptyFeedbacks disabled={isClosedChallenge} />
   ) : (
     <ul
       className={cn(styles.FeedbackList, {

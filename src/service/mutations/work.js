@@ -5,6 +5,7 @@ import {
   createWorkLike,
   deleteWork,
   deleteWorkUnlike,
+  updateWork,
 } from '../api/work';
 import { challengeKey, workKey } from '@/variables/queryKeys';
 import { useRouter } from 'next/router';
@@ -23,46 +24,34 @@ export function useCreateFeedback(id) {
   });
 }
 
-export function useMutateLikes(isLiked) {
+export function useMutateLikes(id) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, isLiked }) => {
-      if (id) {
-        return isLiked ? deleteWorkUnlike(id) : createWorkLike(id);
-      }
+    mutationFn: ({ isLiked }) => {
+      return isLiked ? deleteWorkUnlike(id) : createWorkLike(id);
     },
-    onMutate: async () => {
-      await queryClient.cancelQueries({
-        queryKey: workKey.detail(id),
-      });
+    onMutate: async ({ isLiked }) => {
+      await queryClient.cancelQueries(workKey.detail(id));
 
-      const prevData = queryClient.getQueryData({
-        queryKey: workKey.detail(id),
-      });
+      const prevData = queryClient.getQueryData(workKey.detail(id));
 
-      queryClient.setQueryData({
-        queryKey: workKey.detail(id),
-        updater: (prev) => {
+      if (prevData) {
+        queryClient.setQueryData(workKey.detail(id), (prev) => {
           return {
             ...prev,
-            isFavorite: !isLiked,
-            favoriteCount: isLiked
-              ? prev.favoriteCount + 1
-              : prev.favoriteCount - 1,
+            isLike: !isLiked,
+            likeCount: isLiked ? prev.likeCount - 1 : prev.likeCount + 1,
           };
-        },
-      });
-      return { prevData };
+        });
+        return { prevData };
+      }
     },
     onError: (context) => {
-      queryClient.setQueryData({
-        queryKey: workKey.detail(id),
-        updater: context.prevData,
-      });
+      queryClient.setQueryData(workKey.detail(id), context.prevData);
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: workKey.detail(id) });
+      queryClient.invalidateQueries(workKey.detail(id));
     },
   });
 }
@@ -78,7 +67,7 @@ export function useCreateWork() {
       await queryClient.invalidateQueries({
         queryKey: challengeKey.list(variables.id),
       });
-      await queryClient.refetchQueries(workKey.detail(variables.id));
+      await queryClient.refetchQueries(workKey.list(variables.id));
       router.push(`/work/${data.id}`);
     },
   });
@@ -96,6 +85,23 @@ export function useDeleteWork() {
         queryKey: workKey.detail(variables.id),
       });
       router.push(`/me`);
+    },
+  });
+}
+
+export function useUpdateWork() {
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
+  return useMutation({
+    mutationFn: ({ id, data }) => updateWork(id, data),
+    onSuccess: async (data, variables) => {
+      console.log('successMutation: 작업물 수정 성공');
+      await queryClient.invalidateQueries({
+        queryKey: challengeKey.list(variables.id),
+      });
+      await queryClient.refetchQueries(workKey.detail(variables.id));
+      router.push(`/work/${data.id}`);
     },
   });
 }

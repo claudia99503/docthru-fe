@@ -8,20 +8,17 @@ import Loader from '@/components/common/Loader';
 import { useGetWork } from '@/service/queries/work';
 import SourceViewer from '@/components/work/SourceViewer';
 
-export default function EditWorkPage() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function AdminEditWorkPage() {
   const [content, setContent] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const workId = router.query.id;
+  const isAdmin = router.pathname.startsWith('/admin');
 
-  const { data, isPending } = useGetWork(workId);
   const { mutate: updateWork } = useUpdateWork();
   const { mutate: giveUpChallenge } = useGiveUpChallenge();
-  console.log(data);
 
-  const challengeId = data?.challenge?.id;
-
-  console.log(data);
+  const { data, isPending } = useGetWork(workId);
 
   useEffect(() => {
     if (data && data.content) {
@@ -30,33 +27,36 @@ export default function EditWorkPage() {
   }, [data]);
 
   const handleUpdateWork = () => {
-    updateWork({ id: workId, data: { content } });
+    setIsLoading(true);
+    updateWork(
+      { id: workId, data: { content } },
+      {
+        onSuccess: () => {
+          setIsLoading(false);
+        },
+      }
+    );
   };
-
-  if (isPending) return <Loader msg="작업물 불러오는 중" />;
+  useEffect(() => {
+    if (isPending || isLoading) return <Loader />;
+  });
 
   return (
     <>
       <Head>
-        <title>작업물 수정페이지</title>
+        <title>작업물 수정 페이지</title>
         <meta
           name="description"
-          content="작업물에 대한 상세 정보를 보여주는 수정하는페이지입니다."
+          content="관리자가 작업물 상세 페이지를 수정하는 페이지입니다."
         />
       </Head>
       <WorkForm
-        id={`challenge_${challengeId}`}
-        title={data.challenge.title}
+        isAdmin={isAdmin}
+        id={workId}
         content={content}
         setContent={setContent}
         submitAction={handleUpdateWork}
-        giveUpAction={() => giveUpChallenge(challengeId)}
-        isOpen={isOpen}
-      />
-      <SourceViewer
-        docUrl={data.challenge.docUrl}
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
+        giveUpAction={() => giveUpChallenge(challenge.id)}
       />
     </>
   );

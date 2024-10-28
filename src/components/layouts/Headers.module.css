@@ -23,10 +23,7 @@
   padding-top: 124.5px;
   padding-bottom: 16px;
 }
-.AuthHeader .logo {
-  width: 320px;
-  height: 72px;
-}
+
 .container {
   display: flex;
   flex-direction: row;
@@ -34,11 +31,6 @@
   align-items: center;
   max-width: 1200px;
   width: 100%;
-}
-
-.logo {
-  width: 120px;
-  height: 27px;
 }
 
 .login-btn {
@@ -56,13 +48,22 @@
   color: var(--brand-yellow);
 }
 @media only screen and (max-width: 1199px) {
-  .MemberHeader {
+  .MemberHeader,
+  .AdminHeader {
     padding: 24px;
   }
 }
 
-@media only screen and (max-width: 743px) {
+@media only screen and (max-width: 529px) {
+  .AdminHeader,
   .MemberHeader {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 743px) {
+  .MemberHeader,
+  .AdminHeader {
     padding: 16px;
   }
   .logo {
