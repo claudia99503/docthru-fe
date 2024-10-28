@@ -6,7 +6,6 @@ import { useGetWorkList } from '@/service/queries/work';
 
 import Head from 'next/head';
 import Loader from '@/components/common/Loader';
-import Container from '@/components/challenge/Container';
 
 import ChallengeDetailInfo from '@/components/challenge/ChallengeDetailInfo';
 import ParticipationStatus from '@/components/challenge/ParticipationStatus';
@@ -33,10 +32,11 @@ export default function ChallengeDetailPage() {
     data: challengeData,
     refetch: refetchChallenge,
     isPending: isChallengeLoading,
-  } = useGetChallengeDetail(challengeId, {
-    enabled: !!challengeId,
+  } = useGetChallengeDetail(validId, {
+    enabled: !!validId,
   });
 
+  //오류나서 isPending으로 바꿔줬어요
   const {
     data: worksData,
     refetch: refetchWork,
@@ -84,9 +84,7 @@ export default function ChallengeDetailPage() {
   )?.id;
 
   const getParamId = () => {
-    return workId
-      ? { id: workId, new: true }
-      : { id: challengeData?.id, new: false };
+    return challengeData?.isParticipated ? workId : challengeData?.id;
   };
 
   return (
@@ -99,11 +97,8 @@ export default function ChallengeDetailPage() {
         />
       </Head>
       {challengeData ? (
-        <div className={styles.ChallengeDetailPage}>
-          <div className={styles['info-container']}>
-            <ChallengeDetailInfo list={challengeData} />{' '}
-            <Container list={challengeData} workBtn={getParamId()} />
-          </div>
+        <div className={styles.mainContainer}>
+          <ChallengeDetailInfo list={challengeData} id={getParamId() || 1} />{' '}
           {worksData?.bestList && !getPassedDeadline(challengeData.deadline) ? (
             <BestRecWork list={worksData.bestList} />
           ) : null}

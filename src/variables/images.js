@@ -17,9 +17,9 @@ const assets = {
     calender: '/assets/icons/ic_calender.svg',
     chatBubbles: '/assets/icons/ic_chat_bubbles.svg',
     check: '/assets/icons/ic_check.svg',
-    checkCircle: '/assets/icons/ic_check_circle.svg',
     checkboxIn: '/assets/icons/ic_checkbox_in.svg',
     checkboxOut: '/assets/icons/ic_checkbox_out.svg',
+    checkCircle: '/assets/icons/ic_check_circle.svg',
     circle: '/assets/icons/ic_circle.svg',
     coloring: '/assets/icons/ic_coloring.svg',
     crown: '/assets/icons/ic_crown.svg',
@@ -62,10 +62,12 @@ const assets = {
     up: '/assets/icons/ic_up.svg',
   },
   images: {
+    profile: '/assets/images/default_profile.jpeg',
     black: '/assets/images/img_black.svg',
     logo: '/assets/images/img_logo.svg',
     profileAdmin: '/assets/images/img_profile_admin.svg',
     profileMember: '/assets/images/img_profile_member.svg',
+    profileDefault: '/assets/images/default_profile.jpeg',
   },
 };
 export default assets;
