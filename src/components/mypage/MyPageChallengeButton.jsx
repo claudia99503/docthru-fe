@@ -5,6 +5,7 @@ const MyPageChallengeButton = ({
   setCurrentIndex,
   action,
   length,
+  size,
 }) => {
   const goToPrevious = () => {
     if (currentIndex > 0) {
@@ -13,12 +14,27 @@ const MyPageChallengeButton = ({
   };
 
   const goToNext = () => {
-    if (currentIndex < length - 3) {
+    let maxIndex;
+
+    if (size === 'mobile') {
+      maxIndex = length - 1;
+    } else if (size === 'tablet') {
+      maxIndex = Math.round(length / 2) - 1;
+    } else {
+      maxIndex = Math.round(length / 3) - 1;
+    }
+
+    if (currentIndex < maxIndex) {
       setCurrentIndex((prevIndex) => prevIndex + 1);
-    } else if (currentIndex === length - 3) {
+    } else if (currentIndex === maxIndex) {
       setCurrentIndex(0);
     }
   };
+
+  const shouldShowButton =
+    (size === 'mobile' && length > 1) ||
+    (size === 'tablet' && length > 2) ||
+    (size === 'web' && length > 3);
 
   return (
     <>
@@ -27,12 +43,21 @@ const MyPageChallengeButton = ({
           className={styles.ChallengeButton}
           onClick={goToPrevious}
           disabled={currentIndex === 0}
+          style={{
+            visibility: shouldShowButton ? 'visible' : 'hidden',
+          }}
         >
           &lt;
         </button>
       )}
-      {action === 'goToNext' && length > 3 && (
-        <button className={styles.ChallengeButton} onClick={goToNext}>
+      {action === 'goToNext' && (
+        <button
+          className={styles.ChallengeButton}
+          onClick={goToNext}
+          style={{
+            visibility: shouldShowButton ? 'visible' : 'hidden',
+          }}
+        >
           &gt;
         </button>
       )}

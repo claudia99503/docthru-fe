@@ -11,7 +11,7 @@ const Profile = ({ profileData, userId, onUpdate }) => {
         onUpdate={onUpdate}
         userName={profileData.user?.nickname || '사용자'}
       />
-      <MyPageChallengeCard list={profileData.list} site="home" />
+      <MyPageChallengeCard list={profileData.list} />
     </>
   );
 };
