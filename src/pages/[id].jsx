@@ -3,13 +3,10 @@ import { useRouter } from 'next/router';
 
 import { useGetChallengeDetail } from '@/service/queries/challenge';
 import { useGetWorkList } from '@/service/queries/work';
-import {  updateChallenge } from "@/service/api/challenge";
 
 import Head from 'next/head';
 import Loader from '@/components/common/Loader';
 import Container from '@/components/challenge/Container';
-import KebabMenu from '@/components/common/KebabMenu';
-import AdminModal from '@/components/application/AdminModal';
 
 import ChallengeDetailInfo from '@/components/challenge/ChallengeDetailInfo';
 import ParticipationStatus from '@/components/challenge/ParticipationStatus';
@@ -20,9 +17,6 @@ import styles from '@/styles/pages/Home.module.css';
 export default function ChallengeDetailPage() {
   const router = useRouter();
   const { id: challengeId } = router.query;
-  
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalType, setModalType] = useState("");
   const [validId, setValidId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedOption, setSelectedOption] = useState({
@@ -39,11 +33,10 @@ export default function ChallengeDetailPage() {
     data: challengeData,
     refetch: refetchChallenge,
     isPending: isChallengeLoading,
-  } = useGetChallengeDetail(validId, {
-    enabled: !!validId,
+  } = useGetChallengeDetail(challengeId, {
+    enabled: !!challengeId,
   });
 
-  //오류나서 isPending으로 바꿔줬어요
   const {
     data: worksData,
     refetch: refetchWork,
@@ -51,36 +44,6 @@ export default function ChallengeDetailPage() {
   } = useGetWorkList(validId, selectedOption, {
     enabled: !!validId,
   });
-
-  const handleEditClick = () => {
-    router.push(`/application/${challengeId}`);
-  }
-  
-    const handleDelete = () => {
-      setModalType("delete");
-      setIsModalOpen(true);
-    };
-
-    const handleModalSubmit = async (formData) => {
-      try {
-        await updateChallenge(challengeId, { ...formData });
-        setChallenge({
-          ...challengeData,
-          status: formData.status,
-          message: formData.message,
-        });
-        setReasonData({
-          type: formData.status === "REJECTED" ? "reject" : "delete",
-          message: formData.message,
-          nickname: "독스루 운영진",
-          updatedAt: new Date().toISOString(),
-        });
-        setIsModalOpen(false);
-      } catch (error) {
-        console.log(error)
-        alert("처리 중 오류가 발생했습니다.");
-      }
-    };
 
   const handleOptionChange = (option) => {
     setSelectedOption((pev) => ({ ...pev, ...option }));
@@ -139,10 +102,6 @@ export default function ChallengeDetailPage() {
         <div className={styles.ChallengeDetailPage}>
           <div className={styles['info-container']}>
             <ChallengeDetailInfo list={challengeData} />{' '}
-            <KebabMenu
-              onEdit={handleEditClick}
-              onDelete={handleDelete}
-            />
             <Container list={challengeData} workBtn={getParamId()} />
           </div>
           {worksData?.bestList && !getPassedDeadline(challengeData.deadline) ? (
@@ -152,14 +111,6 @@ export default function ChallengeDetailPage() {
         </div>
       ) : (
         <>챌린지 X || 권한 없음 || 경로 확인 필요</>
-      )}
-
-       {isModalOpen && (
-        <AdminModal
-          type={modalType}
-          onClose={() => setIsModalOpen(false)}
-          onSubmit={handleModalSubmit}
-        />
       )}
     </>
   );

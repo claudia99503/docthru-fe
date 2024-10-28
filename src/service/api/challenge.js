@@ -30,9 +30,9 @@ export async function getChallenge(id) {
   return res.data;
 }
 
-/** /:id/participation POST - 번역 챌린지 참여 */
-export async function createChallenge(id) {
-  const res = await axios.post(`${PATH}/${id}/participations`);
+/** /:id PATCH - 상세 챌린지 수정 - 어드민 */
+export async function updateChallenge(id, data) {
+  const res = await axios.patch(`${PATH}/${id}/`, data);
   return res.data;
 }
 
@@ -49,6 +49,12 @@ export async function deleteChallenges(id) {
       throw new Error('서버와의 통신 중 오류 발생');
     }
   }
+}
+
+/** /:id/participation POST - 번역 챌린지 참여 */
+export async function createChallenge(id) {
+  const res = await axios.post(`${PATH}/${id}/participation`);
+  return res.data;
 }
 
 /** :id/original GET - 챌린지 원문 조회 */

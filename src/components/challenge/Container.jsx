@@ -2,7 +2,7 @@ import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useRouter } from 'next/router';
 
-import { useMutateChallenge } from '@/service/mutations/challenge';
+import { useGiveUpChallenge } from '@/service/mutations/challenge';
 
 import assets from '@/variables/images';
 
@@ -11,7 +11,7 @@ import styles from './Container.module.css';
 const Container = ({ list, workBtn }) => {
   const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
   const router = useRouter();
-  const { mutate } = useMutateChallenge({});
+  const { mutate } = useGiveUpChallenge({});
 
   const formatDeadline = (dateTime) => {
     const date = new Date(dateTime);
@@ -47,7 +47,11 @@ const Container = ({ list, workBtn }) => {
   };
 
   const getBtnText = () => {
-    return list.isParticipated ? list.progress? '작업 도전하기' : '도전 계속하기' : '작업 도전하기';
+    return list.isParticipated
+      ? list.progress
+        ? '작업 도전하기'
+        : '도전 계속하기'
+      : '작업 도전하기';
   };
 
   return (
@@ -72,12 +76,7 @@ const Container = ({ list, workBtn }) => {
       {!isMobile ? (
         <>
           <div className={styles['view-original-button-row']}>
-            <button
-              className={styles['primary-button']}
-              onClick={() => window.open(list.docUrl)}
-            >
-              원문 링크
-            </button>
+            <a className={styles['primary-button']}>원문 링크</a>
           </div>
           <div className={styles['challenge-button-row']}>
             <button
@@ -92,12 +91,7 @@ const Container = ({ list, workBtn }) => {
         </>
       ) : (
         <div className={styles['mobile-buttons-row']}>
-          <button
-            className={styles['primary-button']}
-            onClick={() => window.open(list.docUrl)}
-          >
-            원문 링크
-          </button>
+          <a className={styles['primary-button']}>원문 링크</a>
           <button
             className={styles['gray-button']}
             style={getButtonStyles('style')}

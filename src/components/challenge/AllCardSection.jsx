@@ -2,7 +2,7 @@ import Card from '../../components/challenge/Card';
 
 import styles from './AllCardSection.module.css';
 
-const AllCardSection = ({ list, site, isAdmin }) => {
+const AllCardSection = ({ list, site, isAdmin, onChallengeDeleted  }) => {
   return (
     <>
       <div className={styles.challengeTableWrapper}>
@@ -10,9 +10,13 @@ const AllCardSection = ({ list, site, isAdmin }) => {
           <>
             <div className={styles.AllCardSection}>
               {list.map((challenge) => (
-                <>
-                  <Card key={challenge.id} data={challenge} site={site} isAdmin={isAdmin} />
-                </>
+                <Card
+                  key={challenge.id}
+                  data={challenge}
+                  site={site}
+                  isAdmin={isAdmin}
+                  onChallengeDeleted={onChallengeDeleted} 
+                />
               ))}
             </div>
           </>

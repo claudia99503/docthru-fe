@@ -27,7 +27,7 @@ export default function Home(initialData) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedOption, setSelectedOption] = useState({});
 
-  const { data = initialData, isPending } = useGetChallenges(selectedOption, {
+  const { data = initialData, isPending, refetch } = useGetChallenges(selectedOption, {
     enabled: true,
   });
   const { meta = {}, list = [] } = data || {};
@@ -95,6 +95,7 @@ export default function Home(initialData) {
               list={list}
               site={'home'}
               isAdmin={true}
+              onChallengeDeleted={refetch}
             />
           </div>
           {list.length > 0 && (
