@@ -18,7 +18,7 @@ const ParticipationStatus = ({ list, onPageChange }) => {
   const [currentPage, setCurrentPage] = useState(pageList?.currentPage);
   const totalPages = pageList?.totalPages;
 
-  const msg = `아직 참여한 도전자가 없어요, 지금 바로 도전해보세요!`
+  const msg =  `아직 참여한 도전자가 없어요,\n지금 바로 도전해보세요!`;
 
   const handlePageChange = (direction) => {
     if (direction === 'next' && currentPage < totalPages) {
@@ -103,7 +103,7 @@ const ParticipationStatus = ({ list, onPageChange }) => {
           </>
         ) : (
           <>
-            <Message msg={msg} />
+            <Message className={styles.text} msg={msg} />
           </>
         )}
       </div>

@@ -44,10 +44,9 @@
   height: 40px;
   background-color: var( --brand-yellow);
   border-radius: 12px;
-  font-family: "Pretendard", sans-serif;
   font-weight: 700;
   font-size: 14px;
-  line-height: 26px;
+  line-height: 40px;
   color: var(--grey-800);
   text-align: center;
   border: 2px solid var(--grey-800);

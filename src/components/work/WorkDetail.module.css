@@ -28,10 +28,13 @@
   width: 100%;
 }
 .content {
-  padding-bottom: 64px;
+  padding-bottom: 70px;
   font-size: 16px;
   font-weight: 400;
   width: 100%;
+}
+.title {
+  font-size: 24px;
 }
 
 .time {
@@ -42,13 +45,17 @@
 
 @media only screen and (max-width: 1199px) {
   .content {
-    padding-bottom: 44px;
+    padding-bottom: 60px;
   }
 }
 
 @media only screen and (max-width: 743px) {
   .content {
-    padding-bottom: 40px;
-    font-size: 16px;
+    padding-bottom: 50px;
+    font-size: calc(100% - 2px);
+  }
+
+  .title {
+    font-size: 20px;
   }
 }

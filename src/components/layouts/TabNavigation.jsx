@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import assets from '../../variables/images';
 import styles from './TabNavigation.module.css';
+import Image from 'next/image';
 
 const TabNavigation = ({ activeTab }) => {
   const router = useRouter();
@@ -19,10 +20,12 @@ const TabNavigation = ({ activeTab }) => {
           onClick={() => router.push('/application')}
         >
           <span>신규 챌린지 신청</span>
-          <img
+          <Image
             src={assets.icons.plus}
             alt="plus Icon"
             className={styles.icon}
+            width={16}
+            height={16}
           />
         </button>
       </div>

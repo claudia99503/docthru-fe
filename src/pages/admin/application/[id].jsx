@@ -8,9 +8,13 @@ import KebabMenu from "../../../components/common/KebabMenu";
 import AdminModal from "../../../components/application/AdminModal";
 import ReasonBox from "../../../components/application/ReasonBox";
 import { getChallenge, updateChallenge } from "../../../service/api/challenge";
+import { useGetWorkList } from "@/service/queries/work";
 import Loader from "../../../components/common/Loader";
+import BestRecWork from "../../../components/challenge/BestRecWork";
 import styles from "../../../styles/pages/application/AdminApplicationDetailPage.module.css";
 import assets from "@/variables/images";
+import { useAlertModal } from "../../../hooks/useModal";
+import Image from "next/image";
 
 export default function AdminApplicationDetailPage() {
   const router = useRouter();
@@ -22,6 +26,15 @@ export default function AdminApplicationDetailPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState("");
   const [reasonData, setReasonData] = useState(null);
+  const { Modal, onModalOpen } = useAlertModal();
+
+  const { data: worksData } = useGetWorkList(
+    id,
+    { page: 1 },
+    {
+      enabled: !!id && challenge?.status === "ACCEPTED",
+    }
+  );
 
   useEffect(() => {
     if (id) {
@@ -64,14 +77,17 @@ export default function AdminApplicationDetailPage() {
     try {
       await updateChallenge(id, { status: "ACCEPTED" });
       setChallenge({ ...challenge, status: "ACCEPTED" });
-      alert("챌린지가 승인되었습니다.");
+      onModalOpen({
+        msg: "챌린지가 승인되었습니다",
+        action: () => router.push(`/admin/application/${id}`),
+      });
     } catch (error) {
-      alert("승인 중 오류가 발생했습니다.");
+      onModalOpen({ msg: "승인 중 오류가 발생했습니다" });
     }
   };
 
   const handleEdit = () => {
-    router.push(`/application/${id}`);
+    router.push(`/admin/edit/${id}`);
   };
 
   const handleModalSubmit = async (formData) => {
@@ -89,8 +105,12 @@ export default function AdminApplicationDetailPage() {
         updatedAt: new Date().toISOString(),
       });
       setIsModalOpen(false);
+      onModalOpen({
+        msg: formData.status === "REJECTED" ? "챌린지가 거절되었습니다." : "챌린지가 삭제되었습니다.",
+        action: () => router.push(`/admin/application/${id}`),
+      });
     } catch (error) {
-      alert("처리 중 오류가 발생했습니다.");
+      onModalOpen({ msg: "처리 중 오류가 발생했습니다" });
     }
   };
 
@@ -157,12 +177,36 @@ export default function AdminApplicationDetailPage() {
           ></iframe>
           <button
             className={styles.previewButton}
-            onClick={() => window.open(challenge.docUrl, '_blank')}
+            onClick={() => window.open(challenge.docUrl, "_blank")}
           >
             링크 열기
-            <img src={assets.icons.diagonal} alt="링크 열기" />
+            <Image
+              src={assets.icons.diagonal}
+              alt="링크 열기"
+              width={12}
+              height={12}
+            />
           </button>
         </div>
+
+        {challenge.status === "ACCEPTED" && (
+          <>
+            {!worksData?.bestList || worksData.bestList.length === 0 ? (
+              <p>최다 추천 번역물이 없습니다.</p>
+            ) : (
+              <>
+                <div
+                  style={{
+                    border: "1px solid #F5F5F5",
+                    marginTop: "20px",
+                    marginBottom: "20px",
+                  }}
+                />
+                <BestRecWork list={worksData.bestList} />
+              </>
+            )}
+          </>
+        )}
 
         {challenge.status === "WAITING" && (
           <div className={styles.buttonContainer}>
@@ -183,7 +227,7 @@ export default function AdminApplicationDetailPage() {
           onSubmit={handleModalSubmit}
         />
       )}
+      <Modal />
     </>
   );
 }
-

@@ -1,20 +1,26 @@
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+
+import { updateChallenge } from '@/service/api/challenge';
 
 import DocTypeChip from '../common/DocTypeChip';
 import KebabMenu from '../common/KebabMenu';
 import images from '../../variables/images';
+import AdminModal from '../application/AdminModal';
 
 import styles from './Card.module.css';
-import { useEffect, useState } from 'react';
 
-const Card = ({ data, site }) => {
+const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
+  const router = useRouter();
   const [myData, setMyData] = useState(data);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState('');
 
   useEffect(() => {
-    if (site !== 'home' && myData?.challenge) {
-      setMyData(myData.challenge);
+    if (site !== 'home' && data?.challenge) {
+      setMyData(data.challenge);
     }
-  }, [site, myData]);
+  }, [site, data]);
 
   const formatDeadline = (dateTime) => {
     const date = new Date(dateTime);
@@ -53,10 +59,6 @@ const Card = ({ data, site }) => {
   };
 
   const getCondition = () => {
-    // const today = new Date();
-    // const deadline = new Date(myData.deadline);
-
-    // if (today >= deadline || myData.progress) {
     if (myData.progress) {
       return (
         <div
@@ -83,16 +85,31 @@ const Card = ({ data, site }) => {
     }
   };
 
-  const router = useRouter();
-
   const handleTabClick = (path) => {
     router.push(path);
   };
 
-  function onEdit() {}
-  function onDelete() {}
+  const handleEditClick = () => {
+    router.push(`/application/${data.id}`);
+  };
 
-  const isAdmin = false;
+  const handleDelete = () => {
+    setModalType('delete');
+    setIsModalOpen(true);
+  };
+
+  const handleModalSubmit = async (formData) => {
+    try {
+      await updateChallenge(data.id, { ...formData });
+      setIsModalOpen(false);
+      if (formData.status === 'DELETED' && onChallengeDeleted) {
+        onChallengeDeleted(); 
+      }
+    } catch (error) {
+      console.log(error);
+      alert('처리 중 오류가 발생했습니다.');
+    }
+  };
 
   return (
     <div className={styles.Card}>
@@ -100,7 +117,7 @@ const Card = ({ data, site }) => {
         {getCondition()}
         {isAdmin ? (
           <div className={`${styles.menuButton}`}>
-            <KebabMenu onEdit={onEdit} onDelete={onDelete} />
+            <KebabMenu onEdit={handleEditClick} onDelete={handleDelete} />
           </div>
         ) : (
           <></>
@@ -139,6 +156,13 @@ const Card = ({ data, site }) => {
         </div>
         {getBtn()}
       </div>
+      {isModalOpen && (
+        <AdminModal
+          type={modalType}
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={handleModalSubmit}
+        />
+      )}
     </div>
   );
 };
