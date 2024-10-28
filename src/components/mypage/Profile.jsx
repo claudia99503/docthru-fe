@@ -1,5 +1,5 @@
 import React from 'react';
-import ProfileInfo from './ProfileInfo';
+import ProfileInfo from '@/components/mypage/ProfileInfo';
 import MyPageChallengeCard from './MyPageChallengeCard';
 
 const Profile = ({ profileData, userId, onUpdate }) => {
