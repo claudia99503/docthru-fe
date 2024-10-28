@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './ReasonBox.module.css';
 import assets from '../../variables/images';
+import Image from 'next/image';
 
 const ReasonBox = ({ type, message, nickname, updatedAt }) => {
     const date = new Date(updatedAt);
@@ -21,7 +22,13 @@ const ReasonBox = ({ type, message, nickname, updatedAt }) => {
 
             <div className={styles['reason-footer']}>
                 <span className={styles['user-info']}>{nickname}</span>
-                <img src={assets.icons.line} alt="구분선" className={styles['line-icon']} />
+                <Image
+                    src={assets.icons.line}
+                    alt="구분선"
+                    className={styles['line-icon']}
+                    width={3}
+                    height={15}
+                />
                 <span className={styles.timestamp}>{formattedDate}</span>
             </div>
         </div>

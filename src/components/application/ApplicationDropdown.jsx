@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './ApplicationDropdown.module.css';
 import images from '../../variables/images';
+import Image from 'next/image';
 
 const ApplicationDropdown = ({ onOptionChange }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,10 +21,12 @@ const ApplicationDropdown = ({ onOptionChange }) => {
     <div className={styles.ApplicationDropdown}>
       <button className={styles['dropdown-button']} onClick={toggleDropdown}>
         <span className={styles['selected-text']}>{selectedOption}</span>
-        <img
+        <Image
           src={isOpen ? images.icons.toggleUp : images.icons.toggleDown}
           alt="Toggle Dropdown"
           className={styles.icon}
+          width={24}
+          height={24}
         />
       </button>
       {isOpen && (
