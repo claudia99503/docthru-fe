@@ -29,6 +29,10 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
     return `${date.toLocaleString('ko-KR', options)} 마감`;
   };
 
+  const getUri = () => {
+    return myData.workId ? `/work/${myData.workId}/edit` : `/work/new/${myData.id}` 
+  }
+
   const getBtn = () => {
     if (site == 'ongoing') {
       return (
@@ -36,7 +40,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
           className={`${styles.challengeButton} ${
             router.pathname === `/work/${myData.id}` ? styles.active : ''
           }`}
-          onClick={() => handleTabClick(`/work/edit`)}
+          onClick={() => handleTabClick(getUri())}
         >
           <span>도전 계속하기</span>
           <img src={images.icons.arrowMainRight} alt="arrow icon" />
@@ -48,7 +52,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
           className={`${styles.challengeButton} ${
             router.pathname === `/work/${myData.id}` ? styles.active : ''
           }`}
-          onClick={() => handleTabClick(`/work/${myData.id}`)}
+          onClick={() => handleTabClick(`/work/${myData.workId}`)}
           style={{ border: 'none' }}
         >
           <span>내 작업물 보기</span>
@@ -63,7 +67,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
       return (
         <div
           className={styles['condition-chip']}
-          style={{ backgroundColor: '#262626', color: '#FFFFFF' }}
+          style={{ backgroundColor: 'var(--grey-800)', color: 'white' }}
         >
           <img src={images.icons.deadline} alt="deadline icon" />
           <span>챌린지가 마감되었어요</span>
@@ -76,7 +80,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
       return (
         <div
           className={styles['condition-chip']}
-          style={{ backgroundColor: '#E5E5E5' }}
+          style={{ backgroundColor: 'var(--grey-200)' }}
         >
           <img src={images.icons.personWhite} alt="deadline icon" />
           <span>모집이 완료된 상태에요</span>
@@ -90,7 +94,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
   };
 
   const handleEditClick = () => {
-    router.push(`/application/${data.id}`);
+    router.push(`/application/${myData.id}`);
   };
 
   const handleDelete = () => {
@@ -100,7 +104,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
 
   const handleModalSubmit = async (formData) => {
     try {
-      await updateChallenge(data.id, { ...formData });
+      await updateChallenge(myData.id, { ...formData });
       setIsModalOpen(false);
       if (formData.status === 'DELETED' && onChallengeDeleted) {
         onChallengeDeleted(); 
