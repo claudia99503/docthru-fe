@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import axios from '@/service/api/axios';
-import Edit from '@/components/myPage/edit';
-import Profile from '../../components/myPage/Profile';
+import Edit from '@/components/mypage/edit';
+import Profile from '../../components/mypage/Profile';
 import styles from './Profile.module.css';
 
 export default function ProfileIndex() {
@@ -21,7 +21,7 @@ export default function ProfileIndex() {
       console.log('Fetching profile for userId:', currentUserId);
 
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_DEV_API_URL}/profiles/${currentUserId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/profiles/${currentUserId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
