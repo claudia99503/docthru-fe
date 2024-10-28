@@ -9,7 +9,7 @@ import images from '../../variables/images';
 import AdminModal from '../application/AdminModal';
 
 import styles from './Card.module.css';
-import otherStyles from '@/components/myPage/MyPageChallenge.module.css';
+import myPageStyles from '@/components/mypage/MyPageChallenge.module.css';
 
 const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
   const router = useRouter();
@@ -65,7 +65,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
         <div
           className={
             site === 'myPage'
-              ? otherStyles['condition-chip']
+              ? myPageStyles['condition-chip']
               : styles['condition-chip']
           }
           style={{ backgroundColor: '#262626', color: '#FFFFFF' }}
@@ -82,7 +82,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
         <div
           className={
             site === 'myPage'
-              ? otherStyles['condition-chip']
+              ? myPageStyles['condition-chip']
               : styles['condition-chip']
           }
           style={{ backgroundColor: '#E5E5E5' }}
@@ -124,7 +124,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
 
   return (
     <div
-      className={site === 'myPage' ? otherStyles.Card : styles.Card}
+      className={site === 'myPage' ? myPageStyles.Card : styles.Card}
       onClick={
         site === 'myPage' ? () => handleTabClick(`/${myData.id}`) : undefined
       }
@@ -142,7 +142,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
         <div
           className={
             site === 'myPage'
-              ? otherStyles['challenge-title']
+              ? myPageStyles['challenge-title']
               : styles['challenge-title']
           }
           onClick={() => handleTabClick(`/${myData.id}`)}
@@ -158,13 +158,13 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
       <div
         className={
           site === 'myPage'
-            ? otherStyles['card-bottom']
+            ? myPageStyles['card-bottom']
             : styles['card-bottom ']
         }
       >
         <div
           className={
-            site === 'myPage' ? otherStyles['info-row'] : styles['info-row']
+            site === 'myPage' ? myPageStyles['info-row'] : styles['info-row']
           }
         >
           <div style={{ display: 'flex' }}>
@@ -174,7 +174,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
               className={styles.icon}
             />
             <span
-              className={site === 'myPage' ? otherStyles.text : styles.text}
+              className={site === 'myPage' ? myPageStyles.text : styles.text}
             >
               {formatDeadline(myData.deadline)}
             </span>

@@ -1,5 +1,5 @@
 import styles from './DocTypeChip.module.css';
-import otherStyles from '@/components/myPage/MyPageChallenge.module.css';
+import myPageStyles from '@/components/mypage/MyPageChallenge.module.css';
 import { quantico } from '@/variables/fonts';
 
 export const FIELD = {
@@ -28,7 +28,7 @@ export function ChipField({ field, site }) {
       style={{ '--bg-color': color }}
     >
       <span
-        className={site === 'myPage' ? otherStyles.DocTypeText : styles.text}
+        className={site === 'myPage' ? myPageStyles.DocTypeText : styles.text}
       >
         {FIELD.name[field]}
       </span>
@@ -41,7 +41,7 @@ export function ChipType({ type, site }) {
   return (
     <div className={`${styles.ChipType}`}>
       <span
-        className={site === 'myPage' ? otherStyles.DocTypeText : styles.text}
+        className={site === 'myPage' ? myPageStyles.DocTypeText : styles.text}
       >
         {docType}
       </span>
