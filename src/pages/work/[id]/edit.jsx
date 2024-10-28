@@ -17,7 +17,6 @@ export default function EditWorkPage() {
   const { data, isPending } = useGetWork(workId);
   const { mutate: updateWork } = useUpdateWork();
   const { mutate: giveUpChallenge } = useGiveUpChallenge();
-  console.log(data);
 
   const challengeId = data?.challenge?.id;
 
