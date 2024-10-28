@@ -16,17 +16,6 @@ const MyPageChallengeCard = ({ list }) => {
     return 'mobile';
   }
 
-  const calculateTranslateX = () => {
-    let translatePercentage;
-
-    if (windowSize === 'mobile') {
-      translatePercentage = 100;
-    } else {
-      translatePercentage = 101;
-    }
-    return `translateX(-${currentIndex * translatePercentage}%)`;
-  };
-
   useEffect(() => {
     const handleResize = () => {
       setWindowSize(getWindowSize());
@@ -58,20 +47,20 @@ const MyPageChallengeCard = ({ list }) => {
               <div className={styles.slider}>
                 <div
                   style={{
-                    transform: calculateTranslateX(),
+                    transform: `translateX(-${currentIndex * 100}%)`,
                     transition: 'transform 0.5s ease',
                   }}
                 >
                   <div
                     className={styles.AllCardSection}
-                    // style={{
-                    //   justifyContent:
-                    //     (windowSize === 'web' && length < 3) ||
-                    //     (windowSize === 'tablet' && length < 2) ||
-                    //     (windowSize === 'mobile' && length < 1)
-                    //       ? 'center'
-                    //       : 'flex-start',
-                    // }}
+                    style={{
+                      justifyContent:
+                        (windowSize === 'web' && length < 3) ||
+                        (windowSize === 'tablet' && length < 2) ||
+                        (windowSize === 'mobile' && length < 1)
+                          ? 'center'
+                          : 'flex-start',
+                    }}
                   >
                     {list.map((challenge, index) => (
                       <Card

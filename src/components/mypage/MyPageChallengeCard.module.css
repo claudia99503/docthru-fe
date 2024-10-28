@@ -49,14 +49,14 @@
 }
 
 .ChallengeButton {
-  background-color: none;
+  background-color: #2563eb;
   margin: 120px 10px;
   border-radius: 50%;
   height: 50px;
   width: 50px;
   padding: 10px 10px;
-  border: 2px solid var(--grey-700);
   font-weight: 1000;
+  color: #ffffff;
 }
 
 @media (min-width: 744px) and (max-width: 1210px) {
