@@ -75,7 +75,10 @@ function Edit({ userInfo }) {
               메인 페이지 이동
             </button>
             {isOwner && (
-              <button className={styles.C} onClick={() => router.push('/edit')}>
+              <button
+                className={styles.C}
+                onClick={() => router.push('/profile/edit')}
+              >
                 내 정보 수정
               </button>
             )}

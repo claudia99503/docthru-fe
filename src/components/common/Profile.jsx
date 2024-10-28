@@ -31,7 +31,7 @@ export function Profile({ user, size, type, date, className }) {
     return (
       <div className={cn(styles.Profile, styles.simple, className)}>
         <ProfileImage width="24px" user={user} />
-        <span className={styles.name}>user.nickname</span>
+        <span className={styles.name}>{user.nickname}</span>
         {isTypeSimple.includes('2') && (
           <span className={styles.grade}>{userGrade}</span>
         )}

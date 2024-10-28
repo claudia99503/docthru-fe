@@ -17,9 +17,9 @@ const assets = {
     calender: '/assets/icons/ic_calender.svg',
     chatBubbles: '/assets/icons/ic_chat_bubbles.svg',
     check: '/assets/icons/ic_check.svg',
+    checkCircle: '/assets/icons/ic_check_circle.svg',
     checkboxIn: '/assets/icons/ic_checkbox_in.svg',
     checkboxOut: '/assets/icons/ic_checkbox_out.svg',
-    checkCircle: '/assets/icons/ic_check_circle.svg',
     circle: '/assets/icons/ic_circle.svg',
     coloring: '/assets/icons/ic_coloring.svg',
     crown: '/assets/icons/ic_crown.svg',
@@ -34,6 +34,7 @@ const assets = {
     firstRankWhite: '/assets/icons/ic_first_rank_white.svg',
     firstRankYellow: '/assets/icons/ic_first_rank_yellow.svg',
     fourthRank: '/assets/icons/ic_fourth_rank.svg',
+    gear: '/assets/icons/ic_gear.png',
     giveUp: '/assets/icons/ic_give_up.svg',
     heartActive: '/assets/icons/ic_heart_active.svg',
     heartInactive: '/assets/icons/ic_heart_inactive.svg',
@@ -67,7 +68,6 @@ const assets = {
     logo: '/assets/images/img_logo.svg',
     profileAdmin: '/assets/images/img_profile_admin.svg',
     profileMember: '/assets/images/img_profile_member.svg',
-    profileDefault: '/assets/images/default_profile.jpeg',
   },
 };
 export default assets;

@@ -12,6 +12,8 @@
   font-size: 24px;
   font-weight: 600;
   color: var(--grey-800);
+  display: flex;
+  justify-content: space-between;
 }
 
 .description {
