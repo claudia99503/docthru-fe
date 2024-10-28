@@ -7,7 +7,7 @@ const MyPageChallengeCardList = ({ list, site, currentIndex }) => {
   return (
     <>
       <div
-        className='flex'
+        className="flex"
         style={{
           transform: `translateX(-${currentIndex * 34.3}%)`,
           transition: 'transform 0.5s ease',
@@ -18,10 +18,10 @@ const MyPageChallengeCardList = ({ list, site, currentIndex }) => {
             <div className={styles.AllCardSection}>
               {list.map((challenge, index) => (
                 <MyPageChallengeCardSlice
-                  key={challenge.id} // 인덱스를 키로 사용
+                  key={challenge.id}
                   data={challenge}
                   site={site}
-                  style={{ flex: '0 0 auto', width: '100%' }} // 카드의 폭을 100%로 설정
+                  style={{ flex: '0 0 auto', width: '100%' }}
                 />
               ))}
             </div>
