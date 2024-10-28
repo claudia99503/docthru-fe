@@ -2,6 +2,8 @@ import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useRouter } from 'next/router';
 
+import { useMutateChallenge } from '@/service/mutations/challenge';
+
 import assets from '@/variables/images';
 
 import styles from './Container.module.css';
@@ -9,6 +11,7 @@ import styles from './Container.module.css';
 const Container = ({ list, workBtn }) => {
   const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
   const router = useRouter();
+  const { mutate } = useMutateChallenge({});
 
   const formatDeadline = (dateTime) => {
     const date = new Date(dateTime);
@@ -17,23 +20,34 @@ const Container = ({ list, workBtn }) => {
   };
 
   const getButtonStyles = (type) => {
-    if(type === 'style'){
+    if (type === 'style') {
       return !list.progress
         ? { backgroundColor: '#262626', color: '#FFFFFF' }
         : { backgroundColor: '#E5E5E5', color: '#737373' };
     } else if (type === 'action') {
-      return !list.progress
-      ? false
-      : true
+      return !list.progress ? false : true;
     }
   };
-  
-  const getStatus = (type) => {
-    if(type === 'uri'){
-      return workBtn.new ? `/work/new/${workBtn.id}` : `/work/${workBtn.id}/edit`;
+
+  const getBtnAction = () => {
+    if (!list.isParticipated) {
+      handleChallenge();
+      router.push(getStatus());
     } else {
-      return workBtn.new ? '작업 도전하기' : '도전 계속하기';
+      router.push(getStatus());
     }
+  };
+
+  const handleChallenge = () => {
+    mutate({ id: list.id, isParticipate: true });
+  };
+
+  const getStatus = () => {
+    return workBtn.new ? `/work/${workBtn.id}/edit` : `/work/new/${workBtn.id}`;
+  };
+
+  const getBtnText = () => {
+    return list.isParticipated ? list.progress? '작업 도전하기' : '도전 계속하기' : '작업 도전하기';
   };
 
   return (
@@ -60,7 +74,7 @@ const Container = ({ list, workBtn }) => {
           <div className={styles['view-original-button-row']}>
             <button
               className={styles['primary-button']}
-              onClick={() =>  window.open(list.docUrl)}
+              onClick={() => window.open(list.docUrl)}
             >
               원문 링크
             </button>
@@ -69,28 +83,28 @@ const Container = ({ list, workBtn }) => {
             <button
               className={styles['gray-button']}
               style={getButtonStyles('style')}
-              onClick={() => router.push(getStatus('uri'))}
+              onClick={getBtnAction}
               disabled={getButtonStyles('action')}
             >
-              {getStatus('btn')}
+              {getBtnText()}
             </button>
           </div>
         </>
       ) : (
         <div className={styles['mobile-buttons-row']}>
           <button
-              className={styles['primary-button']}
-              onClick={() =>  window.open(list.docUrl)}
-            >
-              원문 링크
-            </button>
+            className={styles['primary-button']}
+            onClick={() => window.open(list.docUrl)}
+          >
+            원문 링크
+          </button>
           <button
             className={styles['gray-button']}
             style={getButtonStyles('style')}
             onClick={() => router.push(getStatus('uri'))}
             disabled={getButtonStyles('action')}
           >
-            {getStatus('btn')}
+            {getBtnText()}
           </button>
         </div>
       )}

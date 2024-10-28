@@ -114,11 +114,6 @@
   justify-content: flex-start;
 }
 
-/* 태블릿 버전 */
-@media (min-width: 744px) and (max-width: 1199px) {
-
-}
-
-/* 모바일 버전 */
-@media (max-width: 743px) {
+.text {
+  white-space: pre-line;
 }

@@ -7,7 +7,7 @@ import images from '../../variables/images';
 import styles from './Card.module.css';
 import { useEffect, useState } from 'react';
 
-const Card = ({ data, site }) => {
+const Card = ({ data, site, isAdmin }) => {
   const [myData, setMyData] = useState(data);
 
   useEffect(() => {
@@ -91,8 +91,6 @@ const Card = ({ data, site }) => {
 
   function onEdit() {}
   function onDelete() {}
-
-  const isAdmin = false;
 
   return (
     <div className={styles.Card}>
