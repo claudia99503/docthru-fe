@@ -116,7 +116,7 @@ instance.interceptors.response.use(
       if (error.response?.status === 400) {
         return Promise.reject({
           status: error.response.status,
-          message: '이메일 또는 비밀번호가 올바르지 않습니다.',
+          message: error.response.data.error.message,
           handled: true,
         });
       }
@@ -124,7 +124,7 @@ instance.interceptors.response.use(
       if (error.response?.status === 409) {
         return Promise.reject({
           status: error.response.status,
-          message: '이미 존재하는 이메일입니다.',
+          message: error.response.data.error.message,
           handled: true,
         });
       }

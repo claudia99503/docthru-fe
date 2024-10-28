@@ -3,7 +3,6 @@
   justify-content: center;
   align-items: center;
   gap: 34px;
-  line-height: 1;
 }
 .logo {
   width: 120px;
@@ -12,8 +11,9 @@
 
 .link {
   font-weight: 600;
-  font: size 15px;
+  font-size: 15px;
   color: var(--grey-500);
+  padding-top: 2px;
 }
 
 .active {

@@ -20,6 +20,10 @@
   padding: 0;
 }
 
+.TextEditor :global(.ql-toolbar.ql-snow .ql-formats) {
+  margin-right: 8px;
+}
+
 .TextEditor :global(.ql-editor.ql-blank::before) {
   color: rgba(0, 0, 0, 0.6);
   content: attr(data-placeholder);
