@@ -4,9 +4,10 @@ import Image from 'next/image';
 import { formatLikes } from '@/utils/utilFunction';
 
 export default function LikeButton({ data, isButton = false, onClick }) {
-  const imgSrc = data.isLiked
-    ? assets.icons.heartActive
-    : assets.icons.heartInactive;
+  const imgSrc =
+    data.isLiked || data.isLike
+      ? assets.icons.heartActive
+      : assets.icons.heartInactive;
 
   return (
     <button

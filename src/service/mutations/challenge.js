@@ -1,8 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createChallenge, deleteChallengeParticipation } from '../api/challenge';
 import { challengeKey } from '@/variables/queryKeys';
+import { useRouter } from 'next/router';
 
-export function useMutateChallenge(id) {
+export function useGiveUpChallenge(id) {
+  const router = useRouter();
+
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -19,6 +22,7 @@ export function useMutateChallenge(id) {
       queryClient.invalidateQueries({
         queryKey: challengeKey.details(id),
       });
+      router.push(`/`);
     },
   });
 }

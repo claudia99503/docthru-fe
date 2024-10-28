@@ -33,7 +33,6 @@ const TextEditor = forwardRef(({ id, content, setContent }, ref) => {
       [{ color: [] }, { background: [] }],
       [{ list: 'ordered' }, { list: 'bullet' }],
       [{ align: [] }],
-      ['link'],
       ['clean'],
     ],
   };

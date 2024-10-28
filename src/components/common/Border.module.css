@@ -4,5 +4,11 @@
   border-left: none;
   border-right: none;
   border-top: none;
-  margin: var(--gap) 0;
+  margin: var(--gap, 24px) 0;
+}
+
+@media only screen and (max-width: 529px) {
+  .Border {
+    margin: var(--mobile-gap, var(--gap, 16px)) 0;
+  }
 }

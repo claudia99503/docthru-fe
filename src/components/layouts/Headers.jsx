@@ -1,11 +1,10 @@
-import assets from '@/variables/images';
-import Image from 'next/image';
 import styles from './Headers.module.css';
 import Link from 'next/link';
 import ProfileDropDown from './ProfileDropDown';
 import { pages } from '@/variables/variables';
 import Nav from './Nav';
 import Notification from './Notification';
+import Logo from './Logo';
 
 const LoginButton = () => {
   return (
@@ -21,16 +20,7 @@ export function MemberHeader({ user }) {
   return (
     <header className={styles.MemberHeader}>
       <div className={styles.container}>
-        <Link href="/">
-          <Image
-            className={styles.logo}
-            src={assets.images.logo}
-            alt="logo"
-            width={120}
-            height={27}
-            priority
-          />
-        </Link>
+        <Logo />
 
         <div className={styles.rightSection}>
           {user && <Notification />} {/* 로그인한 사용자에게만 알림 표시 */}
@@ -55,16 +45,7 @@ export function AdminHeader({ user }) {
 export function AuthHeader() {
   return (
     <header className={styles.AuthHeader}>
-      <Link href="/">
-        <Image
-          className={styles.logo}
-          src={assets.images.logo}
-          alt="logo"
-          width={320}
-          height={72}
-          priority
-        />
-      </Link>
+      <Logo isAuthPage={true} />
     </header>
   );
 }

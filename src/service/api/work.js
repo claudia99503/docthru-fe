@@ -7,8 +7,8 @@ export async function getWork(id) {
   return res.data;
 }
 
-export async function createWork(data) {
-  const res = await axios.post(PATH, data);
+export async function createWork(id, data) {
+  const res = await axios.post(`${PATH}/${id}`, data);
   return res.data;
 }
 
