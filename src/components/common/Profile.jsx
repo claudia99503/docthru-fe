@@ -17,28 +17,31 @@ export function ProfileImage({ user, width = '32px' }) {
   );
 }
 
-export function Profile({ user = {}, size, type, date, className }) {
-  const userGrade = user?.grade === 'EXPERT' ? '전문가' : '일반';
+export function Profile({ user, size, type, date, className }) {
   const isAdmin = user.role === 'ADMIN';
-  const isTypeNotSimple = type + '';
+  const userGrade = isAdmin
+    ? '어드민'
+    : user?.grade === 'EXPERT'
+    ? '전문가'
+    : '일반';
+  const isTypeSimple = type + '';
   const isSmall = size === 'small';
 
-  if (isTypeNotSimple.includes('simple')) {
+  if (isTypeSimple.includes('simple')) {
     return (
-      <div className={cn(styles.simple, className)}>
+      <div className={cn(styles.Profile, styles.simple, className)}>
         <ProfileImage width="24px" user={user} />
-        <span className={styles.name}>{user.nickname}</span>
-        {isTypeNotSimple.includes('2') && (
+        <span className={styles.name}>user.nickname</span>
+        {isTypeSimple.includes('2') && (
           <span className={styles.grade}>{userGrade}</span>
         )}
-        {isAdmin && <span className={styles.grade}>어드민</span>}
       </div>
     );
   }
 
   if (date) {
     return (
-      <div className={cn(styles.simple, className)}>
+      <div className={cn(styles.Profile, className)}>
         <ProfileImage user={user} />
         <div className={styles.texts}>
           <span className={styles.name}>{user.nickname}</span>
@@ -49,10 +52,10 @@ export function Profile({ user = {}, size, type, date, className }) {
   }
 
   return (
-    <div className={cn(styles.simple, className)}>
+    <div className={cn(styles.Profile, className)}>
       <ProfileImage user={user} width={isSmall ? '24px' : '32px'} />
       <div className={styles.texts}>
-        <span className={styles.name}>{user.nickname || '기본사용자'}</span>
+        <span className={styles.name}>{user.nickname}</span>
         <span className={styles.grade}>{userGrade}</span>
       </div>
     </div>

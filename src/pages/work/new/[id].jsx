@@ -41,7 +41,7 @@ export default function CreateWorkPage() {
       </Head>
       <WorkForm
         id={`challenge_${challengeId}`}
-        title={challengeData.title}
+        title={challengeData?.title}
         content={content}
         setContent={setContent}
         submitAction={handleCreateWork}
@@ -49,7 +49,7 @@ export default function CreateWorkPage() {
         isOpen={isOpen}
       />
       <SourceViewer
-        docUrl={challengeData.docUrl}
+        docUrl={challengeData?.docUrl}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
