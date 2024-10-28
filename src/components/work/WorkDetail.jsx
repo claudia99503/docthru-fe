@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import 'react-quill/dist/quill.snow.css';
 import cn from '@/utils/clsx';
 
-export default function WorkDetail({ isAdmin, data }) {
+export default function WorkDetail({ data }) {
   const router = useRouter();
 
   if (!data) {
@@ -26,10 +26,7 @@ export default function WorkDetail({ isAdmin, data }) {
   const { mutate: deleteWork } = useDeleteWork();
 
   const handleEdit = (workId) => {
-    const editPath = isAdmin
-      ? `/admin/work/${workId}/edit`
-      : `/work/${workId}/edit`;
-    return router.push(editPath);
+    return router.push(`/work/${workId}/edit`);
   };
 
   const handleDelete = (workId) => {
