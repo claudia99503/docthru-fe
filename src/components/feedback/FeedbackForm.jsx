@@ -39,7 +39,7 @@ export default function FeedbackForm({ id }) {
           <Svg
             addName="arrowDown"
             name="circle"
-            className={styles.Svg}
+            className="arrowCircle"
             width="40"
           />
         </button>

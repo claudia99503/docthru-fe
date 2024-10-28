@@ -6,35 +6,42 @@ import KebabMenu from '@/components/common/KebabMenu';
 import { formatDate } from '@/utils/utilFunction';
 import { useDeleteWork, useMutateLikes } from '@/service/mutations/work';
 import { useDeleteModal } from '@/hooks/useModal';
+import { useRouter } from 'next/router';
+import 'react-quill/dist/quill.snow.css';
+import cn from '@/utils/clsx';
 
-export default function WorkDetail({ data }) {
+export default function WorkDetail({ isAdmin, data }) {
+  const router = useRouter();
+
   if (!data) {
     return <div>데이터 없음</div>;
   }
 
-  const { isLiked } = data;
+  console.log(data);
+
+  const { isLike: isLiked, workId, challenge, isEditable, ...rest } = data;
 
   const { onModalOpen, Modal } = useDeleteModal();
-  const { mutate: LikeMutate } = useMutateLikes(isLiked);
+  const { mutate: LikeMutate } = useMutateLikes(workId);
   const { mutate: deleteWork } = useDeleteWork();
 
-  const { workId } = data;
-  const { challenge, isEditable, ...rest } = data;
-
   const handleEdit = (workId) => {
-    router.push(`/work/${workId}/edit`);
+    const editPath = isAdmin
+      ? `/admin/work/${workId}/edit`
+      : `/work/${workId}/edit`;
+    return router.push(editPath);
   };
 
   const handleDelete = (workId) => {
     if (workId) {
-      deleteWork(workId);
+      deleteWork({ id: workId });
     }
   };
 
   const clickDelete = () => {
     onModalOpen({
-      msg: '삭제하시겠습니까?',
-      action: (workId) => handleDelete(workId),
+      msg: '정말 삭제하시겠습니까?',
+      action: () => handleDelete(workId),
     });
   };
 
@@ -50,7 +57,10 @@ export default function WorkDetail({ data }) {
         <div className={styles.heading}>
           <h1 className={styles.title}>{data.challenge.title}</h1>
           {isEditable && (
-            <KebabMenu onEdit={() => handleEdit(id)} onDelete={clickDelete} />
+            <KebabMenu
+              onEdit={() => handleEdit(workId)}
+              onDelete={() => clickDelete(workId)}
+            />
           )}
         </div>
         <DocTypeChip field={challenge.field} docType={challenge.docType} />
@@ -65,7 +75,13 @@ export default function WorkDetail({ data }) {
           </div>
           <time className={styles.time}>{formatDate(data.createdAt)}</time>
         </div>
-        <p className={styles.content}>{data.content}</p>
+        <div className={cn('ql-snow', styles.container)}>
+          <div
+            q
+            className={cn(styles.content, 'ql-editor')}
+            dangerouslySetInnerHTML={{ __html: data.content }}
+          ></div>
+        </div>
       </section>
       <Modal />
     </>

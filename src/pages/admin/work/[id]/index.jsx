@@ -6,19 +6,21 @@ import Loader from '@/components/common/Loader';
 import FeedbackForm from '@/components/feedback/FeedbackForm';
 import FeedbackList from '@/components/feedback/FeedbackList';
 
-export default function WorkDetailPage() {
+export default function AdminWorkPage() {
   const router = useRouter();
   const { id } = router.query;
   const { data, isPending } = useGetWork(id);
+  const isAdmin = router.pathname.startsWith('/admin');
 
   if (isPending) {
-    return <Loader msg="작업물 생성 페이지로 이동중" />;
+    return <Loader />;
   }
 
   if (!data) {
     return <p>데이터 없음</p>;
   }
 
+  console.log(data);
   const { isClosed } = data;
   return (
     <>
@@ -26,10 +28,11 @@ export default function WorkDetailPage() {
         <title>작업물 상세페이지</title>
         <meta
           name="description"
-          content="작업물에 대한 상세 정보를 보여주는 페이지입니다."
+          content="관리자에게 보여지는 작업물 상세 페이지입니다."
         />
       </Head>
-      <WorkDetail data={data} />
+
+      <WorkDetail data={data} isAdmin={isAdmin} />
       {isClosed || <FeedbackForm id={id} />}
 
       <FeedbackList id={id} isClosedChallenge={isClosed} />
