@@ -14,11 +14,11 @@ import ChallengeDropdown from '@/components/challenge/ChallengeDropdown';
 
 import styles from '@/styles/pages/Home.module.css';
 
-// import { dehydrate, QueryClient } from '@tanstack/react-query';
-// import { getChallengeList } from '@/service/api/challenge';
+import { dehydrate, QueryClient } from '@tanstack/react-query';
+import { getChallengeList } from '@/service/api/challenge';
 import { useMediaQuery } from 'react-responsive';
 
-export default function Home(initialData) {
+export default function Home({ dehydratedState }) {
   const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
   const router = useRouter();
 
@@ -27,14 +27,15 @@ export default function Home(initialData) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedOption, setSelectedOption] = useState({});
 
-  const { data = initialData, isPending } = useGetChallenges(selectedOption, {
+  const { data = dehydratedState, isPending } = useGetChallenges(selectedOption, {
     enabled: true,
   });
+  
   const { meta = {}, list = [] } = data || {};
   const { totalPages } = meta;
 
   const handleOptionChange = (option) => {
-    setSelectedOption((pev) => ({ ...pev, ...option }));
+    setSelectedOption((prev) => ({ ...prev, ...option }));
   };
 
   useEffect(() => {
@@ -102,8 +103,6 @@ export default function Home(initialData) {
           <div className={styles['card-container']}>
             <AllCardSection
               list={list}
-              searchTerm={searchTerm}
-              selectedOption={selectedOption}
               site={'home'}
             />
           </div>
@@ -121,24 +120,24 @@ export default function Home(initialData) {
 }
 
 // 서버 사이드 렌더링에서 데이터 가져오기
-// export async function getServerSideProps(context) {
-//   const queryClient = new QueryClient();
+export async function getServerSideProps(context) {
+  const queryClient = new QueryClient();
 
-//   const initialOptions = {
-//     field: '',
-//     docType: '',
-//     status: '',
-//     page: 1,
-//     limit: 5,
-//   };
+  const initialOptions = {
+    field: '',
+    docType: '',
+    status: '',
+    page: 1,
+    limit: 5,
+  };
 
-//   await queryClient.prefetchQuery(['challenges', initialOptions], () =>
-//     getChallengeList(initialOptions)
-//   );
+  await queryClient.prefetchQuery(['challenges', initialOptions], () =>
+    getChallengeList(initialOptions)
+  );
 
-//   return {
-//     props: {
-//       dehydratedState: dehydrate(queryClient),
-//     },
-//   };
-// }
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
