@@ -19,9 +19,6 @@ export default function ChallengeDetailPage() {
   const { id: challengeId } = router.query;
   const [validId, setValidId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedOption, setSelectedOption] = useState({
-    page: 1,
-  });
 
   useEffect(() => {
     if (challengeId) {
@@ -41,43 +38,25 @@ export default function ChallengeDetailPage() {
     data: worksData,
     refetch: refetchWork,
     isPending: isWorkLoading,
-  } = useGetWorkList(validId, selectedOption, {
+  } = useGetWorkList(validId, { page: currentPage }, {
     enabled: !!validId,
   });
-
-  const handleOptionChange = (option) => {
-    setSelectedOption((prev) => ({ ...prev, ...option }));
-  };
 
   useEffect(() => {
     if (validId) {
       refetchChallenge();
-      refetchWork();
     }
-  }, [validId, refetchChallenge, refetchWork]);
+  }, [validId, refetchChallenge]);
 
   useEffect(() => {
-    const option = {
-      page: currentPage,
-    };
-
-    handleOptionChange(option);
-  }, [currentPage]);
+    if (currentPage && validId) {
+      refetchWork();
+    }
+  }, [currentPage, refetchWork, validId]);
 
   if (isChallengeLoading || isWorkLoading) {
     return <Loader />;
   }
-
-  // 추후 util로 분리 예정
-  const getPassedDeadline = (date) => {
-    const today = new Date();
-    const deadline = new Date(date);
-
-    if (deadline <= today) {
-      return false;
-    } else return true;
-  };
-  // -----------------------------------------------
 
   return (
     <>
@@ -94,7 +73,7 @@ export default function ChallengeDetailPage() {
             <ChallengeDetailInfo list={challengeData} />{' '}
             <Container list={challengeData} />
           </div>
-          {worksData?.bestList && !getPassedDeadline(challengeData.deadline) ? (
+          {worksData?.bestList && challengeData.progress ? (
             <BestRecWork list={worksData.bestList} />
           ) : null}
           <ParticipationStatus list={worksData} onPageChange={setCurrentPage} />

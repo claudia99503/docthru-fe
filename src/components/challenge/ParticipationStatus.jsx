@@ -78,13 +78,13 @@ const ParticipationStatus = ({ list, onPageChange }) => {
                       <div className={styles.rank}>{rank(index)}</div>
                     )}
                     <div className={styles['participant-info']}>
-                      {participant && <Profile user={participant} />}
+                      {participant && <Profile user={participant} size='small' type='workList'/>}
                     </div>
                   </div>
                   <div className={styles['participant-right']}>
                     {participant && <LikeButton data={participant} />}
                     <button
-                      type="button"
+                      type='button'
                       onClick={() => router.push(`/work/${userList[index].id}`)}
                     >
                       <span>작업물 보기</span>

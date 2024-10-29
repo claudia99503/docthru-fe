@@ -1,7 +1,7 @@
 export const workKey = {
   all: ['works'],
   lists: () => [...workKey.all, 'list'],
-  list: (params = {}) => [...workKey.lists(), { ...params }],
+  list: (challengeId, params = {}) => [...workKey.lists(),challengeId, { ...params }],
   details: () => [...workKey.all, 'detail'],
   detail: (workId) => [...workKey.details(), workId],
   feedbacks: (workId) => [...workKey.detail(workId), 'feedbacks'],
