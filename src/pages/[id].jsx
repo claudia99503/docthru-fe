@@ -41,28 +41,21 @@ export default function ChallengeDetailPage() {
     data: worksData,
     refetch: refetchWork,
     isPending: isWorkLoading,
-  } = useGetWorkList(validId, selectedOption, {
+  } = useGetWorkList(validId, { page: currentPage }, {
     enabled: !!validId,
   });
-
-  const handleOptionChange = (option) => {
-    setSelectedOption((prev) => ({ ...prev, ...option }));
-  };
 
   useEffect(() => {
     if (validId) {
       refetchChallenge();
-      refetchWork();
     }
-  }, [validId, refetchChallenge, refetchWork]);
+  }, [validId, refetchChallenge]);
 
   useEffect(() => {
-    const option = {
-      page: currentPage,
-    };
-
-    handleOptionChange(option);
-  }, [currentPage]);
+    if (currentPage && validId) {
+      refetchWork();
+    }
+  }, [currentPage, refetchWork, validId]);
 
   if (isChallengeLoading || isWorkLoading) {
     return <Loader />;
