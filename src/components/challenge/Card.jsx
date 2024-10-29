@@ -142,7 +142,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
           className={styles['challenge-title']}
           onClick={() => handleTabClick(`/${myData.id}`)}
         >
-          {myData.title}{' '}
+          {myData.title}
         </div>
         <DocTypeChip field={myData.field} docType={myData.docType} />
       </div>

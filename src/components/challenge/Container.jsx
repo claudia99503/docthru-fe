@@ -75,7 +75,7 @@ const Container = ({ list }) => {
       {!isMobile ? (
         <>
           <div className={styles['view-original-button-row']}>
-            <a className={styles['primary-button']}>원문 보기</a>
+            <a className={styles['primary-button']} href={list.docUrl} >원문 보기</a>
           </div>
           <div className={styles['challenge-button-row']}>
             <button
@@ -90,7 +90,7 @@ const Container = ({ list }) => {
         </>
       ) : (
         <div className={styles['mobile-buttons-row']}>
-          <a className={styles['primary-button']}>원문 보기</a>
+          <a className={styles['primary-button']} href={list.docUrl} >원문 보기</a>
           <button
             className={styles['gray-button']}
             style={getButtonStyles('style')}
