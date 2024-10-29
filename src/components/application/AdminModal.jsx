@@ -36,21 +36,21 @@ export default function AdminModal({ type, onClose, onSubmit }) {
 
   return (
     <div className={styles.AdminModal}>
-      <div className={styles.modalContent} onClick={handleModalClick}>
-        <div className={styles.modalHeader}>
+      <div className={styles["modal-content"]} onClick={handleModalClick}>
+        <div className={styles["modal-header"]}>
           <span className={styles.title}>
             {type === "reject" ? "거절 사유" : "삭제 사유"}
           </span>
           <Image
             src={assets.icons.out}
             alt="닫기"
-            className={styles.closeButton}
+            className={styles["close-button"]}
             onClick={onClose}
             width={24}
             height={24}
           />
         </div>
-        <div className={styles.modalBody}>
+        <div className={styles["modal-body"]}>
           <label className={styles.label}>내용</label>
           <textarea
             className={styles.textarea}
@@ -63,10 +63,11 @@ export default function AdminModal({ type, onClose, onSubmit }) {
             onChange={handleChange}
           ></textarea>
         </div>
-        <button className={styles.submitButton} onClick={handleSubmit}>
+        <button className={styles["submit-button"]} onClick={handleSubmit}>
           전송
         </button>
       </div>
     </div>
   );
 }
+
