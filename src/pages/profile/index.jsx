@@ -4,7 +4,7 @@ import Loader from '@/components/common/Loader';
 import axios from '@/service/api/axios';
 import Edit from '@/components/mypage/edit';
 import Profile from '../../components/mypage/Profile';
-import styles from '@/styles/pages/profile/profile.module.css';
+import styles from '../../styles/pages/profile/Profile.module.css';
 
 export default function ProfileIndex() {
   const [profileData, setProfileData] = useState(null);
@@ -86,16 +86,16 @@ export default function ProfileIndex() {
   );
 
   if (isLoading) {
-    return <Loader msg='로딩 중' />;
+    return <Loader msg="로딩 중" />;
   }
 
   if (error) {
     return (
-      <div className={styles.errorContainer}>
-        <p className={styles.errorText}>Error: {error}</p>
+      <div className={styles['error-container']}>
+        <p className={styles['error-text']}>Error: {error}</p>
         <button
           onClick={() => fetchProfileData(userId)}
-          className={styles.retryButton}
+          className={styles['retry-button']}
         >
           다시 시도
         </button>
@@ -104,7 +104,7 @@ export default function ProfileIndex() {
   }
 
   return (
-    <div className={styles.mainContent}>
+    <div className={styles.MainContent}>
       {profileData && (
         <>
           <Edit
@@ -119,8 +119,8 @@ export default function ProfileIndex() {
             onUpdate={handleProfileUpdate}
           />
           {isUpdating && (
-            <div className={styles.updateOverlay}>
-              <div className={styles.updateModal}>
+            <div className={styles['update-overlay']}>
+              <div className={styles['update-modal']}>
                 <p>업데이트 중...</p>
               </div>
             </div>

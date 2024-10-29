@@ -52,16 +52,16 @@ function Edit({ userInfo }) {
     <>
       <div className={styles.A}>
         <div className={styles.B}>
-          <div className={styles.editContainer}>
-            <div className={styles.profileContainer}>
+          <div className={styles['edit-container']}>
+            <div className={styles['profile-container']}>
               <Image
                 src={userInfo.image || assets.images.profile}
-                alt='프로필 사진'
-                width='75'
-                height='75'
-                className={styles.profileImage}
+                alt="프로필 사진"
+                width="75"
+                height="75"
+                className={styles['profile-image']}
               />
-              <div className={styles.profileInfo}>
+              <div className={styles['profile-info']}>
                 <p>{userInfo.nickname}</p>
                 <p>{userInfo.role}</p>
                 <p>{getGradeDisplay(userInfo.grade)}</p>
