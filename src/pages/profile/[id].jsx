@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
+import Loader from '@/components/common/Loader';
 import axios from '@/service/api/axios';
 import Edit from '@/components/mypage/edit.jsx';
 import Profile from '../../components/mypage/Profile.jsx';
@@ -76,11 +77,7 @@ export default function UserProfile() {
   );
 
   if (!router.isReady || isLoading) {
-    return (
-      <div className={styles.loadingContainer}>
-        <p>Loading...</p>
-      </div>
-    );
+    return <Loader msg='로딩 중' />;
   }
 
   if (error) {
