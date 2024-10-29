@@ -21,7 +21,7 @@ export default function ProfileIndex() {
       console.log('Fetching profile for userId:', currentUserId);
 
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/profiles/${currentUserId}`,
+        `${process.env.NEXT_PUBLIC_DEV_API_URL}/profiles/${currentUserId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
