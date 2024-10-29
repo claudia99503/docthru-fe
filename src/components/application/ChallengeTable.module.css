@@ -12,7 +12,7 @@
 @media (min-width: 1200px) {
   .header,
   .row {
-    height: 35px;
+    height: 40px;
   }
 
   .header {
@@ -39,8 +39,7 @@
     justify-content: center;
     align-items: center;
     flex: 1;
-    padding: 0 10px;
-    text-align: center;
+    padding: 16px;
     min-width: 0;
     white-space: nowrap;
     overflow: hidden;
@@ -51,13 +50,13 @@
 
   .title {
     flex: 3;
-    justify-content: start;
+    justify-content: flex-start;
     color: inherit;
   }
 
   .field,
   .category {
-    justify-content: start;
+    justify-content: flex-start;
   }
 
   .row {
@@ -82,7 +81,7 @@
   }
 }
 
-/* 태블릿  버전 */
+/* 태블릿 버전 */
 @media (max-width: 1199px) {
   .header,
   .row {
@@ -111,7 +110,7 @@
   .applicationDate,
   .deadline,
   .status {
-    padding: 14px 11px;
+    padding: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -126,13 +125,13 @@
 
   .title {
     flex: 3;
-    justify-content: start;
+    justify-content: flex-start;
     color: inherit;
   }
 
   .field,
   .category {
-    justify-content: start;
+    justify-content: flex-start;
   }
 
   .row {
@@ -223,4 +222,3 @@
 .deletedRow {
   background-color: #f5f5f5 !important;
 }
-
