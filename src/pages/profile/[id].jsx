@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import Loader from '@/components/common/Loader';
 import axios from '@/service/api/axios';
-import Edit from '@/components/myPage/MyPageNav.jsx';
+import MyPageNav from '@/components/mypage/MyPageNav.jsx';
 import Profile from '../../components/mypage/Profile.jsx';
 import styles from './Profile.module.css';
 
@@ -77,7 +77,7 @@ export default function UserProfile() {
   );
 
   if (!router.isReady || isLoading) {
-    return <Loader msg='로딩 중' />;
+    return <Loader msg="로딩 중" />;
   }
 
   if (error) {
@@ -98,7 +98,7 @@ export default function UserProfile() {
     <div className={styles.mainContent}>
       {profileData && (
         <>
-          <Edit
+          <MyPageNav
             userInfo={{
               ...profileData.user,
               userId: profileData.userId,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
-import UpdateProfile from '@/components/myPage/UpdateProfile';
-import MyPageNav from '@/components/myPage/MyPageNav';
+import UpdateProfile from '@/components/mypage/UpdateProfile';
+import MyPageNav from '@/components/mypage/MyPageNav';
 
 function EditProfilePage() {
   const [profileImg, setProfileImg] = useState(null);
