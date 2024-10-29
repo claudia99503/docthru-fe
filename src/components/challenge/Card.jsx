@@ -12,6 +12,7 @@ import images from '../../variables/images';
 import Svg from '../common/Svg';
 
 import styles from './Card.module.css';
+import myPageStyles from '@/components/mypage/MyPageChallenge.module.css';
 
 const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
   const router = useRouter();
@@ -48,7 +49,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
           onClick={() => handleTabClick(getUri())}
         >
           <span>도전 계속하기</span>
-          <Svg name="arrowMainRight" alt="arrow icon" />
+          <Svg name='arrowMainRight' alt='arrow icon' />
         </button>
       );
     } else if (site == 'done') {
@@ -64,7 +65,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
           {/* Svg x */}
           <Image
             src={images.icons.document}
-            alt="document icon"
+            alt='document icon'
             width={24}
             height={24}
           />
@@ -77,10 +78,14 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
     if (myData.progress) {
       return (
         <div
-          className={styles['condition-chip']}
+          className={
+            site === 'myPage'
+              ? myPageStyles['condition-chip']
+              : styles['condition-chip']
+          }
           style={{ backgroundColor: 'var(--grey-800)', color: 'white' }}
         >
-          <Svg name='deadline' alt="deadline icon" width='18'/>
+          <Svg name='deadline' alt='deadline icon' width='18' />
           <span>챌린지가 마감되었어요</span>
         </div>
       );
@@ -90,13 +95,19 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
     ) {
       return (
         <div
-          className={styles['condition-chip']}
+          className={
+            site === 'myPage'
+              ? myPageStyles['condition-chip']
+              : styles['condition-chip']
+          }
           style={{ backgroundColor: 'var(--grey-200)' }}
         >
-          <Svg name='personWhite' alt="deadline icon" width='18'/>
+          <Svg name='personWhite' alt='deadline icon' width='18' />
           <span>모집이 완료된 상태에요</span>
         </div>
       );
+    } else if (site === 'myPage') {
+      return <div style={{ minHeight: '32px' }}></div>;
     }
   };
 
@@ -127,10 +138,15 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
   };
 
   return (
-    <div className={styles.Card}>
+    <div
+      className={site === 'myPage' ? myPageStyles.Card : styles.Card}
+      onClick={
+        site === 'myPage' ? () => handleTabClick(`/${myData.id}`) : undefined
+      }
+    >
       <div className={styles['card-top']}>
         {getCondition()}
-        {isAdmin ? (
+        {site !== 'myPage' && isAdmin ? (
           <div className={`${styles.menuButton}`}>
             <KebabMenu onEdit={handleEditClick} onDelete={handleDelete} />
           </div>
@@ -139,31 +155,43 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
         )}
 
         <div
-          className={styles['challenge-title']}
+          className={
+            site === 'myPage'
+              ? myPageStyles['challenge-title']
+              : styles['challenge-title']
+          }
           onClick={() => handleTabClick(`/${myData.id}`)}
         >
           {myData.title}
         </div>
-        <DocTypeChip field={myData.field} docType={myData.docType} />
+        <DocTypeChip
+          field={myData.field}
+          docType={myData.docType}
+          site={'myPage'}
+        />
       </div>
-      <div className={styles['card-bottom']}>
-        <div className={styles['info-row']}>
+      <div
+        className={
+          site === 'myPage'
+            ? myPageStyles['card-bottom']
+            : styles['card-bottom ']
+        }
+      >
+        <div
+          className={
+            site === 'myPage' ? myPageStyles['info-row'] : styles['info-row']
+          }
+        >
           <div style={{ display: 'flex' }}>
-            <Svg
-              name='deadline'
-              alt="deadline icon"
-              className={styles.icon}
-            />
-            <span className={styles.text}>
+            <Svg name='deadline' alt='deadline icon' className={styles.icon} />
+            <span
+              className={site === 'myPage' ? myPageStyles.text : styles.text}
+            >
               {formatDeadline(myData.deadline)}
             </span>
           </div>
           <div style={{ display: 'flex' }}>
-            <Svg
-              name='person'
-              alt="person icon"
-              className={styles.icon}
-            />
+            <Svg name='person' alt='person icon' className={styles.icon} />
             <span className={styles.text}>
               {myData.participants}/{myData.maxParticipants} 참여중
             </span>

@@ -55,11 +55,19 @@ function Edit({ userInfo }) {
           <div className={styles.edit - container}>
             <div className={styles.profile - container}>
               <Image
+<<<<<<< HEAD
                 src={userInfo.image || assets.images.profileDefault}
                 alt="프로필 사진"
                 width="75"
                 height="75"
                 className={styles.profile - image}
+=======
+                src={userInfo.image || assets.images.profile}
+                alt='프로필 사진'
+                width='75'
+                height='75'
+                className={styles.profileImage}
+>>>>>>> 9a6239c83e48587bcc6a156c90065df9df97c44f
               />
               <div className={styles.profile - info}>
                 <p>{userInfo.nickname}</p>
