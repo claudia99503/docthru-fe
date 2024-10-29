@@ -47,3 +47,7 @@
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+
+.AuthForm input {
+  border-color: var(--grey-200);
+}
