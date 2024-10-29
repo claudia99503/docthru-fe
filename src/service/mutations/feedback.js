@@ -32,9 +32,15 @@ export function useMutateFeedback() {
       }
     },
     onSuccess: (data) => {
+      console.log(data);
+      console.log('배열', workKey.feedbacks(data.workId));
       if (data.workId) {
         queryClient.invalidateQueries({
           queryKey: workKey.feedbacks(data.workId),
+        });
+
+        queryClient.invalidateQueries({
+          queryKey: workKey.detail(data.workId),
         });
       }
     },
