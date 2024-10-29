@@ -1,11 +1,11 @@
-import styles from './edit.module.css';
+import styles from './MyPageNav.module.css';
 import { useLogout } from '@/hooks/useAuth';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import assets from '@/variables/images';
 import Image from 'next/image';
 
-function Edit({ userInfo }) {
+export default function MyPageNav({ userInfo }) {
   const logout = useLogout();
   const router = useRouter();
   const [isOwner, setIsOwner] = useState(false);
@@ -96,5 +96,3 @@ function Edit({ userInfo }) {
     </>
   );
 }
-
-export default Edit;

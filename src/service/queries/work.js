@@ -29,7 +29,6 @@ export function useGeWorkFeedbacks(id) {
       }
       return lastPage.meta.nextCursor;
     },
-    keepPreviousData: true,
     enabled: !!id,
   });
 }

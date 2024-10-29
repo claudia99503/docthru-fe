@@ -1,6 +1,7 @@
 import { useState, useCallback, memo } from 'react';
 import axios from 'axios';
 import styles from './ProfileInfo.module.css';
+import Button from '../common/Button';
 
 const ProfileView = memo(({ profile, isOwner, onEdit, userName }) => {
   // 새 프로필인지 여부 확인
@@ -33,9 +34,9 @@ const ProfileView = memo(({ profile, isOwner, onEdit, userName }) => {
         <p className={styles['welcome-text']}>
           프로필을 설정하고 다른 개발자들과 소통해보세요.
         </p>
-        <button onClick={onEdit} className={styles['welcome-button']}>
+        <Button variant="yellow" onClick={onEdit}>
           프로필 설정하기
-        </button>
+        </Button>
       </div>
     );
   }

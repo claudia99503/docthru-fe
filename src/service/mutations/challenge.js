@@ -1,5 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createChallenge, deleteChallengeParticipation } from '../api/challenge';
+import {
+  createChallengeParticipation,
+  deleteChallengeParticipation,
+} from '../api/challenge';
 import { challengeKey } from '@/variables/queryKeys';
 import { useRouter } from 'next/router';
 
@@ -9,11 +12,8 @@ export function useGiveUpChallenge(id) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data) => {
-      const { id, isParticipate } = data;
-      if (isParticipate) {
-        return createChallenge(id);
-      } else {
+    mutationFn: (id) => {
+      if (id) {
         return deleteChallengeParticipation(id);
       }
     },
@@ -23,6 +23,27 @@ export function useGiveUpChallenge(id) {
         queryKey: challengeKey.details(id),
       });
       router.push(`/`);
+    },
+  });
+}
+
+export function useParticipateChallenge(challengeId) {
+  const router = useRouter();
+
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (id) => {
+      if (id) {
+        return createChallengeParticipation(id);
+      }
+    },
+    onSuccess: () => {
+      console.log('successMutation');
+      queryClient.invalidateQueries({
+        queryKey: challengeKey.details(challengeId),
+      });
+      router.push(`/work/new/${challengeId}`);
     },
   });
 }

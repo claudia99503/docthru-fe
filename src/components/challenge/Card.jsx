@@ -49,7 +49,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
           onClick={() => handleTabClick(getUri())}
         >
           <span>도전 계속하기</span>
-          <Svg name='arrowMainRight' alt='arrow icon' />
+          <Svg name="arrowMainRight" alt="arrow icon" />
         </button>
       );
     } else if (site == 'done') {
@@ -65,7 +65,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
           {/* Svg x */}
           <Image
             src={images.icons.document}
-            alt='document icon'
+            alt="document icon"
             width={24}
             height={24}
           />
@@ -85,7 +85,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
           }
           style={{ backgroundColor: 'var(--grey-800)', color: 'white' }}
         >
-          <Svg name='deadline' alt='deadline icon' width='18' />
+          <Svg name="deadline" alt="deadline icon" width="18" />
           <span>챌린지가 마감되었어요</span>
         </div>
       );
@@ -102,7 +102,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
           }
           style={{ backgroundColor: 'var(--grey-200)' }}
         >
-          <Svg name='personWhite' alt='deadline icon' width='18' />
+          <Svg name="personWhite" alt="deadline icon" width="18" />
           <span>모집이 완료된 상태에요</span>
         </div>
       );
@@ -167,7 +167,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
         <DocTypeChip
           field={myData.field}
           docType={myData.docType}
-          site={'myPage'}
+          site={site}
         />
       </div>
       <div
@@ -183,7 +183,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
           }
         >
           <div style={{ display: 'flex' }}>
-            <Svg name='deadline' alt='deadline icon' className={styles.icon} />
+            <Svg name="deadline" alt="deadline icon" className={styles.icon} />
             <span
               className={site === 'myPage' ? myPageStyles.text : styles.text}
             >
@@ -191,7 +191,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
             </span>
           </div>
           <div style={{ display: 'flex' }}>
-            <Svg name='person' alt='person icon' className={styles.icon} />
+            <Svg name="person" alt="person icon" className={styles.icon} />
             <span className={styles.text}>
               {myData.participants}/{myData.maxParticipants} 참여중
             </span>

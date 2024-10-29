@@ -72,7 +72,7 @@ export default function FeedbackContent({ feedback }) {
   const [showReplyForm, setShowReplyForm] = useState(false);
   const [isRepliesOpen, setIsRepliesOpen] = useState(false);
   const { onModalOpen, Modal } = useDeleteModal();
-  const { mutate } = useMutateFeedback({});
+  const { mutate } = useMutateFeedback();
 
   const repliesCount = feedback.replies?.list?.length || 0;
   const hasMoreReplies = feedback.replies?.meta?.hasNext || false;
