@@ -78,7 +78,7 @@ const ParticipationStatus = ({ list, onPageChange }) => {
                       <div className={styles.rank}>{rank(index)}</div>
                     )}
                     <div className={styles['participant-info']}>
-                      {participant && <Profile user={participant} />}
+                      {participant && <Profile user={participant} size="small"/>}
                     </div>
                   </div>
                   <div className={styles['participant-right']}>
