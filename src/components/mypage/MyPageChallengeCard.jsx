@@ -26,11 +26,11 @@ const MyPageChallengeCard = ({ list }) => {
   }, []);
 
   return (
-    <div className={styles.layout}>
+    <div className={styles.MyPageCardLayout}>
       <div className={styles.container}>
         <div className={styles.title}>참여한 챌린지 목록</div>
         {length === 0 ? (
-          <div className={styles.noChallenges}>
+          <div className={styles.styles['no-challenges']}>
             <p>아직 참여한 챌린지가 없어요</p>
             <p>새로운 챌린지에 참여해보세요</p>
           </div>
@@ -52,7 +52,7 @@ const MyPageChallengeCard = ({ list }) => {
                   }}
                 >
                   <div
-                    className={styles.allCardSection}
+                    className={styles['all-card-section']}
                     style={{
                       justifyContent:
                         (windowSize === 'web' && length < 3) ||

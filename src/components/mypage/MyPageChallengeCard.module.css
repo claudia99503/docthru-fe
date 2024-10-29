@@ -1,4 +1,4 @@
-.MyPageChallengeCardLayout {
+.MyPageCardLayout {
   background-color: white;
   border-radius: 0.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -24,7 +24,7 @@
   padding: 40px 0 10px 30px;
 }
 
-.noChallenges {
+.no-challenges {
   margin: 100px 0;
   color: #6b7280;
 }
@@ -42,13 +42,13 @@
   gap: 100%;
 }
 
-.allCardSection {
+.all-card-section {
   display: flex;
   gap: 20px;
   margin-top: 30px;
 }
 
-.MyPageChallengeCardButton {
+.CardButton {
   background-color: var(--brand-yellow);
   margin: 120px 10px;
   border-radius: 50%;
@@ -66,7 +66,7 @@
 }
 
 @media (max-width: 962px) {
-  .AllCardSection {
+  .all-card-section {
     gap: 11px;
   }
   .overflow {
