@@ -42,8 +42,8 @@ const ProfileView = memo(({ profile, isOwner, onEdit, userName }) => {
 
   return (
     <div>
-      <div className={styles['header']}>
-        <h3 className={styles['position']}>
+      <div className={styles.header}>
+        <h3 className={styles.position}>
           {profile.position || '포지션을 설정해주세요'}
         </h3>
         {isOwner && (
@@ -55,7 +55,7 @@ const ProfileView = memo(({ profile, isOwner, onEdit, userName }) => {
 
       <div className={styles['info-line']}>
         <span>{profile.location || '지역 미설정'}</span>
-        <span className={styles['dot']}>•</span>
+        <span className={styles.dot}>•</span>
         <span>
           {profile.career !== undefined && profile.career !== null
             ? `경력 ${profile.career}년차`
@@ -182,10 +182,10 @@ const ProfileForm = memo(({ editForm, onSubmit, onCancel, onChange }) => {
         </div>
 
         <div className={styles['form-group']}>
-          <label className={styles['label']}>경력 (년차)</label>
+          <label className={styles.label}>경력 (년차)</label>
           <input
             type="number"
-            className={styles['input']}
+            className={styles.input}
             value={editForm.career ?? ''}
             onChange={handleCareerChange}
             min="0"
@@ -195,10 +195,10 @@ const ProfileForm = memo(({ editForm, onSubmit, onCancel, onChange }) => {
       </div>
 
       <div className={styles['form-group']}>
-        <label className={styles['label']}>직무</label>
+        <label className={styles.label}>직무</label>
         <input
           type="text"
-          className={styles['input']}
+          className={styles.input}
           value={editForm.position || ''}
           onChange={(e) => onChange('position', e.target.value || null)}
           placeholder="프론트엔드 개발자, 백엔드 개발자 등"
@@ -206,15 +206,15 @@ const ProfileForm = memo(({ editForm, onSubmit, onCancel, onChange }) => {
       </div>
 
       <div className={styles['form-group']}>
-        <label className={styles['label']}>기술 스택 (쉼표로 구분)</label>
+        <label className={styles.label}>기술 스택 (쉼표로 구분)</label>
         <input
           type="text"
-          className={styles['input']}
+          className={styles.input}
           value={editForm.skills?.join(', ') || ''}
           onChange={(e) => handleArrayInputChange('skills', e.target.value)}
           placeholder="JavaScript, React, Node.js"
         />
-        <small className={styles.helperText}>
+        <small className={styles['helper-text']}>
           쉼표(,)로 구분하여 입력해주세요
         </small>
       </div>
@@ -230,16 +230,16 @@ const ProfileForm = memo(({ editForm, onSubmit, onCancel, onChange }) => {
           }
           placeholder="웹 프론트엔드, 백엔드, DevOps"
         />
-        <small className={styles.helperText}>
+        <small className={styles['helper-text']}>
           쉼표(,)로 구분하여 입력해주세요
         </small>
       </div>
 
       <div className={styles['form-group']}>
-        <label className={styles['label']}>GitHub URL</label>
+        <label className={styles.label}>GitHub URL</label>
         <input
           type="url"
-          className={styles['input']}
+          className={styles.input}
           value={editForm.githubUrl || ''}
           onChange={(e) => onChange('githubUrl', e.target.value || null)}
           placeholder="https://github.com/username"
