@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import axios from '@/service/api/axios';
-import Edit from '@/components/mypage/edit';
+import Edit from '@/components/mypage/edit.jsx';
 import Profile from '../../components/mypage/Profile.jsx';
 import styles from './Profile.module.css';
 

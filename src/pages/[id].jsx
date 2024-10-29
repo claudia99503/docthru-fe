@@ -37,6 +37,12 @@ export default function ChallengeDetailPage() {
     enabled: !!validId,
   });
 
+  useEffect(() => {
+    if (!isChallengeLoading && !challengeData) {
+      router.push('/404');
+    }
+  }, [challengeData, isChallengeLoading, router]);
+
   //오류나서 isPending으로 바꿔줬어요
   const {
     data: worksData,
@@ -114,4 +120,3 @@ export default function ChallengeDetailPage() {
     </>
   );
 }
-

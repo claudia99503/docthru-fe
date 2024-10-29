@@ -82,8 +82,11 @@ function Edit({ userInfo }) {
                 내 정보 수정
               </button>
             )}
-            <button className={styles.C} onClick={() => window.open('/devs')}>
-              Github
+            <button
+              className={styles.C}
+              onClick={() => router.push('/profile/devs')}
+            >
+              개발자 Github
             </button>
             {isOwner && (
               <button className={`${styles.C}`} onClick={handleLogout}>

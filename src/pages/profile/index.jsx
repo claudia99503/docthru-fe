@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import axios from '@/service/api/axios';
 import Edit from '@/components/mypage/edit';
 import Profile from '../../components/mypage/Profile';
-import styles from './Profile.module.css';
+import styles from '@/styles/pages/profile/profile.module.css';
 
 export default function ProfileIndex() {
   const [profileData, setProfileData] = useState(null);
