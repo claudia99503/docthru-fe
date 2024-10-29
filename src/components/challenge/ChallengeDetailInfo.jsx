@@ -5,10 +5,10 @@ import { updateChallenge } from '@/service/api/challenge';
 
 import DocTypeChip from '../common/DocTypeChip';
 import KebabMenu from '../common/KebabMenu';
+import AdminModal from '../application/AdminModal';
 import { Profile } from '../common/Profile';
 
 import styles from './ChallengeDetailInfo.module.css';
-import AdminModal from '../application/AdminModal';
 
 const ChallengeDetailInfo = ({ list }) => {
   const router = useRouter();

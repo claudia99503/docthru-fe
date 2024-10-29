@@ -43,7 +43,12 @@ export default function ChallengeDetailPage() {
     }
   }, [challengeData, isChallengeLoading, router]);
 
-  //오류나서 isPending으로 바꿔줬어요
+  useEffect(() => {
+    if (!isChallengeLoading && !challengeData) {
+      router.push('/404');
+    }
+  }, [challengeData, isChallengeLoading, router]);
+
   const {
     data: worksData,
     refetch: refetchWork,
@@ -53,7 +58,7 @@ export default function ChallengeDetailPage() {
   });
 
   const handleOptionChange = (option) => {
-    setSelectedOption((pev) => ({ ...pev, ...option }));
+    setSelectedOption((prev) => ({ ...prev, ...option }));
   };
 
   useEffect(() => {
@@ -86,14 +91,6 @@ export default function ChallengeDetailPage() {
   };
   // -----------------------------------------------
 
-  const workId = worksData?.list?.find(
-    (work) => work.userId === challengeData.userId
-  )?.id;
-
-  const getParamId = () => {
-    return challengeData?.isParticipated ? workId : challengeData?.id;
-  };
-
   return (
     <>
       <Head>
@@ -107,7 +104,7 @@ export default function ChallengeDetailPage() {
         <div className={styles.ChallengeDetailPage}>
           <div className={styles['info-container']}>
             <ChallengeDetailInfo list={challengeData} />{' '}
-            <Container list={challengeData} workBtn={getParamId()} />
+            <Container list={challengeData} />
           </div>
           {worksData?.bestList && !getPassedDeadline(challengeData.deadline) ? (
             <BestRecWork list={worksData.bestList} />

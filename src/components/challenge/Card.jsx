@@ -1,14 +1,18 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 import { updateChallenge } from '@/service/api/challenge';
 
 import DocTypeChip from '../common/DocTypeChip';
 import KebabMenu from '../common/KebabMenu';
-import images from '../../variables/images';
 import AdminModal from '../application/AdminModal';
 
+import images from '../../variables/images';
+import Svg from '../common/Svg';
+
 import styles from './Card.module.css';
+import myPageStyles from '@/components/mypage/MyPageChallenge.module.css';
 
 const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
   const router = useRouter();
@@ -29,6 +33,12 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
     return `${date.toLocaleString('ko-KR', options)} 마감`;
   };
 
+  const getUri = () => {
+    return myData.workId
+      ? `/work/${myData.workId}/edit`
+      : `/work/new/${myData.id}`;
+  };
+
   const getBtn = () => {
     if (site == 'ongoing') {
       return (
@@ -36,10 +46,10 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
           className={`${styles.challengeButton} ${
             router.pathname === `/work/${myData.id}` ? styles.active : ''
           }`}
-          onClick={() => handleTabClick(`/work/edit`)}
+          onClick={() => handleTabClick(getUri())}
         >
           <span>도전 계속하기</span>
-          <img src={images.icons.arrowMainRight} alt="arrow icon" />
+          <Svg name='arrowMainRight' alt='arrow icon' />
         </button>
       );
     } else if (site == 'done') {
@@ -48,11 +58,17 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
           className={`${styles.challengeButton} ${
             router.pathname === `/work/${myData.id}` ? styles.active : ''
           }`}
-          onClick={() => handleTabClick(`/work/${myData.id}`)}
+          onClick={() => handleTabClick(`/work/${myData.workId}`)}
           style={{ border: 'none' }}
         >
           <span>내 작업물 보기</span>
-          <img src={images.icons.document} alt="document icon" />
+          {/* Svg x */}
+          <Image
+            src={images.icons.document}
+            alt='document icon'
+            width={24}
+            height={24}
+          />
         </button>
       );
     }
@@ -62,10 +78,14 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
     if (myData.progress) {
       return (
         <div
-          className={styles['condition-chip']}
-          style={{ backgroundColor: '#262626', color: '#FFFFFF' }}
+          className={
+            site === 'myPage'
+              ? myPageStyles['condition-chip']
+              : styles['condition-chip']
+          }
+          style={{ backgroundColor: 'var(--grey-800)', color: 'white' }}
         >
-          <img src={images.icons.deadline} alt="deadline icon" />
+          <Svg name='deadline' alt='deadline icon' width='18' />
           <span>챌린지가 마감되었어요</span>
         </div>
       );
@@ -75,13 +95,19 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
     ) {
       return (
         <div
-          className={styles['condition-chip']}
-          style={{ backgroundColor: '#E5E5E5' }}
+          className={
+            site === 'myPage'
+              ? myPageStyles['condition-chip']
+              : styles['condition-chip']
+          }
+          style={{ backgroundColor: 'var(--grey-200)' }}
         >
-          <img src={images.icons.personWhite} alt="deadline icon" />
+          <Svg name='personWhite' alt='deadline icon' width='18' />
           <span>모집이 완료된 상태에요</span>
         </div>
       );
+    } else if (site === 'myPage') {
+      return <div style={{ minHeight: '32px' }}></div>;
     }
   };
 
@@ -90,7 +116,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
   };
 
   const handleEditClick = () => {
-    router.push(`/application/${data.id}`);
+    router.push(`/application/${myData.id}`);
   };
 
   const handleDelete = () => {
@@ -100,10 +126,10 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
 
   const handleModalSubmit = async (formData) => {
     try {
-      await updateChallenge(data.id, { ...formData });
+      await updateChallenge(myData.id, { ...formData });
       setIsModalOpen(false);
       if (formData.status === 'DELETED' && onChallengeDeleted) {
-        onChallengeDeleted(); 
+        onChallengeDeleted();
       }
     } catch (error) {
       console.log(error);
@@ -112,10 +138,15 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
   };
 
   return (
-    <div className={styles.Card}>
+    <div
+      className={site === 'myPage' ? myPageStyles.Card : styles.Card}
+      onClick={
+        site === 'myPage' ? () => handleTabClick(`/${myData.id}`) : undefined
+      }
+    >
       <div className={styles['card-top']}>
         {getCondition()}
-        {isAdmin ? (
+        {site !== 'myPage' && isAdmin ? (
           <div className={`${styles.menuButton}`}>
             <KebabMenu onEdit={handleEditClick} onDelete={handleDelete} />
           </div>
@@ -124,31 +155,43 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
         )}
 
         <div
-          className={styles['challenge-title']}
+          className={
+            site === 'myPage'
+              ? myPageStyles['challenge-title']
+              : styles['challenge-title']
+          }
           onClick={() => handleTabClick(`/${myData.id}`)}
         >
-          {myData.title}{' '}
+          {myData.title}
         </div>
-        <DocTypeChip field={myData.field} docType={myData.docType} />
+        <DocTypeChip
+          field={myData.field}
+          docType={myData.docType}
+          site={'myPage'}
+        />
       </div>
-      <div className={styles['card-bottom']}>
-        <div className={styles['info-row']}>
+      <div
+        className={
+          site === 'myPage'
+            ? myPageStyles['card-bottom']
+            : styles['card-bottom ']
+        }
+      >
+        <div
+          className={
+            site === 'myPage' ? myPageStyles['info-row'] : styles['info-row']
+          }
+        >
           <div style={{ display: 'flex' }}>
-            <img
-              src={images.icons.deadline}
-              alt="deadline icon"
-              className={styles.icon}
-            />
-            <span className={styles.text}>
+            <Svg name='deadline' alt='deadline icon' className={styles.icon} />
+            <span
+              className={site === 'myPage' ? myPageStyles.text : styles.text}
+            >
               {formatDeadline(myData.deadline)}
             </span>
           </div>
           <div style={{ display: 'flex' }}>
-            <img
-              src={images.icons.person}
-              alt="person icon"
-              className={styles.icon}
-            />
+            <Svg name='person' alt='person icon' className={styles.icon} />
             <span className={styles.text}>
               {myData.participants}/{myData.maxParticipants} 참여중
             </span>

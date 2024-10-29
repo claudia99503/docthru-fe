@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 
 import { Profile } from '../common/Profile';
 import LikeButton from '../common/LikeButton';
+import Message from '../common/Message';
 
 import styles from './ParticipationStatus.module.css';
-import images from '@/variables/images';
-import Message from '../common/Message';
+import Svg from '../common/Svg';
 
 const ParticipationStatus = ({ list, onPageChange }) => {
   const router = useRouter();
@@ -51,13 +50,13 @@ const ParticipationStatus = ({ list, onPageChange }) => {
                     onClick={() => handlePageChange('prev')}
                     disabled={currentPage === 1}
                   >
-                    <img src={images.icons.arrowLeft} alt="arrowLeft icon" />
+                    <Svg name='arrowLeft' alt="arrowLeft icon" width='32' />
                   </button>
                   <button
                     onClick={() => handlePageChange('next')}
                     disabled={currentPage === totalPages}
                   >
-                    <img src={images.icons.arrowRight} alt="arrowRight icon" />
+                    <Svg name='arrowRight' alt="arrowRight icon" width='32'/>
                   </button>
                 </>
               </div>
@@ -68,8 +67,8 @@ const ParticipationStatus = ({ list, onPageChange }) => {
                   <div className={styles['participant-left']}>
                     {currentPage == 1 && index == 0 ? (
                       <div className={styles['first-rank']}>
-                        <img
-                          src={images.icons.crown}
+                        <Svg
+                          name='crown'
                           alt="Crown Icon"
                           className={styles['icon-crown']}
                         />
@@ -89,11 +88,10 @@ const ParticipationStatus = ({ list, onPageChange }) => {
                       onClick={() => router.push(`/work/${userList[index].id}`)}
                     >
                       <span>작업물 보기</span>
-                      <Image
-                        src={images.icons.arrowRight}
+                      <Svg
+                        name='arrowRight'
                         alt="arrow icon"
-                        width={30}
-                        height={30}
+                        width='36'
                       />
                     </button>
                   </div>
