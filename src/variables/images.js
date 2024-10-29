@@ -38,6 +38,7 @@ const assets = {
     giveUp: '/assets/icons/ic_give_up.svg',
     heartActive: '/assets/icons/ic_heart_active.svg',
     heartInactive: '/assets/icons/ic_heart_inactive.svg',
+    import: '/assets/icons/ic_import.svg',
     italic: '/assets/icons/ic_italic.svg',
     kebab: '/assets/icons/ic_kebab.svg',
     keyboard: '/assets/icons/ic_keyboard.svg',

@@ -2,6 +2,7 @@
   background-color: var(--brand-black);
   border: 2px solid var(--brand-black);
   color: var(--brand-white);
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .button-black:hover {
@@ -14,6 +15,7 @@
   background-color: var(--brand-yellow);
   border: 2px solid var(--brand-yellow);
   color: var(--brand-black);
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 .button-yellow:hover {
   background-color: var(--brand-black);
@@ -25,6 +27,7 @@
   background-color: var(--brand-yellow);
   border: 2px solid var(--brand-black);
   color: var(--brand-black);
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .button-yellow-border:hover {
@@ -37,6 +40,7 @@
   background-color: #fff;
   border: 2px solid var(--brand-black);
   color: var(--brand-black);
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .button-white-border:hover {
@@ -49,6 +53,7 @@
   background-color: #ffe7e7;
   border: 2px solid #ffe7e7;
   color: #f24744;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .button-cancel:hover {

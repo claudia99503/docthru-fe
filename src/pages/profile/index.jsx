@@ -2,8 +2,9 @@ import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import Loader from '@/components/common/Loader';
 import axios from '@/service/api/axios';
-import Edit from '@/components/mypage/edit';
+import MyPageNav from '@/components/myPage/MyPageNav';
 import Profile from '../../components/mypage/Profile';
+import Loader from '@/components/common/Loader';
 import styles from '../../styles/pages/profile/Profile.module.css';
 
 export default function ProfileIndex() {
@@ -107,7 +108,7 @@ export default function ProfileIndex() {
     <div className={styles.MainContent}>
       {profileData && (
         <>
-          <Edit
+          <MyPageNav
             userInfo={{
               ...profileData.user,
               userId: profileData.userId,
