@@ -40,7 +40,7 @@ const MyPageChallengeButton = ({
     <>
       {action === 'goToPrevious' && (
         <button
-          className={styles.ChallengeButton}
+          className={styles.MyPageChallengeCardButton}
           onClick={goToPrevious}
           disabled={currentIndex === 0}
           style={{
@@ -52,7 +52,7 @@ const MyPageChallengeButton = ({
       )}
       {action === 'goToNext' && (
         <button
-          className={styles.ChallengeButton}
+          className={styles.MyPageChallengeCardButton}
           onClick={goToNext}
           style={{
             visibility: shouldShowButton ? 'visible' : 'hidden',

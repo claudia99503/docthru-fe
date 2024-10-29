@@ -52,7 +52,7 @@ const MyPageChallengeCard = ({ list }) => {
                   }}
                 >
                   <div
-                    className={styles.AllCardSection}
+                    className={styles.allCardSection}
                     style={{
                       justifyContent:
                         (windowSize === 'web' && length < 3) ||
