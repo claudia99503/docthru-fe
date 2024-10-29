@@ -2,7 +2,9 @@
 	<span id="top">
 	<h1>Docthru 프론트엔드 레포지토리</h1><br>
 
-![image](https://github.com/user-attachments/assets/a4a5d78a-5ab9-4b1b-bd5e-b641b49b7cfb)
+![DDDC38D4-1769-4847-B535-13CD1FF81616](https://github.com/user-attachments/assets/c350c542-4f9c-4e5f-a445-6b3e28735a7b)
+
+
 
 
 <b>[Docthru 바로가기](https://docthru.vercel.app/)</b> <br>
@@ -129,8 +131,8 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/108f031c-fd02-42f7-b155-3e2f491e0df4" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/9e721f5a-b949-4a93-bb3d-90ba632cdc03" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
@@ -147,8 +149,8 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/f6d468cf-ac69-4802-97f6-eedc11dcd95e" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/54421f27-2c8a-4a61-8286-21d930e32656" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
@@ -165,8 +167,8 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/27d9e8df-59c2-471b-8c9c-660f152eee3c" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/96660ac5-d516-4295-9643-fd536aff7900" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
@@ -176,7 +178,7 @@
 <br>
 
 ✨ **[신청한 챌린지 상세 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/me/application/%5Bid%5D.jsx)** 
-
+  
 <table>
   <tr>
     <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
@@ -205,8 +207,8 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/d1ace1d7-7716-43af-b2bf-bc00b1f99240" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/c6deeacf-4d89-4471-9b8e-fba8c379926d" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
@@ -217,16 +219,50 @@
 
 ✨ **[전문가 전용 신청관리 상세 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/admin/application/%5Bid%5D.jsx)** 
 
+- **승인 상태**
+  
 <table>
   <tr>
     <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/49b3dd3b-f271-40c6-836c-1cde6217c073" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/8f9dd91a-d9e7-4bba-8a79-679acb528684" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
+
+<br>
+
+- **삭제 상태**
+  
+<table>
+  <tr>
+    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
+    <th style="width: 350px; height: 100px;">모바일 버전</th>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/2e877cb1-7130-4408-a011-2485a34c1ffd" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/9e15d1a5-aaad-4ece-bdb1-0dc93b9959d6" alt="모바일 버전 이미지"></td>
+  </tr>
+</table>
+
+<br>
+
+- **거절 상태**
+  
+<table>
+  <tr>
+    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
+    <th style="width: 350px; height: 100px;">모바일 버전</th>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/822c9bf2-629b-4ea3-996b-893ee48b65f4" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/fa2d6025-7506-4f43-b339-d3b1deab0a28" alt="모바일 버전 이미지"></td>
+  </tr>
+</table>
+
+<br>
 
 - 전문가 유저가 일반 유저가 신청한 신규 챌린지 내용을 관리할 수 있는 페이지입니다.
 - **원문 미리보기** : 유저가 신규 챌린지 신청 페이지에서 입력한 원문 문서 주소에 대한 미리보기 기능이 제공됩니다.
@@ -246,8 +282,8 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/ae6fabfd-d4ff-4a1a-94f5-b69fffa84143" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/e8fbf314-ab18-4500-ab93-d27ea6d4d1bd" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
@@ -265,8 +301,8 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/fc530348-3e61-458f-8f71-4c0b556c21b1" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/354e6352-16fd-4444-b1cb-324240e2a945" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
@@ -376,8 +412,8 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/1fc74970-7c2f-4725-adaa-cb052d78394c" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/59f31ff6-d384-4601-a2db-a5e5c758e061" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
@@ -395,8 +431,8 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/1d637b29-7725-427b-96b4-a2833bc01486" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/993bad28-8fe8-4010-ba24-01df73edafb2" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 

@@ -9,8 +9,9 @@ import 'swiper/css/navigation';
 
 import SeveralBestRecCards from './SeveralBestRecCards';
 
+import Svg from '../common/Svg';
+
 import styles from './BestRecWork.module.css';
-import images from '@/variables/images';
 
 SwiperCore.use([Navigation]);
 
@@ -84,8 +85,8 @@ const BestRecWork = ({ list }) => {
                   className={`prev-button ${styles['prev-button']}`}
                   style={getPrevBtnStyles(i)}
                 >
-                  <img
-                    src={images.icons.arrowWhite}
+                  <Svg
+                    name="arrowWhite"
                     style={{ rotate: '180deg' }}
                     alt="icon arrow white"
                   />
@@ -94,7 +95,7 @@ const BestRecWork = ({ list }) => {
                   className={`next-button ${styles['next-button']}`}
                   style={getNextBtnStyles(i)}
                 >
-                  <img src={images.icons.arrowWhite} alt="icon arrow white" />
+                  <Svg name="arrowWhite" alt="icon arrow white" />
                 </button>
               </div>
             </SwiperSlide>

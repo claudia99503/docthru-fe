@@ -4,11 +4,10 @@ import { useRouter } from 'next/router';
 
 import { useGiveUpChallenge } from '@/service/mutations/challenge';
 
-import assets from '@/variables/images';
-
 import styles from './Container.module.css';
+import Svg from '../common/Svg';
 
-const Container = ({ list, workBtn }) => {
+const Container = ({ list }) => {
   const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
   const router = useRouter();
   const { mutate } = useGiveUpChallenge({});
@@ -43,7 +42,7 @@ const Container = ({ list, workBtn }) => {
   };
 
   const getStatus = () => {
-    return workBtn.new ? `/work/${workBtn.id}/edit` : `/work/new/${workBtn.id}`;
+    return list.workId ? `/work/${list.workId}/edit` : `/work/new/${list.id}`;
   };
 
   const getBtnText = () => {
@@ -57,14 +56,14 @@ const Container = ({ list, workBtn }) => {
   return (
     <div className={styles.container}>
       <div className={styles['info-row']}>
-        <img
-          src={assets.icons.deadline}
+        <Svg
+          name='deadline'
           alt="deadline icon"
           className={styles.icon}
         />
         <span className={styles.text}>{formatDeadline(list.deadline)}</span>
-        <img
-          src={assets.icons.person}
+        <Svg
+          name='person'
           alt="person icon"
           className={styles.icon}
         />
@@ -76,7 +75,7 @@ const Container = ({ list, workBtn }) => {
       {!isMobile ? (
         <>
           <div className={styles['view-original-button-row']}>
-            <a className={styles['primary-button']}>원문 보기</a>
+            <a className={styles['primary-button']} href={list.docUrl} >원문 보기</a>
           </div>
           <div className={styles['challenge-button-row']}>
             <button
@@ -91,7 +90,7 @@ const Container = ({ list, workBtn }) => {
         </>
       ) : (
         <div className={styles['mobile-buttons-row']}>
-          <a className={styles['primary-button']}>원문 보기</a>
+          <a className={styles['primary-button']} href={list.docUrl} >원문 보기</a>
           <button
             className={styles['gray-button']}
             style={getButtonStyles('style')}
