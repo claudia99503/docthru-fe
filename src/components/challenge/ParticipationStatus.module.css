@@ -117,3 +117,12 @@
 .text {
   white-space: pre-line;
 }
+
+/* 모바일 버전 */
+@media (max-width: 743px) {
+
+
+  .ParticipationStatus {
+    padding: 16px 16px 23px;
+  }
+}

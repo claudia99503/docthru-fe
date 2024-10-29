@@ -55,7 +55,7 @@ export function Profile({ user, size, type, date, className }) {
     <div className={cn(styles.Profile, className)}>
       <ProfileImage user={user} width={isSmall ? '24px' : '32px'} />
       <div className={styles.texts}>
-        <span className={styles.name}>{user.nickname}</span>
+        <span className={type === 'workList' ? styles['workList-name'] :  styles.name }>{user.nickname}</span>
         <span className={styles.grade}>{userGrade}</span>
       </div>
     </div>
