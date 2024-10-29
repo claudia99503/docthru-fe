@@ -1,4 +1,5 @@
 import styles from './DocTypeChip.module.css';
+import myPageStyles from '@/components/mypage/MyPageChallenge.module.css';
 import { quantico } from '@/variables/fonts';
 
 export const FIELD = {
@@ -18,7 +19,7 @@ export const FIELD = {
   },
 };
 
-export function ChipField({ field }) {
+export function ChipField({ field, site }) {
   const color = FIELD.color[field];
 
   return (
@@ -26,25 +27,33 @@ export function ChipField({ field }) {
       className={`${styles.ChipField} ${quantico.className}`}
       style={{ '--bg-color': color }}
     >
-      <span className={styles.text}>{FIELD.name[field]}</span>
+      <span
+        className={site === 'myPage' ? myPageStyles.DocTypeText : styles.text}
+      >
+        {FIELD.name[field]}
+      </span>
     </div>
   );
 }
 
-export function ChipType({ type }) {
+export function ChipType({ type, site }) {
   const docType = type === 'OFFICIAL' ? '공식 문서' : '블로그';
   return (
     <div className={`${styles.ChipType}`}>
-      <span className={styles.text}>{docType}</span>
+      <span
+        className={site === 'myPage' ? myPageStyles.DocTypeText : styles.text}
+      >
+        {docType}
+      </span>
     </div>
   );
 }
 
-export default function DocTypeChip({ field, docType }) {
+export default function DocTypeChip({ field, docType, site }) {
   return (
     <div className={`${styles.DocTypeChip}`}>
-      <ChipField field={field} />
-      <ChipType type={docType} />
+      <ChipField field={field} site={site} />
+      <ChipType type={docType} site={site} />
     </div>
   );
 }

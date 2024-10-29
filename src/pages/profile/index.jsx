@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
+import Loader from '@/components/common/Loader';
 import axios from '@/service/api/axios';
 import Edit from '@/components/mypage/edit';
 import Profile from '../../components/mypage/Profile';
@@ -85,11 +86,7 @@ export default function ProfileIndex() {
   );
 
   if (isLoading) {
-    return (
-      <div className={styles.loadingContainer}>
-        <p>Loading...</p>
-      </div>
-    );
+    return <Loader msg='로딩 중' />;
   }
 
   if (error) {
