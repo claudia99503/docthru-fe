@@ -16,9 +16,9 @@ const ProfileView = memo(({ profile, isOwner, onEdit, userName }) => {
   // 다른 사용자의 빈 프로필일 경우
   if (!isOwner && isNewProfile) {
     return (
-      <div className={styles.welcomeContainer}>
-        <h3 className={styles.emptyProfileTitle}>아직 프로필이 없어요</h3>
-        <p className={styles.emptyProfileText}>
+      <div className={styles['welcome-container']}>
+        <h3 className={styles['empty-profile-title']}>아직 프로필이 없어요</h3>
+        <p className={styles['empty-profile-text']}>
           {userName}님은 아직 프로필을 설정하지 않았어요.
         </p>
       </div>
@@ -28,12 +28,12 @@ const ProfileView = memo(({ profile, isOwner, onEdit, userName }) => {
   // 본인의 빈 프로필일 경우
   if (isOwner && isNewProfile) {
     return (
-      <div className={styles.welcomeContainer}>
-        <h3 className={styles.welcomeTitle}>환영합니다!</h3>
-        <p className={styles.welcomeText}>
+      <div className={styles['welcome-container']}>
+        <h3 className={styles['welcome-title']}>환영합니다!</h3>
+        <p className={styles['welcome-text']}>
           프로필을 설정하고 다른 개발자들과 소통해보세요.
         </p>
-        <button onClick={onEdit} className={styles.welcomeButton}>
+        <button onClick={onEdit} className={styles['welcome-button']}>
           프로필 설정하기
         </button>
       </div>
@@ -42,20 +42,20 @@ const ProfileView = memo(({ profile, isOwner, onEdit, userName }) => {
 
   return (
     <div>
-      <div className={styles.header}>
-        <h3 className={styles.position}>
+      <div className={styles['header']}>
+        <h3 className={styles['position']}>
           {profile.position || '포지션을 설정해주세요'}
         </h3>
         {isOwner && (
-          <button onClick={onEdit} className={styles.editButton}>
+          <button onClick={onEdit} className={styles['edit-button']}>
             {profile.position ? '수정' : '설정하기'}
           </button>
         )}
       </div>
 
-      <div className={styles.infoLine}>
+      <div className={styles['info-line']}>
         <span>{profile.location || '지역 미설정'}</span>
-        <span className={styles.dot}>•</span>
+        <span className={styles['dot']}>•</span>
         <span>
           {profile.career !== undefined && profile.career !== null
             ? `경력 ${profile.career}년차`
@@ -64,22 +64,22 @@ const ProfileView = memo(({ profile, isOwner, onEdit, userName }) => {
       </div>
 
       <div className={styles.section}>
-        <h4 className={styles.sectionTitle}>자기소개</h4>
+        <h4 className={styles['section-title']}>자기소개</h4>
         <p className={styles.bio}>{profile.bio || '자기소개를 작성해주세요'}</p>
       </div>
 
       <div className={styles.section}>
-        <h4 className={styles.sectionTitle}>기술 스택</h4>
+        <h4 className={styles['section-title']}>기술 스택</h4>
         {profile.skills?.length > 0 ? (
-          <div className={styles.tagContainer}>
+          <div className={styles['tag-container']}>
             {profile.skills.map((skill) => (
-              <span key={skill} className={styles.skillTag}>
+              <span key={skill} className={styles['skill-tag']}>
                 {skill}
               </span>
             ))}
           </div>
         ) : (
-          <p className={styles.emptyText}>
+          <p className={styles['empty-text']}>
             {isOwner
               ? '보유하고 계신 기술 스택을 추가해주세요'
               : '기술 스택 미설정'}
@@ -88,17 +88,17 @@ const ProfileView = memo(({ profile, isOwner, onEdit, userName }) => {
       </div>
 
       <div className={styles.section}>
-        <h4 className={styles.sectionTitle}>선호 분야</h4>
+        <h4 className={styles['section-title']}>선호 분야</h4>
         {profile.preferredFields?.length > 0 ? (
-          <div className={styles.tagContainer}>
+          <div className={styles['tag-container']}>
             {profile.preferredFields.map((field) => (
-              <span key={field} className={styles.fieldTag}>
+              <span key={field} className={styles['field-tag']}>
                 {field}
               </span>
             ))}
           </div>
         ) : (
-          <p className={styles.emptyText}>
+          <p className={styles['empty-text']}>
             {isOwner
               ? '선호하시는 개발 분야를 추가해주세요'
               : '선호 분야 미설정'}
@@ -107,7 +107,7 @@ const ProfileView = memo(({ profile, isOwner, onEdit, userName }) => {
       </div>
 
       <div className={styles.section}>
-        <h4 className={styles.sectionTitle}>GitHub</h4>
+        <h4 className={styles['section-title']}>GitHub</h4>
         {profile.githubUrl ? (
           <a
             href={profile.githubUrl}
@@ -118,7 +118,7 @@ const ProfileView = memo(({ profile, isOwner, onEdit, userName }) => {
             {profile.githubUrl}
           </a>
         ) : (
-          <p className={styles.emptyText}>
+          <p className={styles['empty-text']}>
             {isOwner
               ? 'GitHub 프로필 주소를 추가해주세요'
               : 'GitHub 프로필 미설정'}
@@ -159,7 +159,7 @@ const ProfileForm = memo(({ editForm, onSubmit, onCancel, onChange }) => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <div className={styles.formGroup}>
+      <div className={styles['form-group']}>
         <label className={styles.label}>자기소개</label>
         <textarea
           className={styles.textarea}
@@ -169,8 +169,8 @@ const ProfileForm = memo(({ editForm, onSubmit, onCancel, onChange }) => {
         />
       </div>
 
-      <div className={styles.gridTwo}>
-        <div className={styles.formGroup}>
+      <div className={styles['grid-two']}>
+        <div className={styles['form-group']}>
           <label className={styles.label}>위치</label>
           <input
             type="text"
@@ -181,11 +181,11 @@ const ProfileForm = memo(({ editForm, onSubmit, onCancel, onChange }) => {
           />
         </div>
 
-        <div className={styles.formGroup}>
-          <label className={styles.label}>경력 (년차)</label>
+        <div className={styles['form-group']}>
+          <label className={styles['label']}>경력 (년차)</label>
           <input
             type="number"
-            className={styles.input}
+            className={styles['input']}
             value={editForm.career ?? ''}
             onChange={handleCareerChange}
             min="0"
@@ -194,22 +194,22 @@ const ProfileForm = memo(({ editForm, onSubmit, onCancel, onChange }) => {
         </div>
       </div>
 
-      <div className={styles.formGroup}>
-        <label className={styles.label}>직무</label>
+      <div className={styles['form-group']}>
+        <label className={styles['label']}>직무</label>
         <input
           type="text"
-          className={styles.input}
+          className={styles['input']}
           value={editForm.position || ''}
           onChange={(e) => onChange('position', e.target.value || null)}
           placeholder="프론트엔드 개발자, 백엔드 개발자 등"
         />
       </div>
 
-      <div className={styles.formGroup}>
-        <label className={styles.label}>기술 스택 (쉼표로 구분)</label>
+      <div className={styles['form-group']}>
+        <label className={styles['label']}>기술 스택 (쉼표로 구분)</label>
         <input
           type="text"
-          className={styles.input}
+          className={styles['input']}
           value={editForm.skills?.join(', ') || ''}
           onChange={(e) => handleArrayInputChange('skills', e.target.value)}
           placeholder="JavaScript, React, Node.js"
@@ -219,11 +219,11 @@ const ProfileForm = memo(({ editForm, onSubmit, onCancel, onChange }) => {
         </small>
       </div>
 
-      <div className={styles.formGroup}>
-        <label className={styles.label}>선호 분야 (쉼표로 구분)</label>
+      <div className={styles['form-group']}>
+        <label className={styles['label']}>선호 분야 (쉼표로 구분)</label>
         <input
           type="text"
-          className={styles.input}
+          className={styles['input']}
           value={editForm.preferredFields?.join(', ') || ''}
           onChange={(e) =>
             handleArrayInputChange('preferredFields', e.target.value)
@@ -235,25 +235,25 @@ const ProfileForm = memo(({ editForm, onSubmit, onCancel, onChange }) => {
         </small>
       </div>
 
-      <div className={styles.formGroup}>
-        <label className={styles.label}>GitHub URL</label>
+      <div className={styles['form-group']}>
+        <label className={styles['label']}>GitHub URL</label>
         <input
           type="url"
-          className={styles.input}
+          className={styles['input']}
           value={editForm.githubUrl || ''}
           onChange={(e) => onChange('githubUrl', e.target.value || null)}
           placeholder="https://github.com/username"
         />
       </div>
 
-      <div className={styles.buttonGroup}>
-        <button type="submit" className={styles.submitButton}>
+      <div className={styles['button-group']}>
+        <button type="submit" className={styles['submit-button']}>
           저장
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className={styles.cancelButton}
+          className={styles['cancel-button']}
         >
           취소
         </button>
