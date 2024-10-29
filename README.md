@@ -2,8 +2,7 @@
 	<span id="top">
 	<h1>Docthru 프론트엔드 레포지토리</h1><br>
 
-![DDDC38D4-1769-4847-B535-13CD1FF81616](https://github.com/user-attachments/assets/c350c542-4f9c-4e5f-a445-6b3e28735a7b)
-
+![image](https://github.com/user-attachments/assets/d8691020-d809-4dc8-ad23-76c3392b46f7)
 
 
 
@@ -131,31 +130,13 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/108f031c-fd02-42f7-b155-3e2f491e0df4" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/9e721f5a-b949-4a93-bb3d-90ba632cdc03" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/3659aa88-00c6-4aba-835f-bed4289358ef" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/38ee23f8-8097-4ca6-bae7-170b2d6a15b4" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
 - 유저가 번역하고 싶은 문서를 챌린지로 신청할 수 있는 페이지입니다.
 - **챌린지 정보 입력** : 유저는 챌린지 제목, 목표, 문서타입, 마감일, 최대 참여 인원 등의 정보를 입력하여 신청할 수 있습니다.
-
-<br>
-
-✨ **[챌린지 수정 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/application/%5Bid%5D.jsx)** 
-
-<table>
-  <tr>
-    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
-    <th style="width: 350px; height: 100px;">모바일 버전</th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/f6d468cf-ac69-4802-97f6-eedc11dcd95e" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/54421f27-2c8a-4a61-8286-21d930e32656" alt="모바일 버전 이미지"></td>
-  </tr>
-</table>
-
-- 신청한 챌린지의 내용을 수정할 수 있는 페이지입니다.
-- **챌린지 정보 입력** : 유저가 이전에 입력한 내용이 미리 채워진 상태로 로드되며, 필요 시 수정하여 저장할 수 있습니다.
 
 <br>
 
@@ -167,8 +148,8 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/27d9e8df-59c2-471b-8c9c-660f152eee3c" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/96660ac5-d516-4295-9643-fd536aff7900" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/9b9f4789-9e14-4dea-b42b-13663b8740c7" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/aeae915a-ec2b-4643-94d4-0715ae905f2b" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
@@ -178,21 +159,69 @@
 <br>
 
 ✨ **[신청한 챌린지 상세 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/me/application/%5Bid%5D.jsx)** 
-  
+
+- **승인 대기 중 상태** => 승인 대기 중인 신청은 언제든지 취소할 수 있습니다.
+
 <table>
   <tr>
     <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/496446ac-110d-4956-926a-740686683be1" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/e970d6dc-aa14-419a-8cfb-26d15654842a" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
-- 유저가 신청한 특정 챌린지의 세부 정보를 조회하고 신청 상태 (승인 또는 거절 / 삭제) 를 확인할 수 있는 페이지입니다.
-  - 승인 상태 : 승인된 신청에 대해서는 최다 추천 번역 리스트가 제공됩니다.
-  - 거절 또는 삭제 : 관리자가 입력한 거절 및 삭제 사유도 함께 확인할 수 있습니다.
+<br>
+
+- **승인 상태**
+
+<table>
+  <tr>
+    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
+    <th style="width: 350px; height: 100px;">모바일 버전</th>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/f46cabd7-af3f-4625-a144-f5ce9e35ff02" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/2d1eb082-a7d1-4ca9-a1af-8a25a22fd1c0" alt="모바일 버전 이미지"></td>
+  </tr>
+</table>
+
+<br>
+
+- **거절 상태** => 전문가 유저의 **거절 사유**가 표시됩니다.
+
+<table>
+  <tr>
+    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
+    <th style="width: 350px; height: 100px;">모바일 버전</th>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/2a47dd3d-b113-4b6c-969a-d8c3d2182b3f" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/50b615cc-4772-427a-9323-33fb01329b60" alt="모바일 버전 이미지"></td>
+  </tr>
+</table>
+
+<br>
+
+- **삭제 상태** => 전문가 유저의 **삭제 사유**가 표시됩니다.
+
+<table>
+  <tr>
+    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
+    <th style="width: 350px; height: 100px;">모바일 버전</th>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/c79a6c94-ebc5-4066-ac15-d783ffbfaa30" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/58bd9915-de51-44c9-91b4-f280d44101fe" alt="모바일 버전 이미지"></td>
+  </tr>
+</table>
+
+- 유저가 신청한 특정 챌린지의 세부 정보를 조회하고 신청 상태 (어드민 유저가 승인 또는 거절 / 삭제) 를 확인할 수 있는 페이지입니다.
+  - **승인 대기 중** 상태 : 승인 대기 중인 신청은 언제든지 취소할 수 있습니다.
+  - **승인** 상태 : 승인된 신청에 대해서는 최다 추천 번역 리스트가 제공됩니다.
+  - **거절** 또는 **삭제** : 전문가 유저가 입력한 거절 및 삭제 사유도 함께 확인할 수 있습니다.
 - **원문 미리보기** : 유저가 신규 챌린지 신청 페이지에서 입력한 원문 문서 주소에 대한 미리보기 기능이 제공됩니다.
  - 원문 보기 버튼이 제공되며, 클릭 시 새 창에서 원문 문서를 확인할 수 있습니다.
 - **신청 취소**: 승인 대기 상태일 때만 신청 취소가 가능합니다.
@@ -207,7 +236,7 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/d1ace1d7-7716-43af-b2bf-bc00b1f99240" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/866a567b-398a-47f2-b7ec-0c40a7b1a0e7" alt="데스크탑 & 태블릿 버전 이미지"></td>
     <td><img src="https://github.com/user-attachments/assets/c6deeacf-4d89-4471-9b8e-fba8c379926d" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
@@ -219,7 +248,42 @@
 
 ✨ **[전문가 전용 신청관리 상세 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/admin/application/%5Bid%5D.jsx)** 
 
-- **승인 상태**
+- **승인 대기 중 상태** => 전문가 유저는 승인 대기 중인 챌린지를 **승인**, **거절**, **수정** 또는 **삭제**할 수 있습니다.
+
+<table>
+  <tr>
+    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
+    <th style="width: 350px; height: 100px;">모바일 버전</th>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/9625b654-05d0-4f5d-968e-b6e9c15e9da4" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/2d1eb082-a7d1-4ca9-a1af-8a25a22fd1c0" alt="모바일 버전 이미지"></td>
+  </tr>
+</table>
+
+<br>
+
+- **수정 버튼 클릭 시** => 해당 챌린지의 **수정 페이지**로 이동합니다. <br>
+
+✨ **[챌린지 수정 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/application/%5Bid%5D.jsx)** 
+
+<table>
+  <tr>
+    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
+    <th style="width: 350px; height: 100px;">모바일 버전</th>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/f9930855-a6e1-436e-b388-bfc101512ef1" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="" alt="모바일 버전 이미지"></td>
+  </tr>
+</table>
+
+- 신청한 챌린지의 내용을 수정할 수 있는 페이지입니다.
+- **챌린지 정보 입력** : 일반 유저가 이전에 입력한 내용이 미리 채워진 상태로 로드되며, 필요 시 전문가 유저가 수정하여 저장할 수 있습니다.
+
+<br>
+
+- **삭제 버튼을 클릭하고 삭제 사유를 입력한 후 전송 버튼을 클릭** => 일반 유저와 전문가 유저의 챌린지 상세 페이지에 어드민 유저의 **삭제 사유**가 표시됩니다.
   
 <table>
   <tr>
@@ -227,14 +291,14 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/49b3dd3b-f271-40c6-836c-1cde6217c073" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/8f9dd91a-d9e7-4bba-8a79-679acb528684" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/1480e874-8da4-488d-b824-fc377442334e" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
 <br>
 
-- **삭제 상태**
+- **거절 버튼을 클릭하고 거절 사유를 입력한 후 전송 버튼을 클릭** => 일반 유저와 전문가 유저의 챌린지 상세 페이지에 어드민 유저의 **거절 사유**가 표시됩니다.
   
 <table>
   <tr>
@@ -242,32 +306,18 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/2e877cb1-7130-4408-a011-2485a34c1ffd" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/9e15d1a5-aaad-4ece-bdb1-0dc93b9959d6" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/7164b463-8ba4-47c6-813c-3fb6ed9be1cd" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
 <br>
 
-- **거절 상태**
-  
-<table>
-  <tr>
-    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
-    <th style="width: 350px; height: 100px;">모바일 버전</th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/822c9bf2-629b-4ea3-996b-893ee48b65f4" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/fa2d6025-7506-4f43-b339-d3b1deab0a28" alt="모바일 버전 이미지"></td>
-  </tr>
-</table>
-
-<br>
 
 - 전문가 유저가 일반 유저가 신청한 신규 챌린지 내용을 관리할 수 있는 페이지입니다.
 - **원문 미리보기** : 유저가 신규 챌린지 신청 페이지에서 입력한 원문 문서 주소에 대한 미리보기 기능이 제공됩니다.
  - 원문 보기 버튼이 제공되며, 클릭 시 새 창에서 원문 문서를 확인할 수 있습니다.
-- **챌린지 관리** : 전문가 유저는 승인 대기 중인 챌린지를 승인하거나 거절할 수 있습니다. 승인할 경우 별도의 사유 입력 없이 승인만 가능하며, 삭제 및 거절 시에는 사유를 입력하여 유저가 확인할 수 있도록 합니다.
+- **챌린지 관리** : 전문가 유저는 승인 대기 중인 챌린지를 **승인**, **거절** 또는 **삭제**할 수 있습니다. <br> **승인**할 경우 별도의 사유 입력 없이 승인이 가능하며, **삭제**나 **거절** 시에는 유저가 확인할 수 있도록 사유를 입력해야 합니다. <br> 또한, **수정** 을 클릭하면 해당 챌린지를 수정할 수 있습니다.
 - 검색 및 필터링: 신청 목록을 검색하고 필터링하여 필요한 챌린지를 쉽게 찾을 수 있으며, 페이지네이션 기능이 포함되어 있습니다.
 
 <br>
@@ -282,8 +332,8 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/ae6fabfd-d4ff-4a1a-94f5-b69fffa84143" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/e8fbf314-ab18-4500-ab93-d27ea6d4d1bd" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/e92ecd9d-145f-4648-988f-61b004f0393a" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/77491b66-e7b6-47df-ac7e-c45008b60695" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
@@ -301,7 +351,7 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/fc530348-3e61-458f-8f71-4c0b556c21b1" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/69f56c37-2cfb-4ba2-9027-9981a9defc63" alt="데스크탑 & 태블릿 버전 이미지"></td>
     <td><img src="https://github.com/user-attachments/assets/354e6352-16fd-4444-b1cb-324240e2a945" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
@@ -320,8 +370,8 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/3b192087-8dfa-4b63-b75c-b55e67629d62" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/007dbe49-8bfb-472c-b199-5a2ac934d051" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
@@ -338,7 +388,7 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/0297d21e-1116-4c74-a342-1e052f9b1a76" alt="데스크탑 & 태블릿 버전 이미지"></td>
     <td><img src="" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
@@ -356,7 +406,7 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/bb83a2d2-2e9b-4cc5-96cf-7b1376541fa9" alt="데스크탑 & 태블릿 버전 이미지"></td>
     <td><img src="" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
@@ -412,8 +462,8 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/1fc74970-7c2f-4725-adaa-cb052d78394c" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/59f31ff6-d384-4601-a2db-a5e5c758e061" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/22a558ba-9baf-4e1f-b08e-eb6aa1aed146" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/2e53c5c3-48f9-4326-be88-14a2e0a68afb" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
@@ -431,8 +481,8 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/1d637b29-7725-427b-96b4-a2833bc01486" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/993bad28-8fe8-4010-ba24-01df73edafb2" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/3f7f9ce8-af82-48cc-8716-0f9f2864dc49" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/17416aae-38a2-4543-b21e-7aa49b54aa0f" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
@@ -450,8 +500,8 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/c9ef542e-df7c-4473-bf23-f0a674d296a9" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/6a6b3315-0a58-4641-a2c6-d91ef0a25009" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
@@ -468,8 +518,8 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/601b661d-6a74-48f3-88fe-58878bb6bf1c" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/a49acfac-314e-4bfc-998f-5874bd0b9c9b" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
@@ -486,7 +536,7 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/fc7a151a-e9ce-49fb-82ff-e008feff4e5d" alt="데스크탑 & 태블릿 버전 이미지"></td>
     <td><img src="" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
@@ -504,7 +554,7 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/3dc913b1-29be-4c53-ac14-cc29aff159bb" alt="데스크탑 & 태블릿 버전 이미지"></td>
     <td><img src="" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
@@ -516,22 +566,9 @@
 
 ### 마이페이지 (백엔드 팀 기여)
 
-### 강범준
 
 
-<br>
 
-### 김민수
-
-
-<br>
-
-### 김현우
-
-
-<br>
-
-### 김효인
 
 
 <br>
@@ -830,3 +867,4 @@
 ## <span id="bug">버그 문제</span>
 
 <br> <br>
+
