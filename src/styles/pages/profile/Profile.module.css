@@ -1,4 +1,4 @@
-.mainContent {
+.MainContent {
   max-width: 100% !important;
   width: 100% !important;
   margin: 0px !important;
@@ -14,11 +14,11 @@
   padding: 32px 0;
 }
 
-.errorText {
+.error-text {
   color: #dc2626;
 }
 
-.retryButton {
+.retry-button {
   margin-top: 16px;
   padding: 8px 16px;
   background-color: var(--brand-yellow);
@@ -26,7 +26,7 @@
   border-radius: 4px;
 }
 
-.updateOverlay {
+.update-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -38,7 +38,7 @@
   justify-content: center;
 }
 
-.updateModal {
+.update-modal {
   background-color: white;
   padding: 16px;
   border-radius: 8px;
