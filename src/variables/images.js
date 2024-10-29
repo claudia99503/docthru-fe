@@ -34,6 +34,7 @@ const assets = {
     firstRankWhite: '/assets/icons/ic_first_rank_white.svg',
     firstRankYellow: '/assets/icons/ic_first_rank_yellow.svg',
     fourthRank: '/assets/icons/ic_fourth_rank.svg',
+    gear: '/assets/icons/ic_gear.png',
     giveUp: '/assets/icons/ic_give_up.svg',
     heartActive: '/assets/icons/ic_heart_active.svg',
     heartInactive: '/assets/icons/ic_heart_inactive.svg',
@@ -62,6 +63,7 @@ const assets = {
     up: '/assets/icons/ic_up.svg',
   },
   images: {
+    profile: '/assets/images/default_profile.jpeg',
     black: '/assets/images/img_black.svg',
     logo: '/assets/images/img_logo.svg',
     profileAdmin: '/assets/images/img_profile_admin.svg',

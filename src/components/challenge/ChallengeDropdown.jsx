@@ -1,5 +1,9 @@
 import { useState } from 'react';
+import Image from 'next/image';
+
 import styles from './ChallengeDropdown.module.css';
+
+import Svg from '../common/Svg';
 import images from '../../variables/images';
 
 const ChallengeDropdown = ({ onOptionChange }) => {
@@ -37,7 +41,7 @@ const ChallengeDropdown = ({ onOptionChange }) => {
     } else if (progress[selectedProgress] === '마감') {
       data.progress = 'true';
     }
-    
+
     onOptionChange(data);
     setIsOpen(false);
   };
@@ -66,22 +70,21 @@ const ChallengeDropdown = ({ onOptionChange }) => {
     <div className={styles.ChallengeDropdown}>
       <button className={styles['dropdown-button']} onClick={toggleDropdown}>
         <span className={styles['selected-text']}>필터</span>
-        <img
-          src={images.icons.filterBlack}
-          alt="Toggle Dropdown"
+        <Svg
+          name='filterBlack'
+          alt='Toggle Dropdown'
           className={styles.icon}
+          width={16}
+          height={16}
         />
       </button>
       {isOpen && (
         <div className={styles['dropdown-list']}>
           <div className={styles['dropdown-out']}>
             <span>필터</span>
-            <img
-              src={images.icons.out}
-              alt="out"
-              onClick={toggleDropdown}
-              style={{ cursor: 'pointer' }}
-            />
+            <div style={{ cursor: 'pointer' }} onClick={toggleDropdown}>
+              <Svg name="out" alt="out" />
+            </div>
           </div>
           <div className={styles['dropdown-category']}>
             <span className={styles['dropdown-title']}>분야</span>
@@ -93,7 +96,8 @@ const ChallengeDropdown = ({ onOptionChange }) => {
                   onClick={() => handleFilterClick(index)}
                   style={{ cursor: 'pointer' }}
                 >
-                  <img
+                  {/* Svg x */}
+                  <Image
                     src={
                       selectedFilters[index]
                         ? images.icons.checkboxIn
@@ -101,6 +105,8 @@ const ChallengeDropdown = ({ onOptionChange }) => {
                     }
                     alt={selectedFilters[index] ? 'Checked' : 'Unchecked'}
                     className={styles['checkbox-icon']}
+                    width={24}
+                    height={24}
                   />
                   {filter}
                 </li>
@@ -117,11 +123,11 @@ const ChallengeDropdown = ({ onOptionChange }) => {
                   onClick={() => handleDocTypeClick(index)}
                   style={{ cursor: 'pointer' }}
                 >
-                  <img
-                    src={
+                  <Svg
+                    name={
                       selectedDocType === index
-                        ? images.icons.radioIn
-                        : images.icons.radioOut
+                        ? 'radioIn'
+                        : 'radioOut'
                     }
                     alt={selectedDocType === index ? 'Selected' : 'Unselected'}
                     className={styles['radio-icon']}
@@ -141,11 +147,11 @@ const ChallengeDropdown = ({ onOptionChange }) => {
                   onClick={() => handleProgressClick(index)}
                   style={{ cursor: 'pointer' }}
                 >
-                  <img
-                    src={
+                  <Svg
+                    name={
                       selectedProgress === index
-                        ? images.icons.radioIn
-                        : images.icons.radioOut
+                        ? 'radioIn'
+                        : 'radioOut'
                     }
                     alt={selectedProgress === index ? 'Selected' : 'Unselected'}
                     className={styles['radio-icon']}

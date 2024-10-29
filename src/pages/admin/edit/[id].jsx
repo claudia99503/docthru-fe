@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import styles from "../../styles/pages/application/EditApplicationPage.module.css";
-import { getChallenge, updateChallenge } from "../../service/api/challenge";
-import Loader from "../../components/common/Loader";
-import FieldSelection from "../../components/application/FieldSelection";
-import DocTypeSelection from "../../components/application/DocTypeSelection";
-import assets from "../../variables/images";
+import styles from "../../../styles/pages/application/EditApplicationPage.module.css";
+import { getChallenge, updateChallenge } from "../../../service/api/challenge";
+import Loader from "../../../components/common/Loader";
+import FieldSelection from "../../../components/application/FieldSelection";
+import DocTypeSelection from "../../../components/application/DocTypeSelection";
+import assets from "../../../variables/images";
+import { useAlertModal } from "../../../hooks/useModal";
+import Image from "next/image";
 
 const fieldMapping = {
   "Next.js": "NEXTJS",
@@ -40,15 +42,14 @@ const EditApplicationPage = () => {
   const [error, setError] = useState(null);
   const [fieldDropdownOpen, setFieldDropdownOpen] = useState(false);
   const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
+  const { Modal, onModalOpen } = useAlertModal();
 
   useEffect(() => {
     if (id) {
-      // 페이지가 로드될 때 데이터를 불러와 폼에 채움
       const fetchChallenge = async () => {
         try {
           setLoading(true);
-          const data = await getChallenge(id); // API 호출로 챌린지 데이터를 가져옴
-          console.log("불러온 데이터:", data);
+          const data = await getChallenge(id);
           setFormData({
             title: data.title || "",
             docUrl: data.docUrl || "",
@@ -142,27 +143,29 @@ const EditApplicationPage = () => {
     if (errorMsg) {
       setError(errorMsg);
       setLoading(false);
+      onModalOpen({ msg: errorMsg });
       return;
     }
 
-    // 수정하지 않으면 기존 값으로 전송
     const dataToSend = {
       title: formData.title,
       docUrl: formData.docUrl,
-      field: formData.field || fieldMapping[challenge.field],
-      docType: formData.docType || docTypeMapping[challenge.docType],
+      field: formData.field || fieldMapping[formData.field],
+      docType: formData.docType || docTypeMapping[formData.docType],
       deadline: new Date(formData.deadline).toISOString(),
       maxParticipants: Number(formData.maxParticipants),
       description: formData.description,
     };
 
-    console.log("전송한 데이터:", dataToSend);
-
     try {
-      await updateChallenge(id, dataToSend); // 수정 API
-      router.push(`/admin/application/${id}`);
+      await updateChallenge(id, dataToSend);
+      onModalOpen({
+        msg: "챌린지 수정이 성공적으로 완료되었습니다",
+        action: () => router.push(`/admin/application/${id}`),
+      });
     } catch (error) {
-      setError("챌린지 수정 중 오류가 발생했습니다. 다시 시도해주세요.");
+      setError("챌린지 수정 중 오류가 발생했습니다");
+      onModalOpen({ msg: "챌린지 수정 중 오류가 발생했습니다" });
     } finally {
       setLoading(false);
     }
@@ -225,9 +228,12 @@ const EditApplicationPage = () => {
                 value={formData.field}
                 readOnly
               />
-              <img
+              <Image
                 src={fieldDropdownOpen ? assets.icons.up : assets.icons.down}
+                alt="Dropdown Icon"
                 className={styles.icon}
+                width={16}
+                height={9}
                 onClick={() => setFieldDropdownOpen(!fieldDropdownOpen)}
               />
               {fieldDropdownOpen && (
@@ -250,9 +256,12 @@ const EditApplicationPage = () => {
                 value={formData.docType}
                 readOnly
               />
-              <img
+              <Image
                 src={docTypeDropdownOpen ? assets.icons.up : assets.icons.down}
+                alt="Dropdown Icon"
                 className={styles.icon}
+                width={16}
+                height={9}
                 onClick={() => setDocTypeDropdownOpen(!docTypeDropdownOpen)}
               />
               {docTypeDropdownOpen && (
@@ -280,9 +289,12 @@ const EditApplicationPage = () => {
                 className={styles.dateInput}
                 onChange={handleDateChange}
               />
-              <img
+              <Image
                 src={assets.icons.calender}
+                alt="Calendar Icon"
                 className={styles.icon}
+                width={28}
+                height={28}
                 onClick={() =>
                   document.querySelector(`.${styles.dateInput}`).showPicker()
                 }
@@ -330,10 +342,10 @@ const EditApplicationPage = () => {
         )}
 
         {error && <p className={styles.error}>{error}</p>}
+        <Modal />
       </div>
     </>
   );
 };
 
 export default EditApplicationPage;
-

@@ -10,6 +10,7 @@ import Loader from '@/components/common/Loader';
 import ChallengeDetailInfo from '@/components/challenge/ChallengeDetailInfo';
 import ParticipationStatus from '@/components/challenge/ParticipationStatus';
 import BestRecWork from '@/components/challenge/BestRecWork';
+import Container from '@/components/challenge/Container';
 
 import styles from '@/styles/pages/Home.module.css';
 
@@ -36,7 +37,6 @@ export default function ChallengeDetailPage() {
     enabled: !!validId,
   });
 
-  //오류나서 isPending으로 바꿔줬어요
   const {
     data: worksData,
     refetch: refetchWork,
@@ -46,7 +46,7 @@ export default function ChallengeDetailPage() {
   });
 
   const handleOptionChange = (option) => {
-    setSelectedOption((pev) => ({ ...pev, ...option }));
+    setSelectedOption((prev) => ({ ...prev, ...option }));
   };
 
   useEffect(() => {
@@ -79,14 +79,6 @@ export default function ChallengeDetailPage() {
   };
   // -----------------------------------------------
 
-  const workId = worksData?.list?.find(
-    (work) => work.userId === challengeData.userId
-  )?.id;
-
-  const getParamId = () => {
-    return challengeData?.isParticipated ? workId : challengeData?.id;
-  };
-
   return (
     <>
       <Head>
@@ -97,9 +89,11 @@ export default function ChallengeDetailPage() {
         />
       </Head>
       {challengeData ? (
-        <div className={styles.mainContainer}>
-          <ChallengeDetailInfo list={challengeData} id={getParamId() || 1} />{' '}
-          {/* 수정 필요 */}
+        <div className={styles.ChallengeDetailPage}>
+          <div className={styles['info-container']}>
+            <ChallengeDetailInfo list={challengeData} />{' '}
+            <Container list={challengeData} />
+          </div>
           {worksData?.bestList && !getPassedDeadline(challengeData.deadline) ? (
             <BestRecWork list={worksData.bestList} />
           ) : null}
@@ -111,3 +105,4 @@ export default function ChallengeDetailPage() {
     </>
   );
 }
+

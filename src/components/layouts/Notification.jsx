@@ -28,10 +28,8 @@ const Notification = () => {
     setLoading(true);
     try {
       const response = await fetchNotifications(user.id, false);
-      console.log('Received notifications:', response); // 디버깅용 로그
 
       if (response.length === 0) {
-        // 알림이 없을 때는 에러가 아니라 알림이 없음을 처리
         setNotifications([]);
         setError(null);
       } else {

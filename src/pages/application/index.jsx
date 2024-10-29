@@ -7,6 +7,8 @@ import Loader from "../../components/common/Loader";
 import FieldSelection from "../../components/application/FieldSelection";
 import DocTypeSelection from "../../components/application/DocTypeSelection";
 import assets from "../../variables/images";
+import { useAlertModal } from "../../hooks/useModal";
+import Image from "next/image";
 
 const fieldMapping = {
   "Next.js": "NEXTJS",
@@ -38,6 +40,7 @@ const CreateApplicationPage = () => {
   const [fieldDropdownOpen, setFieldDropdownOpen] = useState(false);
   const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
   const router = useRouter();
+  const { Modal, onModalOpen } = useAlertModal();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -50,7 +53,7 @@ const CreateApplicationPage = () => {
   const handleFieldSelect = (value) => {
     setFormData((prevData) => ({
       ...prevData,
-      field: value, // UI상으로는 선택한 값 유지
+      field: value,
     }));
     setFieldDropdownOpen(false);
   };
@@ -58,7 +61,7 @@ const CreateApplicationPage = () => {
   const handleDocTypeSelect = (value) => {
     setFormData((prevData) => ({
       ...prevData,
-      docType: value, // UI상으로는 선택한 값 유지
+      docType: value,
     }));
     setDocTypeDropdownOpen(false);
   };
@@ -105,6 +108,7 @@ const CreateApplicationPage = () => {
     if (errorMsg) {
       setError(errorMsg);
       setLoading(false);
+      onModalOpen({ msg: errorMsg });
       return;
     }
 
@@ -120,10 +124,13 @@ const CreateApplicationPage = () => {
 
     try {
       await createChallengeApplication(dataToSend);
-      alert("챌린지 신청이 성공적으로 완료되었습니다!");
-      router.push("/me/application");
+      onModalOpen({
+        msg: "챌린지 신청이 성공적으로 완료되었습니다",
+        action: () => router.push("/me/application"), // 확인 버튼 클릭 시 페이지 이동
+      });
     } catch (error) {
-      setError("챌린지 생성 중 오류가 발생했습니다. 다시 시도해주세요.");
+      setError("챌린지 생성 중 오류가 발생했습니다.");
+      onModalOpen({ msg: "챌린지 생성 중 오류가 발생했습니다" });
     } finally {
       setLoading(false);
     }
@@ -140,7 +147,7 @@ const CreateApplicationPage = () => {
       </Head>
       <div className={styles.CreateApplicationPage}>
         <h1 className={styles["application-title"]}>신규 챌린지 신청</h1>
-        {loading && <Loader msg="챌린지를 생성 중입니다" />}
+        {loading && <Loader msg="챌린지를 생성 중입니다." />}
         {!loading && (
           <form className={styles.form} onSubmit={handleSubmit}>
             <label className={styles.label}>제목</label>
@@ -186,9 +193,12 @@ const CreateApplicationPage = () => {
                 value={formData.field}
                 readOnly
               />
-              <img
+              <Image
                 src={fieldDropdownOpen ? assets.icons.up : assets.icons.down}
+                alt="Dropdown Icon"
                 className={styles.icon}
+                width={16}
+                height={9}
                 onClick={() => setFieldDropdownOpen(!fieldDropdownOpen)}
               />
               {fieldDropdownOpen && (
@@ -211,9 +221,12 @@ const CreateApplicationPage = () => {
                 value={formData.docType}
                 readOnly
               />
-              <img
+              <Image
                 src={docTypeDropdownOpen ? assets.icons.up : assets.icons.down}
+                alt="Dropdown Icon"
                 className={styles.icon}
+                width={16}
+                height={9}
                 onClick={() => setDocTypeDropdownOpen(!docTypeDropdownOpen)}
               />
               {docTypeDropdownOpen && (
@@ -241,9 +254,12 @@ const CreateApplicationPage = () => {
                 className={styles.dateInput}
                 onChange={handleDateChange}
               />
-              <img
+              <Image
                 src={assets.icons.calender}
+                alt="Calendar Icon"
                 className={styles.icon}
+                width={28}
+                height={28}
                 onClick={() =>
                   document.querySelector(`.${styles.dateInput}`).showPicker()
                 }
@@ -291,10 +307,10 @@ const CreateApplicationPage = () => {
         )}
 
         {error && <p className={styles.error}>{error}</p>}
+        <Modal />
       </div>
     </>
   );
 };
 
 export default CreateApplicationPage;
-

@@ -24,12 +24,12 @@
 }
 
 .text {
-  font-family: "Pretendard", sans-serif;
   font-weight: 400;
   font-size: 13px;
   line-height: 20px;
   color: var(--grey-600);
   margin-right: 10px;
+  white-space: nowrap;
 }
 
 .view-original-button-row {
@@ -44,10 +44,9 @@
   height: 40px;
   background-color: var( --brand-yellow);
   border-radius: 12px;
-  font-family: "Pretendard", sans-serif;
   font-weight: 700;
   font-size: 14px;
-  line-height: 26px;
+  line-height: 38px;
   color: var(--grey-800);
   text-align: center;
   border: 2px solid var(--grey-800);
@@ -65,7 +64,6 @@
   height: 40px;
   border-radius: 12px;
   background-color: var(--grey-200);
-  font-family: "Pretendard", sans-serif;
   font-weight: 700;
   font-size: 14px;
   line-height: 26px;
@@ -76,9 +74,10 @@
 
 .mobile-buttons-row {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   margin-top: 10px;
+  gap: 8px;
 }
 
 .mobile-buttons-row .primary-button,
@@ -110,7 +109,7 @@
 @media (min-width: 744px) and (max-width: 1199px) {
   .container {
     width: 100%;
-    max-width: 251px;
+    max-width: 260px;
     height: 176px;
     padding: 20px 20px;
   }
@@ -126,10 +125,9 @@
   }
 }
 
-@media (max-width: 743px) {
+@media (max-width: 743px) and (min-width: 375px) {
   .container {
     width: 100%;
-    max-width: 343px;
     height: auto;
     padding: 25px 20px;
   }
@@ -143,10 +141,16 @@
     display: none;
   }
 
-  .challenge-button-row {
+  .mobile-buttons-row {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 30px;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+    gap: clamp(10px, 5vw, 40px); /* 간격을 10px에서 40px까지 화면 크기에 따라 조정 */
+  }
+
+  .mobile-buttons-row .primary-button,
+  .mobile-buttons-row .gray-button {
+    width: calc(50% - 20px);
   }
 }
-

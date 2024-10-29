@@ -15,7 +15,6 @@ import styles from '../../../styles/pages/Home.module.css';
 export default function MyFinishedChallengePage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [limit, setLimit] = useState(5);
   const [params, setParams] = useState({});
 
   const { data, isPending } = useGetCompletedChallenge(params, {
@@ -25,7 +24,7 @@ export default function MyFinishedChallengePage() {
   const { totalPages } = meta;
 
   const handleOptionChange = (option) => {
-    setParams((pev) => ({ ...pev, ...option }));
+    setParams((prev) => ({ ...prev, ...option }));
   };
 
   useEffect(() => {

@@ -53,7 +53,7 @@ export async function deleteChallenges(id) {
 
 /** /:id/participation POST - 번역 챌린지 참여 */
 export async function createChallenge(id) {
-  const res = await axios.post(`${PATH}/${id}/participation`);
+  const res = await axios.post(`${PATH}/${id}/participations`);
   return res.data;
 }
 

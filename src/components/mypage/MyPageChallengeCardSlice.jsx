@@ -1,8 +1,7 @@
 import { useRouter } from 'next/router';
 import DocTypeChip from '../common/DocTypeChip';
 import images from '../../variables/images';
-
-import styles from './MyPageCardSlice.module.css';
+import styles from './MyPageChallengeCardSlice.module.css';
 import { useEffect, useState } from 'react';
 
 const MyPageCardSlice = ({ data, site }) => {
@@ -25,7 +24,7 @@ const MyPageCardSlice = ({ data, site }) => {
           className={styles['condition-chip']}
           style={{ backgroundColor: '#262626', color: '#FFFFFF' }}
         >
-          <img src={images.icons.deadline} alt='deadline icon' />
+          <img src={images.icons.deadline} alt="deadline icon" />
           <span>챌린지가 마감되었어요</span>
         </div>
       );
@@ -38,7 +37,7 @@ const MyPageCardSlice = ({ data, site }) => {
           className={styles['condition-chip']}
           style={{ backgroundColor: '#E5E5E5' }}
         >
-          <img src={images.icons.personWhite} alt='deadline icon' />
+          <img src={images.icons.personWhite} alt="deadline icon" />
           <span>모집이 완료된 상태에요</span>
         </div>
       );
@@ -76,7 +75,7 @@ const MyPageCardSlice = ({ data, site }) => {
         <div style={{ display: 'flex' }}>
           <img
             src={images.icons.deadline}
-            alt='deadline icon'
+            alt="deadline icon"
             className={styles.icon}
           />
           <span className={styles.text}>{formatDeadline(data.deadline)}</span>
@@ -84,7 +83,7 @@ const MyPageCardSlice = ({ data, site }) => {
         <div style={{ display: 'flex', marginTop: '10px' }}>
           <img
             src={images.icons.person}
-            alt='person icon'
+            alt="person icon"
             className={styles.icon}
           />
           <span className={styles.text}>

@@ -44,7 +44,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         className={styles['arrow-button']}
         onClick={handlePrevClick}
         disabled={currentPage === 1}
-        style={{ color: currentPage === 1 ? '#A3A3A3' : '#262626' }} // 색상 적용
+        style={{ color: currentPage === 1 ? '#A3A3A3' : '#262626' }} 
       >
         <svg
           width="40"

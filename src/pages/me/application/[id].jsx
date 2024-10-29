@@ -7,9 +7,13 @@ import InfoContainer from "../../../components/challenge/InfoContainer";
 import CancelMenu from "../../../components/common/CancelMenu";
 import ReasonBox from "../../../components/application/ReasonBox";
 import { getChallenge, deleteChallenges } from "../../../service/api/challenge";
+import { useGetWorkList } from "@/service/queries/work";
 import Loader from "../../../components/common/Loader";
+import BestRecWork from "../../../components/challenge/BestRecWork";
 import styles from "../../../styles/pages/application/MyApplicationDetailPage.module.css";
 import assets from "@/variables/images";
+import { useAlertModal } from "../../../hooks/useModal";
+import Image from "next/image";
 
 export default function MyApplicationDetailPage() {
   const router = useRouter();
@@ -18,6 +22,11 @@ export default function MyApplicationDetailPage() {
   const [challenge, setChallenge] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { Modal, onModalOpen } = useAlertModal();
+
+  const { data: worksData } = useGetWorkList(id, { page: 1 }, {
+    enabled: !!id && challenge?.status === "ACCEPTED",
+  });
 
   useEffect(() => {
     if (id) {
@@ -40,10 +49,12 @@ export default function MyApplicationDetailPage() {
   const handleDelete = async () => {
     try {
       await deleteChallenges(id);
-      alert("챌린지가 취소되었습니다.");
-      router.push("/me/application");
+      onModalOpen({
+        msg: "챌린지 신청이 취소되었습니다",
+        action: () => router.push("/me/application"),
+      });
     } catch (error) {
-      alert(error.message);
+      onModalOpen({ msg: error.message });
     }
   };
 
@@ -118,11 +129,30 @@ export default function MyApplicationDetailPage() {
             onClick={() => window.open(challenge.docUrl, '_blank')}
           >
             링크 열기
-            <img src={assets.icons.diagonal} alt="링크 열기" />
+            <Image
+              src={assets.icons.diagonal}
+              alt="링크 열기"
+              width={12}
+              height={12}
+            />
           </button>
         </div>
+
+        {challenge.status === "ACCEPTED" && (
+          <>
+            {!worksData?.bestList || worksData.bestList.length === 0 ? (
+              <p>최다 추천 번역물이 없습니다.</p>
+            ) : (
+              <>
+                <div style={{ border: "1px solid #F5F5F5", marginTop: "20px", marginBottom: "20px" }} />
+                <BestRecWork list={worksData.bestList} />
+              </>
+            )}
+          </>
+        )}
+
+        <Modal />
       </div>
     </>
   );
 }
-

@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './InfoContainer.module.css';
 import assets from '@/variables/images';
+import Image from 'next/image';
 
 const InfoContainer = ({ deadline, maxParticipants }) => {
   const formatDeadline = (dateTime) => {
@@ -11,16 +12,20 @@ const InfoContainer = ({ deadline, maxParticipants }) => {
 
   return (
     <div className={styles['info-row']}>
-      <img
+      <Image
         src={assets.icons.deadline}
         alt="deadline icon"
         className={styles.icon}
+        width={24}
+        height={24}
       />
       <span className={styles.text}>{formatDeadline(deadline)}</span>
-      <img
+      <Image
         src={assets.icons.person}
         alt="person icon"
         className={styles.icon}
+        width={16}
+        height={16}
       />
       <span className={styles.text}>{maxParticipants}</span>
     </div>

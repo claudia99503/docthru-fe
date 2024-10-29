@@ -52,11 +52,18 @@ export default function ProfileDropDown({ user }) {
           <Profile user={user} />
           <ul className={styles.lists}>
             {isUser && (
-              <li>
-                <Link href="/me" className={styles.link}>
-                  나의 챌린지
-                </Link>
-              </li>
+              <div className={styles.modalHug}>
+                <li>
+                  <Link href="/me" className={styles.link}>
+                    나의 챌린지
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/profile" className={styles.link}>
+                    마이페이지
+                  </Link>
+                </li>
+              </div>
             )}
             <li>
               <button
