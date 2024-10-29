@@ -7,6 +7,7 @@ export default function Svg({
   type = 'icon',
   className,
   addName = '',
+  style
 }) {
   const calculatedHeight = height || width;
 
@@ -18,6 +19,7 @@ export default function Svg({
       height={calculatedHeight}
       className={cn('Svg', className)}
       aria-label={name}
+      style={style}
     >
       <use
         href={`/assets/${type}s_sprite.svg/#${prefix}_${name}`}
