@@ -7,7 +7,13 @@ import { replyKey } from '@/variables/queryKeys';
 import cn from '@/utils/clsx';
 import Reply from './Reply';
 
-export default function RepliesList({ workId, feedback, onDelete, onUpdate }) {
+export default function RepliesList({
+  workId,
+  feedback,
+  onDelete,
+  onUpdate,
+  isPending,
+}) {
   const { ref, inView } = useInView({
     threshold: 0.1,
   });
@@ -60,6 +66,7 @@ export default function RepliesList({ workId, feedback, onDelete, onUpdate }) {
           reply={reply}
           onDelete={onDelete}
           onUpdate={onUpdate}
+          isPending={isPending}
         />
       ))}
       {hasNextPage && (

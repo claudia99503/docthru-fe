@@ -18,7 +18,7 @@ export function useGetWork(id) {
   });
 }
 
-export function useGeWorkFeedbacks(id) {
+export function useGetWorkFeedbacks(id) {
   return useInfiniteQuery({
     queryKey: workKey.feedbacks(id),
     queryFn: ({ pageParam = null }) =>

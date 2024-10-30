@@ -6,9 +6,9 @@ import {
   updateReply,
   deleteReply,
 } from '../api/feedback';
-import { workKey } from '@/variables/queryKeys';
+import { workKey, replyKey } from '@/variables/queryKeys';
 
-export function useMutateFeedback() {
+export function useMutateReply() {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -22,26 +22,37 @@ export function useMutateFeedback() {
           return deleteReply(id);
         }
       } else {
-        if (action === 'edit') {
-          return updateFeedback(id, { content });
-        } else if (action === 'delete') {
-          return deleteFeedback(id);
-        } else if (action === 'reply') {
-          return createReply(id, { content, workId });
-        }
+        return createReply(id, { content, workId });
+      }
+    },
+    onSuccess: (data) => {
+      console.log('reply', data);
+      if (data) {
+        const queryKey = replyKey.replies(data.feedbackId);
+        queryClient.invalidateQueries(queryKey);
+        queryClient.refetchQueries(queryKey, { exact: true });
+      }
+    },
+  });
+}
+
+export function useMutateFeedback() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data) => {
+      const { id, content, action } = data;
+      if (action === 'edit') {
+        return updateFeedback(id, { content });
+      } else if (action === 'delete') {
+        return deleteFeedback(id);
       }
     },
     onSuccess: (data) => {
       console.log(data);
-      console.log('배열', workKey.feedbacks(data.workId));
       if (data.workId) {
-        queryClient.invalidateQueries({
-          queryKey: workKey.feedbacks(data.workId),
-        });
-
-        queryClient.invalidateQueries({
-          queryKey: workKey.detail(data.workId),
-        });
+        const queryKey = workKey.feedbacks(data.workId);
+        queryClient.invalidateQueries(queryKey);
       }
     },
   });
