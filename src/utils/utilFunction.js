@@ -22,3 +22,8 @@ export const formatDate = (dateString, includeTime = false) => {
 
   return `${year}/${month}/${day}`;
 };
+
+export const formatDateByDot = (dateString) => {
+  const date = new Date(dateString);
+  return `${date.getMonth() + 1}.${date.getDate()}.${date.getFullYear()}`;
+};

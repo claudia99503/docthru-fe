@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import assets from '@/variables/images';
 import Image from 'next/image';
 import styles from './MyPageNav.module.css';
+import { formatDateByDot } from '@/utils/utilFunction';
 
 export default function MyPageNav({ userInfo }) {
   const logout = useLogout();
@@ -19,11 +20,6 @@ export default function MyPageNav({ userInfo }) {
       default:
         return grade;
     }
-  };
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
   };
 
   useEffect(() => {
@@ -55,46 +51,47 @@ export default function MyPageNav({ userInfo }) {
   }
 
   return (
-    <div className={styles.A}>
-      <div className={styles.B}>
-        <div className={styles['edit-container']}>
-          <div className={styles['profile-container']}>
-            <Image
-              src={userInfo.image || assets.images.profile}
-              alt="프로필 사진"
-              width={75}
-              height={75}
-              className={styles['profile-image']}
-            />
-            <div className={styles['profile-info']}>
-              <p className={styles.nickname}>{userInfo.nickname}</p>
-              <p className={styles.grade}>{getGradeDisplay(userInfo.grade)}</p>
-              <p className={styles.date}>{formatDate(userInfo.createdAt)}</p>
-            </div>
+    <div className={styles.wrapper}>
+      <div className={styles['edit-container']}>
+        <div className={styles['profile-container']}>
+          <Image
+            src={userInfo.image || assets.images.profileMember}
+            alt="프로필 사진"
+            width={75}
+            height={75}
+            className={styles['profile-image']}
+          />
+          <div className={styles['profile-info']}>
+            <h2 className={styles.nickname}>{userInfo.nickname}</h2>
+            <p className={styles.grade}>{getGradeDisplay(userInfo.grade)}</p>
+            <p className={styles.date}>{formatDateByDot(userInfo.createdAt)}</p>
           </div>
-          <button className={styles.C} onClick={() => router.push('/profile')}>
-            메인 페이지 이동
-          </button>
-          {isOwner && (
-            <button
-              className={styles.C}
-              onClick={() => router.push('/profile/edit')}
-            >
-              내 정보 수정
-            </button>
-          )}
-          <button
-            className={styles.C}
-            onClick={() => window.open('/profile/devs')}
-          >
-            Github
-          </button>
-          {isOwner && (
-            <button className={styles.C} onClick={handleLogout}>
-              로그아웃
-            </button>
-          )}
         </div>
+        <button
+          className={styles.button}
+          onClick={() => router.push('/profile')}
+        >
+          메인 페이지 이동
+        </button>
+        {isOwner && (
+          <button
+            className={styles.button}
+            onClick={() => router.push('/profile/edit')}
+          >
+            내 정보 수정
+          </button>
+        )}
+        <button
+          className={styles.button}
+          onClick={() => window.open('/profile/devs')}
+        >
+          Github
+        </button>
+        {isOwner && (
+          <button className={styles.button} onClick={handleLogout}>
+            로그아웃
+          </button>
+        )}
       </div>
     </div>
   );
