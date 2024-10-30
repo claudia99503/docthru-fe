@@ -288,7 +288,7 @@ export default function ProfileInfo({
     try {
       const token = localStorage.getItem('accessToken');
       const response = await axios.put(
-        `${process.env.NEXT_PUBLIC_DEV_API_URL}/profiles/${initialProfile.userId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/profiles/${initialProfile.userId}`,
         formData,
         {
           headers: {
