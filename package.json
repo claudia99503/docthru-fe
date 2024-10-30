@@ -9,8 +9,7 @@
     "build": "next build",
     "lint": "next lint",
     "image": "nodemon src/utils/generateImgSrc.js",
-    "sprite": "nodemon src/utils/generateSprite_v2.js",
-    "server": "node server.js"
+    "sprite": "nodemon src/utils/generateSprite.js"
   },
   "dependencies": {
     "@svgr/webpack": "^8.1.0",
