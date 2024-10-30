@@ -163,7 +163,7 @@ function EditProfilePage() {
   };
 
   return (
-    <>
+    <div className={styles.MainContent}>
       {profileData && (
         <>
           <MyPageNav
@@ -182,7 +182,7 @@ function EditProfilePage() {
           />
         </>
       )}
-    </>
+    </div>
   );
 }
 
