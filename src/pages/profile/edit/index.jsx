@@ -5,6 +5,7 @@ import UpdateProfile from '@/components/mypage/UpdateProfile';
 import MyPageNav from '@/components/mypage/MyPageNav';
 import Loader from '@/components/common/Loader';
 import { toast } from 'react-hot-toast';
+import styles from '@/styles/pages/profile/editprofilepage.module.css';
 
 function EditProfilePage() {
   const [profileData, setProfileData] = useState(null);
