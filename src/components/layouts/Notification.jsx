@@ -1,6 +1,6 @@
 // cNotification.jsx
 import React, { useState, useEffect, useRef } from 'react';
-import { useAuth } from '../../context/AuthProvider';
+import { useAuth } from '@/hooks/useAuth';
 import Image from 'next/image';
 import assets from '../../variables/images';
 import styles from './Notification.module.css';
