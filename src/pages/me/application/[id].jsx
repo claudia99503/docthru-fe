@@ -41,10 +41,11 @@ export default function MyApplicationDetailPage() {
           setLoading(false);
         }
       };
-
+  
       fetchChallenge();
     }
   }, [id]);
+  
 
   const handleDelete = async () => {
     try {
@@ -82,11 +83,10 @@ export default function MyApplicationDetailPage() {
       <div className={styles.pageContainer}>
         <ChallengeStatusBadge status={challenge.status} />
 
-        {(challenge.status === "REJECTED" ||
-          challenge.status === "DELETED") && (
+        {(challenge.status === "REJECTED" || challenge.status === "DELETED") && (
           <>
             <ReasonBox
-              type={challenge.status === "REJECTED" ? "거절" : "삭제"}
+              type={challenge.status === "REJECTED" ? "reject" : "delete"}
               message={challenge.message}
               nickname="독스루 운영진"
               updatedAt={challenge.updatedAt}

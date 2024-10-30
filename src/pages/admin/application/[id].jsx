@@ -141,7 +141,12 @@ export default function AdminApplicationDetailPage() {
 
         {reasonData && (
           <>
-            <ReasonBox {...reasonData} />
+            <ReasonBox
+              type={challenge.status === "REJECTED" ? "reject" : "delete"}
+              message={reasonData.message}
+              nickname={reasonData.nickname}
+              updatedAt={reasonData.updatedAt}
+            />
             <div className={styles.reasonBoxBorder} />
           </>
         )}
