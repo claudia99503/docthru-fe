@@ -2,7 +2,6 @@
   min-height: 70vh;
   background: None;
   margin: 3rem 1rem;
-  padding-left: 113px;
 }
 
 .wrapper {
@@ -120,18 +119,10 @@
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .container {
-    padding-left: 133px;
-  }
 }
 
 @media (min-width: 1024px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
-  }
-
-  .container {
-    padding-left: 183px;
   }
 }

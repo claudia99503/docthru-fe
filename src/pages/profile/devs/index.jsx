@@ -1,8 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
-import axios from '@/service/api/axios';
 import { GithubIcon, LinkedinIcon, Mail } from 'lucide-react';
-import Edit from '@/components/mypage/edit';
 import Link from 'next/link';
 import styles from '@/styles/pages/profile/DevelopersPage.module.css';
 
@@ -15,7 +13,7 @@ const developers = [
       'React와 TypeScript를 사용하여 사용자 경험을 개선하는데 집중합니다.',
     github: 'https://github.com/Accreditus',
     linkedin: 'https://linkedin.com/in/honggildong',
-    email: 'hong@example.com',
+    email: 'recom54@gmail.com',
   },
   {
     name: '김민서',
@@ -112,88 +110,8 @@ const DeveloperCard = ({ developer }) => (
 );
 
 export default function DevelopersPage() {
-  const [profileData, setProfileData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [userId, setUserId] = useState(null);
-  const router = useRouter();
-
-  const fetchProfileData = useCallback(async (currentUserId) => {
-    if (!currentUserId) return;
-
-    try {
-      const token = localStorage.getItem('accessToken');
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_DEV_API_URL}/profiles/${currentUserId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setProfileData(response.data);
-      setError(null);
-    } catch (error) {
-      console.error('Profile fetch error:', error);
-      setError(
-        error.response?.data?.message || '프로필을 불러오는데 실패했습니다.'
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      try {
-        const payload = token.split('.')[1];
-        const decoded = JSON.parse(window.atob(payload));
-        setUserId(decoded.userId);
-        fetchProfileData(decoded.userId);
-      } catch (error) {
-        console.error('토큰 디코드 실패:', error);
-        setError('토큰 디코드 실패');
-        router.replace('/login');
-      }
-    } else {
-      router.replace('/login');
-    }
-  }, [fetchProfileData, router]);
-
-  if (isLoading) {
-    return (
-      <div className={styles.loadingContainer}>
-        <p>Loading...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className={styles.errorContainer}>
-        <p className={styles.errorText}>Error: {error}</p>
-        <button
-          onClick={() => fetchProfileData(userId)}
-          className={styles.retryButton}
-        >
-          다시 시도
-        </button>
-      </div>
-    );
-  }
-
   return (
     <div className={styles.container}>
-      {profileData && (
-        <Edit
-          userInfo={{
-            ...profileData.user,
-            userId: profileData.userId,
-          }}
-        />
-      )}
       <div className={styles.wrapper}>
         <div className={styles.header}>
           <h1 className={styles.title}>TEAM 2</h1>

@@ -2,9 +2,9 @@ import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import Loader from '@/components/common/Loader';
 import axios from '@/service/api/axios';
-import Edit from '@/components/myPage/MyPageNav.jsx';
+import MyPageNav from '@/components/mypage/MyPageNav.jsx';
 import Profile from '../../components/mypage/Profile.jsx';
-import styles from './Profile.module.css';
+import styles from '@/styles/pages/profile/profile.module.css';
 
 export default function UserProfile() {
   const [profileData, setProfileData] = useState(null);
@@ -23,7 +23,7 @@ export default function UserProfile() {
       console.log('Fetching profile for id:', id);
 
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_DEV_API_URL}/profiles/${id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/profiles/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -77,7 +77,7 @@ export default function UserProfile() {
   );
 
   if (!router.isReady || isLoading) {
-    return <Loader msg='로딩 중' />;
+    return <Loader msg="로딩 중" />;
   }
 
   if (error) {
@@ -95,10 +95,10 @@ export default function UserProfile() {
   }
 
   return (
-    <div className={styles.mainContent}>
+    <div className={styles.MainContent}>
       {profileData && (
         <>
-          <Edit
+          <MyPageNav
             userInfo={{
               ...profileData.user,
               userId: profileData.userId,

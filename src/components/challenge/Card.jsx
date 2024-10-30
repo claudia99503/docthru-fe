@@ -174,7 +174,7 @@ const Card = ({ data, site, isAdmin, onChallengeDeleted }) => {
         className={
           site === 'myPage'
             ? myPageStyles['card-bottom']
-            : styles['card-bottom ']
+            : styles['card-bottom']
         }
       >
         <div
