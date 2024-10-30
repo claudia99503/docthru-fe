@@ -4,7 +4,7 @@ import Loader from '@/components/common/Loader';
 import axios from '@/service/api/axios';
 import MyPageNav from '@/components/mypage/MyPageNav.jsx';
 import Profile from '../../components/mypage/Profile.jsx';
-import styles from '@/styles/pages/profile/profile.module.css';
+import styles from '@/styles/pages/profile/Profile.module.css';
 
 export default function UserProfile() {
   const [profileData, setProfileData] = useState(null);
