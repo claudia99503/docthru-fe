@@ -20,7 +20,7 @@ export function useGiveUpChallenge(id) {
     onSuccess: () => {
       console.log('successMutation');
       queryClient.invalidateQueries({
-        queryKey: challengeKey.details(id),
+        queryKey: challengeKey.detail(id),
       });
       router.push(`/`);
     },
@@ -41,7 +41,7 @@ export function useParticipateChallenge(challengeId) {
     onSuccess: () => {
       console.log('successMutation');
       queryClient.invalidateQueries({
-        queryKey: challengeKey.details(challengeId),
+        queryKey: challengeKey.detail(challengeId),
       });
       router.push(`/work/new/${challengeId}`);
     },
