@@ -1,4 +1,4 @@
-import { useGeWorkFeedbacks } from '@/service/queries/work';
+import { useGetWorkFeedbacks } from '@/service/queries/work';
 import styles from './FeedbackList.module.css';
 import EmptyFeedbacks from './EmptyFeedbacks';
 import FeedbackContent from './FeedbackContent';
@@ -12,12 +12,14 @@ export default function FeedbackList({ id, isClosedChallenge }) {
   }
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isPending } =
-    useGeWorkFeedbacks(id);
+    useGetWorkFeedbacks(id);
 
-  if (isPending) return <Loader />;
+  if (isPending) return <Loader msg="피드백 불러오는 중" />;
 
   const pages = data?.pages || [];
   const isEmpty = pages[0]?.list.length === 0 || pages?.length === 0;
+
+  console.log('reply data', data);
 
   return isEmpty ? (
     <EmptyFeedbacks disabled={isClosedChallenge} />

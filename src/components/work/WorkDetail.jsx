@@ -72,7 +72,6 @@ export default function WorkDetail({ data }) {
         </div>
         <div className={cn('ql-snow', styles.container)}>
           <div
-            q
             className={cn(styles.content, 'ql-editor')}
             dangerouslySetInnerHTML={{ __html: data.content }}
           ></div>
