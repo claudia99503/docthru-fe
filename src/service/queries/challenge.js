@@ -15,6 +15,5 @@ export function useGetChallengeDetail(id) {
     queryKey: challengeKey.detail(id),
     queryFn: () => getChallenge(id),
     enabled: !!id,
-    cacheTime: 0,
   });
 }
