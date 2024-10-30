@@ -62,7 +62,7 @@
 }
 
 .participant-left {
-  width: 184px;
+  min-width: 164px;
   display: flex;
   align-items: center;
   gap: 24px;
@@ -120,8 +120,6 @@
 
 /* 모바일 버전 */
 @media (max-width: 743px) {
-
-
   .ParticipationStatus {
     padding: 16px 16px 23px;
   }
