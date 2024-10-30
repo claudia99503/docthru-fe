@@ -18,7 +18,7 @@ const ChallengeDetailInfo = ({ list }) => {
   const user = list?.writer;
 
   const handleEditClick = () => {
-    router.push(`/application/${list.id}`);
+    router.push(`admin/edit/${list.id}`);
   };
 
   const handleDelete = () => {
