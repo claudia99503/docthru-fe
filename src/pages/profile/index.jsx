@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import Loader from '@/components/common/Loader';
 import axios from '@/service/api/axios';
-import MyPageNav from '@/components/myPage/MyPageNav';
+import MyPageNav from '@/components/mypage/MyPageNav';
 import Profile from '../../components/mypage/Profile';
 import styles from '@/styles/pages/profile/Profile.module.css';
 

@@ -1,7 +1,10 @@
 import styles from './FeedbackContent.module.css';
 import React, { useState } from 'react';
 import { Profile } from '../common/Profile';
-import { useMutateFeedback } from '@/service/mutations/feedback';
+import {
+  useMutateFeedback,
+  useMutateReply,
+} from '@/service/mutations/feedback';
 import UpdateFeedbackForm from './UpdatedFeedbackForm';
 import KebabMenu from '../common/KebabMenu';
 import cn from '@/utils/clsx';
@@ -9,6 +12,7 @@ import { useDeleteModal } from '@/hooks/useModal';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import RepliesList from './RepliesList';
 import Button from '../common/Button';
+import Loader from '../common/Loader';
 
 // 답글 작성 폼 컴포넌트
 function ReplyForm({ onSubmit, onCancel }) {
@@ -72,7 +76,10 @@ export default function FeedbackContent({ feedback }) {
   const [showReplyForm, setShowReplyForm] = useState(false);
   const [isRepliesOpen, setIsRepliesOpen] = useState(false);
   const { onModalOpen, Modal } = useDeleteModal();
-  const { mutate } = useMutateFeedback();
+  const { mutate, isPending: isReplyPending } = useMutateReply();
+
+  const { mutate: feedbackMutate, isPending: isFeedbackPending } =
+    useMutateFeedback();
 
   const repliesCount = feedback.replies?.list?.length || 0;
   const hasMoreReplies = feedback.replies?.meta?.hasNext || false;
@@ -80,13 +87,13 @@ export default function FeedbackContent({ feedback }) {
   const handleEditClick = () => setIsEditMode(true);
   const handleCancelClick = () => setIsEditMode(false);
 
-  const handleDelete = () => {
+  const handleFeedbackDelete = () => {
     mutate({ id: feedback.id, action: 'delete' });
   };
 
-  const handleUpdateSubmit = (data) => {
+  const handleFeedbackUpdateSubmit = (data) => {
     const content = data.content.trim();
-    mutate(
+    feedbackMutate(
       { id: feedback.id, action: 'edit', content },
       {
         onSuccess: () => setIsEditMode(false),
@@ -124,6 +131,7 @@ export default function FeedbackContent({ feedback }) {
     });
   };
 
+  if (isFeedbackPending) return <Loader />;
   return (
     <>
       {!isEditMode ? (
@@ -136,7 +144,7 @@ export default function FeedbackContent({ feedback }) {
                 onDelete={() =>
                   onModalOpen({
                     msg: '피드백을 삭제하시겠어요?',
-                    action: handleDelete,
+                    action: handleFeedbackDelete,
                   })
                 }
               />
@@ -167,6 +175,7 @@ export default function FeedbackContent({ feedback }) {
               feedback={feedback}
               onDelete={handleReplyDelete}
               onUpdate={handleReplyUpdate}
+              isPending={isReplyPending}
             />
           )}
           {showReplyForm && (
@@ -181,7 +190,7 @@ export default function FeedbackContent({ feedback }) {
           <div className={styles.top}>
             <Profile user={feedback.user} date={feedback.updatedAt} />
             <UpdateFeedbackForm
-              onSubmit={handleUpdateSubmit}
+              onSubmit={handleFeedbackUpdateSubmit}
               initialData={feedback}
               onClick={handleCancelClick}
               className={styles.buttons}

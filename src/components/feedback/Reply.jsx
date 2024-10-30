@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { Profile } from '../common/Profile';
-import { useMutateFeedback } from '@/service/mutations/feedback';
 import UpdateFeedbackForm from './UpdatedFeedbackForm';
 import KebabMenu from '../common/KebabMenu';
 import { useDeleteModal } from '@/hooks/useModal';
 import styles from './FeedbackContent.module.css';
 import cn from '@/utils/clsx';
+import Loader from '../common/Loader';
 
-function Reply({ reply, onDelete, onUpdate }) {
+function Reply({ reply, onDelete, onUpdate, isPending }) {
   const [isEditMode, setIsEditMode] = useState(false);
   const { onModalOpen, Modal } = useDeleteModal();
-  const { mutate } = useMutateFeedback();
 
   const handleEdit = () => setIsEditMode(true);
   const handleCancel = () => setIsEditMode(false);
@@ -28,7 +27,7 @@ function Reply({ reply, onDelete, onUpdate }) {
       },
     });
   };
-
+  if (isPending) return <Loader />;
   return (
     <div className={styles.reply}>
       {!isEditMode ? (
