@@ -40,3 +40,4 @@ next-env.d.ts
 # SSL 인증서 및 키 파일 무시
 key.pem
 cert.pem
+server.js
