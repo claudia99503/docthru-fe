@@ -24,9 +24,13 @@ export default function MyApplicationDetailPage() {
   const [error, setError] = useState(null);
   const { Modal, onModalOpen } = useAlertModal();
 
-  const { data: worksData } = useGetWorkList(id, { page: 1 }, {
-    enabled: !!id && challenge?.status === "ACCEPTED",
-  });
+  const { data: worksData } = useGetWorkList(
+    id,
+    { page: 1 },
+    {
+      enabled: !!id && challenge?.status === "ACCEPTED",
+    }
+  );
 
   useEffect(() => {
     if (id) {
@@ -41,11 +45,10 @@ export default function MyApplicationDetailPage() {
           setLoading(false);
         }
       };
-  
+
       fetchChallenge();
     }
   }, [id]);
-  
 
   const handleDelete = async () => {
     try {
@@ -83,7 +86,8 @@ export default function MyApplicationDetailPage() {
       <div className={styles.pageContainer}>
         <ChallengeStatusBadge status={challenge.status} />
 
-        {(challenge.status === "REJECTED" || challenge.status === "DELETED") && (
+        {(challenge.status === "REJECTED" ||
+          challenge.status === "DELETED") && (
           <>
             <ReasonBox
               type={challenge.status === "REJECTED" ? "reject" : "delete"}
@@ -97,7 +101,11 @@ export default function MyApplicationDetailPage() {
 
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>{challenge.title}</h1>
-          <CancelMenu onDelete={handleDelete} />
+          {challenge.status !== "REJECTED" &&
+            challenge.status !== "ACCEPTED" &&
+            challenge.status !== "DELETED" && (
+              <CancelMenu onDelete={handleDelete} />
+            )}
         </div>
 
         <div className={styles.docTypeContainer}>
@@ -126,7 +134,7 @@ export default function MyApplicationDetailPage() {
           ></iframe>
           <button
             className={styles.previewButton}
-            onClick={() => window.open(challenge.docUrl, '_blank')}
+            onClick={() => window.open(challenge.docUrl, "_blank")}
           >
             링크 열기
             <Image
@@ -144,7 +152,13 @@ export default function MyApplicationDetailPage() {
               <p>최다 추천 번역물이 없습니다.</p>
             ) : (
               <>
-                <div style={{ border: "1px solid #F5F5F5", marginTop: "20px", marginBottom: "20px" }} />
+                <div
+                  style={{
+                    border: "1px solid #F5F5F5",
+                    marginTop: "20px",
+                    marginBottom: "20px",
+                  }}
+                />
                 <BestRecWork list={worksData.bestList} />
               </>
             )}
