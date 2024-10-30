@@ -20,12 +20,18 @@ const Container = ({ list }) => {
   };
 
   const getButtonStyles = (type) => {
-    if (type === 'style') {
-      return !list.progress
-        ? { backgroundColor: '#262626', color: '#FFFFFF' }
-        : { backgroundColor: '#E5E5E5', color: '#737373' };
-    } else if (type === 'action') {
-      return !list.progress ? false : true;
+    if (
+      (list.maxParticipants === list.participations.length &&
+        !list.isParticipated) ||
+      list.progress
+    ) {
+      return type === 'style'
+        ? { backgroundColor: 'var(--grey-200)', color: 'var(--grey-500)' }
+        : true;
+    } else {
+      return type === 'style'
+        ? { backgroundColor: 'var(--grey-800)', color: 'white' }
+        : false;
     }
   };
 
