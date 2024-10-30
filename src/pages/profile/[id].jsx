@@ -95,7 +95,7 @@ export default function UserProfile() {
   }
 
   return (
-    <div className={styles.mainContent}>
+    <div className={styles.MainContent}>
       {profileData && (
         <>
           <MyPageNav

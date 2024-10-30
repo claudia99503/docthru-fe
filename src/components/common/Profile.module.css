@@ -20,6 +20,12 @@
 .workList-name {
   font-size: 14px;
   font-weight: 500;
+  flex-grow: 1; 
+  display: inline-block;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  max-width: 15ch; 
 }
 
 .grade,
@@ -53,11 +59,14 @@
   font-size: 12px;
 }
 
-@media (max-width: 743px) {
+@media (max-width: 500px) {
   .workList-name {
-    width: 40px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    max-width: 10ch; 
+  }
+}
+
+@media (max-width: 450px) {
+  .workList-name {
+    max-width: 6ch; 
   }
 }
