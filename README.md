@@ -265,7 +265,7 @@
 
 - **수정 버튼 클릭 시** => 해당 챌린지의 **수정 페이지**로 이동합니다. <br>
 
-✨ **[챌린지 수정 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/application/%5Bid%5D.jsx)** 
+✨ **[챌린지 수정 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/admin/edit/%5Bid%5D.jsx)** 
 
 <table>
   <tr>
