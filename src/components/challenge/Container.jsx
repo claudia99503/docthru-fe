@@ -26,11 +26,11 @@ const Container = ({ list }) => {
       list.progress
     ) {
       return type === 'style'
-        ? { backgroundColor: '#E5E5E5', color: '#737373' }
+        ? { backgroundColor: 'var(--grey-200)', color: 'var(--grey-500)' }
         : true;
     } else {
       return type === 'style'
-        ? { backgroundColor: '#262626', color: '#FFFFFF' }
+        ? { backgroundColor: 'var(--grey-800)', color: 'white' }
         : false;
     }
   };
