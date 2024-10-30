@@ -20,12 +20,18 @@ const Container = ({ list }) => {
   };
 
   const getButtonStyles = (type) => {
-    if (type === 'style') {
-      return !list.progress
+    if (
+      (list.maxParticipants === list.participations.length &&
+        !list.isParticipated) ||
+      list.progress
+    ) {
+      return type === 'style'
+        ? { backgroundColor: '#E5E5E5', color: '#737373' }
+        : true;
+    } else {
+      return type === 'style'
         ? { backgroundColor: '#262626', color: '#FFFFFF' }
-        : { backgroundColor: '#E5E5E5', color: '#737373' };
-    } else if (type === 'action') {
-      return !list.progress ? false : true;
+        : false;
     }
   };
 
