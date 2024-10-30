@@ -3,26 +3,38 @@ import Image from 'next/image';
 import assets from '@/variables/images';
 import { formatDate } from '@/utils/utilFunction';
 import cn from '@/utils/clsx';
+import { CloudinaryImage } from './CloudinaryImage';
 
 export function ProfileImage({ user, width = '32px' }) {
   const isUser = user?.role !== 'ADMIN';
 
   const getImageSource = () => {
     if (!user) return assets.images.profileMember;
-    return (
-      user.image ||
-      (isUser ? assets.images.profileMember : assets.images.profileAdmin)
-    );
+    if (user.image) {
+      const publicId = user.image.split('/').pop();
+      return publicId;
+    }
+    return isUser ? assets.images.profileMember : assets.images.profileAdmin;
   };
 
   return (
     <div className={styles.ProfileImage} style={{ '--width': width }}>
-      <Image
-        src={getImageSource()}
-        alt="profile image"
-        fill
-        className={styles.image}
-      />
+      {user?.image ? (
+        <CloudinaryImage
+          publicId={getImageSource()}
+          alt="profile image"
+          fill
+          className={styles.image}
+          sizes={width}
+        />
+      ) : (
+        <Image
+          src={getImageSource()}
+          alt="profile image"
+          fill
+          className={styles.image}
+        />
+      )}
     </div>
   );
 }
