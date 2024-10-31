@@ -2,7 +2,7 @@
 	<span id="top">
 	<h1>Docthru 프론트엔드 레포지토리</h1><br>
 
-![image](https://github.com/user-attachments/assets/d8691020-d809-4dc8-ad23-76c3392b46f7)
+![image](https://github.com/user-attachments/assets/b7c9c7e6-64f2-46c7-a2a8-3864e6406a56)
 
 
 
@@ -160,7 +160,7 @@
 
 ✨ **[신청한 챌린지 상세 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/me/application/%5Bid%5D.jsx)** 
 
-- **승인 대기 중 상태** => 승인 대기 중인 신청은 언제든지 취소할 수 있습니다.
+- **승인 대기 중 상태** => 승인 대기 중인 신청은 언제든지 취소할 수 있습니다. 승인 대기 중 상태를 제외하고는 신청 취소 버튼이 페이지에 나타나지 않습니다.
 
 <table>
   <tr>
@@ -183,8 +183,8 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/b2a861db-6022-4435-ae6e-0cb16285b3b2" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/14761d15-08cd-4df1-a960-a593c168e122" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/2c4844f4-423d-41c6-8142-2a01cdb8b2fd" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/9181a110-47d8-424b-acfe-f44e5f2abf63" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
@@ -198,8 +198,8 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/59cdd42b-c2fe-4dc6-a7b7-debe1104b634" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/c03159ab-649b-47af-bd64-0b2cb86dbf02" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/4139122e-6c7a-480e-9475-3bce5c013ee7" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/e73dc4a5-d3bd-492d-b5f5-9812ad8a669c" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
@@ -213,13 +213,13 @@
     <th style="width: 350px; height: 100px;">모바일 버전</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/5c1c6917-f69e-492e-923b-360e0cea5912" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/c04b6963-3d60-4dc7-9dc4-80ab0f4ab584" alt="모바일 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/50017ad6-0a97-418a-b7b3-23308ae9d3ed" alt="데스크탑 & 태블릿 버전 이미지"></td>
+    <td><img src="https://github.com/user-attachments/assets/a78a805a-1162-4de4-a640-746b6601a28b" alt="모바일 버전 이미지"></td>
   </tr>
 </table>
 
 - 유저가 신청한 특정 챌린지의 세부 정보를 조회하고 신청 상태 (어드민 유저가 승인 또는 거절 / 삭제) 를 확인할 수 있는 페이지입니다.
-  - **승인 대기 중** 상태 : 승인 대기 중인 신청은 언제든지 취소할 수 있습니다.
+  - **승인 대기 중** 상태 : 승인 대기 중인 신청은 언제든지 취소할 수 있습니다. 승인 대기 중 상태를 제외하고는 신청 취소 버튼이 페이지에 나타나지 않습니다.
   - **승인** 상태 : 승인된 신청에 대해서는 최다 추천 번역 리스트가 제공됩니다.
   - **거절** 또는 **삭제** : 어드민이 입력한 거절 및 삭제 사유도 함께 확인할 수 있습니다.
 - **원문 미리보기** : 유저가 신규 챌린지 신청 페이지에서 입력한 원문 문서 주소에 대한 미리보기 기능이 제공됩니다.
