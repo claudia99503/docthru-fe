@@ -12,15 +12,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 154px;
-  height: 39px;
   border-radius: 19.5px;
+  gap: 6px;
   background-color: var(--brand-black);
   color: white;
   font-weight: 600;
   font-size: 16px;
-  line-height: 19.09px;
-  padding: 0 10px;
+  padding: 8px 14px;
   cursor: pointer;
 }
 
@@ -176,5 +174,9 @@
   .info-container {
     flex-direction: column;
     gap: 20px;
+  }
+
+  .new-challenge-button {
+    font-size: 14px;
   }
 }

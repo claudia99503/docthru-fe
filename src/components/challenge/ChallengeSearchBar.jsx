@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './ChallengeSearchBar.module.css';
-import images from '../../variables/images';
-import Image from 'next/image';
+import Svg from '../common/Svg';
 
 const ChallengeSearchBar = ({ searchTerm, setSearchTerm }) => {
   const handleInputChange = (e) => {
@@ -10,13 +9,7 @@ const ChallengeSearchBar = ({ searchTerm, setSearchTerm }) => {
 
   return (
     <div className={styles.ChallengeSearchBar}>
-      <Image
-        src={images.icons.search}
-        alt="Search Icon"
-        className={styles.icon}
-        width={24}
-        height={24}
-      />
+      <Svg name="search" alt="Search Icon" className={styles.icon} />
       <input
         type="text"
         className={styles.input}

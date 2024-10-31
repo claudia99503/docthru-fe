@@ -5,7 +5,6 @@ import { useGetChallenges } from '@/service/queries/challenge';
 
 import Head from 'next/head';
 import ChallengeSearchBarLarge from '@/components/common/ChallengeSearchBarLarge';
-import images from '@/variables/images';
 import Loader from '@/components/common/Loader';
 import Pagination from '@/components/application/Pagination';
 
@@ -17,6 +16,7 @@ import styles from '@/styles/pages/Home.module.css';
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { getChallengeList } from '@/service/api/challenge';
 import { useMediaQuery } from 'react-responsive';
+import Svg from '@/components/common/Svg';
 
 export default function Home() {
   const isMobile = useMediaQuery({ query: '(max-width: 743px)' });
@@ -80,11 +80,7 @@ export default function Home() {
           onClick={() => router.push('/application')}
         >
           <span>신규 챌린지 신청</span>
-          <img
-            src={images.icons.plus}
-            alt="plus Icon"
-            className={styles.icon}
-          />
+          <Svg name="plus" width="18" />
         </button>
       </div>
       <div className={styles.SearchContainer}>
