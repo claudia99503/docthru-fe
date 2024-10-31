@@ -1,19 +1,19 @@
-import { useRouter } from 'next/router';
-import Head from 'next/head';
-import { useEffect, useState } from 'react';
-import ChallengeStatusBadge from '../../../components/application/ChallengeStatusBadge';
-import DocTypeChip from '../../../components/common/DocTypeChip';
-import InfoContainer from '../../../components/challenge/InfoContainer';
-import CancelMenu from '../../../components/common/CancelMenu';
-import ReasonBox from '../../../components/application/ReasonBox';
-import { getChallenge, deleteChallenges } from '../../../service/api/challenge';
-import { useGetWorkList } from '@/service/queries/work';
-import Loader from '../../../components/common/Loader';
-import BestRecWork from '../../../components/challenge/BestRecWork';
-import styles from '../../../styles/pages/application/MyApplicationDetailPage.module.css';
-import assets from '@/variables/images';
-import { useAlertModal } from '../../../hooks/useModal';
-import Image from 'next/image';
+import { useRouter } from "next/router";
+import Head from "next/head";
+import { useEffect, useState } from "react";
+import ChallengeStatusBadge from "../../../components/application/ChallengeStatusBadge";
+import DocTypeChip from "../../../components/common/DocTypeChip";
+import InfoContainer from "../../../components/challenge/InfoContainer";
+import CancelMenu from "../../../components/common/CancelMenu";
+import ReasonBox from "../../../components/application/ReasonBox";
+import { getChallenge, deleteChallenges } from "../../../service/api/challenge";
+import { useGetWorkList } from "@/service/queries/work";
+import Loader from "../../../components/common/Loader";
+import BestRecWork from "../../../components/challenge/BestRecWork";
+import styles from "../../../styles/pages/application/MyApplicationDetailPage.module.css";
+import assets from "@/variables/images";
+import { useAlertModal } from "../../../hooks/useModal";
+import Image from "next/image";
 
 export default function MyApplicationDetailPage() {
   const router = useRouter();
@@ -28,7 +28,7 @@ export default function MyApplicationDetailPage() {
     id,
     { page: 1 },
     {
-      enabled: !!id && challenge?.status === 'ACCEPTED',
+      enabled: !!id && challenge?.status === "ACCEPTED",
     }
   );
 
@@ -40,7 +40,7 @@ export default function MyApplicationDetailPage() {
           const data = await getChallenge(id);
           setChallenge(data);
         } catch (error) {
-          setError('챌린지를 불러오는데 실패했습니다.');
+          setError("챌린지를 불러오는데 실패했습니다.");
         } finally {
           setLoading(false);
         }
@@ -54,8 +54,8 @@ export default function MyApplicationDetailPage() {
     try {
       await deleteChallenges(id);
       onModalOpen({
-        msg: '챌린지 신청이 취소되었습니다',
-        action: () => router.push('/me/application'),
+        msg: "챌린지 신청이 취소되었습니다",
+        action: () => router.push("/me/application"),
       });
     } catch (error) {
       onModalOpen({ msg: error.message });
@@ -86,11 +86,11 @@ export default function MyApplicationDetailPage() {
       <div className={styles.pageContainer}>
         <ChallengeStatusBadge status={challenge.status} />
 
-        {(challenge.status === 'REJECTED' ||
-          challenge.status === 'DELETED') && (
+        {(challenge.status === "REJECTED" ||
+          challenge.status === "DELETED") && (
           <>
             <ReasonBox
-              type={challenge.status === 'REJECTED' ? '거절' : '삭제'}
+              type={challenge.status === "REJECTED" ? "reject" : "delete"}
               message={challenge.message}
               nickname="독스루 운영진"
               updatedAt={challenge.updatedAt}
@@ -101,9 +101,9 @@ export default function MyApplicationDetailPage() {
 
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>{challenge.title}</h1>
-          {challenge.status !== 'REJECTED' &&
-            challenge.status !== 'ACCEPTED' &&
-            challenge.status !== 'DELETED' && (
+          {challenge.status !== "REJECTED" &&
+            challenge.status !== "ACCEPTED" &&
+            challenge.status !== "DELETED" && (
               <CancelMenu onDelete={handleDelete} />
             )}
         </div>
@@ -134,7 +134,7 @@ export default function MyApplicationDetailPage() {
           ></iframe>
           <button
             className={styles.previewButton}
-            onClick={() => window.open(challenge.docUrl, '_blank')}
+            onClick={() => window.open(challenge.docUrl, "_blank")}
           >
             링크 열기
             <Image
@@ -146,7 +146,7 @@ export default function MyApplicationDetailPage() {
           </button>
         </div>
 
-        {challenge.status === 'ACCEPTED' && (
+        {challenge.status === "ACCEPTED" && (
           <>
             {!worksData?.bestList || worksData.bestList.length === 0 ? (
               <p>최다 추천 번역물이 없습니다.</p>
@@ -154,16 +154,16 @@ export default function MyApplicationDetailPage() {
               <>
                 <div
                   style={{
-                    border: '1px solid #F5F5F5',
-                    marginTop: '20px',
-                    marginBottom: '20px',
+                    border: "1px solid #F5F5F5",
+                    marginTop: "20px",
+                    marginBottom: "20px",
                   }}
                 />
                 <div
                   style={{
-                    border: '1px solid #F5F5F5',
-                    marginTop: '20px',
-                    marginBottom: '20px',
+                    border: "1px solid #F5F5F5",
+                    marginTop: "20px",
+                    marginBottom: "20px",
                   }}
                 />
                 <BestRecWork list={worksData.bestList} />
