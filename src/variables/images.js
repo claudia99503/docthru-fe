@@ -35,6 +35,7 @@ const assets = {
     toggleDown: '/assets/icons/ic_toggle_down.svg',
     toggleUp: '/assets/icons/ic_toggle_up.svg',
     up: '/assets/icons/ic_up.svg',
+    out: '/assets/icons/ic_out.svg'
   },
   images: {
     black: '/assets/images/img_black.svg',
