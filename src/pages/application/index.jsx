@@ -45,10 +45,10 @@ const CreateApplicationPage = () => {
   const { user, isLoading } = useAuth();
 
   useEffect(() => {
-    if (!user && !isLoading) {
+    if (!isLoading && user === null) {
       router.push('/auth/login');
     }
-  }, [user, isLoading]);
+  }, [user, isLoading, router]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
