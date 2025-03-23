@@ -18,12 +18,11 @@
 2. [프론트엔드 팀 소개](#team)
 3. [기술 및 개발 환경](#dev)
 4. [개발 일정](#schedule)
-5. [역할 분담](#roles)
+5. [역할](#roles)
 6. [구현 기능](#feature)
 7. [컨벤션](#convention)
 8. [프로젝트 구조](#tree)
 9. [협업 문화](#culture)
-10. [버그 문제](#bug)
 
 </details>
 <br>
@@ -119,8 +118,7 @@
 
 <br>
 
-## <span id="roles">📝 5. 역할 분담</span>
-### **김민서**
+## <span id="roles">📝 5. 역할</span>
 
 ✨ **[신규 챌린지 신청 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/application/index.jsx)** 
 
@@ -322,272 +320,6 @@
 
 <br>
 
-### 임송이
-
-✨ **[작업물 상세 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/work/%5Bid%5D/index.jsx)**
-
-<table>
-  <tr>
-    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
-    <th style="width: 350px; height: 100px;">모바일 버전</th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/466aaf4c-c3c4-411d-8210-c0971ba6e7da" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/0a8e5c48-0d9b-4323-b74c-e8ec27d251f9" alt="모바일 버전 이미지"></td>
-  </tr>
-</table>
-
-<br>
-
-  - 유저는 자신이 작성한 작업물에 대해서만 수정 및 삭제 버튼이 포함된 메뉴가 표시됩니다. 
-  - 어드민은 모든 작업물에 대해 수정 및 삭제 권한이 있습니다.
-<table>
-  <tr>
-    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
-    <th style="width: 350px; height: 100px;">모바일 버전</th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/0297d21e-1116-4c74-a342-1e052f9b1a76" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/2c18d08e-c8c0-44c4-bf6c-5fcb69b60e76" alt="모바일 버전 이미지"></td>
-  </tr>
-</table>
-
-- 유저가 제출한 작업물의 내용을 조회할 수 있는 페이지입니다.
-- **피드백 조회 및 작성** : 작업물에 대한 피드백을 조회하고 작성할 수 있습니다. 
-- **좋아요 기능** : 작업물에 하트를 남길 수 있으며, 페이지네이션을 통해 추가 피드백을 조회할 수 있습니다.
-- **수정 및 삭제**: 유저는 자신이 작성한 작업물에 대해서만 수정 및 삭제할 수 있습니다. 어드민은 모든 작업물에 대해 수정 및 삭제 권한이 있습니다.
-
-<br>
-
-✨ **[작업물 도전하기 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/work/new/%5Bid%5D.jsx)** 
-
-<table>
-  <tr>
-    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
-    <th style="width: 350px; height: 100px;">모바일 버전</th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/e14e507b-4e02-4c90-84e3-96136fe79d06" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/f6da6700-f9b5-4dd2-b179-0f8f799788cb" alt="모바일 버전 이미지"></td>
-  </tr>
-</table>
-
-<br>
-
- - 원문 버튼 클릭 시
- 
- <table>
-  <tr>
-    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
-    <th style="width: 350px; height: 100px;">모바일 버전</th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/ff9396d4-12e6-4cc3-9063-161b37c2df8f" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/da1f0fb5-59e5-4f0f-a8e7-c06edf05e1b4" alt="모바일 버전 이미지"></td>
-  </tr>
-</table>
-
-<br>
-
- - 임시 저장 후 다시 들어왔을 때 나타나는 알림 메시지
- 
- <table>
-  <tr>
-    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
-    <th style="width: 350px; height: 100px;">모바일 버전</th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/39ef6b19-0186-4e19-a8f2-450cec6738ea" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/31ba91b4-06a3-42b2-a9f6-6e4f378e92d8" alt="모바일 버전 이미지"></td>
-  </tr>
-</table>
-
-<br>
-
-- 유저가 새로운 번역 챌린지에 도전하여 작업물을 작성할 수 있는 페이지입니다.
-- 챌린지 마감일 전까지 제출이 가능합니다.
-- 진행 중인 작업물은 언제든지 포기할 수 있습니다.
-- **원문 미리보기** : 번역할 원문이 미리보기가 제공되어 작업을 진행할 수 있으며, 에디터에서 번역을 작성할 수 있습니다.
-- **임시 저장 기능** : 작성 도중 작업물을 로컬 스토리지에 임시 저장하여 중단 후 이어서 작업할 수 있습니다.
-
-<br>
-
-✨ **[작업물 상세 수정 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/work/%5Bid%5D/edit.jsx)** 
-
-<table>
-  <tr>
-    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
-    <th style="width: 350px; height: 100px;">모바일 버전</th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/e40f2526-a817-46f5-899a-9ada206671d1" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/de2858a1-47fc-43d4-afe9-76511173507c" alt="모바일 버전 이미지"></td>
-  </tr>
-</table>
-
-- 유저는 자신이 작성한 작업물만 수정할 수 있으며, 어드민은 모든 작업물을 수정할 수 있습니다.
-- 미리 채워진 작업물: 이전에 유저가 작성한 번역 작업이 미리 채워진 상태로 로드되며, 수정 후 다시 저장할 수 있습니다.
-
-<br>
-
-
-✨ **[회원가입 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/auth/sign-up.jsx)** 
-
-<table>
-  <tr>
-    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
-    <th style="width: 350px; height: 100px;">모바일 버전</th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/3db553f7-680a-4101-ad42-db0314565cab" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/25aa7132-fbbb-41cc-a20e-b07e665ce97c" alt="모바일 버전 이미지"></td>
-  </tr>
-</table>
-
-- 신규 유저가 Docthru에 회원가입할 수 있는 페이지입니다.
-- **회원 정보 입력** : 회원 가입을 위해 필요한 이메일, 비밀번호, 닉네임 등을 입력할 수 있습니다.
-
-<br>
-
-✨ **[로그인 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/auth/login.jsx)** 
-
-<table>
-  <tr>
-    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
-    <th style="width: 350px; height: 100px;">모바일 버전</th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/3adc9fa6-5959-4f9f-aecb-42f2b2c541fc" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/5c727f9f-a3c8-4d5a-8563-4fb150a9d7e7" alt="모바일 버전 이미지"></td>
-  </tr>
-</table>
-
-- 유저가 계정에 로그인하여 필요한 페이지에 접근할 수 있는 페이지입니다.
-- **권한에 따른 접근 제한** : 로그인 성공 시, 어드민과 유저는 기능과 페이지에 다르게 접근할 수 있습니다.
-
-<br>
-
-### 이율리
-
-✨ **[전체 도전 목록 조회 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/index.js)**
-
-<table>
-  <tr>
-    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
-    <th style="width: 350px; height: 100px;">모바일 버전</th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/06c41221-f1d2-49eb-a71c-acb152bd0d4b" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/863d4967-30fb-4983-b09c-5a696b105abb" alt="모바일 버전 이미지"></td>
-  </tr>
-</table>
-
-- 유저가 참여 가능한 번역 챌린지 목록을 조회할 수 있는 페이지입니다.
-- 제공 정보: 챌린지 제목, 분야, 문서타입, 마감일, 상태(진행 중, 마감), 참여 인원, 최대 참여 가능 인원 등의 정보가 포함됩니다.
-- 검색 및 필터링: 챌린지 제목으로 검색하고, 분야, 문서타입, 상태별로 필터링하여 원하는 챌린지를 찾을 수 있습니다. 페이지네이션 기능이 포함되어 있습니다.
-
-<br>
-
-✨ **[챌린지 상세 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/%5Bid%5D.jsx)**
-
-<table>
-  <tr>
-    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
-    <th style="width: 350px; height: 100px;">모바일 버전</th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/c5e02526-a3f9-447f-9131-383e5b99b4ba" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/32d80294-1f8a-463e-8a7c-57f249d20567" alt="모바일 버전 이미지"></td>
-  </tr>
-</table>
-
--  특정 챌린지의 상세 내용을 유저가 확인할 수 있는 페이지입니다.
- - **진행 중인 챌린지** : 참여한 사람들의 목록이 제공됩니다.
-   - 도전하기 버튼을 통해 챌린지에 참여할 수 있습니다. 
- - **마감된 챌린지** : 참여한 사람들의 목록 및 최다 추천 번역 리스트가 제공됩니다.
-
-<br>
-
-✨ **[참여중인 챌린지 목록 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/me/index.jsx)**
-
-<table>
-  <tr>
-    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
-    <th style="width: 350px; height: 100px;">모바일 버전</th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/db3c4739-a341-4ca3-bfed-89cbac70d33b" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/1092bcb2-b2a3-4aa2-8962-40f38b1fdf8e" alt="모바일 버전 이미지"></td>
-  </tr>
-</table>
-
--  유저가 참여 중인 번역 챌린지 목록을 조회할 수 있는 페이지입니다.
-- 검색 및 필터링: 챌린지 제목, 분야, 문서타입, 상태별로 검색 및 필터링하여 원하는 챌린지를 찾을 수 있으며, 페이지네이션 기능이 포함됩니다.
-  - 도전 계속하기 버튼을 통해 작성한 작업물을 볼 수 있습니다. 
-  
-<br>
-
-✨ **[완료한 챌린지 목록 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/me/done/index.jsx)**
-
-<table>
-  <tr>
-    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
-    <th style="width: 350px; height: 100px;">모바일 버전</th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/55883804-3a33-4aaa-a6c1-8cf2b56d6665" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/648bc6bb-a713-4636-821e-cdeb760da7eb" alt="모바일 버전 이미지"></td>
-  </tr>
-</table>
-
-- 유저가 참여했던 마감된 챌린지 목록을 조회할 수 있는 페이지입니다.
-- 검색 및 필터링: 챌린지 제목, 분야, 문서타입, 상태별로 검색 및 필터링하여 원하는 챌린지를 찾을 수 있으며, 페이지네이션 기능이 포함됩니다.
-  - 작업물 보기 버튼을 통해 작성된 작업물을 볼 수 있습니다. 
-
-<br>
-
-✨ **[어드민 전용 챌린지 보기 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/admin/index.jsx)**
-
-<table>
-  <tr>
-    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
-    <th style="width: 350px; height: 100px;">모바일 버전</th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/06a03260-f4e4-4296-8690-27403c7094b1" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/b6624ae5-cc61-4f54-9114-9db5957e8eac" alt="모바일 버전 이미지"></td>
-  </tr>
-</table>
-
-- 어드민이 전체 챌린지를 조회할 수 있는 페이지입니다.
-- **챌린지 상태 관리** : 어드민은 챌린지 목록에서 각 챌린지의 상태를 확인하고, 필요 시 수정 및 삭제할 수 있습니다.
-
-<br>
-
-✨ **[어드민 전용 챌린지 상세 보기 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/admin/%5Bid%5D.jsx)**
-
-<table>
-  <tr>
-    <th style="width: 650px; height: 100px;">데스크탑 & 태블릿 버전</th>
-    <th style="width: 350px; height: 100px;">모바일 버전</th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/24a8435b-7391-4f91-ac0b-9aed228df453" alt="데스크탑 & 태블릿 버전 이미지"></td>
-    <td><img src="https://github.com/user-attachments/assets/93255a27-a333-4ab2-a3d0-628092346c72" alt="모바일 버전 이미지"></td>
-  </tr>
-</table>
-
-- 어드민이 특정 챌린지의 상세 내용을 확인하고 관리할 수 있는 페이지입니다.
-- **관리 권한** : 어드민은 특정 챌린지를 수정하거나 삭제할 수 있습니다.
-
-<br>
-
-### 마이페이지 (백엔드 팀 기여)
-
-
-
-<br>
-
 #### <p align="right"><a href="#top">TOP👆🏻</a></p>
 
 <br>
@@ -595,25 +327,15 @@
 ## <span id="feature">✨ 6. 구현 기능</span>
 
 ### 유저
-- 🔗 [전체 도전 목록 조회 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/index.js) - [이율리](https://github.com/yoorli)
-- 🔗 [챌린지 상세 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/%5Bid%5D.jsx) - [이율리](https://github.com/yoorli)
-- 🔗 [신규 챌린지 신청 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/application/index.jsx) - [김민서](https://github.com/claudia99503)
-- 🔗 [참여중인 챌린지 목록 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/me/index.jsx) - [이율리](https://github.com/yoorli)
-- 🔗 [완료한 챌린지 목록 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/me/done/index.jsx) - [이율리](https://github.com/yoorli)
-- 🔗 [신청한 챌린지 목록 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/me/application/index.jsx) -[김민서](https://github.com/claudia99503)
-- 🔗 [신청한 챌린지 상세 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/me/application/%5Bid%5D.jsx) - [김민서](https://github.com/claudia99503)
-- 🔗 [작업물 상세 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/work/%5Bid%5D/index.jsx) - [임송이](https://github.com/Im-amberIm)
-- 🔗 [작업 도전하기 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/work/new/%5Bid%5D.jsx) - [임송이](https://github.com/Im-amberIm)
-- 🔗 [작업물 상세 수정 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/work/%5Bid%5D/edit.jsx) - [임송이](https://github.com/Im-amberIm)
-- 🔗 [회원가입 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/auth/sign-up.jsx) - [임송이](https://github.com/Im-amberIm)
-- 🔗 [로그인 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/auth/login.jsx) - [임송이](https://github.com/Im-amberIm)
+- 🔗 [신규 챌린지 신청 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/application/index.jsx)
+- 🔗 [신청한 챌린지 목록 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/me/application/index.jsx)
+- 🔗 [신청한 챌린지 상세 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/me/application/%5Bid%5D.jsx)
+
 
 ### 어드민 전용 페이지
-- 🔗 [챌린지 신청관리 관리 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/admin/application/index.jsx) - [김민서](https://github.com/claudia99503)
-- 🔗 [신청관리 상세 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/admin/application/%5Bid%5D.jsx) - [김민서](https://github.com/claudia99503)
-- 🔗 [챌린지 수정 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/admin/edit/%5Bid%5D.jsx) - [김민서](https://github.com/claudia99503)
-- 🔗 [챌린지 보기 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/admin/index.jsx) - [이율리](https://github.com/yoorli)
-- 🔗 [챌린지 상세 보기 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/admin/%5Bid%5D.jsx) - [이율리](https://github.com/yoorli)
+- 🔗 [챌린지 신청관리 관리 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/admin/application/index.jsx)
+- 🔗 [신청관리 상세 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/admin/application/%5Bid%5D.jsx)
+- 🔗 [챌린지 수정 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/admin/edit/%5Bid%5D.jsx)
 
 <br>
 
@@ -925,7 +647,4 @@
 
 <br>
 
-## <span id="bug">버그 문제</span>
-
-<br> <br>
 
