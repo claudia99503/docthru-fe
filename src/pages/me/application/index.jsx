@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import Head from "next/head";
 import TabNavigation from "../../../components/layouts/TabNavigation";
 import SearchBarWithDropdown from "../../../components/challenge/SearchBarWithDropdown";
@@ -9,24 +9,27 @@ import Loader from "../../../components/common/Loader";
 import styles from "../../../styles/pages/application/MyApplicationPage.module.css";
 
 export default function MyApplicationPage() {
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState(() => "");
   const [searchTerm, setSearchTerm] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(() => 1);
   const [applications, setApplications] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const itemsPerPage = 10;
 
-  const fetchApplications = async () => {
+  const hasApplications = useMemo(() => applications.length > 0, [applications]);
+
+  const fetchApplications = useCallback(async () => {
     setLoading(true);
     try {
-      let status;
-      if (selectedOption === "승인 대기") status = "WAITING";
-      else if (selectedOption === "신청 승인") status = "ACCEPTED";
-      else if (selectedOption === "신청 거절") status = "REJECTED";
+      const statusMap = useMemo(() => ({
+        "승인 대기": "WAITING",
+        "신청 승인": "ACCEPTED",
+        "신청 거절": "REJECTED",
+      }), []);
 
       const response = await getChallengeApplications({
-        status,
+        status: statusMap[selectedOption] || undefined,
         search: searchTerm,
         page: currentPage,
         limit: itemsPerPage,
@@ -39,20 +42,20 @@ export default function MyApplicationPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedOption, searchTerm, currentPage]);
 
   useEffect(() => {
     fetchApplications();
-  }, [selectedOption, searchTerm, currentPage]);
+  }, [fetchApplications]);
 
-  const handleOptionChange = (option) => {
+  const handleOptionChange = useCallback((option) => {
     setSelectedOption(option);
     setCurrentPage(1);
-  };
+  }, []);
 
-  const handlePageChange = (page) => {
+  const handlePageChange = useCallback((page) => {
     setCurrentPage(page);
-  };
+  }, []);
 
   return (
     <>
@@ -77,7 +80,7 @@ export default function MyApplicationPage() {
         <div className={styles.challengeTableWrapper}>
           {loading ? (
             <Loader msg="챌린지를 불러오는 중" />
-          ) : applications && applications.length > 0 ? (
+          ) : hasApplications ? (
             <ChallengeTable data={applications} />
           ) : (
             <div className={styles.noChallengesMessage}>

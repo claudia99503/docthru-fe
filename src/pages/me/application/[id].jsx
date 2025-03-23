@@ -12,8 +12,9 @@ import Loader from "../../../components/common/Loader";
 import BestRecWork from "../../../components/challenge/BestRecWork";
 import styles from "../../../styles/pages/application/MyApplicationDetailPage.module.css";
 import assets from "@/variables/images";
-import { useAlertModal } from "../../../hooks/useModal";
+
 import Image from "next/image";
+import dynamic from "next/dynamic";
 
 export default function MyApplicationDetailPage() {
   const router = useRouter();
@@ -22,7 +23,6 @@ export default function MyApplicationDetailPage() {
   const [challenge, setChallenge] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { Modal, onModalOpen } = useAlertModal();
 
   const { data: worksData } = useGetWorkList(
     id,
@@ -32,35 +32,48 @@ export default function MyApplicationDetailPage() {
     }
   );
 
-  useEffect(() => {
-    if (id) {
-      const fetchChallenge = async () => {
-        try {
-          setLoading(true);
-          const data = await getChallenge(id);
-          setChallenge(data);
-        } catch (error) {
-          setError("챌린지를 불러오는데 실패했습니다.");
-        } finally {
-          setLoading(false);
-        }
-      };
+  const AlertModal = dynamic(() => import("../../../hooks/useModal"), {
+    ssr: false,
+  });
 
-      fetchChallenge();
-    }
-  }, [id]);
 
-  const handleDelete = async () => {
+  const { Modal, onModalOpen } = AlertModal();
+
+useEffect(() => {
+  if (!id) return;
+
+  let isMounted = true;
+
+  const fetchChallenge = async () => {
+    setLoading(true);
     try {
-      await deleteChallenges(id);
-      onModalOpen({
-        msg: "챌린지 신청이 취소되었습니다",
-        action: () => router.push("/me/application"),
-      });
+      const data = await getChallenge(id);
+      if (isMounted) setChallenge(data);
     } catch (error) {
-      onModalOpen({ msg: error.message });
+      if (isMounted) setError("챌린지를 불러오는데 실패했습니다.");
+    } finally {
+      if (isMounted) setLoading(false);
     }
   };
+
+  fetchChallenge();
+
+  return () => {
+    isMounted = false;
+  };
+}, [id]);
+
+
+const handleDelete = async () => {
+  try {
+    await deleteChallenges(id);
+    router.replace("/me/application");
+    onModalOpen({ msg: "챌린지 신청이 취소되었습니다" });
+  } catch (error) {
+    onModalOpen({ msg: error.message });
+  }
+};
+
 
   if (loading) {
     return <Loader msg="챌린지를 불러오는 중" />;
@@ -127,11 +140,13 @@ export default function MyApplicationDetailPage() {
         </a>
 
         <div className={styles.previewContainer}>
-          <iframe
-            src={challenge.docUrl}
-            className={styles.iframePreview}
-            title="Document Preview"
-          ></iframe>
+        <iframe
+  src={challenge.docUrl}
+  className={styles.iframePreview}
+  title="Document Preview"
+  loading="lazy"
+/>
+
           <button
             className={styles.previewButton}
             onClick={() => window.open(challenge.docUrl, "_blank")}
@@ -177,3 +192,4 @@ export default function MyApplicationDetailPage() {
     </>
   );
 }
+

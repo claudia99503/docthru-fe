@@ -21,7 +21,7 @@ export default function AdminApplicationDetailPage() {
   const { id } = router.query;
 
   const [challenge, setChallenge] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState("");
@@ -32,35 +32,25 @@ export default function AdminApplicationDetailPage() {
     id,
     { page: 1 },
     {
-      enabled: !!id && challenge?.status === "ACCEPTED",
+      enabled: Boolean(id && challenge?.status === "ACCEPTED"),
     }
   );
+  
 
   useEffect(() => {
-    if (id) {
-      const fetchChallenge = async () => {
-        try {
-          setLoading(true);
-          const data = await getChallenge(id);
-          setChallenge(data);
-
-          if (data.status === "REJECTED" || data.status === "DELETED") {
-            setReasonData({
-              type: data.status === "REJECTED" ? "reject" : "delete",
-              message: data.message,
-              nickname: "독스루 운영진",
-              updatedAt: data.updatedAt,
-            });
-          }
-        } catch (error) {
-          setError("챌린지를 불러오는데 실패했습니다.");
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      fetchChallenge();
-    }
+    if (!id) return;
+  
+    setIsLoading(true);
+    getChallenge(id)
+      .then((data) => {
+        setChallenge(data);
+      })
+      .catch(() => {
+        setError("챌린지를 불러오는데 실패했습니다.");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [id]);
 
   const handleDelete = () => {
@@ -76,15 +66,13 @@ export default function AdminApplicationDetailPage() {
   const handleApprove = async () => {
     try {
       await updateChallenge(id, { status: "ACCEPTED" });
-      setChallenge({ ...challenge, status: "ACCEPTED" });
-      onModalOpen({
-        msg: "챌린지가 승인되었습니다",
-        action: () => router.push(`/admin/application/${id}`),
-      });
-    } catch (error) {
+      router.replace(router.asPath);
+      onModalOpen({ msg: "챌린지가 승인되었습니다" });
+    } catch {
       onModalOpen({ msg: "승인 중 오류가 발생했습니다" });
     }
   };
+  
 
   const handleEdit = () => {
     router.push(`/admin/edit/${id}`);
@@ -93,26 +81,16 @@ export default function AdminApplicationDetailPage() {
   const handleModalSubmit = async (formData) => {
     try {
       await updateChallenge(id, { ...formData });
-      setChallenge({
-        ...challenge,
-        status: formData.status,
-        message: formData.message,
-      });
-      setReasonData({
-        type: formData.status === "REJECTED" ? "reject" : "delete",
-        message: formData.message,
-        nickname: "독스루 운영진",
-        updatedAt: new Date().toISOString(),
-      });
       setIsModalOpen(false);
+      router.replace(router.asPath);
       onModalOpen({
         msg: formData.status === "REJECTED" ? "챌린지가 거절되었습니다." : "챌린지가 삭제되었습니다.",
-        action: () => router.push(`/admin/application/${id}`),
       });
-    } catch (error) {
+    } catch {
       onModalOpen({ msg: "처리 중 오류가 발생했습니다" });
     }
   };
+  
 
   if (loading) {
     return <Loader msg="챌린지를 불러오는 중" />;
@@ -174,25 +152,28 @@ export default function AdminApplicationDetailPage() {
           원문 링크
         </a>
 
-        <div className={styles.previewContainer}>
-          <iframe
-            src={challenge.docUrl}
-            className={styles.iframePreview}
-            title="Document Preview"
-          ></iframe>
-          <button
-            className={styles.previewButton}
-            onClick={() => window.open(challenge.docUrl, "_blank")}
-          >
-            링크 열기
-            <Image
-              src={assets.icons.diagonal}
-              alt="링크 열기"
-              width={12}
-              height={12}
-            />
-          </button>
-        </div>
+        {challenge.docUrl && (
+  <div className={styles.previewContainer}>
+    <iframe
+      src={challenge.docUrl}
+      className={styles.iframePreview}
+      title="Document Preview"
+    />
+    <button
+      className={styles.previewButton}
+      onClick={() => window.open(challenge.docUrl, "_blank")}
+    >
+      링크 열기
+      <Image
+        src={assets.icons.diagonal}
+        alt="링크 열기"
+        width={12}
+        height={12}
+      />
+    </button>
+  </div>
+)}
+
 
         {challenge.status === "ACCEPTED" && (
           <>
@@ -236,3 +217,4 @@ export default function AdminApplicationDetailPage() {
     </>
   );
 }
+

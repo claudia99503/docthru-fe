@@ -38,52 +38,42 @@ const EditApplicationPage = () => {
   });
 
   const [selectedDate, setSelectedDate] = useState("");
+const [fieldDropdownOpen, setFieldDropdownOpen] = useState(false);
+const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
+  
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [fieldDropdownOpen, setFieldDropdownOpen] = useState(false);
-  const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
   const { Modal, onModalOpen } = useAlertModal();
 
+  
   useEffect(() => {
-    if (id) {
-      const fetchChallenge = async () => {
-        try {
-          setLoading(true);
-          const data = await getChallenge(id);
-          setFormData({
-            title: data.title || "",
-            docUrl: data.docUrl || "",
-            field: data.field || "",
-            docType: data.docType || "",
-            deadline: data.deadline
-              ? new Date(data.deadline).toISOString().substring(0, 10)
-              : "",
-            maxParticipants: data.maxParticipants || "",
-            description: data.description || "",
-          });
-          setSelectedDate(
-            data.deadline
-              ? new Date(data.deadline).toISOString().substring(0, 10)
-              : ""
-          );
-        } catch (error) {
-          setError("데이터를 불러오는 중 오류가 발생했습니다.");
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      fetchChallenge();
-    }
+    if (!id) return;
+  
+    setLoading(true);
+    getChallenge(id)
+      .then((data) => {
+        setFormData((prev) => ({
+          ...prev,
+          title: data.title || "",
+          docUrl: data.docUrl || "",
+          field: data.field || "",
+          docType: data.docType || "",
+          deadline: data.deadline ? new Date(data.deadline).toISOString() : "",
+          maxParticipants: data.maxParticipants || "",
+          description: data.description || "",
+        }));
+      })
+      .catch(() => setError("데이터를 불러오는 중 오류가 발생했습니다."))
+      .finally(() => setLoading(false));
   }, [id]);
+  
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const handleInputChange = ({ target: { name, value } }) => {
+    if (formData[name] !== value) {
+      setFormData((prevData) => ({ ...prevData, [name]: value }));
+    }
   };
+  
 
   const handleFieldSelect = (value) => {
     setFormData((prevData) => ({
@@ -136,40 +126,33 @@ const EditApplicationPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError(null);
-
+  
     const errorMsg = validateForm();
-    if (errorMsg) {
-      setError(errorMsg);
-      setLoading(false);
-      onModalOpen({ msg: errorMsg });
-      return;
-    }
-
+    if (errorMsg) return onModalOpen({ msg: errorMsg });
+  
+    setLoading(true);
+  
     const dataToSend = {
-      title: formData.title,
-      docUrl: formData.docUrl,
-      field: formData.field || fieldMapping[formData.field],
-      docType: formData.docType || docTypeMapping[formData.docType],
+      ...formData,
+      field: fieldMapping[formData.field] || formData.field,
+      docType: docTypeMapping[formData.docType] || formData.docType,
       deadline: new Date(formData.deadline).toISOString(),
       maxParticipants: Number(formData.maxParticipants),
-      description: formData.description,
     };
-
+  
     try {
       await updateChallenge(id, dataToSend);
       onModalOpen({
         msg: "챌린지 수정이 성공적으로 완료되었습니다",
         action: () => router.push(`/admin/application/${id}`),
       });
-    } catch (error) {
-      setError("챌린지 수정 중 오류가 발생했습니다");
+    } catch {
       onModalOpen({ msg: "챌린지 수정 중 오류가 발생했습니다" });
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <>
@@ -315,7 +298,7 @@ const EditApplicationPage = () => {
                 onChange={(e) => {
                   const value = e.target.value;
                   if (/^\d*$/.test(value)) {
-                    handleInputChange(e); // 숫자만 허용
+                    handleInputChange(e);
                   }
                 }}
               />

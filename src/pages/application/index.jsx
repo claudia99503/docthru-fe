@@ -1,41 +1,47 @@
-import React, { useEffect, useState } from 'react';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import styles from '../../styles/pages/application/CreateApplicationPage.module.css';
-import { createChallengeApplication } from '../../service/api/challenge';
-import Loader from '../../components/common/Loader';
-import FieldSelection from '../../components/application/FieldSelection';
-import DocTypeSelection from '../../components/application/DocTypeSelection';
-import assets from '../../variables/images';
-import { useAlertModal } from '../../hooks/useModal';
-import Image from 'next/image';
-import { useAuth } from '@/hooks/useAuth';
+import React, { useEffect, useState, useReducer } from "react";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import styles from "../../styles/pages/application/CreateApplicationPage.module.css";
+import { createChallengeApplication } from "../../service/api/challenge";
+import Loader from "../../components/common/Loader";
+import FieldSelection from "../../components/application/FieldSelection";
+import DocTypeSelection from "../../components/application/DocTypeSelection";
+import assets from "../../variables/images";
+import { useAlertModal } from "../../hooks/useModal";
+import Image from "next/image";
+import { useAuth } from "@/hooks/useAuth";
 
 const fieldMapping = {
-  'Next.js': 'NEXTJS',
-  API: 'API',
-  Career: 'CAREER',
-  'Modern JS': 'MODERNJS',
-  Web: 'WEB',
+  "Next.js": "NEXTJS",
+  API: "API",
+  Career: "CAREER",
+  "Modern JS": "MODERNJS",
+  Web: "WEB",
 };
 
 const docTypeMapping = {
-  '공식 문서': 'OFFICIAL',
-  블로그: 'BLOG',
+  "공식 문서": "OFFICIAL",
+  블로그: "BLOG",
 };
 
 const CreateApplicationPage = () => {
-  const [formData, setFormData] = useState({
-    title: '',
-    docUrl: '',
-    field: '',
-    docType: '',
-    deadline: '',
-    maxParticipants: '',
-    description: '',
-  });
+  const initialState = {
+    title: "",
+    docUrl: "",
+    field: "",
+    docType: "",
+    deadline: "",
+    maxParticipants: "",
+    description: "",
+  };
 
-  const [selectedDate, setSelectedDate] = useState(''); // 화면에서만 표시될 날짜
+  function formReducer(state, action) {
+    return { ...state, [action.name]: action.value };
+  }
+
+  const [formData, dispatch] = useReducer(formReducer, initialState);
+
+  const [selectedDate, setSelectedDate] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [fieldDropdownOpen, setFieldDropdownOpen] = useState(false);
@@ -46,17 +52,13 @@ const CreateApplicationPage = () => {
 
   useEffect(() => {
     if (!isLoading && user === null) {
-      router.push('/auth/login');
+      router.push("/auth/login");
     }
   }, [user, isLoading, router]);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const handleInputChange = useCallback((e) => {
+    dispatch({ name: e.target.name, value: e.target.value });
+  }, []);
 
   const handleFieldSelect = (value) => {
     setFormData((prevData) => ({
@@ -83,66 +85,46 @@ const CreateApplicationPage = () => {
     }));
   };
 
-  const validateForm = () => {
-    const {
-      title,
-      docUrl,
-      field,
-      docType,
-      deadline,
-      maxParticipants,
-      description,
-    } = formData;
-    if (
-      !title ||
-      !docUrl ||
-      !field ||
-      !docType ||
-      !deadline ||
-      !maxParticipants ||
-      !description
-    ) {
-      return '모든 필드를 입력해주세요.';
-    }
-    return null;
-  };
+  const validateForm = () =>
+    Object.values(formData).some((value) => !value)
+      ? "모든 필드를 입력해주세요."
+      : null;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      if (loading) return;
 
-    const errorMsg = validateForm();
-    if (errorMsg) {
-      setError(errorMsg);
-      setLoading(false);
-      onModalOpen({ msg: errorMsg });
-      return;
-    }
+      setLoading(true);
+      setError(null);
 
-    const dataToSend = {
-      title: formData.title,
-      docUrl: formData.docUrl,
-      field: fieldMapping[formData.field],
-      docType: docTypeMapping[formData.docType],
-      deadline: formData.deadline,
-      maxParticipants: Number(formData.maxParticipants),
-      description: formData.description,
-    };
+      const errorMsg = validateForm();
+      if (errorMsg) {
+        onModalOpen({ msg: errorMsg });
+        setLoading(false);
+        return;
+      }
 
-    try {
-      await createChallengeApplication(dataToSend);
-      onModalOpen({
-        msg: '챌린지 신청이 성공적으로 완료되었습니다',
-        action: () => router.push('/me/application'), // 확인 버튼 클릭 시 페이지 이동
-      });
-    } catch (error) {
-      setError('챌린지 생성 중 오류가 발생했습니다.');
-      onModalOpen({ msg: '챌린지 생성 중 오류가 발생했습니다' });
-    } finally {
-      setLoading(false);
-    }
-  };
+      try {
+        await createChallengeApplication({
+          ...formData,
+          field: fieldMapping[formData.field],
+          docType: docTypeMapping[formData.docType],
+          maxParticipants: Number(formData.maxParticipants),
+        });
+
+        onModalOpen({
+          msg: "챌린지 신청이 성공적으로 완료되었습니다",
+          action: () => router.push("/me/application"),
+        });
+      } catch {
+        onModalOpen({ msg: "챌린지 생성 중 오류가 발생했습니다" });
+      } finally {
+        setLoading(false);
+      }
+    },
+    [formData, loading]
+  );
 
   return (
     <>
@@ -154,14 +136,14 @@ const CreateApplicationPage = () => {
         />
       </Head>
       <div className={styles.CreateApplicationPage}>
-        <h1 className={styles['application-title']}>신규 챌린지 신청</h1>
+        <h1 className={styles["application-title"]}>신규 챌린지 신청</h1>
         {loading && <Loader msg="챌린지를 생성 중입니다." />}
         {!loading && (
           <form className={styles.form} onSubmit={handleSubmit}>
             <label className={styles.label}>제목</label>
             <div
-              className={styles['input-wrapper']}
-              style={{ borderRadius: '12px' }}
+              className={styles["input-wrapper"]}
+              style={{ borderRadius: "12px" }}
             >
               <input
                 type="text"
@@ -175,8 +157,8 @@ const CreateApplicationPage = () => {
 
             <label className={styles.label}>원문 링크</label>
             <div
-              className={styles['input-wrapper']}
-              style={{ borderRadius: '12px' }}
+              className={styles["input-wrapper"]}
+              style={{ borderRadius: "12px" }}
             >
               <input
                 type="text"
@@ -190,14 +172,14 @@ const CreateApplicationPage = () => {
 
             <label className={styles.label}>분야</label>
             <div
-              className={styles['input-wrapper']}
-              style={{ borderRadius: '4px' }}
+              className={styles["input-wrapper"]}
+              style={{ borderRadius: "4px" }}
             >
               <input
                 type="text"
                 name="field"
                 placeholder="분야를 선택해주세요"
-                className={styles['select-input']}
+                className={styles["select-input"]}
                 value={formData.field}
                 readOnly
               />
@@ -218,14 +200,14 @@ const CreateApplicationPage = () => {
 
             <label className={styles.label}>문서 타입</label>
             <div
-              className={styles['input-wrapper']}
-              style={{ borderRadius: '4px' }}
+              className={styles["input-wrapper"]}
+              style={{ borderRadius: "4px" }}
             >
               <input
                 type="text"
                 name="docType"
                 placeholder="문서타입을 선택해주세요"
-                className={styles['select-input']}
+                className={styles["select-input"]}
                 value={formData.docType}
                 readOnly
               />
@@ -246,8 +228,8 @@ const CreateApplicationPage = () => {
 
             <label className={styles.label}>마감일</label>
             <div
-              className={styles['input-wrapper']}
-              style={{ borderRadius: '12px' }}
+              className={styles["input-wrapper"]}
+              style={{ borderRadius: "12px" }}
             >
               <input
                 type="text"
@@ -276,8 +258,8 @@ const CreateApplicationPage = () => {
 
             <label className={styles.label}>최대 인원</label>
             <div
-              className={styles['input-wrapper']}
-              style={{ borderRadius: '12px' }}
+              className={styles["input-wrapper"]}
+              style={{ borderRadius: "12px" }}
             >
               <input
                 type="text"
@@ -288,7 +270,7 @@ const CreateApplicationPage = () => {
                 onChange={(e) => {
                   const value = e.target.value;
                   if (/^\d*$/.test(value)) {
-                    handleInputChange(e); // 숫자만 허용
+                    handleInputChange(e);
                   }
                 }}
               />
@@ -301,13 +283,13 @@ const CreateApplicationPage = () => {
               className={styles.textarea}
               value={formData.description}
               onChange={handleInputChange}
-              style={{ borderRadius: '12px' }}
+              style={{ borderRadius: "12px" }}
             ></textarea>
 
             <button
-              className={styles['submit-button']}
+              className={styles["submit-button"]}
               type="submit"
-              style={{ borderRadius: '8px' }}
+              style={{ borderRadius: "8px" }}
             >
               신청하기
             </button>
