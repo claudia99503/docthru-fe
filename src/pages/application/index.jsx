@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useCallback, useEffect, useState, useReducer } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import styles from "../../styles/pages/application/CreateApplicationPage.module.css";

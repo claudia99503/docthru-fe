@@ -1,19 +1,19 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import ChallengeStatusBadge from "../../../components/application/ChallengeStatusBadge";
-import DocTypeChip from "../../../components/common/DocTypeChip";
-import InfoContainer from "../../../components/challenge/InfoContainer";
-import KebabMenu from "../../../components/common/KebabMenu";
-import AdminModal from "../../../components/application/AdminModal";
-import ReasonBox from "../../../components/application/ReasonBox";
-import { getChallenge, updateChallenge } from "../../../service/api/challenge";
+import ChallengeStatusBadge from "@/components/application/ChallengeStatusBadge";
+import DocTypeChip from "@/components/common/DocTypeChip";
+import InfoContainer from "@/components/challenge/InfoContainer";
+import KebabMenu from "@/components/common/KebabMenu";
+import AdminModal from "@/components/application/AdminModal";
+import ReasonBox from "@/components/application/ReasonBox";
+import { getChallenge, updateChallenge } from "@/service/api/challenge";
 import { useGetWorkList } from "@/service/queries/work";
-import Loader from "../../../components/common/Loader";
-import BestRecWork from "../../../components/challenge/BestRecWork";
-import styles from "../../../styles/pages/application/AdminApplicationDetailPage.module.css";
+import Loader from "@/components/common/Loader";
+import BestRecWork from "@/components/challenge/BestRecWork";
+import styles from "@/styles/pages/application/AdminApplicationDetailPage.module.css";
 import assets from "@/variables/images";
-import { useAlertModal } from "../../../hooks/useModal";
+import { useAlertModal } from "@/hooks/useModal";
 import Image from "next/image";
 
 export default function AdminApplicationDetailPage() {
@@ -35,11 +35,10 @@ export default function AdminApplicationDetailPage() {
       enabled: Boolean(id && challenge?.status === "ACCEPTED"),
     }
   );
-  
 
   useEffect(() => {
     if (!id) return;
-  
+
     setIsLoading(true);
     getChallenge(id)
       .then((data) => {
@@ -72,7 +71,6 @@ export default function AdminApplicationDetailPage() {
       onModalOpen({ msg: "승인 중 오류가 발생했습니다" });
     }
   };
-  
 
   const handleEdit = () => {
     router.push(`/admin/edit/${id}`);
@@ -84,15 +82,17 @@ export default function AdminApplicationDetailPage() {
       setIsModalOpen(false);
       router.replace(router.asPath);
       onModalOpen({
-        msg: formData.status === "REJECTED" ? "챌린지가 거절되었습니다." : "챌린지가 삭제되었습니다.",
+        msg:
+          formData.status === "REJECTED"
+            ? "챌린지가 거절되었습니다."
+            : "챌린지가 삭제되었습니다.",
       });
     } catch {
       onModalOpen({ msg: "처리 중 오류가 발생했습니다" });
     }
   };
-  
 
-  if (loading) {
+  if (isLoading) {
     return <Loader msg="챌린지를 불러오는 중" />;
   }
 
@@ -153,27 +153,26 @@ export default function AdminApplicationDetailPage() {
         </a>
 
         {challenge.docUrl && (
-  <div className={styles.previewContainer}>
-    <iframe
-      src={challenge.docUrl}
-      className={styles.iframePreview}
-      title="Document Preview"
-    />
-    <button
-      className={styles.previewButton}
-      onClick={() => window.open(challenge.docUrl, "_blank")}
-    >
-      링크 열기
-      <Image
-        src={assets.icons.diagonal}
-        alt="링크 열기"
-        width={12}
-        height={12}
-      />
-    </button>
-  </div>
-)}
-
+          <div className={styles.previewContainer}>
+            <iframe
+              src={challenge.docUrl}
+              className={styles.iframePreview}
+              title="Document Preview"
+            />
+            <button
+              className={styles.previewButton}
+              onClick={() => window.open(challenge.docUrl, "_blank")}
+            >
+              링크 열기
+              <Image
+                src={assets.icons.diagonal}
+                alt="링크 열기"
+                width={12}
+                height={12}
+              />
+            </button>
+          </div>
+        )}
 
         {challenge.status === "ACCEPTED" && (
           <>
@@ -217,4 +216,3 @@ export default function AdminApplicationDetailPage() {
     </>
   );
 }
-
