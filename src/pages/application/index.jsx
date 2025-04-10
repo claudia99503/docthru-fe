@@ -61,28 +61,19 @@ const CreateApplicationPage = () => {
   }, []);
 
   const handleFieldSelect = (value) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      field: value,
-    }));
+    dispatch({ name: "field", value });
     setFieldDropdownOpen(false);
   };
 
   const handleDocTypeSelect = (value) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      docType: value,
-    }));
+    dispatch({ name: "docType", value });
     setDocTypeDropdownOpen(false);
   };
 
   const handleDateChange = (e) => {
     const date = e.target.value;
     setSelectedDate(date);
-    setFormData((prevData) => ({
-      ...prevData,
-      deadline: new Date(date).toISOString(),
-    }));
+    dispatch({ name: "deadline", value: new Date(date).toISOString() });
   };
 
   const validateForm = () =>
@@ -304,3 +295,4 @@ const CreateApplicationPage = () => {
 };
 
 export default CreateApplicationPage;
+

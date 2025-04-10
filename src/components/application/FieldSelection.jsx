@@ -10,7 +10,10 @@ const FieldSelection = ({ onOptionChange }) => {
         <li
           key={index}
           className={styles['dropdown-item']}
-          onClick={() => onOptionChange(option)}
+          onClick={() => {
+            console.log('선택됨:', option);
+            onOptionChange(option);
+          }}
         >
           {option}
         </li>

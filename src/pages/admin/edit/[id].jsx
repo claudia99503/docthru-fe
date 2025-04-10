@@ -38,17 +38,16 @@ const EditApplicationPage = () => {
   });
 
   const [selectedDate, setSelectedDate] = useState("");
-const [fieldDropdownOpen, setFieldDropdownOpen] = useState(false);
-const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
-  
+  const [fieldDropdownOpen, setFieldDropdownOpen] = useState(false);
+  const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { Modal, onModalOpen } = useAlertModal();
 
-  
   useEffect(() => {
     if (!id) return;
-  
+
     setLoading(true);
     getChallenge(id)
       .then((data) => {
@@ -62,18 +61,21 @@ const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
           maxParticipants: data.maxParticipants || "",
           description: data.description || "",
         }));
+
+        if (data.deadline) {
+          const formattedDate = new Date(data.deadline).toISOString().split("T")[0];
+          setSelectedDate(formattedDate);
+        }
       })
       .catch(() => setError("데이터를 불러오는 중 오류가 발생했습니다."))
       .finally(() => setLoading(false));
   }, [id]);
-  
 
   const handleInputChange = ({ target: { name, value } }) => {
     if (formData[name] !== value) {
       setFormData((prevData) => ({ ...prevData, [name]: value }));
     }
   };
-  
 
   const handleFieldSelect = (value) => {
     setFormData((prevData) => ({
@@ -126,12 +128,12 @@ const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const errorMsg = validateForm();
     if (errorMsg) return onModalOpen({ msg: errorMsg });
-  
+
     setLoading(true);
-  
+
     const dataToSend = {
       ...formData,
       field: fieldMapping[formData.field] || formData.field,
@@ -139,7 +141,7 @@ const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
       deadline: new Date(formData.deadline).toISOString(),
       maxParticipants: Number(formData.maxParticipants),
     };
-  
+
     try {
       await updateChallenge(id, dataToSend);
       onModalOpen({
@@ -152,7 +154,6 @@ const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
       setLoading(false);
     }
   };
-  
 
   return (
     <>
@@ -169,10 +170,7 @@ const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
         {!loading && (
           <form className={styles.form} onSubmit={handleSubmit}>
             <label className={styles.label}>제목</label>
-            <div
-              className={styles["input-wrapper"]}
-              style={{ borderRadius: "12px" }}
-            >
+            <div className={styles["input-wrapper"]} style={{ borderRadius: "12px" }}>
               <input
                 type="text"
                 name="title"
@@ -184,10 +182,7 @@ const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
             </div>
 
             <label className={styles.label}>원문 링크</label>
-            <div
-              className={styles["input-wrapper"]}
-              style={{ borderRadius: "12px" }}
-            >
+            <div className={styles["input-wrapper"]} style={{ borderRadius: "12px" }}>
               <input
                 type="text"
                 name="docUrl"
@@ -199,10 +194,7 @@ const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
             </div>
 
             <label className={styles.label}>분야</label>
-            <div
-              className={styles["input-wrapper"]}
-              style={{ borderRadius: "4px" }}
-            >
+            <div className={styles["input-wrapper"]} style={{ borderRadius: "4px" }}>
               <input
                 type="text"
                 name="field"
@@ -227,10 +219,7 @@ const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
             </div>
 
             <label className={styles.label}>문서 타입</label>
-            <div
-              className={styles["input-wrapper"]}
-              style={{ borderRadius: "4px" }}
-            >
+            <div className={styles["input-wrapper"]} style={{ borderRadius: "4px" }}>
               <input
                 type="text"
                 name="docType"
@@ -255,10 +244,7 @@ const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
             </div>
 
             <label className={styles.label}>마감일</label>
-            <div
-              className={styles["input-wrapper"]}
-              style={{ borderRadius: "12px" }}
-            >
+            <div className={styles["input-wrapper"]} style={{ borderRadius: "12px" }}>
               <input
                 type="text"
                 name="deadline"
@@ -285,10 +271,7 @@ const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
             </div>
 
             <label className={styles.label}>최대 인원</label>
-            <div
-              className={styles["input-wrapper"]}
-              style={{ borderRadius: "12px" }}
-            >
+            <div className={styles["input-wrapper"]} style={{ borderRadius: "12px" }}>
               <input
                 type="text"
                 name="maxParticipants"
@@ -323,7 +306,6 @@ const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
             </button>
           </form>
         )}
-
         {error && <p className={styles.error}>{error}</p>}
         <Modal />
       </div>
@@ -332,3 +314,4 @@ const [docTypeDropdownOpen, setDocTypeDropdownOpen] = useState(false);
 };
 
 export default EditApplicationPage;
+
