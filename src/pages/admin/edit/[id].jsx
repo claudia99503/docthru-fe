@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import styles from "../../../styles/pages/application/EditApplicationPage.module.css";
-import { getChallenge, updateChallenge } from "../../../service/api/challenge";
-import Loader from "../../../components/common/Loader";
-import FieldSelection from "../../../components/application/FieldSelection";
-import DocTypeSelection from "../../../components/application/DocTypeSelection";
-import assets from "../../../variables/images";
-import { useAlertModal } from "../../../hooks/useModal";
+import styles from "@/styles/pages/application/EditApplicationPage.module.css";
+import { getChallenge, updateChallenge } from "@/service/api/challenge";
+import Loader from "@/components/common/Loader";
+import FieldSelection from "@/components/application/FieldSelection";
+import DocTypeSelection from "@/components/application/DocTypeSelection";
+import assets from "@/variables/images";
+import { useAlertModal } from "@/hooks/useModal";
 import Image from "next/image";
 
 const fieldMapping = {

@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useState, useReducer } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import styles from "../../styles/pages/application/CreateApplicationPage.module.css";
-import { createChallengeApplication } from "../../service/api/challenge";
-import Loader from "../../components/common/Loader";
-import FieldSelection from "../../components/application/FieldSelection";
-import DocTypeSelection from "../../components/application/DocTypeSelection";
-import assets from "../../variables/images";
-import { useAlertModal } from "../../hooks/useModal";
+import styles from "@/styles/pages/application/CreateApplicationPage.module.css";
+import { createChallengeApplication } from "@/service/api/challenge";
+import Loader from "@/components/common/Loader";
+import FieldSelection from "@/components/application/FieldSelection";
+import DocTypeSelection from "@/components/application/DocTypeSelection";
+import assets from "@/variables/images";
+import { useAlertModal } from "@/hooks/useModal";
 import Image from "next/image";
 import { useAuth } from "@/hooks/useAuth";
 

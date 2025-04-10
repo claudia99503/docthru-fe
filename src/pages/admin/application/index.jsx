@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback, useReducer } from "react";
 import Head from "next/head";
-import SearchBarWithDropdown from "../../../components/challenge/SearchBarWithDropdown";
-import ChallengeTable from "../../../components/application/ChallengeTable";
-import Pagination from "../../../components/application/Pagination";
-import { getAllChallengeApplications } from "../../../service/api/challenge";
-import Loader from "../../../components/common/Loader";
-import styles from "../../../styles/pages/application/AdminApplicationPage.module.css";
+import SearchBarWithDropdown from "@/components/challenge/SearchBarWithDropdown";
+import ChallengeTable from "@/components/application/ChallengeTable";
+import Pagination from "@/components/application/Pagination";
+import { getAllChallengeApplications } from "@/service/api/challenge";
+import Loader from "@/components/common/Loader";
+import styles from "@/styles/pages/application/AdminApplicationPage.module.css";
 import { debounce } from "lodash";
 
 const initialState = {

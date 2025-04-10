@@ -1,16 +1,16 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import ChallengeStatusBadge from "../../../components/application/ChallengeStatusBadge";
-import DocTypeChip from "../../../components/common/DocTypeChip";
-import InfoContainer from "../../../components/challenge/InfoContainer";
-import CancelMenu from "../../../components/common/CancelMenu";
-import ReasonBox from "../../../components/application/ReasonBox";
-import { getChallenge, deleteChallenges } from "../../../service/api/challenge";
+import ChallengeStatusBadge from "@/components/application/ChallengeStatusBadge";
+import DocTypeChip from "@/components/common/DocTypeChip";
+import InfoContainer from "@/components/challenge/InfoContainer";
+import CancelMenu from "@/components/common/CancelMenu";
+import ReasonBox from "@/components/application/ReasonBox";
+import { getChallenge, deleteChallenges } from "@/service/api/challenge";
 import { useGetWorkList } from "@/service/queries/work";
-import Loader from "../../../components/common/Loader";
-import BestRecWork from "../../../components/challenge/BestRecWork";
-import styles from "../../../styles/pages/application/MyApplicationDetailPage.module.css";
+import Loader from "@/components/common/Loader";
+import BestRecWork from "@/components/challenge/BestRecWork";
+import styles from "@/styles/pages/application/MyApplicationDetailPage.module.css";
 import assets from "@/variables/images";
 
 import Image from "next/image";

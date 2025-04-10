@@ -1,12 +1,12 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import Head from "next/head";
-import TabNavigation from "../../../components/layouts/TabNavigation";
-import SearchBarWithDropdown from "../../../components/challenge/SearchBarWithDropdown";
-import ChallengeTable from "../../../components/application/ChallengeTable";
-import Pagination from "../../../components/application/Pagination";
-import { getChallengeApplications } from "../../../service/api/user";
-import Loader from "../../../components/common/Loader";
-import styles from "../../../styles/pages/application/MyApplicationPage.module.css";
+import TabNavigation from "@/components/layouts/TabNavigation";
+import SearchBarWithDropdown from "@/components/challenge/SearchBarWithDropdown";
+import ChallengeTable from "@/components/application/ChallengeTable";
+import Pagination from "@/components/application/Pagination";
+import { getChallengeApplications } from "@/service/api/user";
+import Loader from "@/components/common/Loader";
+import styles from "@/styles/pages/application/MyApplicationPage.module.css";
 
 export default function MyApplicationPage() {
   const [selectedOption, setSelectedOption] = useState(() => "");
