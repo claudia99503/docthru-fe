@@ -6,23 +6,33 @@
 
 
 
-<b>[Docthru 바로가기](https://docthru.vercel.app/)</b> <br>
+<b>[Docthru 바로가기](https://easydocthru.vercel.app/)</b> <br>
 
 <br> 
 </div>
+
+## 🔐 **테스트용 계정**
+
+### 👤 일반 유저
+- **이메일**: `super101@test.com`  
+- **비밀번호**: `12341234`
+
+### 🛠 어드민 유저
+- **이메일**: `super301@test.com`  
+- **비밀번호**: `12341234`
+
+
+<br>
 
 <details>
 <summary>목차</summary>
   
 1. [서비스 소개](#app)
-2. [프론트엔드 팀 소개](#team)
-3. [기술 및 개발 환경](#dev)
-4. [개발 일정](#schedule)
-5. [역할](#roles)
-6. [구현 기능](#feature)
-7. [컨벤션](#convention)
-8. [프로젝트 구조](#tree)
-9. [협업 문화](#culture)
+2. [기술 및 개발 환경](#dev)
+3. [담당 구현](#roles)
+4. [구현 기능](#feature)
+5. [컨벤션](#convention)
+6. [프로젝트 구조](#tree)
 
 </details>
 <br>
@@ -45,19 +55,8 @@
 
 <br><br>
 
-## <span id="team"> 🧑🏻‍💻👩🏻‍💻 2. 프론트엔드 팀 소개</span>
 
-### 팀원
-
-| 김민서                                                                          | 임송이                                                                          | 이율리                                                                    |
-| ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| <img src="https://avatars.githubusercontent.com/u/101076926?v=4" width="200px"/> | <img src="https://avatars.githubusercontent.com/u/126642292?v=4" width="200px"/> | <img src="https://avatars.githubusercontent.com/u/57631151?v=4" width="200px"/> |
-| [claudia99503](https://github.com/claudia99503)                                 | [Im-amberIm](https://github.com/Im-amberIm)                                      | [yoorli](https://github.com/yoorli)                                  |
-
-<br>
-
-
-## <span id="dev">🛠️ 3. 기술 및 개발 환경</span>
+## <span id="dev">🛠️ 2. 기술 및 개발 환경</span>
 
 ### Frontend
 
@@ -82,43 +81,8 @@
 
 <br><br>
 
-## <span id="schedule">📅 4. 개발 일정 [**2024-10-08 ~ 2024-10-31**]</span>
 
-### 1. 기획 완료
-
-- [x] 요구사항 분석 및 수집
-- [x] 기술 스택 검토 및 선정
-- [x] Git 브랜치 전략 수립
-- [x] PR 규칙 등 팀 컨벤션 확립 [**2024-10-08 ~ 2024-10-09**]
-
-### 2. 컴포넌트 개발
-
-- [x] 각 단위별 담당자 지정 [**2024-10-10**]
-- [x] 컴포넌트 개발 [**2024-10-11 ~ 2024-10-13**]
-
-### 3. 페이지 개발
-
-- [x] 페이지 레이아웃 및 구조 설계 [**2024-10-10**]
-- [x] 페이지 개발 [**2024-10-14 ~ 2024-10-25**]
-- [x] 페이지 스타일링 및 반응형 디자인 적용 [**2024-10-14 ~ 2024-10-25**]
-
-### 4. 백엔드 API 연동
-
-- [x] API 테스트 [**2024-10-21 ~ 2024-10-24**]
-- [x] 페이지에 API 연동 [**2024-10-24 ~ 2024-10-28**]
-
-### 5. 릴리스 준비
-
-- [x] 최종 점검 및 테스트
-- [x] **최종 발표** [**2024-10-31**]
-
-<br>
-
-#### <p align="right"><a href="#top">TOP👆🏻</a></p>
-
-<br>
-
-## <span id="roles">📝 5. 역할</span>
+## <span id="roles">📝 3. 담당 구현</span>
 
 ✨ **[신규 챌린지 신청 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/application/index.jsx)** 
 
@@ -261,7 +225,9 @@
 
 <br>
 
-- **수정 버튼 클릭 시** => 해당 챌린지의 **수정 페이지**로 이동합니다. <br>
+- **수정 버튼 클릭 시** => 해당 챌린지의 **수정 페이지**로 이동합니다.
+
+<br>
 
 ✨ **[챌린지 수정 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/admin/edit/%5Bid%5D.jsx)** 
 
@@ -324,7 +290,7 @@
 
 <br>
 
-## <span id="feature">✨ 6. 구현 기능</span>
+## <span id="feature">✨ 4. 구현 기능</span>
 
 ### 유저
 - 🔗 [신규 챌린지 신청 페이지](https://github.com/Docthru/docthru-fe/blob/main/src/pages/application/index.jsx)
@@ -344,7 +310,7 @@
 <br>
 
 
-## <span id="convention">🖌️ 7. 컨벤션</span>
+## <span id="convention">🖌️ 5. 컨벤션</span>
 
 ### Git 컨벤션
 
@@ -382,7 +348,7 @@
 
 <br>
 
-## <span id="tree">🌱 8. 프로젝트 구조</span>
+## <span id="tree">🌱 6. 프로젝트 구조</span>
 
 - **public/**: 애플리케이션의 정적 자산을 포함하는 디렉터리.
     - **assets/**: 이미지 파일을 포함하는 디렉터리.
@@ -430,218 +396,6 @@
 - **jsconfig.json**: 경로 설정 및 프로젝트 구성 파일.
 - **next.config.mjs**: Next.js 설정 파일.
 - **package.json**: 프로젝트 의존성 및 스크립트 관리.
-
-```
-📦src
- ┣ 📂components
- ┃ ┣ 📂application
- ┃ ┃ ┣ 📜AdminModal.jsx
- ┃ ┃ ┣ 📜AdminModal.module.css
- ┃ ┃ ┣ 📜ApplicationDropdown.jsx
- ┃ ┃ ┣ 📜ApplicationDropdown.module.css
- ┃ ┃ ┣ 📜ChallengeStatusBadge.jsx
- ┃ ┃ ┣ 📜ChallengeStatusBadge.module.css
- ┃ ┃ ┣ 📜ChallengeTable.jsx
- ┃ ┃ ┣ 📜ChallengeTable.module.css
- ┃ ┃ ┣ 📜DocTypeSelection.jsx
- ┃ ┃ ┣ 📜DocTypeSelection.module.css
- ┃ ┃ ┣ 📜FieldSelection.jsx
- ┃ ┃ ┣ 📜FieldSelection.module.css
- ┃ ┃ ┣ 📜Pagination.jsx
- ┃ ┃ ┣ 📜Pagination.module.css
- ┃ ┃ ┣ 📜ReasonBox.jsx
- ┃ ┃ ┗ 📜ReasonBox.module.css
- ┃ ┣ 📂challenge
- ┃ ┃ ┣ 📜AllCardSection.jsx
- ┃ ┃ ┣ 📜AllCardSection.module.css
- ┃ ┃ ┣ 📜BestRecWork.jsx
- ┃ ┃ ┣ 📜BestRecWork.module.css
- ┃ ┃ ┣ 📜Card.jsx
- ┃ ┃ ┣ 📜Card.module.css
- ┃ ┃ ┣ 📜ChallengeDetailInfo.jsx
- ┃ ┃ ┣ 📜ChallengeDetailInfo.module.css
- ┃ ┃ ┣ 📜ChallengeDropdown.jsx
- ┃ ┃ ┣ 📜ChallengeDropdown.module.css
- ┃ ┃ ┣ 📜ChallengeSearchBar.jsx
- ┃ ┃ ┣ 📜ChallengeSearchBar.module.css
- ┃ ┃ ┣ 📜Container.jsx
- ┃ ┃ ┣ 📜Container.module.css
- ┃ ┃ ┣ 📜InfoContainer.jsx
- ┃ ┃ ┣ 📜InfoContainer.module.css
- ┃ ┃ ┣ 📜ParticipationStatus.jsx
- ┃ ┃ ┣ 📜ParticipationStatus.module.css
- ┃ ┃ ┣ 📜SearchBarWithDropdown.jsx
- ┃ ┃ ┣ 📜SearchBarWithDropdown.module.css
- ┃ ┃ ┣ 📜SeveralBestRecCards.jsx
- ┃ ┃ ┗ 📜SeveralBestRecCards.module.css
- ┃ ┣ 📂common
- ┃ ┃ ┣ 📂form
- ┃ ┃ ┃ ┣ 📜Input.jsx
- ┃ ┃ ┃ ┣ 📜PasswordInput.jsx
- ┃ ┃ ┃ ┣ 📜TextArea.jsx
- ┃ ┃ ┃ ┗ 📜inputFields.module.css
- ┃ ┃ ┣ 📜Border.jsx
- ┃ ┃ ┣ 📜Border.module.css
- ┃ ┃ ┣ 📜Button.jsx
- ┃ ┃ ┣ 📜Button.module.css
- ┃ ┃ ┣ 📜CancelMenu.jsx
- ┃ ┃ ┣ 📜CancelMenu.module.css
- ┃ ┃ ┣ 📜ChallengeSearchBarLarge.jsx
- ┃ ┃ ┣ 📜ChallengeSearchBarLarge.module.css
- ┃ ┃ ┣ 📜DocTypeChip.jsx
- ┃ ┃ ┣ 📜DocTypeChip.module.css
- ┃ ┃ ┣ 📜Iframe.jsx
- ┃ ┃ ┣ 📜KebabMenu.jsx
- ┃ ┃ ┣ 📜KebabMenu.module.css
- ┃ ┃ ┣ 📜LikeButton.jsx
- ┃ ┃ ┣ 📜LikeButton.module.css
- ┃ ┃ ┣ 📜Loader.jsx
- ┃ ┃ ┣ 📜Loader.module.css
- ┃ ┃ ┣ 📜Message.jsx
- ┃ ┃ ┣ 📜Message.module.css
- ┃ ┃ ┣ 📜Profile.jsx
- ┃ ┃ ┣ 📜Profile.module.css
- ┃ ┃ ┗ 📜Svg.jsx
- ┃ ┣ 📂feedback
- ┃ ┃ ┣ 📜EmptyFeedbacks.jsx
- ┃ ┃ ┣ 📜EmptyFeedbacks.module.css
- ┃ ┃ ┣ 📜FeedbackContent.jsx
- ┃ ┃ ┣ 📜FeedbackContent.module.css
- ┃ ┃ ┣ 📜FeedbackForm.jsx
- ┃ ┃ ┣ 📜FeedbackForm.module.css
- ┃ ┃ ┣ 📜FeedbackList.jsx
- ┃ ┃ ┣ 📜FeedbackList.module.css
- ┃ ┃ ┣ 📜RepliesList.jsx
- ┃ ┃ ┣ 📜Reply.jsx
- ┃ ┃ ┣ 📜UpdateFeedbackForm.module.css
- ┃ ┃ ┗ 📜UpdatedFeedbackForm.jsx
- ┃ ┣ 📂layouts
- ┃ ┃ ┣ 📜Headers.jsx
- ┃ ┃ ┣ 📜Headers.module.css
- ┃ ┃ ┣ 📜Layout.jsx
- ┃ ┃ ┣ 📜Layout.module.css
- ┃ ┃ ┣ 📜Nav.jsx
- ┃ ┃ ┣ 📜Nav.module.css
- ┃ ┃ ┣ 📜ProfileDropDown.jsx
- ┃ ┃ ┣ 📜ProfileDropDown.module.css
- ┃ ┃ ┣ 📜TabNavigation.jsx
- ┃ ┃ ┗ 📜TabNavigation.module.css
- ┃ ┣ 📂modals
- ┃ ┃ ┣ 📜AlertModal.jsx
- ┃ ┃ ┣ 📜AlertModal.module.css
- ┃ ┃ ┣ 📜Toast.jsx
- ┃ ┃ ┣ 📜Toast.module.css
- ┃ ┃ ┣ 📜TwoBtnModal.jsx
- ┃ ┃ ┗ 📜TwoBtnModal.module.css
- ┃ ┣ 📂user
- ┃ ┃ ┣ 📜LoginForm.jsx
- ┃ ┃ ┣ 📜SignUpForm.jsx
- ┃ ┃ ┗ 📜userForms.module.css
- ┃ ┗ 📂work
- ┃ ┃ ┣ 📜TextEditor.jsx
- ┃ ┃ ┣ 📜TextEditor.module.css
- ┃ ┃ ┣ 📜WorkDetail.jsx
- ┃ ┃ ┗ 📜WorkDetail.module.css
- ┣ 📂context
- ┃ ┗ 📜AuthProvider.js
- ┣ 📂hooks
- ┃ ┣ 📜useAuth.js
- ┃ ┗ 📜useModal.js
- ┣ 📂pages
- ┃ ┣ 📂admin
- ┃ ┃ ┣ 📂application
- ┃ ┃ ┃ ┣ 📜[id].jsx
- ┃ ┃ ┃ ┗ 📜index.jsx
- ┃ ┃ ┣ 📂work
- ┃ ┃ ┃ ┣ 📜[id].jsx
- ┃ ┃ ┃ ┗ 📜edit.jsx
- ┃ ┃ ┣ 📜[id].jsx
- ┃ ┃ ┣ 📜edit.jsx
- ┃ ┃ ┗ 📜index.jsx
- ┃ ┣ 📂application
- ┃ ┃ ┣ 📜[id].jsx
- ┃ ┃ ┗ 📜index.jsx
- ┃ ┣ 📂auth
- ┃ ┃ ┣ 📜login.jsx
- ┃ ┃ ┗ 📜sign-up.jsx
- ┃ ┣ 📂me
- ┃ ┃ ┣ 📂application
- ┃ ┃ ┃ ┣ 📜[id].jsx
- ┃ ┃ ┃ ┗ 📜index.jsx
- ┃ ┃ ┣ 📂done
- ┃ ┃ ┃ ┗ 📜index.jsx
- ┃ ┃ ┗ 📜index.jsx
- ┃ ┣ 📂work
- ┃ ┃ ┣ 📂[id]
- ┃ ┃ ┃ ┣ 📜edit.jsx
- ┃ ┃ ┃ ┗ 📜index.jsx
- ┃ ┃ ┗ 📂new
- ┃ ┃ ┃ ┗ 📜[id].jsx
- ┃ ┣ 📜[id].jsx
- ┃ ┣ 📜_app.js
- ┃ ┣ 📜_document.js
- ┃ ┗ 📜index.js
- ┣ 📂service
- ┃ ┣ 📂api
- ┃ ┃ ┣ 📜application.js
- ┃ ┃ ┣ 📜auth.js
- ┃ ┃ ┣ 📜axios.js
- ┃ ┃ ┣ 📜challenge.js
- ┃ ┃ ┣ 📜feedback.js
- ┃ ┃ ┣ 📜user.js
- ┃ ┃ ┗ 📜work.js
- ┃ ┣ 📂mutations
- ┃ ┃ ┣ 📜application.js
- ┃ ┃ ┣ 📜feedback.js
- ┃ ┃ ┣ 📜user.js
- ┃ ┃ ┗ 📜work.js
- ┃ ┗ 📂queries
- ┃ ┃ ┣ 📜application.js
- ┃ ┃ ┣ 📜challenge.js
- ┃ ┃ ┣ 📜user.js
- ┃ ┃ ┗ 📜work.js
- ┣ 📂styles
- ┃ ┣ 📂pages
- ┃ ┃ ┣ 📂application
- ┃ ┃ ┃ ┣ 📜AdminApplicationDetailPage.module.css
- ┃ ┃ ┃ ┣ 📜AdminApplicationPage.module.css
- ┃ ┃ ┃ ┣ 📜CreateApplicationPage.module.css
- ┃ ┃ ┃ ┣ 📜EditApplicationPage.module.css
- ┃ ┃ ┃ ┣ 📜MyApplicationDetailPage.module.css
- ┃ ┃ ┃ ┗ 📜MyApplicationPage.module.css
- ┃ ┃ ┣ 📂work
- ┃ ┃ ┃ ┣ 📜mutateWork.module.css
- ┃ ┃ ┃ ┗ 📜workDetail.module.css
- ┃ ┃ ┣ 📜Home.module.css
- ┃ ┃ ┗ 📜auth.module.css
- ┃ ┣ 📜globals.css
- ┃ ┗ 📜reset.css
- ┣ 📂utils
- ┃ ┣ 📜canUseDom.jsx
- ┃ ┣ 📜clsx.js
- ┃ ┣ 📜generateImgSrc.js
- ┃ ┣ 📜generateSprite.js
- ┃ ┣ 📜generateSprite_v2.js
- ┃ ┗ 📜utilFunction.js
- ┗ 📂variables
- ┃ ┣ 📜fonts.js
- ┃ ┣ 📜formValidation.js
- ┃ ┣ 📜images.js
- ┃ ┣ 📜queryKeys.js
- ┃ ┗ 📜variables.js
-```
-<br>
-
-#### <p align="right"><a href="#top">TOP👆🏻</a></p>
-
-<br>
-
-## <span id="culture">💪🏻 9. 협업 문화</span>
-
-- 일시: 평일 오전 9시 ~ 오후 7시, 주말
-- 내용: PR 내용 발표 및 코드 리뷰, 진행 상황 점검, 추가 이후 계획 논의
-
-<br>
 
 #### <p align="right"><a href="#top">TOP👆🏻</a></p>
 
