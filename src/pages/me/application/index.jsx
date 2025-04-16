@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useEffect, useCallback, useReducer } from "react";
 import Head from "next/head";
 import TabNavigation from "@/components/layouts/TabNavigation";
 import SearchBarWithDropdown from "@/components/challenge/SearchBarWithDropdown";
@@ -7,55 +7,70 @@ import Pagination from "@/components/application/Pagination";
 import { getChallengeApplications } from "@/service/api/user";
 import Loader from "@/components/common/Loader";
 import styles from "@/styles/pages/application/MyApplicationPage.module.css";
+import { STATUS_MAP } from "@/constants/statusMap";
+
+const initialState = {
+  selectedOption: "",
+  searchTerm: "",
+  currentPage: 1,
+  applications: [],
+  totalPages: 1,
+  loading: false,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "SET_OPTION":
+      return { ...state, selectedOption: action.payload, currentPage: 1 };
+    case "SET_SEARCH":
+      return { ...state, searchTerm: action.payload };
+    case "SET_PAGE":
+      return { ...state, currentPage: action.payload };
+    case "SET_APPLICATIONS":
+      return {
+        ...state,
+        applications: action.payload.applications,
+        totalPages: action.payload.totalPages,
+      };
+    case "SET_LOADING":
+      return { ...state, loading: action.payload };
+    default:
+      return state;
+  }
+}
 
 export default function MyApplicationPage() {
-  const [selectedOption, setSelectedOption] = useState(() => "");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [currentPage, setCurrentPage] = useState(() => 1);
-  const [applications, setApplications] = useState([]);
-  const [totalPages, setTotalPages] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const itemsPerPage = 10;
 
-  const hasApplications = useMemo(() => applications.length > 0, [applications]);
-
   const fetchApplications = useCallback(async () => {
-    setLoading(true);
-    try {
-      const statusMap = useMemo(() => ({
-        "승인 대기": "WAITING",
-        "신청 승인": "ACCEPTED",
-        "신청 거절": "REJECTED",
-      }), []);
+    dispatch({ type: "SET_LOADING", payload: true });
 
+    try {
       const response = await getChallengeApplications({
-        status: statusMap[selectedOption] || undefined,
-        search: searchTerm,
-        page: currentPage,
+        status: STATUS_MAP[state.selectedOption] || undefined,
+        search: state.searchTerm,
+        page: state.currentPage,
         limit: itemsPerPage,
       });
 
-      setApplications(response.challenges);
-      setTotalPages(response.meta.totalPages);
+      dispatch({
+        type: "SET_APPLICATIONS",
+        payload: {
+          applications: response.challenges,
+          totalPages: response.meta.totalPages,
+        },
+      });
     } catch (error) {
       console.error("Failed to fetch applications:", error);
     } finally {
-      setLoading(false);
+      dispatch({ type: "SET_LOADING", payload: false });
     }
-  }, [selectedOption, searchTerm, currentPage]);
+  }, [state.selectedOption, state.searchTerm, state.currentPage]);
 
   useEffect(() => {
     fetchApplications();
   }, [fetchApplications]);
-
-  const handleOptionChange = useCallback((option) => {
-    setSelectedOption(option);
-    setCurrentPage(1);
-  }, []);
-
-  const handlePageChange = useCallback((page) => {
-    setCurrentPage(page);
-  }, []);
 
   return (
     <>
@@ -72,16 +87,20 @@ export default function MyApplicationPage() {
         </div>
         <div className={styles.applicationSearchDropdownContainer}>
           <SearchBarWithDropdown
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            onOptionChange={handleOptionChange}
+            searchTerm={state.searchTerm}
+            setSearchTerm={(value) =>
+              dispatch({ type: "SET_SEARCH", payload: value })
+            }
+            onOptionChange={(option) =>
+              dispatch({ type: "SET_OPTION", payload: option })
+            }
           />
         </div>
         <div className={styles.challengeTableWrapper}>
-          {loading ? (
+          {state.loading ? (
             <Loader msg="챌린지를 불러오는 중" />
-          ) : hasApplications ? (
-            <ChallengeTable data={applications} />
+          ) : state.applications.length > 0 ? (
+            <ChallengeTable data={state.applications} />
           ) : (
             <div className={styles.noChallengesMessage}>
               아직 챌린지가 없어요.
@@ -90,9 +109,11 @@ export default function MyApplicationPage() {
         </div>
         <div className={styles.paginationWrapper}>
           <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
+            currentPage={state.currentPage}
+            totalPages={state.totalPages}
+            onPageChange={(page) =>
+              dispatch({ type: "SET_PAGE", payload: page })
+            }
           />
         </div>
       </div>
