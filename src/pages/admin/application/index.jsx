@@ -7,6 +7,7 @@ import { getAllChallengeApplications } from "@/service/api/challenge";
 import Loader from "@/components/common/Loader";
 import styles from "@/styles/pages/application/AdminApplicationPage.module.css";
 import { debounce } from "lodash";
+import { STATUS_MAP } from "@/constants/statusMap";
 
 const initialState = {
   selectedOption: "",
@@ -42,13 +43,8 @@ export default function AdminApplicationPage() {
       dispatch({ type: "SET_LOADING", payload: true });
 
       try {
-        const statusMap = {
-          "승인 대기": "WAITING",
-          "신청 승인": "ACCEPTED",
-          "신청 거절": "REJECTED",
-        };
         const response = await getAllChallengeApplications({
-          status: statusMap[state.selectedOption] || undefined,
+          status: STATUS_MAP[state.selectedOption] || undefined,
           keyword: state.searchTerm,
           page: state.currentPage,
           limit: 10,
