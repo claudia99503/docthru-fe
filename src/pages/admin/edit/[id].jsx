@@ -9,6 +9,7 @@ import DocTypeSelection from "@/components/application/DocTypeSelection";
 import assets from "@/variables/images";
 import { useAlertModal } from "@/hooks/useModal";
 import Image from "next/image";
+import { validateFormFields } from "@/utils/validateFormFields";
 
 const fieldMapping = {
   "Next.js": "NEXTJS",
@@ -63,7 +64,9 @@ const EditApplicationPage = () => {
         }));
 
         if (data.deadline) {
-          const formattedDate = new Date(data.deadline).toISOString().split("T")[0];
+          const formattedDate = new Date(data.deadline)
+            .toISOString()
+            .split("T")[0];
           setSelectedDate(formattedDate);
         }
       })
@@ -93,8 +96,20 @@ const EditApplicationPage = () => {
     setDocTypeDropdownOpen(false);
   };
 
+  const isPastDate = (dateStr) => {
+    const selected = new Date(dateStr);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return selected < today;
+  };
+
   const handleDateChange = (e) => {
     const date = e.target.value;
+    if (isPastDate(date)) {
+      onModalOpen({ msg: "오늘 이전 날짜는 선택할 수 없습니다." });
+      return;
+    }
+
     setSelectedDate(date);
     setFormData((prevData) => ({
       ...prevData,
@@ -102,35 +117,14 @@ const EditApplicationPage = () => {
     }));
   };
 
-  const validateForm = () => {
-    const {
-      title,
-      docUrl,
-      field,
-      docType,
-      deadline,
-      maxParticipants,
-      description,
-    } = formData;
-    if (
-      !title ||
-      !docUrl ||
-      !field ||
-      !docType ||
-      !deadline ||
-      !maxParticipants ||
-      !description
-    ) {
-      return "모든 필드를 입력해주세요.";
-    }
-    return null;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const errorMsg = validateForm();
-    if (errorMsg) return onModalOpen({ msg: errorMsg });
+    const errorMsg = validateFormFields(formData);
+    if (errorMsg) {
+      onModalOpen({ msg: errorMsg });
+      return;
+    }
 
     setLoading(true);
 
@@ -170,7 +164,10 @@ const EditApplicationPage = () => {
         {!loading && (
           <form className={styles.form} onSubmit={handleSubmit}>
             <label className={styles.label}>제목</label>
-            <div className={styles["input-wrapper"]} style={{ borderRadius: "12px" }}>
+            <div
+              className={styles["input-wrapper"]}
+              style={{ borderRadius: "12px" }}
+            >
               <input
                 type="text"
                 name="title"
@@ -182,7 +179,10 @@ const EditApplicationPage = () => {
             </div>
 
             <label className={styles.label}>원문 링크</label>
-            <div className={styles["input-wrapper"]} style={{ borderRadius: "12px" }}>
+            <div
+              className={styles["input-wrapper"]}
+              style={{ borderRadius: "12px" }}
+            >
               <input
                 type="text"
                 name="docUrl"
@@ -194,7 +194,10 @@ const EditApplicationPage = () => {
             </div>
 
             <label className={styles.label}>분야</label>
-            <div className={styles["input-wrapper"]} style={{ borderRadius: "4px" }}>
+            <div
+              className={styles["input-wrapper"]}
+              style={{ borderRadius: "4px" }}
+            >
               <input
                 type="text"
                 name="field"
@@ -219,7 +222,10 @@ const EditApplicationPage = () => {
             </div>
 
             <label className={styles.label}>문서 타입</label>
-            <div className={styles["input-wrapper"]} style={{ borderRadius: "4px" }}>
+            <div
+              className={styles["input-wrapper"]}
+              style={{ borderRadius: "4px" }}
+            >
               <input
                 type="text"
                 name="docType"
@@ -244,7 +250,10 @@ const EditApplicationPage = () => {
             </div>
 
             <label className={styles.label}>마감일</label>
-            <div className={styles["input-wrapper"]} style={{ borderRadius: "12px" }}>
+            <div
+              className={styles["input-wrapper"]}
+              style={{ borderRadius: "12px" }}
+            >
               <input
                 type="text"
                 name="deadline"
@@ -271,7 +280,10 @@ const EditApplicationPage = () => {
             </div>
 
             <label className={styles.label}>최대 인원</label>
-            <div className={styles["input-wrapper"]} style={{ borderRadius: "12px" }}>
+            <div
+              className={styles["input-wrapper"]}
+              style={{ borderRadius: "12px" }}
+            >
               <input
                 type="text"
                 name="maxParticipants"
