@@ -10,6 +10,7 @@ import assets from "@/variables/images";
 import { useAlertModal } from "@/hooks/useModal";
 import Image from "next/image";
 import { useAuth } from "@/hooks/useAuth";
+import { validateFormFields } from "@/utils/validateFormFields";
 
 const fieldMapping = {
   "Next.js": "NEXTJS",
@@ -70,16 +71,24 @@ const CreateApplicationPage = () => {
     setDocTypeDropdownOpen(false);
   };
 
+  const isPastDate = (dateStr) => {
+    const selected = new Date(dateStr);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return selected < today;
+  };
+
   const handleDateChange = (e) => {
     const date = e.target.value;
+    if (isPastDate(date)) {
+      onModalOpen({ msg: "오늘 이전 날짜는 선택할 수 없습니다." });
+      return;
+    }
+
     setSelectedDate(date);
     dispatch({ name: "deadline", value: new Date(date).toISOString() });
   };
 
-  const validateForm = () =>
-    Object.values(formData).some((value) => !value)
-      ? "모든 필드를 입력해주세요."
-      : null;
 
   const handleSubmit = useCallback(
     async (e) => {
@@ -89,7 +98,7 @@ const CreateApplicationPage = () => {
       setLoading(true);
       setError(null);
 
-      const errorMsg = validateForm();
+      const errorMsg = validateFormFields(formData);
       if (errorMsg) {
         onModalOpen({ msg: errorMsg });
         setLoading(false);
