@@ -2,14 +2,14 @@
   "name": "doksuru-fe",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": " next dev",
     "start": "npm run build && next start",
     "build": "next build",
     "lint": "next lint",
     "image": "nodemon src/utils/generateImgSrc.js",
-    "sprite": "nodemon src/utils/generateSprite.js"
+    "sprite": "nodemon src/utils/generateSprite.js",
+    "test": "jest"
   },
   "dependencies": {
     "@svgr/webpack": "^8.1.0",
